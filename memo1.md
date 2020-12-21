@@ -1,23 +1,202 @@
-機能|呼び名python|呼び名ruby|code-python|code-ruby
--|-|-|-|-|
-出力|||print("abc")|puts "abc"|
-埋込|||puts "私の名前は#{name}です"|print("私の名前は%sです" % name)|
-演算子+||||
-演算子-|||||
-演算子*|||||
-演算子/|||||
-演算子%|||||
-演算子**|||||
-変数宣言|||||
-if|||if a == b<br>&nbsp;&nbsp;puts "OK"<br>end|if a == b:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("OK")<br>|
-ifelse|||if a == b<br>&nbsp;&nbsp;puts "OK"<br>elsif a > b<br>&nbsp;&nbsp;puts "WARN"<br>else<br>&nbsp;&nbsp;puts "NG"<br>end|if a == b:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("OK")<br>elif a > b:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("WARN")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("NG")|
--|リスト|配列|names=["Tanaka","Yamada","Suzuki"]|names=["Tanaka","Yamada","Suzuki"]|
-繰り返し|||配列.each do\|変数名\|<br>&nbsp;&nbsp;#実行したい処理<br>end|for i in リスト:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)|
--|辞書|ハッシュ|user = {"name":"Suzuki","age":20}|user = {"name" => "Suzuki","age" => 20}<br>{:name => "Suzuki", :age => 20}|
-何もない|||None|nil|
-|||||
-|||||
-|||||
-|||||
-|||||
-|||||
+<table>
+<tr>
+
+<th>機能</th>
+<th>python</th>
+<th>ruby</th>
+</tr>
+<tr>
+<td>出力</td>
+<td>
+
+```python
+print("abc")
+```
+</td>
+<td>
+  
+```ruby
+puts "abc"
+```
+</td>
+</tr>
+
+<td>埋込</td>
+<td>
+
+```python
+print("私の名前は%sです" % name)
+```
+</td>
+<td>
+  
+```ruby
+puts "私の名前は#{name}です"
+```
+</td>
+</tr>
+
+<td>if</td>
+<td>
+
+```python
+if a == b:
+    print("OK")
+```
+</td>
+<td>
+  
+```ruby
+if a == b
+  puts "OK"
+end
+```
+</td>
+</tr>
+
+<td>ifelse</td>
+<td>
+
+```python
+if a == b:
+    print("OK")
+elif a > b:
+    print("WARN")
+else:
+    print("NG")
+```
+</td>
+<td>
+  
+```ruby
+if a == b
+  puts "OK"
+elsif a > b
+  puts "WARN"
+else
+  puts "NG"
+end
+```
+</td>
+</tr>
+
+<td>リスト/配列</td>
+<td>
+
+```python
+names=["Tanaka","Yamada","Suzuki"]
+```
+</td>
+<td>
+  
+```ruby
+names=["Tanaka","Yamada","Suzuki"]
+```
+</td>
+</tr>
+
+<td>繰り返し</td>
+<td>
+
+```python
+for name in names:
+    print(name)
+```
+</td>
+<td>
+  
+```ruby
+names.each do|name|
+  puts name
+end
+```
+</td>
+</tr>
+
+<td>辞書/ハッシュ</td>
+<td>
+
+```python
+user = {"name":"Suzuki","age":20}
+```
+</td>
+<td>
+  
+```ruby
+# 書き方その１
+user = {"name" => "Suzuki","age" => 20}
+# 書き方その2
+user = {:name => "Suzuki", :age => 20}
+```
+</td>
+</tr>
+
+<td>何もない</td>
+<td>
+
+```python
+None
+```
+</td>
+<td>
+  
+```ruby
+nil
+```
+</td>
+</tr>
+
+<td>機能</td>
+<td>
+
+```python
+```
+</td>
+<td>
+  
+```ruby
+```
+</td>
+</tr>
+
+<td>機能</td>
+<td>
+
+```python
+```
+</td>
+<td>
+  
+```ruby
+```
+</td>
+</tr>
+
+<td>機能</td>
+<td>
+
+```python
+```
+</td>
+<td>
+  
+```ruby
+```
+</td>
+</tr>
+
+<td>機能</td>
+<td>
+
+```python
+```
+</td>
+<td>
+  
+```ruby
+```
+</td>
+</tr>
+
+</table>
+
