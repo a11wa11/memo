@@ -146,15 +146,46 @@ nil
 </td>
 </tr>
 
-<td>機能</td>
+<td>メソッド</td>
 <td>
 
 ```python
+# 定義
+def hello:
+    print("HELLO")
+
+def introduction(name):
+    print("私は#{name}です。")
+
+def add(x, y):
+    return x + y
+
+# 呼出
+hello()
+introduction("suzuki")
+add(5, 6)
 ```
 </td>
 <td>
   
 ```ruby
+# 定義
+def hello
+  puts "HELLO"
+end
+
+def introduction(name)
+  puts "私は#{name}です。"
+end
+
+def add(x, y)
+  return x + y
+end
+
+# 呼出
+hello
+introduction("suzuki")
+add(5, 6)
 ```
 </td>
 </tr>
