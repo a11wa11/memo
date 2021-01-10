@@ -1,6 +1,10 @@
 
 ### programming_memo
 - [python and ruby](https://a11wa11.github.io/memo/python_ruby)
+- [mysql_memo](https://a11wa11.github.io/memo/mysql_memo)
+- [ruby_memo](https://a11wa11.github.io/memo/ruby_memo)
+- [command_memo](https://a11wa11.github.io/memo/command_memo)
+ 
 
 ### Support or Contact
 
