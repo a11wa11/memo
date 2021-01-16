@@ -37,6 +37,7 @@ puts "私の名前は#{name}です"
 </td>
 </tr>
 
+
 <tr>
 <td>if</td>
 <td>
@@ -106,7 +107,6 @@ names=["Tanaka","Yamada","Suzuki"]
 ```python
 for name in names:
     print(name)
-
 for i, name in enumerate(names):
     print(i, name)
 ```
@@ -146,6 +146,7 @@ user = {:name => "Suzuki", :age => 20}
 </td>
 </tr>
 
+
 <tr>
 <td>何もない</td>
 <td>
@@ -162,6 +163,7 @@ nil
 </td>
 </tr>
 
+
 <tr>
 <td>メソッド</td>
 <td>
@@ -173,6 +175,7 @@ def hello:
 
 def introduction(name):
     print("私は%sです。" % name)
+    print("私は#{name}です。")
 
 def add(x, y):
     return x + y
@@ -211,7 +214,6 @@ def introduction_myself name, age
 end
 
 introduction_myself "suzuki", 20
-
 ```
 </td>
 </tr>
@@ -342,6 +344,11 @@ C or D
 
 ```python
 pip install ipython==7.9
+<td>機能</td>
+<td>
+
+```python
+
 ```
 </td>
 <td>
@@ -379,7 +386,6 @@ gem install rails -v 5.1.6
 ```
 </td>
 </tr>
-
 
 </table>
 
