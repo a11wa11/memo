@@ -337,15 +337,17 @@ C or D
 </tr>
 
 <tr>
-<td>機能</td>
+<td>パッケージ管理システム</td>
 <td>
 
 ```python
+pip install ipython==7.9
 ```
 </td>
 <td>
   
 ```ruby
+gem install rails -v 5.1.6
 ```
 </td>
 </tr>
