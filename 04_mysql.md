@@ -130,3 +130,41 @@ default_password_lifetime = 0
 sudo systemctl restart mysqld.service
 ```
 
+## クエリ
+
+* トランザクション
+```
+begin;
+update table_name set column_name1=1, column_name2='test' where id=999;
+rollback; # 戻す
+commit;
+```
+
+* プロシージャ
+
+```
+# 登録
+DELIMITER //
+CREATE PROCEDURE proc_test01(IN input varchar(255))
+BEGIN
+
+　　SELECT USER_NAME FROM USER_DATA WHERE USER_ID = input;
+
+END;
+//
+
+# 一覧確認-1
+SELECT ROUTINE_NAME, ROUTINE_TYPE FROM information_schema.ROUTINES WHERE ROUTINE_TYPE = 'PROCEDURE';
+
+# 一覧確認-2
+SHOW PROCEDURE STATUS;
+
+# 詳細確認
+SHOW CREATE PROCEDURE プロシージャ名;
+
+# 実行
+call プロシージャ名(引数)
+
+# 削除
+DROP PROCEDURE [プロシージャ名];
+```

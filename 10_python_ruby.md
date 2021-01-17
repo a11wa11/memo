@@ -1,6 +1,5 @@
 <table>
 <tr>
-
 <th>機能</th>
 <th>python</th>
 <th>ruby</th>
@@ -8,23 +7,19 @@
 <tr>
 <td>出力</td>
 <td>
-
 ```python
 print("abc")
 ```
 </td>
 <td>
-  
 ```ruby
 puts "abc"
 ```
 </td>
 </tr>
-
 <tr>
 <td>埋込</td>
 <td>
-
 ```python
 print("私の名前は%sです" % name)
 ```
@@ -36,19 +31,15 @@ puts "私の名前は#{name}です"
 ```
 </td>
 </tr>
-
-
 <tr>
 <td>if</td>
 <td>
-
 ```python
 if a == b:
     print("OK")
 ```
 </td>
 <td>
-  
 ```ruby
 if a == b
   puts "OK"
@@ -56,11 +47,9 @@ end
 ```
 </td>
 </tr>
-
 <tr>
 <td>ifelse</td>
 <td>
-
 ```python
 if a == b:
     print("OK")
@@ -71,7 +60,6 @@ else:
 ```
 </td>
 <td>
-  
 ```ruby
 if a == b
   puts "OK"
@@ -83,27 +71,22 @@ end
 ```
 </td>
 </tr>
-
 <tr>
 <td>リスト/配列</td>
 <td>
-
 ```python
 names=["Tanaka","Yamada","Suzuki"]
 ```
 </td>
 <td>
-  
 ```ruby
 names=["Tanaka","Yamada","Suzuki"]
 ```
 </td>
 </tr>
-
 <tr>
 <td>繰り返し</td>
 <td>
-
 ```python
 for name in names:
     print(name)
@@ -112,7 +95,6 @@ for i, name in enumerate(names):
 ```
 </td>
 <td>
-  
 ```ruby
 names.each do|name|
   puts name
@@ -126,17 +108,14 @@ end
 ```
 </td>
 </tr>
-
 <tr>
 <td>辞書/ハッシュ</td>
 <td>
-
 ```python
 user = {"name":"Suzuki","age":20}
 ```
 </td>
 <td>
-  
 ```ruby
 # 書き方その１
 user = {"name" => "Suzuki","age" => 20}
@@ -145,8 +124,6 @@ user = {:name => "Suzuki", :age => 20}
 ```
 </td>
 </tr>
-
-
 <tr>
 <td>何もない</td>
 <td>
@@ -162,12 +139,9 @@ nil
 ```
 </td>
 </tr>
-
-
 <tr>
 <td>メソッド</td>
 <td>
-
 ```python
 # 定義
 def hello:
@@ -187,7 +161,6 @@ add(5, 6)
 ```
 </td>
 <td>
-  
 ```ruby
 # 定義
 def hello
@@ -217,11 +190,9 @@ introduction_myself "suzuki", 20
 ```
 </td>
 </tr>
-
 <tr>
 <td>メソッド(キーワード引数使用)</td>
 <td>
-
 ```python
 # 定義
 def introduction(name, age):
@@ -232,7 +203,6 @@ introduction(age=20, name="suzuki")
 ```
 </td>
 <td>
-  
 ```ruby
 # 定義
 def introduction(name:, age:)
@@ -244,11 +214,9 @@ introduction(age: 20, name: "suzuki")
 ```
 </td>
 </tr>
-
 <tr>
 <td>クラス</td>
 <td>
-
 ```python
 class Menu:
     name = None
@@ -258,7 +226,6 @@ menu.name = "コーヒー"
 ```
 </td>
 <td>
-  
 ```ruby
 class Menu
   attr_accessor :name
@@ -270,11 +237,9 @@ menu.name = "コーヒー"
 ```
 </td>
 </tr>
-
 <tr>
 <td>イニシャライズ</td>
 <td>
-
 ```python
 # 省略
 def __init__(self, name):
@@ -284,7 +249,6 @@ menu = Menu("コーヒー")
 ```
 </td>
 <td>
-  
 ```ruby
 # 省略
   def initialize(name)
@@ -296,27 +260,22 @@ menu = Menu.new("コーヒー")
 ```
 </td>
 </tr>
-
 <tr>
 <td>継承</td>
 <td>
-
 ```python
 class 新しいクラス名(もととなるクラス名):
 ```
 </td>
 <td>
-  
 ```ruby
 class 新しいクラス名 < もととなるクラス名
 ```
 </td>
 </tr>
-
 <tr>
 <td>and or</td>
 <td>
-
 ```python
 ## and条件記法
 A and B
@@ -326,7 +285,6 @@ C or D
 ```
 </td>
 <td>
-  
 ```ruby
 ## and条件記法
 A && B
@@ -337,55 +295,43 @@ C or D
 ```
 </td>
 </tr>
-
 <tr>
 <td>パッケージ管理システム</td>
 <td>
-
 ```python
 pip install ipython==7.9
 <td>機能</td>
 <td>
-
 ```python
-
 ```
 </td>
 <td>
-  
 ```ruby
 gem install rails -v 5.1.6
 ```
 </td>
 </tr>
-
 <tr>
 <td>機能</td>
 <td>
-
 ```python
 ```
 </td>
 <td>
-  
 ```ruby
 ```
 </td>
 </tr>
-
 <tr>
 <td>機能</td>
 <td>
-
 ```python
 ```
 </td>
 <td>
-  
 ```ruby
 ```
 </td>
 </tr>
-
 </table>
 

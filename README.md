@@ -1,10 +1,13 @@
 
 ### programming_memo
-- [mysql_memo](https://a11wa11.github.io/memo/mysql_memo)
-- [python and ruby](https://a11wa11.github.io/memo/python_ruby)
-- [ruby_memo](https://a11wa11.github.io/memo/ruby_memo)
-- [command_memo](https://a11wa11.github.io/memo/command_memo)
-- [aws-cli](https://a11wa11.github.io/memo/aws-cli)
+- [english](https://a11wa11.github.io/memo/01_english)
+- [ssh](https://a11wa11.github.io/memo/02_ssh)
+- [CommandLine](https://a11wa11.github.io/memo/03_command)
+- [mysql](https://a11wa11.github.io/memo/04_mysql)
+- [aws-cli](https://a11wa11.github.io/memo/05_aws_cli)
+- [yaml](https://a11wa11.github.io/memo/06_yaml)
+- [python and ruby](https://a11wa11.github.io/memo/10_python_ruby)
+- [ruby](https://a11wa11.github.io/memo/11_ruby)
 
 
 ### Support or Contact
