@@ -29,3 +29,17 @@ $ gem install rails -v 5.1.6
 # バージョンを指定して rails new
 $ rails _5.1.6_ new mini_tweet_app
 $ cd mini_tweet_app/
+
+
+
+### エラー解消方
+
+```
+gem "better errors"
+gem "binding of caller"
+
+byebug # railsに恐らくデフォルトで入っている。import pdb;pdb.trace()のように仕込めばデバッグ可能
+```
+
+* `is:issue is:open キーワード` githubで検索する
+* スタックオーバーフローは✔がベストアンサー、しかし投票数が多いものの方が参考すべき

@@ -7,7 +7,8 @@
 - [aws-cli](https://a11wa11.github.io/memo/05_aws_cli)
 - [yaml](https://a11wa11.github.io/memo/06_yaml)
 - [python and ruby](https://a11wa11.github.io/memo/10_python_ruby)
-- [ruby](https://a11wa11.github.io/memo/11_ruby)
+- [python](https://a11wa11.github.io/memo/11_python)
+- [ruby](https://a11wa11.github.io/memo/12_ruby)
 
 
 ### Support or Contact
