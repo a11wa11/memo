@@ -168,3 +168,13 @@ call プロシージャ名(引数)
 # 削除
 DROP PROCEDURE [プロシージャ名];
 ```
+
+# 設定
+
+```
+# 結果の折り返しを無効にする
+export LESS="-XFR"
+
+# 結界の折り返しを有効にする
+export LESS="-SRXF"
+```
