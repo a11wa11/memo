@@ -145,6 +145,7 @@ commit;
 ```
 # 登録
 DELIMITER //
+drop procedure if exists `proc_test01` //
 CREATE PROCEDURE proc_test01(IN input varchar(255))
 BEGIN
 
@@ -152,6 +153,7 @@ BEGIN
 
 END;
 //
+DELIMITER ;
 
 # 一覧確認-1
 SELECT ROUTINE_NAME, ROUTINE_TYPE FROM information_schema.ROUTINES WHERE ROUTINE_TYPE = 'PROCEDURE';
@@ -169,9 +171,39 @@ call プロシージャ名(引数)
 DROP PROCEDURE [プロシージャ名];
 ```
 
-# 設定
+* プロシージャで動的にテーブル名を指定する
 
 ```
+# 登録
+DELIMITER //
+drop procedure if exists `proc_test02` //
+CREATE PROCEDURE proc_test01(IN input_table varchar(255))
+BEGIN
+    if (select count(*) from information_schema.columns where table_name=input_table and table_schema='db_name' and column_name='column_name1') > 0 then
+      set @s = concat('select * from `, input_table, '` where column_name='999');
+    elseif (select count(*) from information_schema.columns where table_name=input_table and table_schema='db_name' and column_name='column_name2') > 0 then
+      set @s = concat('select * from `, input_table, '` where column_name='888');
+    else 
+      set @s = concat('select * from `, input_table);
+    end if;
+    prepare stmt from @s;
+    execute stmt;
+
+END;
+//
+DELIMITER ;
+```
+
+* 日時・時刻系
+
+```
+select now();
+select utc_time();
+select date();
+
+https://www.wakuwakubank.com/posts/335-mysql-sql-function-date/
+```
+
 # 結果の折り返しを無効にする
 export LESS="-XFR"
 
