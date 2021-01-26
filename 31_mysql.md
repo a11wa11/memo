@@ -1,55 +1,61 @@
+# mysql
+
 ## CentOS7へmysqlインストール
 
-* MariaDBがインストールされている場合はこれからインストールするMySQLと競合を起こさないように削除
+1. MariaDBがインストールされている場合はこれからインストールするMySQLと競合を起こさないように削除
 
-```
+```sh
 sudo yum remove mariadb-libs
 sudo rm -rf /var/lib/mysql
 ```
 
-* MySQL公式のyumリポジトリの追加
+2. MySQL公式のyumリポジトリの追加(yumでもrpmでも可)
 
-```
+```sh
+# 5.7の追加
 sudo rpm -ivh http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm
+# 8.0の追加
+sudo yum install -y http://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm
 ```
 
-* MySQLのインストール
+3. MySQLのインストール
 
-```
+```sh
 sudo yum install mysql-community-server
-```
 
-* バージョンを確認
-
-```
-$ mysqld --version
+# バージョンを確認
+mysqld --version
 mysqld  Ver 5.7.14 for Linux on x86_64 (MySQL Community Server (GPL))
 ```
 
-* MySQLの起動
+3. MySQLのインストール-別のやり方
 
+```sh
+yum localinstall -y http://dev.mysql.com/get/mysql57-community-release-el7-7.noarch.rpm
+yum install -y mysql-community-client-5.7.34-1.el7.x86_64
 ```
+
+4. MySQLの起動と自動化設定
+
+```sh
 sudo systemctl start mysqld.service
-```
-
-* 自動起動の設定
-
-```
 sudo systemctl enable mysqld.service
 ```
 
-* MySQLの初期パスワード確認
-※`MySQL5.7`では、初回起動時に初期パスワードが生成されるので、ログファイルから生成されたパスワードを確認
+5. MySQLの初期パスワード確認  
+※`MySQL5.7`以降では、初回起動時に初期パスワードが生成されるので、ログファイルから生成されたパスワードを確認
 
-```
+```sh
 $ sudo cat /var/log/mysqld.log | grep password
 2016-09-01T13:09:03.337119Z 1 [Note] A temporary password is generated for root@localhost: xxxx!XXX;XXXX
 ```
 
-* MySQLのセキュリティ設定
+6. MySQLのセキュリティ設定
 mysql_secure_installationコマンドを実行して、MySQLのセキュリティ設定を行う
 
-```
+<details>
+  <summary>コード</summary>
+    <code>
 $ mysql_secure_installation
 
 Securing the MySQL server deployment.
@@ -107,42 +113,101 @@ Reload privilege tables now? (Press y|Y for Yes, any other key for No) : y
 Success.
 
 All done!
-```
+</code>
+</details>
 
-* 設定変更
-※MySQL5.7からパスワードの有効期限がデフォルトで360日になり、360日を経過するとパスワードの変更を促されてMySQLにログインできなくなる。
+7. 設定変更
+* MySQL5.7からパスワードの有効期限がデフォルトで360日になり、360日を経過するとパスワードの変更を促されてMySQLにログインできなくなる。  
 default_password_lifetime の値を `0` に変更して、この有効期限の設定を無効にする
 また、デフォルトの文字コードも UTF-8 に変更
 
-```
+```sh
 /etc/my.cnf
 [mysqld]
-.
 .
 .
 character-set-server = utf8
 default_password_lifetime = 0
 ```
 
-* MySQLを再起動させ、設定内容を反映
+- [ポート番号を変更](https://oreno-it3.info/archives/440)
 
+```sh
+# /etc/mysql/mysql.conf.d/mysql.conf
+port = 3307
 ```
+
+8. MySQLを再起動させ、設定内容を反映
+
+```sh
 sudo systemctl restart mysqld.service
 ```
 
 ## クエリ
 
-* トランザクション
+- select
+
+```sql
+# テーブルのカラム名を横並びで取得する
+select group_concat(カラム名 separator ', ') as columns from information_schema.columns where table_schema = 'DB名' and table_name = 'テーブル名' order by ordinal_position asc;
+
+# データをグループ化する
+select カラム名1, カラム名2 from テーブル名 group by カラム名1;
+
+# データをグループ化し、条件抽出する
+select カラム名1, カラム名2 from テーブル名 group by カラム名1 having カラム名>1;
+
+# 複数の対象のどれかに該当する値を取得
+select * from テーブル名 where カラム名 in(1,2,3);
+
+# テーブルのカラム数を取得
+select count(カラム名) from information_schema.columns where table_name='テーブル名' and table_schema='DB名';
+
+# 外部キー確認
+select * from information_schema.key_column_usage where table_schema='DB名' and table_name='テーブル名';
+
 ```
+
+- update
+
+```sql
+update TABLE_NAME set COLUMN_NAME1='AAA', COLUMN_NAME2='BBB',updated_at=now() where id=999;
+```
+
+- delete
+
+```sql
+delete from TABLE_NAME; # テーブルを削除する
+```
+
+- 複数insert
+
+```sql
+insert into words (english, japanese,created_at,updated_at) values 
+('availability','可用性',now(),now()),
+('arn','Amazon リソースネーム (ARN)',now(),now());
+```
+
+- トランザクション
+
+```sql
 begin;
 update table_name set column_name1=1, column_name2='test' where id=999;
 rollback; # 戻す
 commit;
 ```
 
-* プロシージャ
+- 日時・時刻系 : [参考](https://www.wakuwakubank.com/posts/335-mysql-sql-function-date/)
 
+```sql
+select now();
+select utc_time();
+select date();
 ```
+
+### プロシージャ
+
+```sql
 # 登録
 DELIMITER //
 drop procedure if exists `proc_test01` //
@@ -171,9 +236,9 @@ call プロシージャ名(引数)
 DROP PROCEDURE [プロシージャ名];
 ```
 
-* プロシージャで動的にテーブル名を指定する
+- プロシージャで動的にテーブル名を指定する
 
-```
+```sql
 # 登録
 DELIMITER //
 drop procedure if exists `proc_test02` //
@@ -194,19 +259,63 @@ END;
 DELIMITER ;
 ```
 
-* 日時・時刻系
+## 設定関連
 
-```
-select now();
-select utc_time();
-select date();
+- パスワードの変更
 
-https://www.wakuwakubank.com/posts/335-mysql-sql-function-date/
+```sql
+set password = 'new_password'
 ```
 
-# 結果の折り返しを無効にする
-export LESS="-XFR"
+- 文字コード変更
 
-# 結界の折り返しを有効にする
-export LESS="-SRXF"
+```sql
+# 初期設定では日本語入力受け付けない場合があるため、/etc/my.cnf に下記を追加し、mysqlを再起動
+
+[mysqld]
+character-set-server = utf8
+```
+
+- クエリ結果をlessで表示且つ横スクロール可能にする
+
+```sql
+mysql> pager less -iSN
+# -i → 検索時に大小文字を区別しない
+# -S → 行を折り返さない
+# -N → 行番号を表示
+```
+
+- カラムのNULL成約を変更する(Nullを許可)
+
+```sql
+alter table TABLE_NAME modify COLUMN_NAME varchar(255);
+```
+
+### 出力系
+
+- dump
+
+```sql
+# dump
+mysqldump -u user_name -p -h host_name db_name table_name > OUTPUT_FILE_NAME
+# 取り込み
+mysql -u user_name -p -h host_name db_name table_name < OUTPUT_FILE_NAME
+```
+
+- csv出力
+
+```sql
+# csvに出力には下記の結果で表示される場所にのみ出力可能。空白であればcsv出力不可
+SELECT @@global.secure_file_priv;
+# select結果をcsv出力
+SELECT * FROM table_name INTO OUTFILE '/tmp/table_name.csv' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"';
+```
+
+### linuxコマンドを実行
+
+- linuxコマンド実行には`\!` をつけて実行する
+
+```sql
+mysql> \! test.sql
+mysql> source test.sql
 ```
