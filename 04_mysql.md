@@ -204,6 +204,12 @@ select date();
 https://www.wakuwakubank.com/posts/335-mysql-sql-function-date/
 ```
 
+* パスワードの変更
+
+```
+set password = 'new_password'
+```
+
 # 結果の折り返しを無効にする
 export LESS="-XFR"
 

@@ -7,9 +7,8 @@ def natural_number?(number)
 end
 
 puts natural_number?(3) 
+
 ```
-
-
 ### bundle
 
 * bundle install --path <フォルダ名>とすれば、指定のフォルダにインストール先を指定できる。指定先は`vendor/bundle`が一般的
@@ -26,13 +25,17 @@ bundle update
 ```
 # gemのインストール？
 
-$ printf "install: -N \nupdate: -N\n" >> ~/.gemrc
+printf "install: -N \nupdate: -N\n" >> ~/.gemrc
+gem install rails -v 5.1.6
 
-$ gem install rails -v 5.1.6
 # バージョンを指定して rails new
-$ rails _5.1.6_ new mini_tweet_app
-$ cd mini_tweet_app/
+rails _5.1.6_ new アプリ名
+cd アプリ名
 
+# javascriptがない時にエラーが起こる場合、nodejsをインストール
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+. ~/.nvm/nvm.sh
+nvm install node
 ```
 
 ### エラー解消方
@@ -100,4 +103,43 @@ rbenv global 2.7.0
 
 # Rubyのバージョンを確認する（指定したバージョンが表示されれば成功）
 ruby -v
+```
+
+## Rails
+
+```
+# 外部からのアクセスを可能にする
+rails s -b 0.0.0.0
+
+```
+
+* railsでmysql使用
+
+```
+# amazon-linux
+
+# 初期設定では日本語入力受け付けない場合があるため、/etc/my.cnf に下記を追加し、mysqlを再起動
+character-set-server=utf8
+```
+* mysqlに接続するアダプターのgemを追加する
+
+```
+# Gemfile
+gem 'mysql2'
+bundle install --path vendor/bundle
+# mysql-develないとエラーになるため、インストール
+sudo yum install mysql-devel
+```
+
+```
+# Wordクラスのテーブルを作成し、english,japanese,remarksの3カラムを作成
+rails generate scaffold Word english:string japanese:string remarks:string
+rails db:migrate
+# ↑dbを作成していなければ、mysqlで予めdbを作成しておく
+>mysql
+create database words;
+```
+
+```
+rails _5.1.6_ new english_words -d mysql
 ```
