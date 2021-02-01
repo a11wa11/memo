@@ -1,6 +1,7 @@
 # ruby
 
 * 真偽値を返すメソッドは、メソッド名の末尾に?を付ける慣習
+
 ```
 def natural_number?(number)
   return number > 0
@@ -22,26 +23,11 @@ bundle install --path vendor/bundle
 bundle update
 ```
 
-```
-# gemのインストール？
-
-printf "install: -N \nupdate: -N\n" >> ~/.gemrc
-gem install rails -v 5.1.6
-
-# バージョンを指定して rails new
-rails _5.1.6_ new アプリ名
-cd アプリ名
-
-# javascriptがない時にエラーが起こる場合、nodejsをインストール
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-. ~/.nvm/nvm.sh
-nvm install node
-```
-
 ### エラー解消
 * エラー検索方法
   * `is:issue is:open キーワード` githubで検索する
   * スタックオーバーフローは✔がベストアンサー、しかし投票数が多いものの方が参考すべき
+
 ```
 gem "better errors"
 gem "binding of caller"
@@ -107,12 +93,27 @@ ruby -v
 
 ## Rails
 * 外部からのアクセスを可能にする
+
 ```
 rails s -b 0.0.0.0
 ```
 
+* rails new
+
+```
+# バージョンを指定して rails new
+rails _5.1.6_ new アプリ名
+cd アプリ名
+
+# javascriptがない時にエラーが起こる場合、nodejsをインストール
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+. ~/.nvm/nvm.sh
+nvm install node
+```
+
 * Railsでmysql使用
   1. mysqlに接続するアダプターのgemを追加する
+
 ```
 # Gemfile
 gem 'mysql2'
@@ -121,12 +122,14 @@ bundle install --path vendor/bundle
 sudo yum install mysql-devel
 ```
   2. 最初からmysqlを使用する際はオプションあり
+
 ```
 rails _5.1.6_ new english_words -d mysql
-# config/database.ymlの接続設定を行う
+# 後、config/database.ymlの接続設定を行う
 ```
 
 * 簡易アプリ制作例。Wordクラスのテーブルを作成し、english,japanese,remarksの3カラムを作成
+
 ```
 rails generate scaffold Word english:string japanese:string remarks:string
 rails db:create
@@ -149,25 +152,30 @@ CSV.foreach('db/words.csv') do |info|
 end
 ```
   2. 初期データを反映させる
+
 ```
 rails db:seed
 ```
 
 ### railsコマンド
 * モデルの作成
+
 ```
 rails generate model モデル名 フィールド名1:データ型1 ...
 ```
 * コントローラーの作成
+
 ```
 rails generate controller StaticPages home help
 ```
 * generateの取り消し
+
 ```
 rails destroy controller StaticPages home help
 rails destroy model User
 ```
 * マイグレーションの取り消し
+
 ```
 # 1つ前の状態に戻る
 rails db:rollback
@@ -187,6 +195,7 @@ bundle install |bundle
 
 
 * test
+
 ```
 rails test
 ```
