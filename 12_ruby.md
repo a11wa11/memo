@@ -9,7 +9,7 @@ end
 puts natural_number?(3) 
 
 ```
-### bundle
+## bundle
 
 * bundle install --path <フォルダ名>とすれば、指定のフォルダにインストール先を指定できる。指定先は`vendor/bundle`が一般的
 * 一度上のコマンドを実行すれば、Bundlerはインストール先を記憶するので次回以降はbundle installを実行するだけで毎回vendor/bundleディレクトリにインストールされる
@@ -38,8 +38,10 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 nvm install node
 ```
 
-### エラー解消方
-
+### エラー解消
+* エラー検索方法
+  * `is:issue is:open キーワード` githubで検索する
+  * スタックオーバーフローは✔がベストアンサー、しかし投票数が多いものの方が参考すべき
 ```
 gem "better errors"
 gem "binding of caller"
@@ -47,13 +49,11 @@ gem "binding of caller"
 byebug # railsに恐らくデフォルトで入っている。import pdb;pdb.trace()のように仕込めばデバッグ可能
 ```
 
-* エラー検索方法
-  * `is:issue is:open キーワード` githubで検索する
-  * スタックオーバーフローは✔がベストアンサー、しかし投票数が多いものの方が参考すべき
 
-### インストール(AWS-amazonlinux)  -> [参考](https://qiita.com/Ekodhikodhi/items/01eab1b2b5785163e684)
 
-* rbenvのインストール
+## Ruby環境構築(AWS-amazonlinux)  -> [参考](https://qiita.com/Ekodhikodhi/items/01eab1b2b5785163e684)
+
+1. rbenvのインストール
 
 ```
 # yum更新
@@ -74,8 +74,8 @@ source ~/.bash_profile
 rbenv -v
 ```
 
-* ruby-buildのインストール。
-  `※Rubyをrbenv経由でインストールする時に必要なrbenvのプラグイン。これ入ってないとRubyインストール不可`
+2. ruby-buildのインストール  
+`※Rubyをrbenv経由でインストールする時に必要なrbenvのプラグイン。これ入ってないとRubyインストール不可`
 
 ```
 # リポジトリからクローン
@@ -89,7 +89,7 @@ sudo ./install.sh
 rbenv install -l
 ```
 
-* Rubyのインストール
+3. Rubyのインストール
 
 ```
 # Rubyインストールに必要なパッケージをインストール
@@ -106,23 +106,13 @@ ruby -v
 ```
 
 ## Rails
-
+* 外部からのアクセスを可能にする
 ```
-# 外部からのアクセスを可能にする
 rails s -b 0.0.0.0
-
 ```
 
-* railsでmysql使用
-
-```
-# amazon-linux
-
-# 初期設定では日本語入力受け付けない場合があるため、/etc/my.cnf に下記を追加し、mysqlを再起動
-character-set-server=utf8
-```
-* mysqlに接続するアダプターのgemを追加する
-
+* Railsでmysql使用
+  1. mysqlに接続するアダプターのgemを追加する
 ```
 # Gemfile
 gem 'mysql2'
@@ -130,16 +120,94 @@ bundle install --path vendor/bundle
 # mysql-develないとエラーになるため、インストール
 sudo yum install mysql-devel
 ```
-
-```
-# Wordクラスのテーブルを作成し、english,japanese,remarksの3カラムを作成
-rails generate scaffold Word english:string japanese:string remarks:string
-rails db:migrate
-# ↑dbを作成していなければ、mysqlで予めdbを作成しておく
->mysql
-create database words;
-```
-
+  2. 最初からmysqlを使用する際はオプションあり
 ```
 rails _5.1.6_ new english_words -d mysql
+# config/database.ymlの接続設定を行う
 ```
+
+* 簡易アプリ制作例。Wordクラスのテーブルを作成し、english,japanese,remarksの3カラムを作成
+```
+rails generate scaffold Word english:string japanese:string remarks:string
+rails db:create
+# DBを作成する。下と同じ
+>mysql
+create database words;
+
+rails db:migrate
+rails db:seed
+```
+
+* 初期データ投入
+  1. `db/seeds.rb`を編集。以下参考文
+
+```
+require "csv"
+
+CSV.foreach('db/words.csv') do |info|
+  Word.create(:english => info[0], :japanese => info[1], :remarks => info[2], :created_at => info[3], :updated_at => info[4])
+end
+```
+  2. 初期データを反映させる
+```
+rails db:seed
+```
+
+### railsコマンド
+* モデルの作成
+```
+rails generate model モデル名 フィールド名1:データ型1 ...
+```
+* コントローラーの作成
+```
+rails generate controller StaticPages home help
+```
+* generateの取り消し
+```
+rails destroy controller StaticPages home help
+rails destroy model User
+```
+* マイグレーションの取り消し
+```
+# 1つ前の状態に戻る
+rails db:rollback
+
+# 最初の状態に戻る
+rails db:migrate VERSION=0
+```
+* 正規コマンドと省略コマンド
+
+完全なコマンド|短縮形コマンド
+-|-
+rails server | rails s
+rails console	| rails c
+rails generate | rails g
+rails test |rails t
+bundle install |bundle
+
+
+* test
+```
+rails test
+```
+
+* test通るための一連の手順
+test/controllers/static_pages_controller_test.rbで失敗させたいテストを書く
+
+config/route.rbでルーティング作成
+controllerでアクション追加
+viewでhtmlファイル作成
+↑でtest通る
+
+
+```
+test/test_helper.rb
+
+require "minitest/reporters"
+Minitest::Reporters.use!
+```
+
+* 参考
+#### [マイグレーション](https://railsguides.jp/active_record_migrations.html)
+#### [git 万葉](https://github.com/everyleaf/el-training)
+#### [rails 設定](https://railsguides.jp/configuring.html)
