@@ -40,5 +40,11 @@ aws configure list --profile user01
 aws s3 ls --profile user01
 ```
 
+* EC2操作
+```
+aws ec2 describe-instances
+aws ec2 stop-instances --instance-ids インスタンスID
+```
+
 * [参考サイト:公式](https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-config)
 * [参考サイト:Qiita](https://qiita.com/reflet/items/e4225435fe692663b705)
