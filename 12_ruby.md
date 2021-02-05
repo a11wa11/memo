@@ -185,13 +185,13 @@ rails db:migrate VERSION=0
 ```
 * 正規コマンドと省略コマンド
 
-完全なコマンド|短縮形コマンド
--|-
-rails server | rails s
-rails console	| rails c
-rails generate | rails g
-rails test |rails t
-bundle install |bundle
+| 完全なコマンド | 短縮形コマンド |
+| - | - |
+| rails server | rails s |
+| rails console	| rails c |
+| rails generate | rails g |
+| rails test | rails t |
+| bundle install | bundle |
 
 
 * test
@@ -215,6 +215,57 @@ test/test_helper.rb
 require "minitest/reporters"
 Minitest::Reporters.use!
 ```
+
+
+```
+"#{foo} bar" # ダブルクオテーションでは式展開される
+'#{foo} bar' # シングルクオテーションでは式展開されない
+```
+* よく使うメソッド
+
+```
+>> "foobar".length        # 文字列に "length" というメッセージを送る
+=> 6
+
+>> "".empty?
+=> true
+
+>> nil.to_s
+=> ""
+
+>> a = %w[foo bar baz quux]         # %wを使って文字列の配列に変換
+=> ["foo", "bar", "baz", "quux"]
+
+
+>> (1..5).each { |i| puts 2 * i }
+2
+4
+6
+8
+10
+=> 1..5
+
+>> (1..5).each do |i|
+?>   puts 2 * i
+>> end
+2
+4
+6
+8
+10
+=> 1..5
+
+# シンボル
+user = { :name => "Michael Hartl", :email => "michael@example.com" }
+{ name: "Michael Hartl", email: "michael@example.com" }
+
+
+# なお、論理値はそれぞれ && (and) や || (or)、! (not) オペレーターで表すこともできます。
+
+
+```
+
+
 
 * 参考
 #### [マイグレーション](https://railsguides.jp/active_record_migrations.html)
