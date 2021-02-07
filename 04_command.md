@@ -47,3 +47,10 @@ export LESS="-XFR"
 # 結界の折り返しを有効にする
 export LESS="-SRXF"
 ```
+
+
+### 画像ダウンロード
+```
+# curl -o 保管ディククトリ/保管ファイル名 -OL ダウンロードしたいURL
+curl -o app/assets/images/rails.png -OL railstutorial.jp/rails.png
+```

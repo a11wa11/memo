@@ -1,3 +1,5 @@
+# [閲覧ページはこちら(の方が好ましいです)](https://github.com/a11wa11/memo/blob/main/10_python_ruby.md)
+
 <table>
 <th>機能</th>
 <th>python</th>
