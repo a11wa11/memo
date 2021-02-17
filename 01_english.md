@@ -56,5 +56,6 @@
 | diagram | 図 |
 | assumable | 仮定できる |
 | notice | 注意する |
-| federated |  |
+| federated |連合した(いろいろなシステム等を統合して使えるようにしたりしたもの)|
 | grant | 付与 |
+| duration | 持続範囲 |
