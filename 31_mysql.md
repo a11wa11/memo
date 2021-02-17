@@ -45,6 +45,7 @@ $ sudo cat /var/log/mysqld.log | grep password
 
 6. MySQLのセキュリティ設定
 mysql_secure_installationコマンドを実行して、MySQLのセキュリティ設定を行う
+
 <details>
   <summary>コード</summary>
 
@@ -107,6 +108,7 @@ Success.
 
 All done!
 ```
+
 </details>
 
 7. 設定変更
