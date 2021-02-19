@@ -13,7 +13,7 @@
 - [aws-cli](https://a11wa11.github.io/memo/22_aws_cli)
 - [mysql](https://a11wa11.github.io/memo/31_mysql)
 - [network](https://a11wa11.github.io/memo/40_network)
-- [ntml](https://a11wa11.github.io/memo/51_html)
+- [html](https://a11wa11.github.io/memo/51_html)
 
 
 ### Support or Contact

@@ -16,3 +16,10 @@ git remote add origin git@github.com:hoge/test.git
 git branch -M main
 git push -u origin main
 ```
+
+* リモートブランチをローカルブランチに強制的にもってくる（ローカルでコンフリクト発生して手に負えない時など）
+
+```
+git fetch origin ブランチ名
+git reset --hard origin/ブランチ名
+```
