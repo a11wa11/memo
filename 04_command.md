@@ -39,6 +39,13 @@ cp /etc/localtime /etc/localtime.org # バックアップ
 ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 ```
 
+* ユーザー確認
+
+```
+/etc/passwd
+/etc/shadow
+```
+
 ### lessの設定
 ```
 # 結果の折り返しを無効にする
