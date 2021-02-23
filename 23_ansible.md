@@ -50,7 +50,13 @@ ansible aws -m ping -i hosts
 ansible-playbook --syntax-check YAML_FILE_NAME.yml
 ```
 
-### インベントリの登録0
+* デバッグ実行
+
+```
+ansible-playbook SAMPLE.yml --step
+```
+
+### インベントリの登録
 
 * `/etc/ansible/hosts` に対象のサーバを登録することで省略化、グループ化が可能
 
@@ -59,22 +65,41 @@ ansible-playbook --syntax-check YAML_FILE_NAME.yml
 10.0.0.0 ansible_ssh_user=USERNAME ansible_ssh_private_key_file=~/.ssh/SAMPLE.pem
 ```
 
+* `/etc/ansible/hosts` に対象のサーバを登録することで省略化、グループ化が可能
 
 
 
 ### よく使うモジュール
 
+* when →　条件分岐
+* block → `try except`のようにエラー処理
+* ansible_distribution →　
+* with_items →　リストで値を保持し、`{{var}}`で展開が可能
+
+##### [モジュール公式一覧](https://docs.ansible.com/ansible/2.9/modules/modules_by_category.html)
+
+* [include](https://docs.ansible.com/ansible/2.9/modules/include_module.html#include-module)
+
+* [debug](https://docs.ansible.com/ansible/2.9/modules/debug_module.html#debug-module)
+
+| オプション名 | 説明　| 必須 | デフォルト値 |
+| - | - | - | - |
+| msg | 定義された文を表示する | × | Hello world! |　
+| var | 変数名をデバッグする(msg引数と意お互いに排他的である) | × | |
+|  |  |
+
+* [get_url]
+* [unarchive]
+* [lineinfile](https://docs.ansible.com/ansible/2.9/modules/lineinfile_module.html#lineinfile-module) → マッチした行を置換する
+
+- shell　シェルを実行　※冪等製が保たれないので非推奨
+- script 対象のスクリプトを実行
 - service
 - file
 - user
-- var
-- item 
-- when 条件文期
+- item
 - pouse 
 - set_fact 変数の設置
 - setup # ansibleコマンドで自動的に呼ばれる
-- ansible_distribution
-- lineinfile
-- shell
 - local_action
   - wait_for
