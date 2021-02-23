@@ -56,7 +56,7 @@ ansible-playbook --syntax-check YAML_FILE_NAME.yml
 
 ```
 [aws]
-10.0.0.0 ansible_ssh_user=ec2-user ansible_ssh_private_key_file=~/.ssh/SAMPLE.pem
+10.0.0.0 ansible_ssh_user=USERNAME ansible_ssh_private_key_file=~/.ssh/SAMPLE.pem
 ```
 
 
