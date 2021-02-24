@@ -8,6 +8,7 @@ git config --global user.email "test_address"
 ```
 
 * リモートリポジトリの設定
+
 ```
 git remote add origin(任意のリモートリポジトリ名) git@github.com:hoge/test.git
 
