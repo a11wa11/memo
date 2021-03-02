@@ -91,3 +91,10 @@ export LESS="-SRXF"
 # curl -o 保管ディククトリ/保管ファイル名 -OL ダウンロードしたいURL
 curl -o app/assets/images/rails.png -OL railstutorial.jp/rails.png
 ```
+
+
+### ファイル上限数確認
+
+```
+ulimit -n ディレクトリ名
+```

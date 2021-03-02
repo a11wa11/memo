@@ -24,3 +24,9 @@ git push -u origin main
 git fetch origin ブランチ名
 git reset --hard origin/ブランチ名
 ```
+
+* リモートリポジトリのタグをローカルに強制的に持ってくる
+
+```
+git fetch --tags -f
+```
