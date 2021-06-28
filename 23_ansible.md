@@ -100,7 +100,11 @@ ansible-playbook --syntax-check YAML_FILE_NAME.yml
 ansible-playbook SAMPLE.yml --step
 ```
 
+* 実行
 
+```
+ansible-playbook -i inventoryファイルのパス playbook.ymlファイルのパス
+```
 
 ### よく使うモジュール
 

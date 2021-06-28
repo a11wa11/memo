@@ -53,6 +53,7 @@
 | metrics | 測定基準 |
 | availability | 可用性 |
 | duplicate | 複製 |
+| deprecate | 非推奨 |
 | diagram | 図 |
 | assumable | 仮定できる |
 | notice | 注意する |

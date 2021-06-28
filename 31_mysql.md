@@ -229,7 +229,10 @@ character-set-server = utf8
 * クエリ結果をlessで表示且つ横スクロール可能にする
 
 ```
-mysql> pager less -n -i -S
+mysql> pager less -iSN
+# -i → 検索時に大小文字を区別しない
+# -S → 行を折り返さない
+# -N → 行番号を表示
 ```
 
 * カラムのNULL成約を変更する(Nullを許可)
