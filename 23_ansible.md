@@ -105,6 +105,12 @@ ansible-playbook --syntax-check YAML_FILE_NAME.yml
 ansible-playbook SAMPLE.yml --step
 ```
 
+* 時間算出
+
+```
+time ansible-playbook SAMPLE.yml
+```
+
 * 実行
 
 ```
