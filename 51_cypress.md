@@ -10,6 +10,7 @@
 #### 1. node.jsのインストール。とりあえず、簡単かつ代表的なインストール方法は下記２つ
 
 * nodenvからのインストール → ```nodenv install バージョン```
+  * ```echo 'eval "$(nodenv init -)"' >> ~/.zshrc # 初回のみ```
 * [webサイト](https://nodejs.org/en/download/)からインストール
 
 #### 2. npmからcypressのインストール

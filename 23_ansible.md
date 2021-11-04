@@ -189,5 +189,5 @@ ansible-playbook -i inventoryファイルのパス playbook.ymlファイルの�
 - local_action
   - wait_for
 
-[参考リポジトリ](https://github.com/spurin/diveintoansible-lab/blob/master/docker-compose.yaml)
-
+[参考リポジトリ1](https://github.com/spurin/diveintoansible-lab/blob/master/docker-compose.yaml)
+[参考リポジトリ2](https://github.com/spurin/diveintoansible)

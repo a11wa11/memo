@@ -111,6 +111,13 @@ nmcli d
 nmcli device show ens160
 ```
 
+### サービス一覧確認
+
+```sh
+# 定義されているサービス一覧と自動起動の状態
+systemctl list-unit-files --type=service
+```
+
 ---
 
 ## ハードウェア情報
@@ -203,6 +210,20 @@ curl -o app/assets/images/rails.png -OL railstutorial.jp/rails.png
 ```
 
 ### 基本コマンド
+
+* 四則演算
+
+```sh
+$(( 99 * 99 ))
+$(( var1 * var2 ))
+$(expr 99 ¥* 99 )
+$(expr 99 / 99 )
+$(expr $var1 + $var2 )
+
+# 小数点を含めた計算はbcを使用
+yum install bc
+echo "43.8 * 23.9" | bc 
+```
 
 * if文
 
