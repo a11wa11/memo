@@ -1,5 +1,11 @@
 # ssh
 
+## ssh鍵の作成
+
+```sh
+ssh-keygen -t rsa -b 4096 -C "email@example.com" -f ~/.ssh/id_rsa(名付けたい鍵名)
+```
+
 ## 接続先でタイムアウトになるのを防ぐため、クライアント側で接続時間を伸ばす設定
 
 * `.ssh/config`に以下の設定を書き込む

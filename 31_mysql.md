@@ -319,3 +319,39 @@ SELECT * FROM table_name INTO OUTFILE '/tmp/table_name.csv' FIELDS TERMINATED BY
 mysql> \! test.sql
 mysql> source test.sql
 ```
+
+### SQL構文の優先度
+
+- 下に行くほど優先度が下がる(上ほど処理の優先度が高い)
+
+| 機能 | 構文 |
+| -- | -- |
+| テーブルの指定 | FROM |
+| 結合 | ON / JOIN |
+| 取得条件 | WHERE |
+| グループ化 | GROUP BY |
+| 関数 | COUNT / SUM / AVG / MIN |
+| 取得条件 | HAVING |
+| 検索 | SELECT / DISTINCT |
+| 順序 | ORDER BY |
+| LIMIT | LIMIT |
+
+- select ① from ②;	①の部分に入れたカラムを指定し、②のテーブルから取得してくる。基本selectとfromはセットで使い単体では使用しない
+- テキスト	""で囲む
+- 数値	クオテーション不要
+- 日付	""(ダブルクオテーション)、もしくは’’(シングルクオテーション)で囲む
+- select ① from ② where ③ = ④;	③のカラムの中で④と一致するものを取得する
+- selct distinct(①) from ②;	①で指定したカラムで重複したものを削除する
+- SUM	select SUM(①) from ②;で①のカラムの合計値を取得。whereと併用可能
+- AVG	select AVG(①) from ②;で①のカラムの平均値を取得。whereと併用可能
+- COUNT	select COUNT(①) from ②;で①のカラムのデータ合計値を取得。whereと併用可能。ただし、nullはカウントされない
+- MAX	select MAX(①) from ②;で①のカラムの最大値を取得。whereと併用可能。
+- MIN	select MIN(①) from ②;で①のカラムの最小値を取得。whereと併用可能。ただし、nullはカウントされない
+- GROUP BY	指定したカラムで、完全に同一のデータを持つレコード同士がグループ化する。sumやavgと組み合わせて集計しやすくなる。コンマで区切り、複数のグループ化も可能
+- 検索（where）、グループ化（group by）、関数（sum,count）、havingの順番で行われる	
+- HAVING	group by ① having ②;で②の条件を満たすグループを取得することができる。WHEREはグループ化される前のテーブル全体を検索対象とするのに対し、HAVINGはGROUP BYによってグループ化されたデータを検索対象
+- サブクエリ	SQL文の中に他のSQL文を入れることができる。サブクエリの中にセミコロンは不要
+- AS	select ① as "②"「カラム名 AS "名前"」で、カラム名に定義する名前を指定
+- join ① on ②	①のテーブルを結合し、結合条件は、「ON テーブル名.カラム名 = テーブル名.カラム名」で指定。JOINを含んだSQL文では、はじめにJOINが実行されます
+- 複数のテーブルに同じカラム名が存在するときは、「テーブル名.カラム名」で指定
+- LEFT JOIN	FROMで指定したテーブルのレコードを全て取得します。外部キーがNULLのレコードもNULLのまま実行結果に表示されます

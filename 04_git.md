@@ -92,6 +92,12 @@ git log branch1..branch2 --pretty=oneline --pretty=format:"%n - %ad : %s" --date
 
 ```
 
+* 特定の鍵を指定してリモートリポジトリに接続
+
+```sh
+GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa' git clone リモートリポジトリ
+```
+
 * [マージ関連](https://qiita.com/horimislime/items/84fa431460c8d39f37e6)
 
 ```sh
