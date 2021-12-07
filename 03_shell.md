@@ -86,8 +86,15 @@ ifconfig # 古くて今はあまり推奨されていない
 
 # 特定のアクセスを制限したり、逆に許可したりし、その制限を確認する
 iptables -L
+# INPUTのみ採番して制限内容を表示する
+iptables -nL INPUT --line-numbers
 
-# 下記のファイルのPADDRの変更などでIPアドレスを変更可能
+# 制限するときの例
+iptables -A INPUT -p tcp -s 10.0.0.0(IPアドレス) --sport 3000(ポート番号) --tcp-flags SYN,FIN,RST,ACK FIN,ACK -j DROP
+iptables -A INPUT -p tcp -s 10.0.0.0(IPアドレス) --sport 3000(ポート番号) --tcp-flags PSH,ACK PSH,ACK -j DROP
+
+
+# 下記のファイルのIPADDRの変更などでIPアドレスを変更可能
 /etc/sysconfig/network-scripts/ifcfg*
 ```
 
@@ -120,7 +127,55 @@ systemctl list-unit-files --type=service
 
 ---
 
-## ハードウェア情報
+## パフォーマンス測定
+
+* top(プロセスの状態表示)
+  * load-averageはディスクIO待ちのプロセス数を表す。左から1分、5分、15分平均で表示される
+  * CPU表示 us->ユーザー空間プロセスの時間割合 sy->カーネル空間プロセスの時間割合 id->idle状態の時間割合
+  * メモリ表示
+  * total = used + buff/cache + free
+  * buff/cache = 解放不可の領域と解放可能の領域があり、よくfreeの領域が減ることと連動してbuff/cacheが増える
+  * Avail Mem = free + buff/cache(解放可能領域)
+
+```sh
+# リアルタイムにプロセスの状態表示が可能
+top
+
+q 終了
+? or help ヘルプ表示
+P CPU率でソート
+M メモリ使用率でソート
+```
+
+* vmstat 秒サイクル 表示回数
+  * vmstatコマンド例 vmstat 秒サイクル 表示回数
+  * 最初の１例目は当てにならない(サーバ起動時からの統計値となり、リアルタイム性がない)
+
+```sh
+vmstat 2 7
+```
+
+* sar (System Activity Report)
+  * CPU、Memoryメモリ、ネットワーク、I/Oなどの付加状況を表示する
+  * 過去に遡って確認可能
+  * 低負荷のため本番環境でもパフォーマンス影響は少ない
+
+```sh
+# CPU使用率
+sar -P ALL
+# メモリ使用率
+sar -r
+# ネットワーク負荷
+sar -n DEV
+# ディスクI/O
+sar -d -p
+# ファイル保管場所指定
+sar -r -f /var/log/ファイル名
+```
+
+* netstat
+  * ネットワーク接続やルーティングの状況、ネットワークインターフェースの状態を表示する
+  * CentOS7, RHEL7では非推奨(代替 ss)。ただしssの不具合も報告されている
 
 * メモリ
 
@@ -145,6 +200,9 @@ df --total  # 空き領域の合計も併せて表示する
 # 各ディレクトリやファイルごとに確認
 du -sh ./*
 du -h -d 1 . # カレントディレクトリ下の角ファイルやディレクトリのサイズを確認
+
+# list block devices
+lsblk
 ```
 
 ---
@@ -154,6 +212,12 @@ du -h -d 1 . # カレントディレクトリ下の角ファイルやディレ�
 ```sh
 nslookup
 >google.com
+```
+
+### ファイルタイプ確認
+
+```sh
+file -s 対象ファイル
 ```
 
 ### ファイル上限数確認
@@ -175,6 +239,13 @@ nice -n 5 python sample.py
 nice -20 [command]
 ```
 
+### 稼働時間確認
+
+```sh
+uptime
+>0:24  up 12 days,  1:36, 3 users, load averages: 1.69 2.10 2.02
+```
+
 ---
 
 ## 便利コマンド
@@ -185,13 +256,37 @@ nice -20 [command]
 md5sum ファイル名
 ```
 
+### 時間変更
+
+```sh
+date -s "2099/12/31 23:00"  # 指定時間まで時間を進める
+
+hwclock -s                  # 変更した時間を元に戻す
+```
+
+### 時間指定
+
+```sh
+yum install at
+systemctl start atd
+
+at now + 5min
+> 処理内容を記述し、Ctl + D で終了
+
+atq    # atコマンドで登録している一覧を表示する
+atrm 番号　#　登録しているat内容を削除する
+
+/etc/at.allow # 許可ユーザーを登録
+/etc/at.deny  # 拒否ユーザーを登録
+```
+
 ### lessの設定
 
 ```sh
 # 結果の折り返しを無効にする
 export LESS="-XFR"
 
-# 結界の折り返しを有効にする
+# 結果の折り返しを有効にする
 export LESS="-SRXF"
 ```
 
@@ -205,8 +300,34 @@ curl -o app/assets/images/rails.png -OL railstutorial.jp/rails.png
 ### cron
 
 ```cron
-*/4 * * * * sh /home/user/test.sh
-*/4 * * * * exho "test" >> ~/test.txt
+# 分(0-59) 時(0-23) 日(1-31) 月(1-12) 曜日(0-7) # 0と7は日曜日
+# 曜日 0,7=日 1=月 2=火 3=水 4=木 5=金 6=土
+
+0 * * * * sh /home/user/test.sh       # 毎時0分に実行
+*/4 * * * * echo "test" >> ~/test.txt # 4分毎に実行
+
+# crondを確認
+systemctl status crond.service
+
+# crondを起動
+systemctl start crond.service
+
+# 登録されているcronを表示
+crontab -l
+
+# cronを編集
+crontab -e
+
+# 実行結果を確認
+cat /var/log/cron
+
+# 設定ファイルを表示
+cat /etc/crontab
+
+SHELL  # cronで使用するshellのこと
+PATH   # cronに教えるpath
+MAILTO # cron実行結果を送るユーザー、またはメールアドレスを指定
+HOME   # cronを実行するカレントディレクトリを設定
 ```
 
 ### 基本コマンド
@@ -248,6 +369,9 @@ for var in `seq 1 10`;do  echo $var;done
 
 for var in `seq 1 2 10`; # 1 3 5 7 9
 for var in ls pwd date;  # コマンド実行も可能
+
+# 一括でファイルをリネームしたい場合 → https://orebibou.com/ja/home/201601/20160105_001/
+for i in `ls`; do cp $i `echo $i | sed "s/2021-01-01T/2022-12-31T/g"`;done
 ```
 
 * ファイル作成
@@ -255,3 +379,74 @@ for var in ls pwd date;  # コマンド実行も可能
 ```sh
 touch -d '2019/01/01' sample.txt # 作成日付を指定
 ```
+
+* 置換
+
+```sh
+# 基本文
+sed -e "s/(置換前の文字)/(置換後の文字)/g"
+sed -e "s/(置換前の文字)/(置換後の文字)/g" ファイル名
+sed -i -e "s/(置換前の文字)/(置換後の文字)/g" ファイル名 # 直接ファイルを書き換える
+
+sed -e "3 s/(置換前の文字)/(置換後の文字)/g" ファイル名  # ３行目の対象を置換する
+sed -i -e "3i hoge" ファイル名                       # ３行目にhogeを挿入する
+sed -e "s/$str/hoge/g"                             # 変数を使用する時 → ""で囲み、$変数名と記載
+```
+
+* 関数
+
+```sh
+
+function 関数名 (引数) {
+  echo "message: ${MSG:-HELLO}" # ${変数名:-代入内容}で変数の初期値を定義可能
+}
+```
+
+* jq
+
+```sh
+# 特定の値を取得する
+cat ***.json | jq ".キー名"
+# row形式で表示
+cat ***.json | jq -r
+
+```
+
+* ヒアドキュメント 標準入力から受け取れる
+
+```sh
+tee /***/ファイル名<<EOF
+echo "Yeah"
+EOF
+# tee /***/ファイル名<<"EOF" とEOFを""か''で囲むと中身を変数展開しない
+```
+
+* ジョブ １つ以上のコマンドで動作するひとまとまりの処理単位
+
+```sh
+#実行中のジョブを表示
+jobs
+
+fg %ジョブ番号
+bg %ジョブ番号
+```
+
+* メモ アイドリング状態→安定動作時
+
+* 日付取得
+
+```sh
+# yyyymmddの形で取得
+date '+%Y%m%d'
+# yyyymmdd-HHMMの形で取得
+date '+%Y%m%d-%H%M'
+```
+
+* デバッグ
+
+```sh
+sh -x 対象スクリプト
+bash -vx 対象スクリプト
+```
+
+[SYNフラッド攻撃の対策](https://www.shadan-kun.com/blog/measure/2664/)

@@ -35,6 +35,35 @@ export GO111MODULE=on // 1.13 以降は不要
 go mod init github.com/${GITHUB_USER}/${PROJECT_NAME}
 ```
 
+* godocのインストール
+
+```sh
+go get golang.org/x/tools/cmd/godoc
+```
+
+* depのインストール
+
+```sh
+go get -u github.com/golang/dep/cmd/dep
+
+
+# パッケージのインストール
+dep ensure
+```
+
+* デバッグ
+
+```sh
+# gdb引数ありで実行
+# パターン1
+gdb プログラム名
+(gdb) run --foo --bar
+
+# パターン2
+gdb --args プログラム名 --foo --bar
+(gdb) run
+```
+
 * dlvパッケージの追加
 
 ```sh
@@ -42,8 +71,8 @@ go get -u github.com/derekparker/delve/cmd/dlv
 ```
 
 * dlvの使い方
-https://budougumi0617.github.io/2018/04/08/debug-by-delve/
-https://nishinatoshiharu.com/go-delve-usage/
+  * [参考1](https://budougumi0617.github.io/2018/04/08/debug-by-delve/)
+  * [参考2](https://nishinatoshiharu.com/go-delve-usage/)
 
 ```sh
 # デバッグ。引数は -- の後に追加
@@ -54,6 +83,8 @@ b main
 ```
 
 <!-- 変数宣言、関数 -->
+
+```go
 package main
 
 import (
@@ -89,7 +120,6 @@ func main() {
 }
 
 <!-- 型変換 -->
-
 package main
 
 import (
@@ -599,3 +629,16 @@ func main() {
 		log.Fatalln("ERROR")
 	}
 }
+```
+
+
+[go mod完全に理解した](https://zenn.dev/optimisuke/articles/105feac3f8e726830f8c)
+[【Go】パッケージ/モジュールやgo modコマンドについてまとめ
+Golang](https://blog.framinal.life/entry/2021/04/11/013819)
+[Go1.16からの go get と go install について](https://qiita.com/eihigh/items/9fe52804610a8c4b7e41)
+[Go 1.17連載が始まります: コンパイラとgo mod ](https://future-architect.github.io/articles/20210810a/)
+[delve](https://github.com/go-delve/delve)
+[Golangのデバッガdelveの使い方](https://qiita.com/minamijoyo/items/4da68467c1c5d94c8cd7)
+[Goのバージョン管理について](https://yyh-gl.github.io/tech-blog/blog/go-versions/)
+[【goenv】GOPATH が変わらないときの対処法](https://yyh-gl.github.io/tech-blog/blog/gopath/)
+[grafana](https://github.com/grafana/grafana)

@@ -25,6 +25,12 @@ git fetch origin ブランチ名
 git reset --hard origin/ブランチ名
 ```
 
+* reflogの履歴からもとに戻す
+
+```sh
+git reset --hard HEAD@[1]
+```
+
 * タグ関連
 
 ```sh
@@ -60,6 +66,9 @@ git revert -m 1 コミットID
 git revert コミットID
 git push origin HEAD
 git merge リバートしたブランチ
+
+* トピックブランチなど空のコミットを打ちたい時
+git commit --allow-empty -m "# プルリクエストのタイトル"
 ```
 
 * ブランチ関連
@@ -73,6 +82,9 @@ git checkout -b ブランチ名 origin/リモートブランチ名
 
 # リモートブランチのIPアドレス変更
 git remote set-url origin git@0.0.0.0:*****.git
+
+# リモートブランチの最新状態を取得（リモートブランチの削除も同期）
+git fetch -p
 ```
 
 * git diff
@@ -108,4 +120,22 @@ git merge ブランチ名 --no-commit
 (トピックブランチ) git checkout master
 (master) git apply test.patch --check # パッチが適用できるかチェック
 # コンフリクトが起きる場合はエラーが発生する
+```
+
+* フォーク関連
+
+```sh
+# フォーク元をリモートリポジトリに追加
+git remote add upstream git@github.com:XXXXXXXXXXXXXXXX
+
+# フォーク元からpull
+git pull upstream ブランチ名
+
+# フォーク元のPRにチェックアウト
+git fetch upstream pull/ID番号/head:pr/ID番号
+git checkout pr/ID番号
+
+# フォーク元の最新状態をリモート先に反映
+git pull upstream ブランチ名
+git push origin ブランチ名
 ```

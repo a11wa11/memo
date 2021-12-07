@@ -35,6 +35,7 @@ systemctl start xrdp
 systemctl enable xrdp
 # 4. mysql setup
 yum install -y mysql
+
 # 5. nginx setup
 touch /etc/yum.repos.d/nginx.repo
 echo '[nginx-stable]' >> /etc/yum.repos.d/nginx.repo

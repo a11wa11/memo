@@ -1,11 +1,5 @@
 # ssh
 
-## ssh鍵の作成
-
-```sh
-ssh-keygen -t rsa -b 4096 -C "email@example.com" -f ~/.ssh/id_rsa(名付けたい鍵名)
-```
-
 ## 接続先でタイムアウトになるのを防ぐため、クライアント側で接続時間を伸ばす設定
 
 * `.ssh/config`に以下の設定を書き込む
@@ -28,6 +22,12 @@ ServerAliveCountMax 200
 ssh XXX -t ssh YYY
 ```
 
+### 初の接続先の時の「Are you sure you want to continue connecting(yes/no)?」を聞かれないようにする
+
+```sh
+ssh -oStrictHostKeyChecking=no 接続先名
+```
+
 ## 接続先登録
 
 ```sh
@@ -43,6 +43,14 @@ Host NAME
     UserKnownHostsFile /dev/null
 ```
 
+## [ssh-keygen](https://www.attachmate.com/ja-jp/documentation/reflection-desktop-v16/rdesktop-guide/data/ssh-keygen_command_rf.htm)
+
+### 鍵の作成
+
+```sh
+ssh-keygen -t rsa -b 4096 -C "email@example.com" -f ~/.ssh/id_rsa(名付けたい鍵名)
+```
+
 ### 接続先の情報を削除
 
 ```sh
@@ -51,3 +59,9 @@ ssh-keygen -R remote_host_name
 ```
 
 [参考ページ](https://note.crohaco.net/2017/ssh-tunnel/)
+
+### 公開鍵のコピーを作成
+
+```sh
+ssh-keygen -y -f 秘密鍵の指定
+```

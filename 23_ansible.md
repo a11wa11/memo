@@ -34,6 +34,13 @@ apt install -y ansible
   1. `./ansible.cfg`           # カレントディレクトリ
   1. `ANSIBLE_CONFIG`          # 環境変数で指定された構成ファイル　例 `export ANSIBLE_CONFIG=/home/test/my_ansible.cfg`
 
+```sh
+# ログの出力先を設定
+log_path = /var/log/ansible.log
+# ログの出力時に改行する
+stdout_callback = yaml
+```
+
 ## インベントリ
 
 ### ホスト
