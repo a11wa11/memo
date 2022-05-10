@@ -17,6 +17,7 @@
 - [aws-cli](https://a11wa11.github.io/memo/22_aws_cli)
 - [ansible](https://a11wa11.github.io/memo/23_ansible)
 - [cloudformation](https://a11wa11.github.io/memo/24_cloudformation)
+- [test](https://a11wa11.github.io/memo/29_test)
 - [mysql](https://a11wa11.github.io/memo/31_mysql)
 - [redis](https://a11wa11.github.io/memo/36_redis)
 - [network](https://a11wa11.github.io/memo/40_network)

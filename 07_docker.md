@@ -19,3 +19,12 @@ fi
 # Google chrome & driver インストール
 RUN yum install -y https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm --skip-broken
 ```
+
+### docker build
+
+```sh
+# 基本build
+docker build -t 名付けたいイメージ名 .(Dockerfileのあるパス)
+# Dockerfileを指定してbuild
+docker build -f Dockerfile_demo(Dockerfile以外の名前の場合) xxx/yyy/path(パス)
+```

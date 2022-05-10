@@ -46,3 +46,14 @@
 
 * vscodeでhtmlファイルを作成
   * < ! + tab > で保管可能
+
+## その他
+
+* 折り畳み
+
+```html
+<details>
+    <summary>Details</summary>
+    Something small enough to escape casual notice.
+</details>
+```

@@ -256,6 +256,15 @@ uptime
 md5sum ファイル名
 ```
 
+### awk
+
+```sh
+# 標準出力で表示される内容のうち、空白区切りで２番目の内容を取得
+ps aux | grep python | grep -v grep | awk '{print $2}'
+# 標準出力で表示される内容のうち、空白区切りで4番目の内容を取得
+ps aux | grep python | grep -v grep | awk '{print $4}'
+```
+
 ### 時間変更
 
 ```sh
