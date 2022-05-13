@@ -402,6 +402,12 @@ sed -i -e "3i hoge" ファイル名                       # ３行目にhogeを�
 sed -e "s/$str/hoge/g"                             # 変数を使用する時 → ""で囲み、$変数名と記載
 ```
 
+* && 前段の処理が成功したら後段の処理をする
+
+```sh
+yum update -y && yum install tree
+```
+
 * 関数
 
 ```sh
@@ -440,8 +446,6 @@ fg %ジョブ番号
 bg %ジョブ番号
 ```
 
-* メモ アイドリング状態→安定動作時
-
 * 日付取得
 
 ```sh
@@ -457,5 +461,3 @@ date '+%Y%m%d-%H%M'
 sh -x 対象スクリプト
 bash -vx 対象スクリプト
 ```
-
-[SYNフラッド攻撃の対策](https://www.shadan-kun.com/blog/measure/2664/)

@@ -24,17 +24,16 @@ sar(sysstat)によるボトルネック参照
 sarコマンドの使い方 QIITA
 sarコマンドの基本
 ```
-sar -h ヘルプの表示
-sar -r メモリ使用率 
-sar -R
 
-sar -b I/Oと転送率の状況
-mock.called
-mock.called_args
-mock.called_once_with?
+* sar -h ヘルプの表示
+* sar -r メモリ使用率 
+* sar -R
+
+* sar -b I/Oと転送率の状況
+
+* iptables
 
 ```sh
-
 # yum install iptables
 
 iptables -A INPUT -p tcp -d 対象サーバIP --dport 3000(ポート番号) -j DROP

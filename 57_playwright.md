@@ -129,7 +129,7 @@ const config: PlaywrightTestConfig = {
             "--disable-setuid-sandbox",
             "--use-fake-device-for-media-stream",
             "--use-fake-ui-for-media-stream",
-            "--use-file-for-fake-video-capture=./data/fakeCameraCapureDP.y4m"
+            "--use-file-for-fake-video-capture=./data/fakeCameraCaptureDP.y4m"
         ]}
       }
     },
