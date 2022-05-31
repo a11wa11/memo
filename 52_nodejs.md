@@ -33,5 +33,8 @@ console.timeEnd("timerName")
 ## コマンド
 
 ```sh
-node # インタラクティブシェル
+ # インタラクティブシェル
+ node
+ # バージョン確認
+ node -v
 ```

@@ -9,6 +9,13 @@ npm i -D playwright
 
 ## [基本](https://playwright.dev/docs/api/class-page)
 
+* [セレクタ](https://playwright.dev/docs/api/class-elementhandle#element-handle-eval-on-selector-all)
+
+```sh
+page.$('.htmlクラス名')
+page.waitForSelector('li div span'); # 指定したセレクターを取得するまで待つ
+```
+
 * [入力](https://playwright.dev/docs/api/class-locator#locator-fill)
 
 ```typescript
@@ -39,6 +46,8 @@ page.bringToFront()
 
 ```typescript
 page.waitForTimeout(1000) //1000=1秒
+
+page.waitForLoadState()   // 直前の動作が完了するまで待つ
 ```
 
 ## デバッグ
@@ -61,6 +70,19 @@ npx playwright test 対象テスト --headed --debug
 ```
 
 * [vscodeでのデバッグ設定](https://qiita.com/sakamoto66/items/d7a0977601ec94b88e98)
+
+```json
+"configurations": [
+    {
+        "type": "pwa-node",
+        "request": "launch",
+        "name": "playwright debug",
+        "env": { "PWDEBUG": "console" },
+        "program": "node_modules/.bin/playwright",
+        "args":["test", "${relativeFile}"]
+    }
+```
+
 
 ```json
     "version": "0.2.0",
@@ -162,10 +184,4 @@ const config: PlaywrightTestConfig = {
   ]
 };
 export default config;
-```
-
-* セレクタ
-
-```sh
-adminPage.waitForSelector('li div span'); # 指定したセレクターを取得するまで待つ
 ```

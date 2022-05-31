@@ -122,6 +122,29 @@ interface Pc extends Cpu {
 }
 ```
 
+* class
+
+```typescript
+class Person {
+    name: string
+    constructor(initName: string) {
+        this.name = initName;
+    }
+    greeting() {
+        console.log(`Hello ${this.name}`)
+    }
+}
+const mike = new Person('Mike');
+console.log(mike)
+
+# 初期化の省略記述
+class Person {
+    constructor(public name: string, ) {
+    }
+}
+
+```
+
 * 関数
 
 ```typescript
@@ -203,7 +226,7 @@ interface Designer {
     }
 }
 console.log(Designer.name?first)
-}
+```
 
 * Nullish Coalescing -> undefinedかnullの場合のみ代入する
 
@@ -213,3 +236,14 @@ const testVar = someObject.key ?? 'tmpKey'
 ```
 
 * lookup型
+
+```typescript
+interface Designer {
+    name?: {
+        first: string;
+        last: string;
+    }
+}
+# 変数名["内容"] で型にアクセスできる
+type id = Designer["name"]["first"]
+```

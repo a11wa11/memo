@@ -26,3 +26,7 @@ VPCはサブネットマスク16ビット、サブネット24ビットが推奨�
 ```sh
 yum install cronie
 ```
+
+## 予算管理
+
+cloudwatchでは全体の予算管理のアラート、aws budgetでは個別のリソースの予算管理ができる

@@ -28,3 +28,16 @@ docker build -t 名付けたいイメージ名 .(Dockerfileのあるパス)
 # Dockerfileを指定してbuild
 docker build -f Dockerfile_demo(Dockerfile以外の名前の場合) xxx/yyy/path(パス)
 ```
+
+### dockerの小技
+
+* イメージを一括削除
+
+```sh
+# イメージIDのみを一覧表示
+docker images -q
+# イメージ一括削除
+docker rmi -f `docker images -q`
+```
+
+* エフェメラルポート番号 -> 49152 ~ 65535

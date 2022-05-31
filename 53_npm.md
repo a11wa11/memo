@@ -32,6 +32,9 @@ npm outdated
 
 # package.jsonに記載されていないパッケージをnode_modulesから削除する
 npm prune
+
+# npmのアップデート
+npm update -g npm
 ```
 
 ## eslintの設定 -> [参考](https://maku.blog/p/xz9iry9/)
@@ -108,3 +111,5 @@ npx npm-which ターゲット
   "d": "*"       // x.x.x
 }
 ```
+
+## [Yarn](https://www.wakuwakubank.com/posts/307-javascript-yarn/)

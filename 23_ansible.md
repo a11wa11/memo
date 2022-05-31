@@ -108,6 +108,9 @@ ansible aws -m ping -i hosts
 # グループのホスト名を一覧表示する
 ansible グループ名 --list-hosts
 ansible ~.*1 --list-hosts # 正規表現で指定も可能
+
+# インベントリファイル内の特定の値を抽出して指定する
+ansible 10.0.0.0 -m ping -i hosts -l XXX
 ```
 
 ## playbook
@@ -122,6 +125,14 @@ ansible-playbook --syntax-check YAML_FILE_NAME.yml
 
 ```sh
 ansible-playbook SAMPLE.yml --step
+```
+
+* dry-run実行(実際には実行しない)
+
+```sh
+ansible-playbook SAMPLE.yml --check
+ansible-playbook SAMPLE.yml -C      # 省略版
+# shell,commandモジュールでは強制skipとなるため、該当の箇所は check_mode: no を利用する
 ```
 
 * 時間算出
