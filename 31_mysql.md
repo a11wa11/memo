@@ -117,6 +117,7 @@ All done!
 </details>
 
 7. 設定変更
+
 * MySQL5.7からパスワードの有効期限がデフォルトで360日になり、360日を経過するとパスワードの変更を促されてMySQLにログインできなくなる。  
 default_password_lifetime の値を `0` に変更して、この有効期限の設定を無効にする
 また、デフォルトの文字コードも UTF-8 に変更
@@ -141,6 +142,12 @@ port = 3307
 
 ```sh
 sudo systemctl restart mysqld.service
+```
+
+9. 接続
+
+```sh
+mysql -u ユーザー名 -D DB名 -p -P ポート番号
 ```
 
 ## クエリ
@@ -203,6 +210,22 @@ commit;
 select now();
 select utc_time();
 select date();
+```
+
+### 確認
+
+- ポート確認
+
+```sql
+mysql> status
+
+mysql> show variables like 'port'
+```
+
+- 疎通確認
+
+```sql
+mysqladmin ping -h xxx.xxx.xxx.xxx -u hoge -p fuga
 ```
 
 ### プロシージャ
