@@ -19,6 +19,7 @@
 - [cloudformation](https://a11wa11.github.io/memo/24_cloudformation)
 - [test](https://a11wa11.github.io/memo/29_test)
 - [mysql](https://a11wa11.github.io/memo/31_mysql)
+- [postgresql](https://a11wa11.github.io/memo/33_postgresql)
 - [redis](https://a11wa11.github.io/memo/36_redis)
 - [network](https://a11wa11.github.io/memo/40_network)
 - [nginx](https://a11wa11.github.io/memo/41_nginx)
