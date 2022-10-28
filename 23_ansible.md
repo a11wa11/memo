@@ -147,6 +147,20 @@ time ansible-playbook SAMPLE.yml
 ansible-playbook -i inventoryファイルのパス playbook.ymlファイルのパス
 ```
 
+* 一部タグのみ実行
+
+```sh
+# 指定したタグのみ実行
+ansible-playbook -i inventoryファイルのパス playbook.ymlファイルのパス  --tags=タグ名
+ansible-playbook -i inventoryファイルのパス playbook.ymlファイルのパス  -t "タグ名1,タグ名2"  # 省略版
+# 指定したタグをスキップして実行
+ansible-playbook -i inventoryファイルのパス playbook.ymlファイルのパス  --skip-tags="タグ名１,タグ名"
+
+# どのタグやタスクが実行されるか表示する
+ansible-playbook -i inventoryファイルのパス playbook.ymlファイルのパス  --list-tags   # 実行タグを表示
+ansible-playbook -i inventoryファイルのパス playbook.ymlファイルのパス  --list-tasks  # 実行タスクを表示
+```
+
 ### [プレイブックキーワード](https://docs.ansible.com/ansible/2.9/reference_appendices/playbooks_keywords.html)
 
 ### handler

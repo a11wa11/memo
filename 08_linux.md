@@ -26,6 +26,12 @@ yum install http://mirror.centos.orgXXXXX.noarch.rpm
 # リポジトリを確認
 yum repolist
 
+# 有効なリポジトリを確認
+yum repoinfo
+
+# リポジトリをアップデート
+yum update epel
+
 # amazon-linuxでのEPEL追加
 amazon-linux-extras install -y epel
 ```
