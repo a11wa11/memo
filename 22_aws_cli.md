@@ -50,9 +50,10 @@ aws s3 ls --profile user01
 aws configure set region us-east-2
 ```
 
-* 操作コマンド
+## 操作コマンド
 
 ```sh
+# EC2
 aws ec2 describe-instances
 aws ec2 describe-instance-status
 aws ec2 start-instances --instance-ids インスタンスID
@@ -60,6 +61,7 @@ aws ec2 stop-instances --instance-ids インスタンスID
 aws ec2 describe-vpcs
 aws ec2 describe-images # AMI
 
+# RDS
 aws rds describe-db-instances
 aws rds describe-db-clusters  --db-cluster-identifier クラスターID
 aws rds describe-db-cluster-endpoints
@@ -67,10 +69,42 @@ aws rds describe-db-cluster-endpoints
 # シークレットマネージャー
 aws secretsmanager list-secrets
 aws secretsmanager get-secret-value --secret-id シークレット名
+# シークレット即時消去
+aws secretsmanager delete-secret --secret-id シークレット名 --force-delete-without-recovery --region us-east-1
 
+# S3
+aws s3 cp コピー元　コピー先
+# ディレクトリごとコピー
+aws s3 cp ディレクトリ名 s3://バケット名/対象フォルダ名 --recursive
+# ディレクトリごと消去
+aws s3 rm s3://バケット名/ディレクトリ名/ --recursive
+
+# パラメーターストア
+# パラメーターストアから値だけ取得してテキスト形式で出力する
+aws ssm get-parameter --name 'パラメーター名' --query Parameter.Value --output text
+# 暗号化パラメーターを取得
+aws ssm get-parameter --name パラメーター名 --query Parameter.Value --with-decryption --output text
+
+
+# cloudformation
+# 正しく完了したstack
+aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE
+# 削除90日以内含むstack
+aws cloudformation list-stacks  | grep StackName
+# 実行中のstack
+aws cloudformation describe-stacks | grep StackName
+# ALBのルール表示
+aws elbv2 describe-rules --listener-arn arn:aws:elasticloadbalancing:リージョン:アカウント:listener/app/XXXXX/YYYYY/ZZZZZ
+
+```
+
+* 値の取得や形式に関して
+
+```sh
 # フィルターに関して
 aws secretsmanager list-secrets --filters Key=name,Value=任意の値
 aws ec2 describe-vpcs --region ap-northeast-1 --filters "Name=tag-value,Value=XXX" --query "Vpcs[].CidrBlockAssociationSet[].CidrBloc"
+aws ec2 describe-vpcs --region ap-northeast-1 --filters "Name=tag-value,Values=XXX" --query "Vpcs[].CidrBlockAssociationSet[].CidrBlock" --output text
 
 # 特定の値を取得
 aws secretsmanager list-secrets --query "値[*].値"
@@ -78,22 +112,10 @@ aws secretsmanager list-secrets --query "値[*].値"
 aws secretsmanager list-secrets --output text
 aws secretsmanager list-secrets --output json
 aws secretsmanager list-secrets --output yaml
+
 ```
 
-* s3
 
-```sh
-aws s3 cp ディレクトリ名 s3://バケット名/対象フォルダ名 --recursie
-```
-
-* パラメーターストア
-
-```sh
-# パラメーターストアから値だけ取得してテキスト形式で出力する
-aws ssm get-parameter --name 'パラメーター名' --query Parameter.Value --output text
-# 暗号化パラメーターを取得
-aws ssm get-parameter --name パラメーター名 --query Parameter.Value --with-decryption --output text
-```
 
 * [参考サイト:公式](https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-config)
 * [参考サイト:Qiita](https://qiita.com/reflet/items/e4225435fe692663b705)
