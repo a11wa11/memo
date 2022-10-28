@@ -21,6 +21,16 @@ VPCはサブネットマスク16ビット、サブネット24ビットが推奨�
 
 ## amazon-linux
 
+```sh
+# amazon-linuxでのEPEL追加
+amazon-linux-extras install -y epel
+
+# amazon-linux-extras のリスト確認
+amazon-linux-extras
+amazon-linux-extras list # list省略可能
+
+```
+
 * cronを入れる
 
 ```sh
