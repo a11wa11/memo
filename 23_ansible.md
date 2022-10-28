@@ -190,22 +190,47 @@ ansible-playbook -i inventoryファイルのパス playbook.ymlファイルの�
 | msg | 定義された文を表示する | × | Hello world! |　
 | var | 変数名をデバッグする(msg引数と意お互いに排他的である) | × | |
 
-* [get_url]
-* [unarchive]
+* [get_url](https://docs.ansible.com/ansible/2.9/modules/get_url_module.html)
+* [unarchive](https://docs.ansible.com/ansible/2.9/modules/unarchive_module.html)
 * [lineinfile](https://docs.ansible.com/ansible/2.9/modules/lineinfile_module.html#lineinfile-module) → マッチした行を置換する
+* [copy](https://docs.ansible.com/ansible/2.9/modules/copy_module.html)
+* [file](https://docs.ansible.com/ansible/2.9/modules/file_module.html)
+* [shell](https://docs.ansible.com/ansible/2.9/modules/shell_module.html) → 　シェルを実行　※冪等製が保たれないので非推奨
+* [script](https://docs.ansible.com/ansible/2.9/modules/script_module.html) → 対象のスクリプトを実行
+* [service](https://docs.ansible.com/ansible/2.9/modules/service_module.html)
+* [user](https://docs.ansible.com/ansible/2.9/modules/user_module.html)
+* [item]
+* [pause](https://docs.ansible.com/ansible/2.9/modules/pause_module.html)
+* [set_fact](https://docs.ansible.com/ansible/2.9/modules/set_fact_module.html) → 変数の設置
+* [setup](https://docs.ansible.com/ansible/2.9/modules/setup_module.html) → ansibleコマンドで自動的に呼ばれる
+* local_action
+  * [wait_for](https://docs.ansible.com/ansible/2.9/modules/wait_for_module.html)
 
-- copy
-- shell　シェルを実行　※冪等製が保たれないので非推奨
-- script 対象のスクリプトを実行
-- service
-- file
-- user
-- item
-- pouse 
-- set_fact 変数の設置
-- setup # ansibleコマンドで自動的に呼ばれる
-- local_action
-  - wait_for
+* ignore_errors
 
-[参考リポジトリ1](https://github.com/spurin/diveintoansible-lab/blob/master/docker-compose.yaml)
-[参考リポジトリ2](https://github.com/spurin/diveintoansible)
+
+ignore_errosをyesにすると、そのタスクでエラーが発生しても無視して次のタスクに進むことができる
+
+```yaml
+- name: 必ず失敗するタスク
+  command: /bin/false
+  ignore_errors: yes
+
+- debug:
+    msg: '直前タスクの失敗の場合でも次に進みます'
+```
+
+* [ansible実行時のログ出力先の指定と出力形式を指定して改行を見やすくする](https://tekunabe.hatenablog.jp/entry/2019/07/11/ansible_vallback_plugin_yaml)
+  - `ansible.cfg`というファイルをansible実行するルートディレクトリに配置する
+  - 環境毎に設定を変更したい場合は`ansible.cfg`を各ディレクトリに配置可能
+
+```yaml
+[defaults]
+# ログの出力先を設定
+log_path = /var/log/ansible.log
+# ログの出力時に改行し、見やすくする
+stdout_callback = yaml
+```
+
+[参考リポジトリ1-diveintoansible-lab](https://github.com/spurin/diveintoansible-lab/blob/master/docker-compose.yaml)<br>
+[参考リポジトリ2-diveintoansible](https://github.com/spurin/diveintoansible)
