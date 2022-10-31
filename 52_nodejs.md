@@ -1,5 +1,39 @@
 # node.js
 
+## インストール
+
+* [nvmからインストール](https://kazuhira-r.hatenablog.com/entry/2021/03/22/223042)
+ * nvmとはNode.jsをインストールしたり、既にインストール済みのNode.jsを最新の安定版にアップデート、バージョンを変更したりするツール
+
+```sh
+# ubuntuで検証済。事前にgitやcurlをインストールされていることが必要
+
+# nvmリポジトリをクローン
+git clone https://github.com/nvm-sh/nvm /opt/nvm/
+
+# 全ユーザーにアクティベートするためにprofileを作成
+echo '#!/bin/sh' > /etc/profile.d/nvm.sh && echo -e "\nsource /opt/nvm/nvm.sh" >> /etc/profile.d/nvm.sh
+source /etc/profile
+
+# node.jsのインストール
+nvm install node   # 最新版インストール
+nvm install --lts  # 安定版インストール
+nvm install v0.0.0 # バージョン指定インストール
+
+# インストールされているnodeバージョン確認
+nvm ls
+
+# nvmで使用nodeバージョンの切替
+nvm use v16.15.0
+
+# インストール可能なバージョン一覧
+nvm ls-remote
+
+# nodeのアンインストール
+nvm uninstall v16.15.0
+```
+
+
 ## [リリースサイクル](https://github.com/nodejs/Release)
 
 ```javascript
