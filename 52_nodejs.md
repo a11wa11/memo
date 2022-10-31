@@ -4,6 +4,7 @@
 
 * [nvmからインストール](https://kazuhira-r.hatenablog.com/entry/2021/03/22/223042)
  * nvmとはNode.jsをインストールしたり、既にインストール済みのNode.jsを最新の安定版にアップデート、バージョンを変更したりするツール
+ * EOLは[ここ](https://endoflife.date/nodejs)で確認
 
 ```sh
 # ubuntuで検証済。事前にgitやcurlをインストールされていることが必要
