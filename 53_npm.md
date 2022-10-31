@@ -26,6 +26,10 @@ npm list --depth=1
 
 # どのバージョンがあるか調べる
 npm info パッケージ名 versions
+# バージョンを絞り込み
+npm info パッケージ名@0.1 version
+# 最新バージョンを表示
+npm info パッケージ名 version
 
 # 古い依存関係を表示
 npm outdated
