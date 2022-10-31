@@ -72,33 +72,49 @@ aws secretsmanager get-secret-value --secret-id シークレット名
 # シークレット即時消去
 aws secretsmanager delete-secret --secret-id シークレット名 --force-delete-without-recovery --region us-east-1
 
-# S3
-aws s3 cp コピー元　コピー先
-# ディレクトリごとコピー
-aws s3 cp ディレクトリ名 s3://バケット名/対象フォルダ名 --recursive
-# ディレクトリごと消去
-aws s3 rm s3://バケット名/ディレクトリ名/ --recursive
-
 # パラメーターストア
 # パラメーターストアから値だけ取得してテキスト形式で出力する
 aws ssm get-parameter --name 'パラメーター名' --query Parameter.Value --output text
 # 暗号化パラメーターを取得
 aws ssm get-parameter --name パラメーター名 --query Parameter.Value --with-decryption --output text
 
+# ALBのルール表示
+aws elbv2 describe-rules --listener-arn arn:aws:elasticloadbalancing:リージョン:アカウント:listener/app/XXXXX/YYYYY/ZZZZZ
+```
 
-# cloudformation
+* [S3](https://qiita.com/uhooi/items/48ef6ef2b34162988295)
+
+```sh
+# S3
+aws s3 cp コピー元　コピー先
+# ディレクトリごとコピー
+aws s3 cp ディレクトリ名 s3://バケット名/対象フォルダ名 --recursive
+# ディレクトリごと消去
+aws s3 rm s3://バケット名/ディレクトリ名/ --recursive
+# バケット消去(空でなくても削除)
+aws s3 rb s3://バケット名 --force
+# バケットの内容をローカルのフォルダと同期する(追加・更新のみで削除されない)
+aws s3 sync 対象フォルダ s3://バケット名/パス
+# バケットの内容をローカルのフォルダと同期する(削除もされる)
+aws s3 sync 対象フォルダ s3://バケット名/パス --delete
+# ローカルのファイルをバケットに移動する
+aws s3 mv 対象ファイル s3://バケット名/パス
+```
+
+* [cloudformation](https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/using-cfn-describing-stacks.html)
+
+```sh
 # 正しく完了したstack
 aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE
 # 削除90日以内含むstack
-aws cloudformation list-stacks  | grep StackName
+aws cloudformation list-stacks  | grep スタック名
+# 実行中のスタックの情報を表示
+aws cloudformation describe-stacks --stack-name スタック名
 # 実行中のstack
-aws cloudformation describe-stacks | grep StackName
-# ALBのルール表示
-aws elbv2 describe-rules --listener-arn arn:aws:elasticloadbalancing:リージョン:アカウント:listener/app/XXXXX/YYYYY/ZZZZZ
-
+aws cloudformation describe-stacks | grep スタック名
 ```
 
-* 値の取得や形式に関して
+* 値の取得や形式、フィルターに関して
 
 ```sh
 # フィルターに関して
