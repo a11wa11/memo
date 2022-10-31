@@ -3,8 +3,16 @@
 * 初期設定
 
 ```sh
+# グローバルユーザー設定
 git config --global user.name "test_name"
 git config --global user.email "test_address"
+```
+
+* ローカルユーザー設定
+
+```sh
+git config --local user.name "test_name"
+git config --local user.email "test_address"
 ```
 
 * リモートリポジトリの設定
