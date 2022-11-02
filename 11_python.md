@@ -128,3 +128,14 @@ poetry env use <python>     # 仮想環境を作成、アクティベート
 # pip freeze をpoetryで実行したい時
 poetry run pip --disable-pip-version-check list --format=freeze
 ```
+
+### よく使うライブラリ
+
+* subprocess -> pythonからコマンドを実行
+
+```python
+import subprocess
+
+subprocess.run(["ls", "-l"])
+subprocess.run("ls -l", shell=True)
+```
