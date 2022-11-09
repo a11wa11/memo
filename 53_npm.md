@@ -6,8 +6,8 @@
 # インストール
 npm install パッケージ名
 npm i パッケージ名           # 省略形
-npm ci                    # clean-install
-npm install               # package.jsonに書かれているパッケージをインストール
+npm ci                    # clean-install package-lock.jsonは更新されない
+npm install               # package.jsonに書かれているパッケージをインストール、package-lock.jsonは更新することがある
 npm install --production  # dependenciesに書かれているパッケージのみインストール
 
 # バージョンを指定してインストール
@@ -111,6 +111,8 @@ npx npm-which ターゲット
 
 ### package.json
 
+* `npm install`によってインストールすべきパッケージのバージョンの範囲(とその他もろもろ)
+
 * 見方
 
 ```json
@@ -132,5 +134,15 @@ dependencies": {
     "@aws-cdk/assert": "^1.9.0",   # aws-cdkというユーザーネームのassertというモジュール名という意味
     "aws-cdk": "^1.16.0"
 }
+```
+
+### package-lock.json
+
+* `npm install`によって実際にインストールしたパッケージのバージョンのみが記載されている
+  * package-lock.jsonを使うことで`npm install`でインストールした孫依存モジュールを記録しておくことができる
+  * 孫依存モジュールの新しいバージョンがリリースされたとしても以前インストールしたバージョンをインストールすることができる
+
+
+
 
 ## [Yarn](https://www.wakuwakubank.com/posts/307-javascript-yarn/)
