@@ -5,14 +5,18 @@
 ```sh
 # インストール
 npm install パッケージ名
-npm i パッケージ名  # 省略形
+npm i パッケージ名           # 省略形
+npm ci                    # clean-install
+npm install               # package.jsonに書かれているパッケージをインストール
+npm install --production  # dependenciesに書かれているパッケージのみインストール
 
 # バージョンを指定してインストール
 npm install パッケージ名@バージョン名
 
 # ローカル環境にインストール
-npm i --save-dev パッケージ名
+npm i --save-dev パッケージ名 # devDependenciesに追加したいとき
 npm i -D パッケージ名  # 省略形
+npm install --save パッケージ名 # dependenciesに追加したいとき
 
 # グローバル環境にインストール
 npm i -g パッケージ名  # 省略形
@@ -105,15 +109,28 @@ npm install npm-which
 npx npm-which ターゲット
 ```
 
-* package.json
+### package.json
+
+* 見方
 
 ```json
 "dependencies": {
   "a": "3.2.1",
   "b": "~3.2.1", // 3.2.x  明記したところ以下のバージョンがあがることのみ許容
-  "c": "^3.2.1", // 3.x.x  一番左の0以外の数字のバージョンを更新しない
+  "c": "^3.2.1", // 3.x.x  一番左の3以外の数字のバージョンを更新しない
   "d": "*"       // x.x.x
 }
 ```
+* @マークの意味 -> [名前空間としてのアットマーク](https://mass-min.com/archives/1018)
+  * npmモジュールは、名前が被るのを許可していない。しかしそれだと`assert`や`cli`のような誰しつける名前は早い者勝ちで名付けられないことになる。
+  * そこでnpmでは、「@」と「/」の間にユーザーネーム(or 組織名)を入れて名前空間とし、その後ろにモジュール名をつける「scoped packages」形式を許可しており、以下のような指定方法になる。
+
+
+
+```json
+dependencies": {
+    "@aws-cdk/assert": "^1.9.0",   # aws-cdkというユーザーネームのassertというモジュール名という意味
+    "aws-cdk": "^1.16.0"
+}
 
 ## [Yarn](https://www.wakuwakubank.com/posts/307-javascript-yarn/)
