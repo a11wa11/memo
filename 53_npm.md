@@ -42,6 +42,10 @@ npm outdated --long # 追加項目表示
 # 依存しているパッケージの重複を整理
 npm dedupe
 
+# キャッシュクリア
+npm cache clean 
+npm cache clean --force
+
 # package.jsonに記載されていないパッケージをnode_modulesから削除する
 npm prune
 
