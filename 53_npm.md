@@ -6,7 +6,7 @@
 # インストール
 npm install パッケージ名
 npm i パッケージ名           # 省略形
-npm ci                    # clean-install package-lock.jsonは更新されない
+npm ci                    # clean-install package-lock.jsonは更新されない(package-lock.jsonを元にインストール)
 npm install               # package.jsonに書かれているパッケージをインストール、package-lock.jsonは更新することがある
 npm install --production  # dependenciesに書かれているパッケージのみインストール
 
@@ -37,6 +37,10 @@ npm info パッケージ名 version
 
 # 古い依存関係を表示
 npm outdated
+npm outdated --long # 追加項目表示
+
+# 依存しているパッケージの重複を整理
+npm dedupe
 
 # package.jsonに記載されていないパッケージをnode_modulesから削除する
 npm prune
@@ -130,7 +134,7 @@ npx npm-which ターゲット
 
 
 ```json
-dependencies": {
+"dependencies": {
     "@aws-cdk/assert": "^1.9.0",   # aws-cdkというユーザーネームのassertというモジュール名という意味
     "aws-cdk": "^1.16.0"
 }
