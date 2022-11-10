@@ -67,9 +67,18 @@ console.timeEnd("timerName")
 
 ## コマンド
 
+* 基本
+
 ```sh
  # インタラクティブシェル
  node
  # バージョン確認
  node -v
 ```
+
+* デバッグ
+
+```sh
+node inspect 実行ファイル名.js
+```
+
