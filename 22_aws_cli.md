@@ -80,6 +80,9 @@ aws ssm get-parameter --name パラメーター名 --query Parameter.Value --wit
 
 # ALBのルール表示
 aws elbv2 describe-rules --listener-arn arn:aws:elasticloadbalancing:リージョン:アカウント:listener/app/XXXXX/YYYYY/ZZZZZ
+
+# アカウントの確認
+aws sts get-caller-identity
 ```
 
 * [S3](https://qiita.com/uhooi/items/48ef6ef2b34162988295)
