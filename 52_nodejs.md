@@ -80,5 +80,8 @@ console.timeEnd("timerName")
 
 ```sh
 node inspect 実行ファイル名.js
+
+# replと入力するとreplモードになり、user.nameのようなプロパティを確認可能
+debug>repl
 ```
 
