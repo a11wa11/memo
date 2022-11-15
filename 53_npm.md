@@ -116,7 +116,7 @@ letを使っているが再代入していないので、constを使うべき
 宣言されているが、使っていない変数がある
 未定義の変数やモジュールを使用している
 
-## prettierの設定 -> [参考](https://chaika.hatenablog.com/entry/2021/07/21/083000)
+## [prettierの設定](https://chaika.hatenablog.com/entry/2021/07/21/083000)
 
 * [公式](https://prettier.io/docs/en/cli.html)
 
@@ -146,7 +146,23 @@ prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json,css,scss}'
     * 宣言されているが、使っていない変数がある
     * 未定義の変数やモジュールを使用している
 
-* よく使うライブラリ
+### husky
+gitのcommitやpushといったアクションのタイミングで、コマンドを実行する仕組みを提供するライブラリ
+
+* インストール
+
+```sh
+npm install -D husky
+npx husky install #最初だけ実行 gitフックを有効にする
+```
+
+* 設定
+
+```sh
+npx husky add .husky/pre-commit "実行したいスクリプト"
+```
+
+### よく使うライブラリ
   * npm-which
 
 ```sh
