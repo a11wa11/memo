@@ -53,7 +53,9 @@ npm prune
 npm update -g npm
 ```
 
-## eslintの設定 -> [参考](https://maku.blog/p/xz9iry9/)
+## [eslintの設定](https://maku.blog/p/xz9iry9/)
+
+* コマンド
 
 ```sh
 # インストール
@@ -67,6 +69,41 @@ npx eslint --ext ts(対象の拡張子) .(パスの指定)
 npx eslint 対象ファイル --fix-dry-run
 npx eslint 対象ファイル --fix
 
+```
+
+* [eslintrc(設定ファイル)](https://maku.blog/p/j6iu7it/)
+
+```yaml
+# 実行時のカレントディレクトリを起点にして、上位のディレクトリの設定ファイル (.eslintrc.*) を探していく。
+root: true # trueの指定があると、この検索の振る舞いをそこで停止できる。
+env: # 実行環境の指示
+# どのようなグローバルオブジェクトを宣言なしで参照可能にするかを ESLint に知らせるための設定。
+# 例えば、Web ブラウザ上で動作させる JavaScript コードであれば browser
+# Node.js 環境で動作させるコードであれば node を true に設定します
+# 内部的には、選択した環境ごとに globals オプションの設定が行われる
+  commonjs: true
+  es2021: true
+  node: true
+plugins: # 使用するプラグインの指定
+# pluginsはあらかじめnpmでインストールした上で、ここに列挙しておく必要がある。さらに、実際にルールを有効化するには、extends なども指定する必要がある。
+  - '@typescript-eslint'
+overrides: []
+parser: [] # TypeScript コード (.ts、.tsx) を扱えるようにするには、TypeScript 用のパーサー (@typescript-eslint/parser) をインストールして指定する必要がある
+  - @typescript-eslint/parser
+parserOptions:
+  ecmaVersion: 2021 # 12と同様、常に最新を指定するlatestと指定することも可能
+extends: # 共有設定の適用
+# 複数のルールをまとめたコンフィギュレーション名をする。
+# ESLint標準のもの（eslint:recommeded など）以外は、npmパッケージをインストールすることで指定できるようになる。
+# 内部のルール設定が重複する場合は、後から指定したものが優先されることに注意。
+# 例えば、plugin:@typescript-eslint/recommended は eslint:recommended より後に指定する必要がある（TypeScript 用の設定で上書きする必要があるため）。
+  - eslint:recommended 
+  - plugin:@typescript-eslint/recommended
+rules: # 各ルールの設定
+# 多くのケースでは、extends による共有設定で大まかなルール設定を行い、ここで個別ルールを細かく調整する。
+  indent: ["error", 2]
+  semi: ["error", "always"]
+  no-console: warn
 ```
 
 * eslintとprettierの使い分け
