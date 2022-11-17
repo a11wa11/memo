@@ -355,6 +355,22 @@ yum install bc
 echo "43.8 * 23.9" | bc 
 ```
 
+* 文字列から配列作成
+
+```sh
+${変数名/置換前文字列/置換後文字列} #文字列置換
+
+PYTHON_VERSION="3.9.14"
+PYTHON_VERSION_NUNBERS=${PYTHON_VERSION/./ } #マッチした先頭を置換したい場合
+echo ${PYTHON_VERSION_NUNBERS[0]} # 3
+echo ${PYTHON_VERSION_NUNBERS[1]} # 9.14
+
+PYTHON_VERSION_NUNBERS=${PYTHON_VERSION//./ } #マッチする文字をすべて置換したい場合
+echo ${PYTHON_VERSION_NUNBERS[0]} # 3
+echo ${PYTHON_VERSION_NUNBERS[1]} # 9
+echo ${PYTHON_VERSION_NUNBERS[2]} # 14
+```
+
 * if文
 
 ```sh
