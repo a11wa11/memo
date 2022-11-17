@@ -1,5 +1,11 @@
 # python
 
+## インストール
+
+* [バイナリ(直インストール)](https://www.build-python-from-source.com/)
+
+
+
 ## 環境系
 
 * 仮想環境作成
@@ -33,6 +39,23 @@ def double(n):
 lambda_ver = lambda n: n * 3 # doubleと同じ
 
 print(double(3) == lambda_ver(3)) # Trueとなる
+```
+
+### 調査
+
+* メソッドの一覧を取得する
+
+```python
+import inspect
+obj = "test"
+for x in inspect.getmembers(obj):
+    print(x)
+```
+
+* pdbでメソッドの一覧を取得する
+
+```pdb
+obj.__dir__()
 ```
 
 ### テスト系
