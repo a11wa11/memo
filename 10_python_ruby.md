@@ -94,6 +94,40 @@ names=["Tanaka","Yamada","Suzuki"]
 </td>
 </tr>
 <tr>
+<td>スライス</td>
+<td>
+
+```python
+names=["Tanaka","Yamada","Suzuki"]
+names[0] # "Tanaka"
+names[-1] # "Suzuki"  
+```
+</td>
+<td>
+
+```ruby
+```
+</td>
+</tr>
+<tr>
+<td>文字列分割</td>
+<td>
+
+```python
+s = 'one,two,three'
+l = s.split(',')
+# ['one', 'two', 'three']
+```
+</td>
+<td>
+
+```ruby
+```
+</td>
+</tr>
+
+  
+<tr>
 <td>繰り返し</td>
 <td>
 
