@@ -49,6 +49,19 @@ RUN yum -y install wget gcc openssl-devel bzip2-devel libffi-devel xz-devel tk-d
 ```
 </details>
 
+* [pyenv(バージョン管理パッケージ)のインストール](https://github.com/pyenv/pyenv#basic-github-checkout)
+
+```sh
+# linux、bashrcを使用する場合
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+cd ~/.pyenv && src/configure && make -C src
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+exec "$SHELL"
+pyenv install 任意のバージョン
+pyenv global 任意のバージョン
+```
 
 ## 環境系
 
