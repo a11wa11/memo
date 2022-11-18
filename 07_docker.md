@@ -10,7 +10,7 @@
 # docker-tags centos でタグ一覧を取得。jq & curl が必要
 if [ -e /usr/bin/docker ]; then
     function docker-tags {
-        curl -s https://registry.hub.docker.com/v1/$1/tags | jq -r '.[].name'
+        curl -s curl -s https://registry.hub.docker.com/v2/repositories/library/$1/tags/ | jq -r '.results[].name'
     }
 fi
 ```
