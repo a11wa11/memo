@@ -20,16 +20,61 @@ fi
 RUN yum install -y https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm --skip-broken
 ```
 
-### docker build
+### コマンド
+
+#### イメージ関連コマンド
+
+* イメージ検索
 
 ```sh
-# 基本build
-docker build -t 名付けたいイメージ名 .(Dockerfileのあるパス)
-# Dockerfileを指定してbuild
-docker build -f Dockerfile_demo(Dockerfile以外の名前の場合) xxx/yyy/path(パス)
+docker search イメージ名
 ```
 
-### dockerの小技
+* イメージ取得
+
+```sh
+docker pull イメージ名
+```
+
+* DockerFileからイメージを作成する
+
+```sh
+# イメージ作成基本コマンド。この場合イメージ名はランダムにつけられる
+docker build (DockerFileのある)パス
+
+# イメージ名を独自につける
+docker build -t 名付けたいイメージ名 .(Dockerfileのあるパス)
+
+# Dockerfileを指定してbuild
+docker build -f Dockerfile_demo(Dockerfile以外の名前の場合) .(Dockerfileのあるパス)
+
+# イメージ名とタグを独自につける
+docker build -t 名付けたいイメージ名:タグ (DockerFileのある)パス
+
+# 例
+docker build -t sample:1 .
+・
+・
+・
+# 省略
+Successfully built 1234abcdefgh ←作成されたイメージID
+Successfully tagged sample:1  ←イメージ名とタグがつく。オプションつけなければこの表記されない
+```
+
+* dockerイメージの作成履歴を確認
+
+```sh
+docker history イメージ名
+```
+
+* イメージを削除する
+
+```sh
+# 対象を指定する際はイメージ名、イメージ名:タグ、イメージIDのどれかで指定する
+docker rmi イメージ名
+docker rmi イメージ名:タグ
+docker rmi イメージID
+```
 
 * イメージを一括削除
 
@@ -39,5 +84,94 @@ docker images -q
 # イメージ一括削除
 docker rmi -f `docker images -q`
 ```
+
+#### コンテナ関連コマンド
+
+* コンテナの中でbashを利用して起動
+
+```sh
+docker run -it イメージ名 bash
+
+# 作成するコンテナに名前をつける場合
+docker run --name 名付けたいコンテナ名 -it イメージ名 bash
+```
+
+* コンテナの状態確認
+
+```sh
+# 起動コンテナのみ表示
+docker ps
+# 停止コンテナも含めて表示
+docker ps -a
+# 停止コンテナも含めてコンテナIDのみ表示
+docker ps -aq
+```
+
+* コンテナを起動
+
+```sh
+docker start コンテナ名
+```
+
+* コンテナを停止
+
+```sh
+docker stop コンテナ名
+```
+
+* バックグランドで起動しているコンテナに入る
+
+```sh
+docker attach コンテナ名
+```
+
+* dockerコンテナを削除
+
+```sh
+docker rm コンテナ名 or コンテナID
+```
+
+* dockerコンテナの標準出力のログを確認
+
+```sh
+docker logs コンテナ名 or コンテナID
+```
+
+* ファイルコピー
+
+```sh
+docker cp {コンテナID|コンテナ名}:ファイルパス コピー先
+```
+
+#### ネットワーク関連コマンド
+
+* dockerネットワークを表示
+
+```sh
+docker network ls
+```
+
+* dockerネットワークの詳細を確認
+
+```sh
+docker network inspect ネットワーク名 or ネットワークID
+```
+
+* dockerネットワークを作成
+
+```sh
+docker network create --attachable -d ネットワーク名 --subnet=172.17.0.0/16 作成ネットワーク名
+```
+
+#### Docker for Mac
+
+* Macでvolumeに保存されているVMに入る
+
+```sh
+screen ~/Library/Containers/com.docker.docker/Data/vms/0/tty
+```
+
+
+
 
 * エフェメラルポート番号 -> 49152 ~ 65535
