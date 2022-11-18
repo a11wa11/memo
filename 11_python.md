@@ -2,8 +2,52 @@
 
 ## インストール
 
-* [バイナリ(直インストール)](https://www.build-python-from-source.com/)
+* [バイナリ(直インストール):参考１](https://www.build-python-from-source.com/)
+* [バイナリ(直インストール):参考２](https://docs.posit.co/resources/install-python-source/)
 
+
+<details>
+    <summary>Dockerでのamazonlinux2イメージでのpythonインストール</summary>
+
+```Dokerfile
+FROM amazonlinux:2
+
+WORKDIR /root
+
+RUN yum install -y glibc-langpack-ja && yum clean all; \
+    yum update -y && yum -y groupinstall "Development Tools" && \
+    echo "alias ll='ls -la --color'" >> /root/.bashrc;
+
+ENV LANG=ja_JP.UTF-8   \
+    LANGUAGE=ja_JP:ja  \
+    LC_ALL=ja_JP.UTF-8 \
+    TZ=Asia/Tokyo
+
+# install python
+ARG PYTHON_VERSION="3.9.14"
+RUN yum -y install wget gcc openssl-devel bzip2-devel libffi-devel xz-devel tk-devel && \
+    cd /tmp/ && \
+    wget https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz && \
+    tar xzf Python-${PYTHON_VERSION}.tgz && \
+    cd Python-${PYTHON_VERSION} && \
+    ./configure --prefix=/opt/python/${PYTHON_VERSION}/ --enable-optimizations --with-lto --with-computed-gotos --with-system-ffi && \
+    make -j "$(nproc)" && \
+    make altinstall && \
+    rm /tmp/Python-${PYTHON_VERSION}.tgz && \
+    PYTHON_VERSION_NUNBERS=(${PYTHON_VERSION//./ }) && \
+    PYTHON_MAJOR=${PYTHON_VERSION_NUNBERS[0]} && \
+    PYTHON_MINOR=${PYTHON_VERSION_NUNBERS[1]} && \
+    ln -s /opt/python/${PYTHON_VERSION}/bin/python${PYTHON_MAJOR}.${PYTHON_MINOR}        /opt/python/${PYTHON_VERSION}/bin/python && \
+    ln -s /opt/python/${PYTHON_VERSION}/bin/python${PYTHON_MAJOR}.${PYTHON_MINOR}        /opt/python/${PYTHON_VERSION}/bin/python${PYTHON_MAJOR} && \
+    ln -s /opt/python/${PYTHON_VERSION}/bin/pip${PYTHON_MAJOR}.${PYTHON_MINOR}           /opt/python/${PYTHON_VERSION}/bin/pip && \
+    ln -s /opt/python/${PYTHON_VERSION}/bin/pip${PYTHON_MAJOR}.${PYTHON_MINOR}           /opt/python/${PYTHON_VERSION}/bin/pip${PYTHON_MAJOR} && \
+    ln -s /opt/python/${PYTHON_VERSION}/bin/pydoc${PYTHON_MAJOR}.${PYTHON_MINOR}         /opt/python/${PYTHON_VERSION}/bin/pydoc && \
+    ln -s /opt/python/${PYTHON_VERSION}/bin/idle${PYTHON_MAJOR}.${PYTHON_MINOR}          /opt/python/${PYTHON_VERSION}/bin/idle && \
+    ln -s /opt/python/${PYTHON_VERSION}/bin/python${PYTHON_MAJOR}.${PYTHON_MINOR}-config /opt/python/${PYTHON_VERSION}/bin/python-config && \
+    echo "PATH=/opt/python/${PYTHON_VERSION}/bin/:$PATH" >> /root/.bashrc && source /root/.bashrc && \
+    pip3 install boto3;
+```
+</details>
 
 
 ## 環境系
