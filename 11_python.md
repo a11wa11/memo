@@ -89,6 +89,18 @@ sys.getsizeof(リストとか)
 
 ## 基本系
 
+* 埋込出力
+
+```python
+# %sは文字列埋込、%dは整数、浮動小数が%f
+print('合計 %s 個です' % len(list))
+
+# format形式
+print('{} is {} years old'.format(s, i))
+```
+
+* lambda
+
 ```python
 def double(n):
     return n * 3
