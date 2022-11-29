@@ -207,3 +207,98 @@ npx npm-which ターゲット
 
 
 ## [Yarn](https://www.wakuwakubank.com/posts/307-javascript-yarn/)
+
+Yarn　とは?
+* Facebookが開発したJavaScriptのパッケージマネージャー
+* npmと互換性がある
+* インストールがより速い
+* ネットワーク接続失敗時、自動リトライする
+* `yarn.lock`によるバージョン固定化が行われる(`yarn.lock`はyarnでインストールした後に自動生成される)
+
+#### インストール
+
+```sh
+npm install -g yarn
+```
+<table>
+<th>機能</th>
+<th>npm</th>
+<th>yarn</th>
+  <tr>
+<td>初期化</td>
+<td>npm init</td>
+<td>yarn init</td>
+  </tr>
+  <tr>
+<td>package.jsonからインストール</td>
+<td>npm install</td>
+<td>yarn, yarn install</td>
+  </tr>
+  <tr>
+<td>パッケージ削除</td>
+<td>npm uninstall パッケージ名</td>
+<td>yarn remove パッケージ名</td>
+  </tr>
+  <tr>
+<td>パッケージ追加</td>
+<td>npm install パッケージ名</td>
+<td>yarn add パッケージ名</td>
+  </tr>
+  <tr>
+<td>パッケージ追加(devDependencies)</td>
+<td>npm install --save-dev --dev パッケージ名</td>
+<td>yarn add --dev パッケージ名</td>
+  </tr>
+  <tr>
+<td>グローバルインストール</td>
+<td>npm install -g パッケージ名</td>
+<td>yarn global add パッケージ名</td>
+  </tr>
+  <tr>
+<td>パッケージ削除</td>
+<td>npm uninstall パッケージ名</td>
+<td>yarn remove パッケージ名</td>
+  </tr>
+  <tr>
+<td>ローカルプロジェクトの全パッケージを更新</td>
+<td>npm update</td>
+<td>yarn upgrade</td>
+  </tr>
+  <tr>
+<td>指定パッケージを更新</td>
+<td>npm update パッケージ名</td>
+<td>yarn upgrade パッケージ名</td>
+  </tr>
+  <tr>
+<td>scriptを実行</td>
+<td>npm run スクリプト名</td>
+<td>yarn run スクリプト名</td>
+  </tr>
+  <tr>
+<td>パッケージ一覧を表示</td>
+<td>npm ls</td>
+<td>yarn list</td>
+  </tr>
+  <tr>
+<td>パッケージ情報</td>
+<td>npm info パッケージ名</td>
+<td>yarn info パッケージ名</td>
+  </tr>
+  <tr>
+<td>古い依存関係を表示</td>
+<td>npm outdated</td>
+<td>yarn outdated</td>
+  </tr>
+  <tr>
+<td>キャッシュクリア</td>
+<td>npm cache clean</td>
+<td>yarn cache clean</td>
+  </tr>
+  <tr>
+<td>ローカルパッケージの実行</td>
+<td>npx パッケージ名</td>
+<td>yarn -s run パッケージ名</td>
+  </tr>
+</table>
+
+
