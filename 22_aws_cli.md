@@ -111,6 +111,8 @@ aws s3 mv 対象ファイル s3://バケット名/パス
 aws cloudformation list-stacks --stack-status-filter CREATE_COMPLETE
 # 削除90日以内含むstack
 aws cloudformation list-stacks  | grep スタック名
+# ステータスがDELETE_COMPLETE以外のスタックを [StackStatus/LastUpdatedTime/StackName] の形式で表示
+aws cloudformation list-stacks --output json | jq -r '.StackSummaries[] | .result = .StackStatus + " " + .LastUpdatedTime + " " + .StackName | .result' | grep -v DELETE_COMPLETE | sort
 # 実行中のスタックの情報を表示
 aws cloudformation describe-stacks --stack-name スタック名
 # 実行中のstack
