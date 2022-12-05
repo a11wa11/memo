@@ -263,6 +263,8 @@ md5sum ファイル名
 ps aux | grep python | grep -v grep | awk '{print $2}'
 # 標準出力で表示される内容のうち、空白区切りで4番目の内容を取得
 ps aux | grep python | grep -v grep | awk '{print $4}'
+# 標準出力で表示される内容のうち、空白区切りで最後の内容を取得
+ps aux | grep python | grep -v grep | awk '{print $NF}'
 ```
 
 ### 時間変更
