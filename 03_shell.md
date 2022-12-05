@@ -385,7 +385,27 @@ if [ -w ファイル名:]      # 書込権限があるかどうか
 if [ -x ファイル名:]      # 実行権限があるかどうか
 if [ fileA -nt fileB:]  # fileAがfileBよr新しいかどうか
 if [ fileA -ot fileB:]  # fileAがfileBよr古いかどうか
+if [[ argA = "-f" ]] || [[ argA = "--force" ]]  # argAが -f または --force の場合
+if [[ "$str" == *shell* ]]   # $str がshellという文字列を含むかどうか
+```
 
+* case文
+
+```sh
+read -p "Are you sure you're trying to delete the stack? [y/n]: " YN
+case $YN in
+    [Yy]|[Yy][Ee][Ss])
+        echo "Start delete the Stack"
+        ;;
+    [Nn]|[Nn][Oo])
+        echo "Canceled delete Stack"
+        exit 1
+        ;;
+    *)
+        echo "No answer. Please enter your answer"
+        exit 1
+        ;;
+esac
 ```
 
 * for文
@@ -433,6 +453,21 @@ yum update -y && yum install tree
 function 関数名 (引数) {
   echo "message: ${MSG:-HELLO}" # ${変数名:-代入内容}で変数の初期値を定義可能
 }
+```
+
+* echo
+
+```sh
+# 改行させる
+echo;
+echo "test"
+```
+
+* 入力待ち
+
+```sh
+# -pで指定した文を表示し、入力した内容をYN変数で定義
+read -p "Are you sure you're trying to delete the stack? [y/n]: " YN
 ```
 
 * jq
