@@ -105,6 +105,7 @@ aws s3 mv 対象ファイル s3://バケット名/パス
 ```
 
 * [cloudformation](https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/using-cfn-describing-stacks.html)
+* [AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/reference/cloudformation/index.html#cli-aws-cloudformation)
 
 ```sh
 # 正しく完了したstack
