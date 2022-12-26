@@ -301,11 +301,15 @@ export LESS="-XFR"
 export LESS="-SRXF"
 ```
 
-### 画像ダウンロード(curl)
+### curl
 
 ```sh
-# curl -o 保管ディククトリ/保管ファイル名 -OL ダウンロードしたいURL
+# 画像ダウンロード `curl -o 保管ディククトリ/保管ファイル名 -OL ダウンロードしたいURL`
 curl -o app/assets/images/rails.png -OL railstutorial.jp/rails.png
+# ヘッダー表示
+curl -Iv 対象URI
+# User-Agent設定
+curl --user-agent 任意のUser-Agent名 -Iv 対象URI
 ```
 
 ### cron
