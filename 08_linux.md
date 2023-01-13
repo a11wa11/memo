@@ -32,6 +32,9 @@ yum repoinfo
 # リポジトリをアップデート
 yum update epel
 
+# 一時的にリポジトリを有効にして実行
+yum --enablerepo=epal install ライブラリ名
+
 # amazon-linuxでのEPEL追加
 amazon-linux-extras install -y epel
 ```
