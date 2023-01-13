@@ -67,6 +67,14 @@ Successfully tagged sample:1  ←イメージ名とタグがつく。オプシ�
 docker history イメージ名
 ```
 
+* コンテナからイメージを作成
+
+```sh
+# 起動中であれば停止する
+docker stop コンテナ名
+docker commit コンテナ名 名付けたいイメージ名
+```
+
 * イメージを削除する
 
 ```sh
@@ -83,6 +91,8 @@ docker rmi イメージID
 docker images -q
 # イメージ一括削除
 docker rmi -f `docker images -q`
+# 不使用イメージ一括削除
+docker image prune -f
 ```
 
 #### コンテナ関連コマンド
@@ -103,6 +113,8 @@ docker run --name 名付けたいコンテナ名 -it イメージ名 bash
 docker ps
 # 停止コンテナも含めて表示
 docker ps -a
+# コンテナサイズも含めて表示
+docker ps -s
 # 停止コンテナも含めてコンテナIDのみ表示
 docker ps -aq
 ```
@@ -123,6 +135,7 @@ docker stop コンテナ名
 
 ```sh
 docker attach コンテナ名
+docker exec -it コンテナ名 bash
 ```
 
 * dockerコンテナを削除
