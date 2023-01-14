@@ -83,20 +83,33 @@ npx playwright test 対象テスト --headed --debug
     }
 ```
 
-
 ```json
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "pwa-node",
-            "request": "launch",
-            "name": "Run Test - headed",
-            # playwrightを実行するパスを指定
-            "program": "node_modules/.bin/playwright",
-            # 実行時に指定したい引数
-            "args":["test", "--headed", "${relativeFile}"]
-        }
-    ]
+"version": "0.2.0",
+"configurations": [
+    {
+        "type": "pwa-node",
+        "request": "launch",
+        "name": "Run Test - headed",
+        # playwrightを実行するパスを指定
+        "program": "node_modules/.bin/playwright",
+        # 実行時に指定したい引数
+        "args":["test", "--headed", "${relativeFile}"]
+    }
+]
+```
+
+## 開発
+
+* 手動操作をコード化
+
+```sh
+npx playwright codegen {{Target URI ... like https://app.staging.ovice.io/login}}
+```
+
+* 既存コードをデバッグ。途中から手動操作も可能
+
+```sh
+PWDEBUG=1 npx playwright test --config playwright.config.ts --project=chrome XXX.spec.ts
 ```
 
 ## [アサーション](https://playwright.dev/docs/test-assertions)
