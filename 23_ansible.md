@@ -145,6 +145,17 @@ time ansible-playbook SAMPLE.yml
 
 ```sh
 ansible-playbook -i inventoryファイルのパス playbook.ymlファイルのパス
+
+ansible-playbook -i inventoryファイルのパス -l サブセット名 playbook.ymlファイルのパス # 下記のインベントリファイルの指定のサブセットのみ実行する
+[サブセット1]
+192.168.111.101
+[サブセット2]
+192.168.111.102
+[サブセット3]
+192.168.111.103
+[サブセット4:children]
+web
+log
 ```
 
 * 一部タグのみ実行
