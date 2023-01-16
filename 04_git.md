@@ -75,24 +75,64 @@ git revert コミットID
 git push origin HEAD
 git merge リバートしたブランチ
 
-* トピックブランチなど空のコミットを打ちたい時
+# トピックブランチなど空のコミットを打ちたい時
 git commit --allow-empty -m "# プルリクエストのタイトル"
+
+# addを取り消す
+git reset HEAD addしたファイル名
+
+# コミットしていない内容を一時退避(変更内容をコミットしないとブランチ変更できないのでそういう時に使う)
+git stash
+
+# 一時退避したリストの一覧
+git stash list
+
+# 一時退避した内容(stash)をリストから指定して戻す
+git stash pop stash@{0} # stash@{0}は適宜変更
+
+# 一時退避した内容(stash)を全て消去
+git stash clear
+
 ```
 
 * ブランチ関連
 
 ```sh
-# ローカルブランチの設定変更
+# 変更したいブランチにいる時
+git branch -m 新ブランチ名
+
+# ローカルブランチの設定変更(別ブランチにいる時)
 git branch -m 古いブランチ名 新しいブランチ名
 
 # 任意のブランチ名をつけてチェックアウト
 git checkout -b ブランチ名 origin/リモートブランチ名
+
+# ブランチを削除する
+git branch -d ブランチ名
+
+# ブランチを強制削除
+git branch -D ブランチ名
 
 # リモートブランチのIPアドレス変更
 git remote set-url origin git@0.0.0.0:*****.git
 
 # リモートブランチの最新状態を取得（リモートブランチの削除も同期）
 git fetch -p
+
+# リモートで削除されているブランチをローカルでも削除する
+git fetch --prune
+```
+
+* 対象のローカルブランチをリモートブランチに強制プッシュ
+
+```sh
+git push -f origin ローカルブランチ:リモートブランチ
+```
+
+* マージする前に戻る
+
+```sh
+git merge --abort
 ```
 
 * git diff
