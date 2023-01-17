@@ -109,8 +109,8 @@ ansible aws -m ping -i hosts
 ansible グループ名 --list-hosts
 ansible ~.*1 --list-hosts # 正規表現で指定も可能
 
-# インベントリファイル内の特定の値を抽出して指定する
-ansible 10.0.0.0 -m ping -i hosts -l XXX
+# インベントリファイル内の特定の値(サブセット名)を抽出して指定する
+ansible 10.0.0.0 -m ping -i hosts -l サブセット名
 ```
 
 ## playbook
