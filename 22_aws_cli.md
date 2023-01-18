@@ -59,7 +59,10 @@ aws ec2 describe-instance-status
 aws ec2 start-instances --instance-ids インスタンスID
 aws ec2 stop-instances --instance-ids インスタンスID
 aws ec2 describe-vpcs
-aws ec2 describe-images # AMI
+# AMI　検索
+aws ec2 describe-images
+aws ec2 describe-images --image-ids ami-XXXXXXXXXXX --output table
+aws ec2 describe-images --owners amazon --filters "Name=name,Values=amzn2-ami-hvm-2.0.2020*" --query 'reverse(sort_by(Images, &Name))[].[Name,ImageId,CreationDate]' --output table
 
 # RDS
 aws rds describe-db-instances
