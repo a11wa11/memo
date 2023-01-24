@@ -214,11 +214,11 @@ ansible-galaxy init ロール名
 * ターゲットセクションで定義するモジュール
   * gather_facts →　デフォルトでyes。実行時間など図れるがその分処理時間がプラスされるため、不要であれば`false`で設定
   * become       → 実行ユーザーを定義
-  * connection   
+  * connection
 
 * when →　条件分岐
 * block → `try except`のようにエラー処理
-* ansible_distribution →　
+* ansible_distribution →
 * with_items →　リストで値を保持し、`{{var}}`で展開が可能
 
 #### [モジュール公式一覧](https://docs.ansible.com/ansible/2.9/modules/modules_by_category.html)
@@ -229,7 +229,7 @@ ansible-galaxy init ロール名
 
 | オプション名 | 説明　| 必須 | デフォルト値 |
 | - | - | - | - |
-| msg | 定義された文を表示する | × | Hello world! |　
+| msg | 定義された文を表示する | × | Hello world! |
 | var | 変数名をデバッグする(msg引数と意お互いに排他的である) | × | |
 
 * [get_url](https://docs.ansible.com/ansible/2.9/modules/get_url_module.html)
@@ -250,7 +250,6 @@ ansible-galaxy init ロール名
 
 * ignore_errors
 
-
 ignore_errosをyesにすると、そのタスクでエラーが発生しても無視して次のタスクに進むことができる
 
 ```yaml
@@ -263,8 +262,8 @@ ignore_errosをyesにすると、そのタスクでエラーが発生しても�
 ```
 
 * [ansible実行時のログ出力先の指定と出力形式を指定して改行を見やすくする](https://tekunabe.hatenablog.jp/entry/2019/07/11/ansible_vallback_plugin_yaml)
-  - `ansible.cfg`というファイルをansible実行するルートディレクトリに配置する
-  - 環境毎に設定を変更したい場合は`ansible.cfg`を各ディレクトリに配置可能
+  * `ansible.cfg`というファイルをansible実行するルートディレクトリに配置する
+  * 環境毎に設定を変更したい場合は`ansible.cfg`を各ディレクトリに配置可能
 
 ```yaml
 [defaults]
@@ -274,5 +273,5 @@ log_path = /var/log/ansible.log
 stdout_callback = yaml
 ```
 
-[参考リポジトリ1-diveintoansible-lab](https://github.com/spurin/diveintoansible-lab/blob/master/docker-compose.yaml)<br>
-[参考リポジトリ2-diveintoansible](https://github.com/spurin/diveintoansible)
+* [参考リポジトリ1-diveintoansible-lab](https://github.com/spurin/diveintoansible-lab/blob/master/docker-compose.yaml)
+* [参考リポジトリ2-diveintoansible](https://github.com/spurin/diveintoansible)
