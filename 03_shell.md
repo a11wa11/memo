@@ -42,11 +42,36 @@ hostnamectl status
 hostnamectl set-hostname ホストネーム名
 ```
 
-### ユーザー確認
+### ユーザー&グループ関連
+
+* ユーザー確認
 
 ```sh
 /etc/passwd
 /etc/shadow
+
+$ id
+uid=0(root) gid=0(root) groups=0(root)
+
+```
+
+* グループ確認
+
+```sh
+groups
+```
+
+* 権限変更
+
+```sh
+# ユーザー追加
+useradd -m -s /bin/bash -U 新規ユーザー名
+# -m：ホームディレクトリを作成する
+# -s：デフォルトのシェルを指定する
+# -U：新しいグループを作成する
+
+# 再起的にオーナーを変更する
+chown -R ユーザー名:グループ名 対象フォルダ
 ```
 
 ### タイムゾーン
