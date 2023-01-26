@@ -48,10 +48,11 @@
 			"ms-vscode-remote.remote-containers",
 			"donjayamanne.githistory",
 			"eamodio.gitlens",
-			"ms-python.isort",
+			"tyriar.sort-lines",
 			"patricklee.vsnotes",
 			"usernamehw.errorlens",
 			"oderwat.indent-rainbow",
+			"moshfeu.compare-folders",
 			//  Infrastructure
 			"aws-scripting-guy.cform",
 			"redhat.vscode-yaml",
