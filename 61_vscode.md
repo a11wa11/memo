@@ -2,10 +2,13 @@
 
 ## ショートカット
 
+* `cmd + P` → コマンドパレット
 * `ctl + -` → 戻る
+* `cmd + K + T` → カラーテーマ設定
 
-* playwrightのデバッグ設定例
-  * launch.json
+## playwrightのデバッグ設定例
+  
+* launch.json
 
 ```json
 "configurations": [
