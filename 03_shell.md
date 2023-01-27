@@ -74,6 +74,15 @@ useradd -m -s /bin/bash -U 新規ユーザー名
 chown -R ユーザー名:グループ名 対象フォルダ
 ```
 
+* リンク関連
+
+```sh
+# シンボリックリンク貼り付け
+ln -sf 貼り付け元パス 貼り付け先パス
+# python3を標準にする
+alternatives --set python /usr/bin/python3
+```
+
 ### タイムゾーン
 
 * タイムゾーンを確認
