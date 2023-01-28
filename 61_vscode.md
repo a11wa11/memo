@@ -56,6 +56,9 @@
 			"usernamehw.errorlens",
 			"oderwat.indent-rainbow",
 			"moshfeu.compare-folders",
+			"vscode-icons",
+			"hediet.vscode-drawio",
+			"Log File Highlighte",
 			//  Infrastructure
 			"aws-scripting-guy.cform",
 			"redhat.vscode-yaml",
