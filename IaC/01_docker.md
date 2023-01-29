@@ -101,6 +101,13 @@ docker rmi -f `docker images -q`
 docker image prune -f
 ```
 
+#### docker push
+
+* 下記の流れでdockerhubへpush
+  1. dockerhubへログイン `docker login`
+  1. タグ付け `docker tag 元イメージ リポジトリ名/イメージ名:タグ`
+  1. push `docker push リポジトリ名/イメージ名:タグ`
+
 #### コンテナ関連コマンド
 
 * コンテナの中でbashを利用して起動
