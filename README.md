@@ -1,6 +1,5 @@
 # programming_memo
 
-- [english](https://a11wa11.github.io/memo/01_english)
 - infrastructure
   - [ssh](https://a11wa11.github.io/memo/02_ssh)
   - [shell](https://a11wa11.github.io/memo/03_shell)
@@ -35,7 +34,8 @@
   - [postgresql](https://a11wa11.github.io/memo/33_postgresql)
   - [redis](https://a11wa11.github.io/memo/36_redis)
 - etc
-  - [vscode](https://a11wa11.github.io/memo/61_vscode)
+  - [english](https://a11wa11.github.io/memo/etc/01_english)
+  - [vscode](https://a11wa11.github.io/memo/etc/02_vscode)
 
 ## Support or Contact
 

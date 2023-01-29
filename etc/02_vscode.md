@@ -43,34 +43,33 @@
 
 ```json
 {
-	// List of extensions which should be recommended for users of this workspace.
-	"recommendations": [
-			//  common
-			"streetsidesoftware.code-spell-checker",
-			"ms-azuretools.vscode-docker",
-			"ms-vscode-remote.remote-containers",
-			"donjayamanne.githistory",
-			"eamodio.gitlens",
-			"tyriar.sort-lines",
-			"patricklee.vsnotes",
-			"usernamehw.errorlens",
-			"oderwat.indent-rainbow",
-			"moshfeu.compare-folders",
-			"vscode-icons",
-			"hediet.vscode-drawio",
-			"Log File Highlighte",
-			//  Infrastructure
-			"aws-scripting-guy.cform",
-			"redhat.vscode-yaml",
-			//  languages
-			"ms-python.python",
-			"ms-python.vscode-pylance",
-			"tabnine.tabnine-vscode",
-	],
-	// List of extensions recommended by VS Code that should not be recommended for users of this workspace.
-	"unwantedRecommendations": [
-		
-	]
+ // List of extensions which should be recommended for users of this workspace.
+ "recommendations": [
+   //  common
+   "streetsidesoftware.code-spell-checker",
+   "ms-azuretools.vscode-docker",
+   "ms-vscode-remote.remote-containers",
+   "donjayamanne.githistory",
+   "eamodio.gitlens",
+   "tyriar.sort-lines",
+   "patricklee.vsnotes",
+   "usernamehw.errorlens",
+   "oderwat.indent-rainbow",
+   "moshfeu.compare-folders",
+   "vscode-icons",
+   "hediet.vscode-drawio",
+   "Log File Highlighte",
+   //  Infrastructure
+   "aws-scripting-guy.cform",
+   "redhat.vscode-yaml",
+   //  languages
+   "ms-python.python",
+   "ms-python.vscode-pylance",
+   "tabnine.tabnine-vscode",
+ ],
+ // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
+ "unwantedRecommendations": [
+  
+ ]
 }
 ```
-
