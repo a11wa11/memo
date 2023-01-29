@@ -149,7 +149,6 @@ mock.assert_called()      #呼び出されたかどうかを確認
 mock.assert_called_once() #呼び出されたか回数が１度だけかどうかを確認
 ```
 
-
 ### パッケージ管理
 
 * pip

@@ -1,11 +1,13 @@
 # programming_memo
 
+- common
+  - [git](https://a11wa11.github.io/memo/common/01_git)
+  - [yaml](https://a11wa11.github.io/memo/common/02_yaml)
+  - [Makefile](https://a11wa11.github.io/memo/common/03_Makefile)
 - infrastructure
   - [ssh](https://a11wa11.github.io/memo/02_ssh)
   - [shell](https://a11wa11.github.io/memo/03_shell)
-  - [git](https://a11wa11.github.io/memo/04_git)
   - [powershell](https://a11wa11.github.io/memo/05_powershell)
-  - [yaml](https://a11wa11.github.io/memo/06_yaml)
   - [docker](https://a11wa11.github.io/memo/07_docker)
   - [linux](https://a11wa11.github.io/memo/08_linux)
   - [AWS](https://a11wa11.github.io/memo/21_AWS)
