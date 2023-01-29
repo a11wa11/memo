@@ -29,10 +29,10 @@
   - [npm](https://a11wa11.github.io/memo/53_npm)
   - [cypress](https://a11wa11.github.io/memo/56_cypress)
   - [playwright](https://a11wa11.github.io/memo/57_playwright)
-- Database
-  - [mysql](https://a11wa11.github.io/memo/31_mysql)
-  - [postgresql](https://a11wa11.github.io/memo/33_postgresql)
-  - [redis](https://a11wa11.github.io/memo/36_redis)
+- database
+  - [mysql](https://a11wa11.github.io/memo/database/01_mysql)
+  - [postgresql](https://a11wa11.github.io/memo/database/02_postgresql)
+  - [redis](https://a11wa11.github.io/memo/database/03_redis)
 - etc
   - [english](https://a11wa11.github.io/memo/etc/01_english)
   - [vscode](https://a11wa11.github.io/memo/etc/02_vscode)
