@@ -74,7 +74,7 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible all -m ping
 
 * hostsファイルに以下のように記載
 
-```sh
+```hosts
 [defaults]
 inventory = hosts
 host_key_checking = False
@@ -90,7 +90,14 @@ ansible_port=2222
 ansible インベントリ -m setup
 ```
 
-* インベントリをyaml形式で一覧表示
+* グループのホスト名を一覧表示する
+
+```sh
+ansible グループ名 --list-hosts
+ansible ~.*1 --list-hosts # 正規表現で指定も可能
+```
+
+* インベントリの構成をyaml形式で一覧表示
 
 ```sh
 ansible-inventory -i インベントリ --list --yaml
@@ -104,10 +111,6 @@ ansible 10.0.0.0 -m ping -i hosts --private-key ~/.ssh/SAMPLE.pem -u ec2-user
 # 以下は /etc/ansible/hosts にインベントリを登録していれば上記と同じ動作
 ansible 10.0.0.0 -m ping -i hosts
 ansible aws -m ping -i hosts
-
-# グループのホスト名を一覧表示する
-ansible グループ名 --list-hosts
-ansible ~.*1 --list-hosts # 正規表現で指定も可能
 
 # インベントリファイル内の特定の値(サブセット名)を抽出して指定する
 ansible 10.0.0.0 -m ping -i hosts -l サブセット名
@@ -144,7 +147,11 @@ time ansible-playbook SAMPLE.yml
 * 実行
 
 ```sh
+# 基本実行の形
 ansible-playbook -i inventoryファイルのパス playbook.ymlファイルのパス
+
+# インベントリファイルを指定せず、直接ホストを指定する場合はカンマをつける
+ansible-playbook -i ホスト名, playbook.ymlファイルのパス
 
 ansible-playbook -i inventoryファイルのパス -l サブセット名 playbook.ymlファイルのパス # 下記のインベントリファイルの指定のサブセットのみ実行する
 [サブセット1]
