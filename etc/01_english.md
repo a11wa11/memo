@@ -12,21 +12,12 @@
 | フロントエンドフリート(Frontend Fleet) | Webサイトやアプリケーションのインターフェイスやユーザーインタラクションに関する機能を提供するコンピュータやサーバーのグループのこと | Webブラウザやモバイルアプリなどのクライアントからのリクエストを処理し、HTML、CSS、JavaScriptなどのコンテンツを返すことで、ユーザーにウェブサイトやアプリケーションを提供する |
 | フォールトトレラント | システムやアプリケーションが障害やエラーに対して再起動や回復などの自律的な処理を行うことができるように構築されていること | 障害発生時にシステムが停止しないようになり、高い可用性や安定性が実現 |
 
-## HTTPヘッダー
-
-### User-Agentとは
-
-Webブラウザの固有情報。ブラウザーなどの種類を表す情報で、サーバーはブラウザーなどの種類によっても、異なる結果を返す可能性がある
-
-### Referrerとは
-
-直前にリンクされていたURL
-
 ## 英単語帳
 
 | 英語 | 訳 | 補足 |
 | -- | -- | -- |
 | availability |  可用性  |  システムが継続して稼働できる度合いや能力 |
+| availability | 可用性 |
 | arn | Amazon リソースネーム (ARN) |
 | amend | 修正する |
 | inference | 推論 |
@@ -34,6 +25,7 @@ Webブラウザの固有情報。ブラウザーなどの種類を表す情報�
 | waste | 無駄 |
 | omit | 省く |
 | suppressed | 抑制された |
+| diagram | 図 |
 | diagnostic | 診断 |
 | verbose | 冗長な |
 | verbosity | 冗長さ |
@@ -47,7 +39,7 @@ Webブラウザの固有情報。ブラウザーなどの種類を表す情報�
 | payload | パケットに含まれるヘッダやトレーラなどの不可情報を除いたデータ本体のこと |
 | compatible | 互換性のある |
 | extract | 展開 |
-| credential信任状 |
+| credential | 信任状 |
 | annotation | 注釈 |
 | subscriptable | 添字 |
 | per_page | 1ページあたり |
@@ -60,6 +52,7 @@ Webブラウザの固有情報。ブラウザーなどの種類を表す情報�
 | suffix | 接尾辞 |
 | disregard | 無視する |
 | privileged | 特権 |
+| grant | 付与 |
 | gist | 要旨 |
 | distribution | 分布、配布、流通 |
 | shard | 破片 |
@@ -73,16 +66,13 @@ Webブラウザの固有情報。ブラウザーなどの種類を表す情報�
 | invoke | 呼び出す |
 | change for | 付け替える |
 | outdated | 時代遅れ |
-| deprecated | 非推奨 |
-| metrics | 測定基準 |
-| availability | 可用性 |
 | duplicate | 複製 |
 | deprecate | 非推奨 |
-| diagram | 図 |
+| deprecated | 非推奨 |
+| metrics | 測定基準 |
 | assumable | 仮定できる |
 | notice | 注意する |
 | federated |連合した(いろいろなシステム等を統合して使えるようにしたりしたもの)|
-| grant | 付与 |
 | duration | 持続範囲 |
 | implicit | 暗黙 |
 | rc | バージョン候補(release candidate) |
