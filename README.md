@@ -14,8 +14,8 @@
   - [network](https://a11wa11.github.io/memo/40_network)
   - [nginx](https://a11wa11.github.io/memo/41_nginx)
 - IaC (Infrastructure as Code)
-  - [ansible](https://a11wa11.github.io/memo/23_ansible)
-  - [cloudformation](https://a11wa11.github.io/memo/24_cloudformation)
+  - [ansible](https://a11wa11.github.io/memo/IaC/01_ansible)
+  - [cloudformation](https://a11wa11.github.io/memo/IaC/02_cloudformation)
 - programming language
   - [python and ruby](https://a11wa11.github.io/memo/10_python_ruby)
   - [python](https://a11wa11.github.io/memo/11_python)
