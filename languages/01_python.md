@@ -5,7 +5,6 @@
 * [バイナリ(直インストール):参考１](https://www.build-python-from-source.com/)
 * [バイナリ(直インストール):参考２](https://docs.posit.co/resources/install-python-source/)
 
-
 <details>
     <summary>Dockerでのamazonlinux2イメージでのpythonインストール</summary>
 
@@ -47,6 +46,7 @@ RUN yum -y install wget gcc openssl-devel bzip2-devel libffi-devel xz-devel tk-d
     echo "PATH=/opt/python/${PYTHON_VERSION}/bin/:$PATH" >> /root/.bashrc && source /root/.bashrc && \
     pip3 install boto3;
 ```
+
 </details>
 
 * [pyenv(バージョン管理パッケージ)のインストール](https://github.com/pyenv/pyenv#basic-github-checkout)
