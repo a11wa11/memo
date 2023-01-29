@@ -107,7 +107,6 @@ cat /etc/rsyslog
 * [logrotateの簡単設定](https://qiita.com/Esfahan/items/a8058f1eb593170855a1)
 * [【logrotate】の仕組みと書き方, オプション一覧, 設定反映と再起動について](https://milestone-of-se.nesuke.com/sv-basic/linux-basic/logrotate/)
 
-
 ## 初期構築テンプレート
 
 * CentOS7へデスクトップツールをインストール

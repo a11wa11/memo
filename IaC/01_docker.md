@@ -48,6 +48,12 @@ docker build -t 名付けたいイメージ名 .(Dockerfileのあるパス)
 # Dockerfileを指定してbuild
 docker build -f Dockerfile_demo(Dockerfile以外の名前の場合) .(Dockerfileのあるパス)
 
+# マルチステージビルドで定義されたイメージを指定してbuild
+docker build --target 定義されたイメージ -t 名付けたいイメージ名 .(Dockerfileのあるパス)
+
+# マルチステージビルドで定義されたイメージを指定してbuild
+docker build --force-rm=true -t 名付けたいイメージ名 .(Dockerfileのあるパス)
+
 # イメージ名とタグを独自につける
 docker build -t 名付けたいイメージ名:タグ (DockerFileのある)パス
 
@@ -183,8 +189,5 @@ docker network create --attachable -d ネットワーク名 --subnet=172.17.0.0/
 ```sh
 screen ~/Library/Containers/com.docker.docker/Data/vms/0/tty
 ```
-
-
-
 
 * エフェメラルポート番号 -> 49152 ~ 65535
