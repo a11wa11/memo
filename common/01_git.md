@@ -81,6 +81,9 @@ git commit --allow-empty -m "# プルリクエストのタイトル"
 # addを取り消す
 git reset HEAD addしたファイル名
 
+# 直前のコミット操作を取り消す
+git reset --soft HEAD^
+
 # コミットしていない内容を一時退避(変更内容をコミットしないとブランチ変更できないのでそういう時に使う)
 git stash
 
