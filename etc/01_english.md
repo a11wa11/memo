@@ -48,6 +48,7 @@
 | description | 解説 |
 | specifications | 仕様書 |
 | diverged | 分岐した |
+| configure | 構成、設定 |
 | prefix | 接頭辞 |
 | suffix | 接尾辞 |
 | disregard | 無視する |

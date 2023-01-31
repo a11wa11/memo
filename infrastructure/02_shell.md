@@ -301,6 +301,13 @@ ps aux | grep python | grep -v grep | awk '{print $4}'
 ps aux | grep python | grep -v grep | awk '{print $NF}'
 ```
 
+### xargs
+
+```sh
+# 標準入力から読み取った値(最初のARGS)に後のARGSに置き換える
+echo "test.txt" | xargs -I ARGS echo ARGS
+```
+
 ### 時間変更
 
 ```sh
