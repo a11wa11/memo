@@ -154,6 +154,9 @@ mock.assert_called_once() #呼び出されたか回数が１度だけかどう�
 * pip
 
 ```sh
+# インストール可能なバージョンを表示。　※あえてバージョン指定しないことでインストール可能なバージョンが表示される
+pip install ipython==
+
 # インターネットではなローカルの指定のパスからライブラリをインストールする
 pip install --no-index --find-links=/path/path/libraries -c path/requirements.lock
 pip install --no-index --find-links=/path/path/libraries -c path/requirements.txt
