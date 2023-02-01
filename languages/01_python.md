@@ -154,6 +154,9 @@ mock.assert_called_once() #呼び出されたか回数が１度だけかどう�
 * pip
 
 ```sh
+# dry-run（実際にはインストールしない）
+pip install --dry-run 対象パッケージ
+
 # インストール可能なバージョンを表示。　※あえてバージョン指定しないことでインストール可能なバージョンが表示される
 pip install ipython==
 
