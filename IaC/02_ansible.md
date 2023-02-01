@@ -280,5 +280,23 @@ log_path = /var/log/ansible.log
 stdout_callback = yaml
 ```
 
+### [リンター](https://ansible-lint.readthedocs.io/)
+
+ansible-lintでバグ解析可能
+
+*　インストール
+
+```sh
+pip install ansible-lint
+```
+
+*　使い方
+
+```sh
+ansible-lint 対象ファイル
+ansible-lint  -p 対象ファイル # １行表示
+```
+
+
 * [参考リポジトリ1-diveintoansible-lab](https://github.com/spurin/diveintoansible-lab/blob/master/docker-compose.yaml)
 * [参考リポジトリ2-diveintoansible](https://github.com/spurin/diveintoansible)
