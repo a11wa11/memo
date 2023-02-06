@@ -1,20 +1,24 @@
 
 https://tech.librastudio.co.jp/entry/2021/07/23/153304
 
-goenvのインストール
-```
+* goenvのインストール
+
+```sh
 git clone https://github.com/syndbg/goenv.git ~/.goenv
 ```
 
 PATHを通す　※zshの場合
-```
+
+```sh
 echo 'export GOENV_ROOT="$HOME/.goenv"' >> ~/.zshrc
 echo 'export PATH="$GOENV_ROOT/bin:$PATH"' >> ~/.zshrc
 echo 'eval "$(goenv init -)"' >> ~/.zshrc
 source ~/.zshrc
 ```
+
 GOPATHの設定
-```
+
+```sh
 export GOPATH=$HOME/go
 export GOENV_ROOT=$HOME/.goenv
 export PATH="$GOENV_ROOT/bin:$PATH"
@@ -26,13 +30,13 @@ export GO111MODULE=on // 1.13 以降は不要
 
 プロジェクトの作成
 
-```
+```sh
 go mod init github.com/${GITHUB_USER}/${PROJECT_NAME}
 ```
 
 * dlvパッケージの追加
 
-```
+```sh
 go get -u github.com/derekparker/delve/cmd/dlv
 ```
 
@@ -40,14 +44,12 @@ go get -u github.com/derekparker/delve/cmd/dlv
 https://budougumi0617.github.io/2018/04/08/debug-by-delve/
 https://nishinatoshiharu.com/go-delve-usage/
 
-```
+```sh
 # デバッグ。引数は -- の後に追加
 dlv exec ./myprogram -- somearg
 # mainから開始
 b main.main
 b main
-```
-
 
 <!-- 変数宣言、関数 -->
 package main
@@ -596,4 +598,4 @@ func main() {
 	}
 }
 
-
+```
