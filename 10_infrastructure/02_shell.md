@@ -353,6 +353,13 @@ curl -Iv 対象URI
 curl --user-agent 任意のUser-Agent名 -Iv 対象URI
 ```
 
+### grep
+
+```sh
+# grepで複数ワード検索
+grep -e 文字列１ -e 文字列2
+```
+
 ### cron
 
 ```cron
