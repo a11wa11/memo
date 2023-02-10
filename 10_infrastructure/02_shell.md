@@ -5,7 +5,7 @@
 [参考](http://tegetegekibaru.blogspot.com/2012/08/zsh_2.html)
 
 <details>
-<sammary>タイトル</sammary>
+<summary>展開</summary>
 <pre><code>
 # zshではプロンプト設定は'PROMPT'の変数で設定
 # %F{カラー}表示したい文字列%f　→　%Fと%fで囲まれた文字を色変更可能
@@ -415,14 +415,14 @@ echo "43.8 * 23.9" | bc
 ${変数名/置換前文字列/置換後文字列} #文字列置換
 
 PYTHON_VERSION="3.9.14"
-PYTHON_VERSION_NUNBERS=${PYTHON_VERSION/./ } #マッチした先頭を置換したい場合
-echo ${PYTHON_VERSION_NUNBERS[0]} # 3
-echo ${PYTHON_VERSION_NUNBERS[1]} # 9.14
+PYTHON_VERSION_NUMBERS=${PYTHON_VERSION/./ } #マッチした先頭を置換したい場合
+echo ${PYTHON_VERSION_NUMBERS[0]} # 3
+echo ${PYTHON_VERSION_NUMBERS[1]} # 9.14
 
-PYTHON_VERSION_NUNBERS=${PYTHON_VERSION//./ } #マッチする文字をすべて置換したい場合
-echo ${PYTHON_VERSION_NUNBERS[0]} # 3
-echo ${PYTHON_VERSION_NUNBERS[1]} # 9
-echo ${PYTHON_VERSION_NUNBERS[2]} # 14
+PYTHON_VERSION_NUMBERS=${PYTHON_VERSION//./ } #マッチする文字をすべて置換したい場合
+echo ${PYTHON_VERSION_NUMBERS[0]} # 3
+echo ${PYTHON_VERSION_NUMBERS[1]} # 9
+echo ${PYTHON_VERSION_NUMBERS[2]} # 14
 ```
 
 * if文
@@ -439,6 +439,7 @@ if [ fileA -nt fileB:]  # fileAがfileBよr新しいかどうか
 if [ fileA -ot fileB:]  # fileAがfileBよr古いかどうか
 if [[ argA = "-f" ]] || [[ argA = "--force" ]]  # argAが -f または --force の場合
 if [[ "$str" == *shell* ]]   # $str がshellという文字列を含むかどうか
+if [ -z str:]           # 文字列 str が0文字であれば(zero)
 ```
 
 * case文

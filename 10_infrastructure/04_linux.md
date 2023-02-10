@@ -33,8 +33,8 @@ yum repoinfo
 yum update epel
 
 # 一時的にリポジトリを有効にして実行
-yum --enablerepo=epal install ライブラリ名
-yum --disablerepo=epal install,update,search ライブラリ名
+yum --enablerepo=epel install ライブラリ名
+yum --disablerepo=epel install,update,search ライブラリ名
 ```
 
 ### RPM
@@ -112,7 +112,7 @@ cat /etc/rsyslog
 * [logrotateの簡単設定](https://qiita.com/Esfahan/items/a8058f1eb593170855a1)
 * [【logrotate】の仕組みと書き方, オプション一覧, 設定反映と再起動について](https://milestone-of-se.nesuke.com/sv-basic/linux-basic/logrotate/)
 
-### マウント
+### マウント関連
 
 #### マウント
 
@@ -158,7 +158,6 @@ UUID=XXXX / xfs defaults.noatime 1 1
 * type
   * マウントされるパーティションやストレージデバイスのファイルシステムタイプのこと
   * `xfs` や `ext2,3,4`、`swap`などがある
-  *    
 
 * option
   * マウント時の読み書き可能かなどのオプションを指定可能
@@ -175,7 +174,6 @@ UUID=XXXX / xfs defaults.noatime 1 1
   * ルートファイルシステムは１と記述する必要がある
   * 0の場合、`fsck`によるチェック不要とみなされる
   * `fsck`コマンドではファイルシステムを検査・修復するコマンド
-
 
 ## 初期構築テンプレート
 
