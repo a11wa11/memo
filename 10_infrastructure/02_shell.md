@@ -204,7 +204,9 @@ sar -n DEV
 # ディスクI/O
 sar -d -p
 # ファイル保管場所指定
-sar -r -f /var/log/ファイル名
+sar -r -f /var/log/sa/sa日付名
+# 時間指定で情報を取得 -s 開始時刻  -e 終了時刻
+sar -r -f /var/log/sa/sa日付名 -s "20:00:00" -e "23:00:00"
 ```
 
 * netstat
