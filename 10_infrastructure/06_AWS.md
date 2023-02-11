@@ -7,8 +7,7 @@ resource → どの対象か　誰が何を許可するかの誰がの部分
 インラインポリシー → 1つのIAMユーザなど、1対1でのアタッチしかできないポリシー
 ```
 
-* CloudTrail
-  * https://aws.amazon.com/jp/cloudtrail/pricing/
+* [CloudTrail](https://aws.amazon.com/jp/cloudtrail/pricing/)
 
 ## VPC
 
@@ -29,12 +28,6 @@ amazon-linux-extras install -y epel
 amazon-linux-extras
 amazon-linux-extras list # list省略可能
 
-```
-
-* cronを入れる
-
-```sh
-yum install cronie
 ```
 
 ## 予算管理

@@ -13,8 +13,8 @@ ab -n 100 -c 10 example.com
 
 ## IPアドレスを確認できるサイト
 
-* https://al-batross.net/2020/11/02/check_my_global_ip_address/
-* http://checkip.dyndns.org/
-* http://httpbin.org/ip
+* [1](https://al-batross.net/2020/11/02/check_my_global_ip_address/)
+* [2](http://checkip.dyndns.org/)
+* [3](http://httpbin.org/ip)
 
 [SYNフラッド攻撃の対策](https://www.shadan-kun.com/blog/measure/2664/)

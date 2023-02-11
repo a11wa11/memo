@@ -23,5 +23,5 @@ wsl -l
 
 * wslの名前解決できない時の対処
 
-https://zenn.dev/ekuinox/articles/520500939e5242a6393c
-https://qiita.com/kkato233/items/1fc71bde5a6d94f1b982
+* [参考1](https://zenn.dev/ekuinox/articles/520500939e5242a6393c)
+* [参考2](https://qiita.com/kkato233/items/1fc71bde5a6d94f1b982)
