@@ -9,6 +9,8 @@
 ```sh
 yum install httpd
 ab -n 100 -c 10 example.com
+# -n リクエスト数
+# -c 一度に行うリクエストの数
 ```
 
 ## IPアドレスを確認できるサイト
