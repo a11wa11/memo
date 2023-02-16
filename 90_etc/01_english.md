@@ -77,6 +77,7 @@
 | federated |連合した(いろいろなシステム等を統合して使えるようにしたりしたもの)|
 | duration | 持続範囲 |
 | implicit | 暗黙 |
+| truncate | 切り捨てる |
 | rc | バージョン候補(release candidate) |
 | clobber | 打ち消す、打ちのめす |
 | SKU | スキュー（Stock Keeping Unit）作成可能なリソースで選択可能な機能種類　| Azure用語 |
