@@ -245,16 +245,22 @@ yum install sysstat
 #### コマンド例
 
 ```sh
+# 基本
+sar 5(インターバル秒数) 3(実行回数)
 # CPU使用率
+sar -u
+# コアごとのCPU使用率表示
 sar -P ALL
 # メモリ使用率
 sar -r
 # ネットワーク負荷
 sar -n DEV
 # ディスクI/O
-sar -d -p
+sar -d
 # I/Oと転送率の状況
 sar -b
+# ロードアベレージ
+sar -q
 # ファイル保管場所指定
 sar -r -f /var/log/sa/sa日付名
 # 時間指定で情報を取得 -s 開始時刻  -e 終了時刻
