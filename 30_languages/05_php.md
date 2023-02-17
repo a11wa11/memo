@@ -1,130 +1,16 @@
-# python
-
-## 環境系
-
-* 仮想環境作成
-
-```sh
-# 仮想環境構築
-python -m venv 仮想環境名
-
-# 仮想環境実行
-source 仮想環境名/bin/activate
-
-# 仮想環境停止
-deactivate
-
-# 仮想環境削除
-rm -rf 仮想環境名
-```
-
-* メモリのサイズを確認する
-
-```python
-sys.getsizeof(リストとか)
-```
-
-## 基本系
-
-```python
-def double(n):
-    return n * 3
-
-lambda_ver = lambda n: n * 3 # doubleと同じ
-
-print(double(3) == lambda_ver(3)) # Trueとなる
-```
-
-### テスト系
-
-```sh
-# 全体テスト
-coverage run -m unittest discover
-
-# 個別テスト
-python -m unittest -v tests/test_sample.py
-coverage run -m unittest -v tests/test_sample.py
-
-# 結果出力
-coverage report -m sample.py
-coverage html
-```
-
-#### unittest
-
-```python
-mock.assert_called()      #呼び出されたかどうかを確認
-mock.assert_called_once() #呼び出されたか回数が１度だけかどうかを確認
-```
+# php
 
 
-### パッケージ管理
+## php-fpm
 
-* pip
+PHPをFastCGIインターフェイス経由でサーバーに提供するためのプロセスマネージャ
 
-```sh
-# インターネットではなローカルの指定のパスからライブラリをインストールする
-pip install --no-index --find-links=/path/path/libraries -c path/requirements.lock
-pip install --no-index --find-links=/path/path/libraries -c path/requirements.txt
-pip install --no-index --find-links=/path/path/libraries -c path/requirements.lock -r path/reuirements.txt
-```
+* pm.max_children: プロセスマネージャで起動する最大子プロセス数を設定。プロセスマネージャが、子プロセスを起動する際に、この設定値を超えないようにします。同時リクエストの処理能力を向上させることができますが、同時に大量の子プロセスを起動すると、メモリ使用量が増加するため、サーバーのパフォーマンスに影響を与える可能性がある
+* pm.start_servers: プロセスマネージャが起動するときに最初に起動する子プロセスの数を設定
+* pm.min_spare_servers: プロセスマネージャが管理する子プロセスの最小数を設定。空きプロセスがこの値より少なくなった場合、プロセスマネージャは新しい子プロセスを起動します
+* pm.max_spare_servers: プロセスマネージャが管理する子プロセスの最大数を設定。空きプロセスがこの値を超える場合、プロセスマネージャは子プロセスを終了させます
 
-* [poetry](https://zenn.dev/canonrock/articles/poetry_basics)
+簡単にまとめると、pm.max_childrenは最大同時実行数を設定し、pm.max_spare_serversはアイドル状態で保持するプロセス数を設定するための設定です。pm.max_childrenが大きすぎる場合、システムの負荷が増加し、pm.max_spare_serversが小さすぎる場合、Webサーバのリクエスト処理が遅延する可能性があります。適切な設定を行うことで、Webサーバのパフォーマンスを最適化することができます。
 
-```sh
-# poetryの導入・pyproject.tomlの作成や対話式でプロジェクトに関する情報を決定する
-poetry init
 
-# パッケージ追加
-poetry add パッケージ名
-# オプションや引数指定例
-poetry add パッケージ名 --dry-run # インストールされる内容を確認
-poetry add "パッケージ名>1.15"    # 1.15より大きいバージョンの指定
-poetry add "パッケージ名@latest"  # 最新のバージョンをインストール
-# バージョン指定について
-"^3.8" #3.8以上4.0より小さいバージョンという意味。3.9も含んでいる
-"^3.8,<3.9" #3.8のみ指定し、3.9は含まず
-"=3.8"      #3.8のみ指定し、3.9は含まず。上記と同じ
 
-# パッケージの削除
-poetry remove パッケージ名
-
-# パッケージの確認
-poetry show
-# >> オプション例
-poetry show --tree         # ツリー形式で依存関係を表示
-poetry show --latest       # 最新バージョンを表示
-poetry show -o(--outdated) # 古くなっているパッケージを表示
-
-# パッケージ検索
-poetry search
-
-# パッケージの更新
-poetry update パッケージ名 # 個別更新
-poetry update            # 前パッケージの更新
-poetry update --dry-run  # アップグレードされるパッケージを確認
-# poetry自身の更新
-poetry self update
-
-# poetry.lockの生成
-poetry lock
-
-# 仮想環境からコマンド実行
-poetry shell
-poetry run python -m unittest ~~~
-
-# pyproject.tomlの検証
-portry check
-
-# pyproject.tomlから一括インストール。poetry.lockがあればそれを参考にする
-poetry install
-
-# 環境関連
-poetry env info             # 現在の仮想環境の情報
-poetry env list             # 仮想環境一覧
-poetry env remove <python>  # 仮想環境の削除
-poetry env use <python>     # 仮想環境を作成、アクティベート
-
-# pip freeze をpoetryで実行したい時
-poetry run pip --disable-pip-version-check list --format=freeze
-```
