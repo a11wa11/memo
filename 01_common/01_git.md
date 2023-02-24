@@ -87,6 +87,9 @@ git reset --soft HEAD^
 # コミットしていない内容を一時退避(変更内容をコミットしないとブランチ変更できないのでそういう時に使う)
 git stash
 
+# 一時退避する内容を名前をつけて保存
+git stash save "後で見るけど消してもいいstash"
+
 # 一時退避したリストの一覧
 git stash list
 
