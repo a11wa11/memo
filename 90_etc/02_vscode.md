@@ -53,6 +53,7 @@
    "eamodio.gitlens",
    "tyriar.sort-lines",
    "patricklee.vsnotes",
+   "yzhang.markdown-all-in-one",
    "usernamehw.errorlens",
    "oderwat.indent-rainbow",
    "moshfeu.compare-folders",
@@ -69,7 +70,6 @@
  ],
  // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
  "unwantedRecommendations": [
-  
  ]
 }
 ```
