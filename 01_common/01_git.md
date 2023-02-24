@@ -90,6 +90,9 @@ git stash
 # 一時退避したリストの一覧
 git stash list
 
+# 退避した内容をdiffで確認
+git diff HEAD..stash@{0}
+
 # 一時退避した内容(stash)をリストから指定して戻す
 git stash pop stash@{0} # stash@{0}は適宜変更
 
