@@ -20,7 +20,6 @@
 | 英語 | 訳 | 補足 |
 | -- | -- | -- |
 | availability |  可用性  |  システムが継続して稼働できる度合いや能力 |
-| availability | 可用性 |
 | arn | Amazon リソースネーム (ARN) |
 | amend | 修正する |
 | benchmark | 性能評価 |
@@ -72,8 +71,7 @@
 | change for | 付け替える |
 | outdated | 時代遅れ |
 | duplicate | 複製 |
-| deprecate | 非推奨 |
-| deprecated | 非推奨 |
+| deprecate(d) | 非推奨 |
 | metrics | 測定基準 |
 | assumable | 仮定できる |
 | notice | 注意する |
