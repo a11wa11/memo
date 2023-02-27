@@ -73,3 +73,8 @@
  ]
 }
 ```
+
+### markdown
+
+* コマンドパレットで`Markdown All in One: Create Table of Contents`を実行すると、見出しの内容から目次が作成される
+* 見出し更新後に`Cmd+s`で保存すると、目次も更新される
