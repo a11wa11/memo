@@ -14,6 +14,8 @@ ab -n 100 -c 10 -t 5 example.com
 # -n リクエスト数
 # -c 一度に行うリクエストの数
 # -t 何秒間で実施するかのタイムリミット
+ab -n 100 -c 10 -A hogehoge:password example.com
+# -A 認証に必要なアカウント:パスワードの形式で送信可能
 ```
 
 * 表記
