@@ -2,6 +2,8 @@
 
 - [npm](#npm)
   - [文法](#文法)
+    - [インストール](#インストール)
+    - [確認](#確認)
     - [package.json](#packagejson)
     - [package-lock.json](#package-lockjson)
   - [eslintの設定](#eslintの設定)
@@ -9,30 +11,38 @@
   - [husky](#husky)
   - [よく使うライブラリ](#よく使うライブラリ)
   - [Yarn](#yarn)
-    - [インストール](#インストール)
+    - [インストール](#インストール-1)
   - [npmとyarn比較](#npmとyarn比較)
 
 ## [文法](https://zenn.dev/hedrall/articles/251441f391990f)
 
+### インストール
+
 ```sh
-# インストール
+# 基本インストール
 npm install パッケージ名
-npm i パッケージ名           # 省略形
+
+# 応用インストール
+npm i パッケージ名          # 省略形
 npm ci                    # clean-install package-lock.jsonは更新されない(package-lock.jsonを元にインストール)
 npm install               # package.jsonに書かれているパッケージをインストール、package-lock.jsonは更新することがある
 npm install --production  # dependenciesに書かれているパッケージのみインストール
 
-# バージョンを指定してインストール
+# バージョン指定インストール
 npm install パッケージ名@バージョン名
 
 # ローカル環境にインストール
-npm i --save-dev パッケージ名 # devDependenciesに追加したいとき
-npm i -D パッケージ名  # 省略形
+npm i --save-dev パッケージ名   # devDependenciesに追加したいとき
+npm i -D パッケージ名           # 省略形
 npm install --save パッケージ名 # dependenciesに追加したいとき
 
 # グローバル環境にインストール
 npm i -g パッケージ名  # 省略形
+```
 
+### 確認
+
+```sh
 # json形式で表示
 npm list --json
 
