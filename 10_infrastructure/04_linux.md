@@ -38,7 +38,11 @@ apt-get install -y libmysqlclient-dev
 
 ```sh
 # どのバージョンが存在するかを検索
-yum search --showduplicates search パッケージ名
+yum search --showduplicates パッケージ名
+yum search all --showduplicates パッケージ名
+
+# ファイル名からパッケージを検索する
+yum provides パッケージ名
 
 # rpmパッケージのURLを直接指定してインストール
 yum install http://mirror.centos.orgXXXXX.noarch.rpm
