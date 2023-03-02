@@ -63,6 +63,19 @@ pyenv install 任意のバージョン
 pyenv global 任意のバージョン
 ```
 
+* pythonのバイナリインストール(ちょっと古い3.5.9の時)
+
+```sh
+wget https://www.python.org/ftp/python/3.5.9/Python-3.5.9.tar.xz
+tar -Jxvf Python-3.5.9.tar.xz
+Python-3.5.9/configure --prefix=/usr/local/python
+make
+make install
+rm -rf /root/*
+ln -s /usr/local/python/bin/python3.5 /usr/local/bin/python
+ln -s /usr/local/python/bin/pip3.5 /usr/local/bin/pip
+```
+
 ## 環境系
 
 * 仮想環境作成
