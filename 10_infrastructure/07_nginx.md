@@ -1,6 +1,22 @@
 # nginx
 
-* [locationディレクティブ](https://heartbeats.jp/hbblog/2012/04/nginx05.html)
+## インストール
+
+* centos7
+
+```sh
+touch /etc/yum.repos.d/nginx.repo
+echo '[nginx-stable]' >> /etc/yum.repos.d/nginx.repo
+echo 'name=nginx stable repo' >> /etc/yum.repos.d/nginx.repo
+echo 'baseurl=http://nginx.org/packages/centos/$releasever/$basearch/' >> /etc/yum.repos.d/nginx.repo
+echo 'gpgcheck=1' >> /etc/yum.repos.d/nginx.repo
+echo 'enabled=1' >> /etc/yum.repos.d/nginx.repo
+echo 'gpgkey=https://nginx.org/keys/nginx_signing.key' >> /etc/yum.repos.d/nginx.repo
+echo 'module_hotfixes=true' >> /etc/yum.repos.d/nginx.repo
+yum install -y nginx
+```
+
+## [locationディレクティブ](https://heartbeats.jp/hbblog/2012/04/nginx05.html)
 
 | なし | 前方一致 |
 | ^~ | 前方一致。一致したら、正規表現の条件を評価しない |
