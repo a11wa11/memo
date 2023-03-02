@@ -37,6 +37,12 @@ apt-get install -y libmysqlclient-dev
 ### yum
 
 ```sh
+# パッケージのリストを表示する
+yum list installed # インストール済パッケージ
+yum list available # 利用可能なパッケージ
+yum list updates   # アップデート可能なパッケージ
+yum list extras    # 利用できないパッケージ
+
 # どのバージョンが存在するかを検索
 yum search --showduplicates パッケージ名
 yum search all --showduplicates パッケージ名
