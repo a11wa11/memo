@@ -7,7 +7,7 @@
 ### apache bench
 
 * コマンド
-* 
+
 ```sh
 yum install httpd
 ab -n 100 -c 10 -t 5 example.com
@@ -81,6 +81,30 @@ Transfer rate:          19.33 [Kbytes/sec] received
 # Transfer rate：サーバーからの受信速度（キロバイト/秒）
 ```
 
+## stress
+
+* インストール
+
+```sh
+yum install stree
+stress --version
+```
+
+* 使用例
+
+```sh
+# CPU負荷がけ
+stress -c 1 -q &  # -qはquiet
+# IO負荷がけ
+stress -d 1 &
+# メモリ負荷がけ
+stress -m 1
+# CPU負荷がけのドライラン(-n)
+stress -n -c 1
+
+# stress関連コマンドを消去
+pkill stress
+```
 
 ## IPアドレスを確認できるサイト
 
