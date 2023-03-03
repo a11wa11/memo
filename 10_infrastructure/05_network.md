@@ -53,14 +53,18 @@ Webブラウザの固有情報。ブラウザーなどの種類を表す情報�
 - ホスト名を確認
 
 ```sh
+# 以下どのコマンドも確認可能
 cat /etc/hostname  
-hostnamectl status 
+hostnamectl status
+hostname
 ```
 
 - ホスト名変更
 
 ```sh
+# 以下どちらでもOK
 hostnamectl set-hostname ホストネーム名
+hostname 'ホストネーム名'
 ```
 
 ### タイムゾーン
@@ -75,8 +79,11 @@ cat /etc/localtime
 - タイムゾーン変更
 
 ```sh
-cp /etc/localtime /etc/localtime.org # バックアップ
+# まずはバックアップ
+cp /etc/localtime /etc/localtime.org
+# 以下どちらかでOK。元ファイルはどちら(Asia/TokyoもJapan)も同じ
 ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+cp /usr/share/zoneinfo/Japan /etc/localtime
 ```
 
 ### ロケール
@@ -86,8 +93,10 @@ ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 locale
 localectl
 
-# ロケール変更
+# ロケール変更パターン1
 export LC_ALL=ja_JP.UTF-8
+# ロケール変更パターン2
+echo "LANG=ja_JP.UTF-8" > /etc/sysconfig/i18n
 ```
 
 ### IPアドレス
@@ -99,6 +108,7 @@ export LC_ALL=ja_JP.UTF-8
 ip a
 ip addr show
 ifconfig # 古くて今はあまり推奨されていない
+hostname -i|-I
 
 # 下記のファイルのIPADDRの変更などでIPアドレスを変更可能
 /etc/sysconfig/network-scripts/ifcfg*
