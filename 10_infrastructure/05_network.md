@@ -370,7 +370,7 @@ lsblk
 | amd64 | 「AMD社」が発表したx86アーキテクチャを64bitに拡張したもの | Windows、Linux、Intel Mac |
 | intel64 | 「インテル社」が発表したx86アーキテクチャを64bitに拡張したもの | Windows、Linux、Intel Mac |
 | x86-64 | amd64とIntel64を含んだ総称 | Windows、Linux、Intel Mac |
-| arm64 | スマホやタブレットなどで多く利用されているARMアーキテクチャを64bitに拡張したもの | iOS、M1/M2 Mac、ARM版Windows |
+| arm64/aarch64 | スマホやタブレットなどで多く利用されているARMアーキテクチャを64bitに拡張したもの | iOS、M1/M2 Mac、ARM版Windows |
 |  |  |  | 
 
 ---
