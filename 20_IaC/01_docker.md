@@ -199,7 +199,10 @@ screen ~/Library/Containers/com.docker.docker/Data/vms/0/tty
 
 * エフェメラルポート番号 -> 49152 ~ 65535
 
-### マルチCPUアーキテクチャ
+### [マルチCPUアーキテクチャ](https://docs.docker.jp/docker-for-mac/multi-arch.html)
+
+* [公式参考サイト:マルチCPUアーキテクチャ](https://matsuand.github.io/docs.docker.jp.onthefly/desktop/multi-arch/)
+* [公式参考サイト:Docker Buildx](https://matsuand.github.io/docs.docker.jp.onthefly/buildx/working-with-buildx/)
 
 #### [docker buildx](https://matsuand.github.io/docs.docker.jp.onthefly/buildx/working-with-buildx/)
 **Docker Desktop for WindowsまたはDocker Desktop for Macの場合には、最初からbuildxが有効になっていてマルチCPUアーキテクチャーのコンテナーを作成することができるようになっている**
@@ -214,12 +217,19 @@ DOCKER_CLI_EXPERIMENTAL=enabled
 # ビルダーインスタンスを作成
 docker buildx create --name ビルダー名
 
+# ビルダーインスタンスを停止
+docker buildx stop ビルダー名
+
+# ビルダーインスタンスを削除
+docker buildx rm ビルダー名
+
 # ビルダーインスタンスを選択
 docker buildx use ビルダー名
 
 # ビルダーインスタンスを起動
 docker buildx inspect --bootstrap
 
+# マルチアーキテクチャでのビルド実行例
 docker buildx build --platform linux/amd64,linux/arm64 -t イメージ名 --push .(Dockerfileのパス)
 ```
 
