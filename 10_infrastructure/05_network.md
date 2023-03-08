@@ -81,9 +81,10 @@ cat /etc/localtime
 ```sh
 # まずはバックアップ
 cp /etc/localtime /etc/localtime.org
-# 以下どちらかでOK。元ファイルはどちら(Asia/TokyoもJapan)も同じ
+# 以下どれらかでOK。元ファイルはどちら(Asia/TokyoもJapan)も同じ
 ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 cp /usr/share/zoneinfo/Japan /etc/localtime
+timedatectl set-timezone Asia/Tokyo
 ```
 
 ### ロケール
@@ -97,6 +98,8 @@ localectl
 export LC_ALL=ja_JP.UTF-8
 # ロケール変更パターン2
 echo "LANG=ja_JP.UTF-8" > /etc/sysconfig/i18n
+# ロケール変更パターン3
+localectl set-locale LANG=ja_JP.UTF-8
 ```
 
 ### IPアドレス
