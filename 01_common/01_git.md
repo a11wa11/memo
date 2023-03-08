@@ -1,45 +1,31 @@
 # git
 
-* 初期設定
+- [git](#git)
+  - [設定](#設定)
+  - [タグ関連](#タグ関連)
+  - [コミット編集](#コミット編集)
+    - [stash関連](#stash関連)
+  - [ブランチ関連](#ブランチ関連)
+  - [diff関連](#diff関連)
+  - [フォーク関連](#フォーク関連)
+
+## 設定
+
+- グローバルユーザー設定(初期設定)
 
 ```sh
-# グローバルユーザー設定
 git config --global user.name "test_name"
 git config --global user.email "test_address"
 ```
 
-* ローカルユーザー設定
+- ローカルユーザー設定
 
 ```sh
 git config --local user.name "test_name"
 git config --local user.email "test_address"
 ```
 
-* リモートリポジトリの設定
-
-```sh
-git remote add origin(任意のリモートリポジトリ名) git@github.com:hoge/test.git
-
-# githubに既存ローカルリポジトリをプッシュする場合
-git remote add origin git@github.com:hoge/test.git
-git branch -M main
-git push -u origin main
-```
-
-* リモートブランチをローカルブランチに強制的にもってくる（ローカルでコンフリクト発生して手に負えない時など）
-
-```sh
-git fetch origin ブランチ名
-git reset --hard origin/ブランチ名
-```
-
-* reflogの履歴からもとに戻す
-
-```sh
-git reset --hard HEAD@[1]
-```
-
-* タグ関連
+## タグ関連
 
 ```sh
 # リモートブランチのタグの一覧
@@ -58,7 +44,7 @@ git tag -d タグ名
 git push origin タグ名
 ```
 
-* コミット編集
+## コミット編集
 
 ```sh
 # 直近のコミットメッセージの変更
@@ -69,6 +55,9 @@ git cherry-pick コミットID
 
 # マージを打ち消したい時
 git revert -m 1 コミットID
+
+# マージする前に戻る
+git merge --abort
 
 # 以下の流れでやればmaster(main)ブランチが綺麗なまま余計なコミットをgit revertで取り消せる
 git revert コミットID
@@ -83,6 +72,29 @@ git reset HEAD addしたファイル名
 
 # 直前のコミット操作を取り消す
 git reset --soft HEAD^
+
+# reflogの履歴からもとに戻す
+git reset --hard HEAD@[1]
+```
+
+- [マージ関連](https://qiita.com/horimislime/items/84fa431460c8d39f37e6)
+
+```sh
+# コミットされないが、ローカルファイルはマージされてしまう
+git merge ブランチ名 --no-commit
+
+(トピックブランチ) git format-patch master --stdout > test.patch
+(トピックブランチ) git checkout master
+(master) git apply test.patch --check # パッチが適用できるかチェック
+# コンフリクトが起きる場合はエラーが発生する
+```
+
+### stash関連
+
+```sh
+# リモートブランチをローカルブランチに強制的にもってくる（ローカルでコンフリクト発生して手に負えない時など）
+git fetch origin ブランチ名
+git reset --hard origin/ブランチ名
 
 # コミットしていない内容を一時退避(変更内容をコミットしないとブランチ変更できないのでそういう時に使う)
 git stash
@@ -101,10 +113,9 @@ git stash pop stash@{0} # stash@{0}は適宜変更
 
 # 一時退避した内容(stash)を全て消去
 git stash clear
-
 ```
 
-* ブランチ関連
+## ブランチ関連
 
 ```sh
 # 変更したいブランチにいる時
@@ -132,19 +143,30 @@ git fetch -p
 git fetch --prune
 ```
 
-* 対象のローカルブランチをリモートブランチに強制プッシュ
+- リモートリポジトリの設定
+
+```sh
+git remote add origin(任意のリモートリポジトリ名) git@github.com:hoge/test.git
+
+# githubに既存ローカルリポジトリをプッシュする場合
+git remote add origin git@github.com:hoge/test.git
+git branch -M main
+git push -u origin main
+```
+
+- 対象のローカルブランチをリモートブランチに強制プッシュ
 
 ```sh
 git push -f origin ローカルブランチ:リモートブランチ
 ```
 
-* マージする前に戻る
+- 特定の鍵を指定してリモートリポジトリに接続
 
 ```sh
-git merge --abort
+GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa' git clone リモートリポジトリ
 ```
 
-* git diff
+## diff関連
 
 ```sh
 # ２つのブランチの差分を確認
@@ -161,25 +183,7 @@ git log branch1..branch2 --pretty=oneline --pretty=format:"%n - %ad : %s" --date
 
 ```
 
-* 特定の鍵を指定してリモートリポジトリに接続
-
-```sh
-GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa' git clone リモートリポジトリ
-```
-
-* [マージ関連](https://qiita.com/horimislime/items/84fa431460c8d39f37e6)
-
-```sh
-# コミットされないが、ローカルファイルはマージされてしまう
-git merge ブランチ名 --no-commit
-
-(トピックブランチ) git format-patch master --stdout > test.patch
-(トピックブランチ) git checkout master
-(master) git apply test.patch --check # パッチが適用できるかチェック
-# コンフリクトが起きる場合はエラーが発生する
-```
-
-* フォーク関連
+## フォーク関連
 
 ```sh
 # フォーク元をリモートリポジトリに追加
