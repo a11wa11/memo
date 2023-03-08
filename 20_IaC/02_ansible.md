@@ -297,6 +297,5 @@ ansible-lint 対象ファイル
 ansible-lint  -p 対象ファイル # １行表示
 ```
 
-
 * [参考リポジトリ1-diveintoansible-lab](https://github.com/spurin/diveintoansible-lab/blob/master/docker-compose.yaml)
 * [参考リポジトリ2-diveintoansible](https://github.com/spurin/diveintoansible)

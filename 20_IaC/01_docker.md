@@ -205,6 +205,7 @@ screen ~/Library/Containers/com.docker.docker/Data/vms/0/tty
 * [公式参考サイト:Docker Buildx](https://matsuand.github.io/docs.docker.jp.onthefly/buildx/working-with-buildx/)
 
 #### [docker buildx](https://matsuand.github.io/docs.docker.jp.onthefly/buildx/working-with-buildx/)
+
 **Docker Desktop for WindowsまたはDocker Desktop for Macの場合には、最初からbuildxが有効になっていてマルチCPUアーキテクチャーのコンテナーを作成することができるようになっている**
 
 ```sh
@@ -232,4 +233,3 @@ docker buildx inspect --bootstrap
 # マルチアーキテクチャでのビルド実行例
 docker buildx build --platform linux/amd64,linux/arm64 -t イメージ名 --push .(Dockerfileのパス)
 ```
-
