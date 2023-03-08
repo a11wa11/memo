@@ -363,6 +363,12 @@ export LESS="-SRXF"
 
 ### curl
 
+- `-o` 保管ディククトリ/保管ファイル名の指定
+- `-O` ダウンロードファイルを変更せずにそのままの名前で保存
+- `-L,--location` サーバーがリダイレクトを返した際に追跡してファイルをダウンロード
+- `-k` サーバー証明書の検証を無効にする
+- `-u,--user` 認証情報を指定する `-u username:password`と指定すると指定されたユーザー名とパスワードで認証される
+
 ```sh
 # 画像ダウンロード `curl -o 保管ディククトリ/保管ファイル名 -OL ダウンロードしたいURL`
 curl -o app/assets/images/rails.png -OL railstutorial.jp/rails.png
