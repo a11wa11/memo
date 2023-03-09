@@ -70,6 +70,9 @@ git commit --allow-empty -m "# プルリクエストのタイトル"
 # addを取り消す
 git reset HEAD addしたファイル名
 
+# addを取り消す(直前のコミット時の状態に戻る)
+git restore --staged ファイルパス
+
 # 直前のコミット操作を取り消す
 git reset --soft HEAD^
 
