@@ -11,9 +11,13 @@ psql -h ホスト名 -U ユーザー名 -p 5432 -d データベース名
 
 ```psql
 # データベース
-\l show databases;
+\l (show databases;)
 # テーブル
-\d show tables;
+\d (show tables;)
+# タイムゾーン
+show timezone;
+# 現在時間
+select now();
 ```
 
 * dump
