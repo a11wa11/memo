@@ -3,7 +3,7 @@
 - [git](#git)
   - [設定](#設定)
   - [タグ関連](#タグ関連)
-  - [コミット編集](#コミット編集)
+  - [コミット関連](#コミット関連)
     - [stash関連](#stash関連)
   - [ブランチ関連](#ブランチ関連)
   - [diff関連](#diff関連)
@@ -44,7 +44,7 @@ git tag -d タグ名
 git push origin タグ名
 ```
 
-## コミット編集
+## コミット関連
 
 ```sh
 # 直近のコミットメッセージの変更
@@ -75,6 +75,9 @@ git reset --soft HEAD^
 
 # reflogの履歴からもとに戻す
 git reset --hard HEAD@[1]
+
+# 特定のファイルだけ前の状態に戻したいとき
+git checkout コミットハッシュ ファイルパス
 ```
 
 - [マージ関連](https://qiita.com/horimislime/items/84fa431460c8d39f37e6)
