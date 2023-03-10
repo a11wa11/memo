@@ -53,6 +53,10 @@ yum provides パッケージ名
 # rpmパッケージのURLを直接指定してインストール
 yum install http://mirror.centos.orgXXXXX.noarch.rpm
 
+# ローカルインストール
+wget https://dev.mysql.com/get/mysql80-community-release-el7-7.noarch.rpm
+yum localinstall mysql80-community-release-el7-7.noarch.rpm(ファイルパス)
+
 # リポジトリを確認
 yum repolist
 
