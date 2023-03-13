@@ -84,6 +84,7 @@
 | truncate | 切り捨てる |
 | rc | バージョン候補(release candidate) |
 | clobber | 打ち消す、打ちのめす |
+| fleet | 艦隊、ものの集まり |
 | SKU | スキュー（Stock Keeping Unit）作成可能なリソースで選択可能な機能種類　| Azure用語 |
 | LVM | Logical Volume Manager) 複数のハードディスクやパーティションにまたがった記憶領域をまとめて単一の論理ボリューム（LV）として扱うことのできるディスク管理機能 | クラウド用語 |
 | VHD | (Virtual Hard Disk) HDDと構造的に似せているファイル形式 | クラウド用語 |
