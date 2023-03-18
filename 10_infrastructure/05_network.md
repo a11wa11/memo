@@ -114,7 +114,27 @@ ifconfig # 古くて今はあまり推奨されていない
 hostname -i|-I
 
 # 下記のファイルのIPADDRの変更などでIPアドレスを変更可能
-/etc/sysconfig/network-scripts/ifcfg*
+/etc/sysconfig/network-scripts/ifcfg* # OSのNICに関する定義を行うファイル
+
+$ cat /etc/sysconfig/network-scripts/ifcfg-eth0
+DEVICE=eth0                        # 物理デバイス名
+BOOTPROTO=dhcp                     # プロトコル
+ONBOOT=yes                         # ブート時にこのデバイスをONにするかどうか
+BROADCAST=192.168.0.255            # ブロードキャストアドレス
+IPADDR=192.168.0.125               # IPアドレス
+NETMASK=255.255.255.0              # ネットマスク
+NETWORK=192.168.0.0                # ネットマスク
+```
+
+`/etc/sysconfig/network` (RedHat系OS)でネットワークに接続する際に必要とされる情報が記述されている
+
+```sh
+$ cat /etc/sysconfig/network
+NETWORKING=yes              # ネットワーキングを有効にするかどうか
+HOSTNAME=your.domain.name   # ホスト名
+DOMAINNAME=your.domain.name # ドメイン名
+GATEWAY=192.168.0.1         # デフォルトゲートウェイ
+NOZEROCONF=yes
 ```
 
 #### iptables
@@ -368,12 +388,12 @@ lsblk
 
 ## [CPUアーキテクチャ](https://developer.a-blogcms.jp/blog/custom/docker-arm64.html)
 
-| アーキテクチャ | 概要 | OS例 | 
+| アーキテクチャ | 概要 | OS例 |
 | - | - | - |
 | amd64 | 「AMD社」が発表したx86アーキテクチャを64bitに拡張したもの | Windows、Linux、Intel Mac |
 | intel64 | 「インテル社」が発表したx86アーキテクチャを64bitに拡張したもの | Windows、Linux、Intel Mac |
 | x86-64 | amd64とIntel64を含んだ総称 | Windows、Linux、Intel Mac |
 | arm64/aarch64 | スマホやタブレットなどで多く利用されているARMアーキテクチャを64bitに拡張したもの | iOS、M1/M2 Mac、ARM版Windows |
-|  |  |  | 
+|  |  |  |
 
 ---
