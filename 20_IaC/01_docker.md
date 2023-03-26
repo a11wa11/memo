@@ -1,6 +1,17 @@
 # docker
 
-* [centos7へdockerのインストール](https://qiita.com/kichise/items/f8e56c6d2d08eaf4a6a0)
+- [docker](#docker)
+  - [dockerのタグ一覧を取得するコマンドを生成](#dockerのタグ一覧を取得するコマンドを生成)
+  - [コマンド](#コマンド)
+    - [イメージ関連](#イメージ関連)
+      - [push](#push)
+    - [コンテナ関連](#コンテナ関連)
+    - [ネットワーク関連](#ネットワーク関連)
+    - [マルチCPUアーキテクチャ](#マルチcpuアーキテクチャ)
+      - [docker buildx](#docker-buildx)
+  - [Docker for Mac](#docker-for-mac)
+
+[centos7へdockerのインストール](https://qiita.com/kichise/items/f8e56c6d2d08eaf4a6a0)
 
 ## dockerのタグ一覧を取得するコマンドを生成
 
@@ -20,23 +31,23 @@ fi
 RUN yum install -y https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm --skip-broken
 ```
 
-### コマンド
+## コマンド
 
-#### イメージ関連コマンド
+### イメージ関連
 
-* イメージ検索
+- イメージ検索
 
 ```sh
 docker search イメージ名
 ```
 
-* イメージ取得
+- イメージ取得
 
 ```sh
 docker pull イメージ名
 ```
 
-* DockerFileからイメージを作成する
+- DockerFileからイメージを作成する
 
 ```sh
 # イメージ作成基本コマンド。この場合イメージ名はランダムにつけられる
@@ -67,13 +78,13 @@ Successfully built 1234abcdefgh ←作成されたイメージID
 Successfully tagged sample:1  ←イメージ名とタグがつく。オプションつけなければこの表記されない
 ```
 
-* dockerイメージの作成履歴を確認
+- dockerイメージの作成履歴を確認
 
 ```sh
 docker history イメージ名
 ```
 
-* コンテナからイメージを作成
+- コンテナからイメージを作成
 
 ```sh
 # 起動中であれば停止する
@@ -81,7 +92,7 @@ docker stop コンテナ名
 docker commit コンテナ名 名付けたいイメージ名
 ```
 
-* イメージを削除する
+- イメージを削除する
 
 ```sh
 # 対象を指定する際はイメージ名、イメージ名:タグ、イメージIDのどれかで指定する
@@ -90,7 +101,7 @@ docker rmi イメージ名:タグ
 docker rmi イメージID
 ```
 
-* イメージを一括削除
+- イメージを一括削除
 
 ```sh
 # イメージIDのみを一覧表示
@@ -101,16 +112,16 @@ docker rmi -f `docker images -q`
 docker image prune -f
 ```
 
-#### docker push
+#### push
 
-* 下記の流れでdockerhubへpush
+- 下記の流れでdockerhubへpush
   1. dockerhubへログイン `docker login`
   1. タグ付け `docker tag 元イメージ リポジトリ名/イメージ名:タグ`
   1. push `docker push リポジトリ名/イメージ名:タグ`
 
-#### コンテナ関連コマンド
+### コンテナ関連
 
-* コンテナの中でbashを利用して起動
+- コンテナの中でbashを利用して起動
 
 ```sh
 docker run -it イメージ名 bash
@@ -119,7 +130,7 @@ docker run -it イメージ名 bash
 docker run --name 名付けたいコンテナ名 -it イメージ名 bash
 ```
 
-* コンテナの状態確認
+- コンテナの状態確認
 
 ```sh
 # 起動コンテナのみ表示
@@ -132,77 +143,67 @@ docker ps -s
 docker ps -aq
 ```
 
-* コンテナを起動
+- コンテナを起動
 
 ```sh
 docker start コンテナ名
 ```
 
-* コンテナを停止
+- コンテナを停止
 
 ```sh
 docker stop コンテナ名
 ```
 
-* バックグランドで起動しているコンテナに入る
+- バックグランドで起動しているコンテナに入る
 
 ```sh
 docker attach コンテナ名
 docker exec -it コンテナ名 bash
 ```
 
-* dockerコンテナを削除
+- dockerコンテナを削除
 
 ```sh
 docker rm コンテナ名 or コンテナID
 ```
 
-* dockerコンテナの標準出力のログを確認
+- dockerコンテナの標準出力のログを確認
 
 ```sh
 docker logs コンテナ名 or コンテナID
 ```
 
-* ファイルコピー
+- ファイルコピー
 
 ```sh
 docker cp {コンテナID|コンテナ名}:ファイルパス コピー先
 ```
 
-#### ネットワーク関連コマンド
+### ネットワーク関連
 
-* dockerネットワークを表示
+- dockerネットワークを表示
 
 ```sh
 docker network ls
 ```
 
-* dockerネットワークの詳細を確認
+- dockerネットワークの詳細を確認
 
 ```sh
 docker network inspect ネットワーク名 or ネットワークID
 ```
 
-* dockerネットワークを作成
+- dockerネットワークを作成
 
 ```sh
 docker network create --attachable -d ネットワーク名 --subnet=172.17.0.0/16 作成ネットワーク名
 ```
 
-#### Docker for Mac
-
-* Macでvolumeに保存されているVMに入る
-
-```sh
-screen ~/Library/Containers/com.docker.docker/Data/vms/0/tty
-```
-
-* エフェメラルポート番号 -> 49152 ~ 65535
-
 ### [マルチCPUアーキテクチャ](https://docs.docker.jp/docker-for-mac/multi-arch.html)
 
-* [公式参考サイト:マルチCPUアーキテクチャ](https://matsuand.github.io/docs.docker.jp.onthefly/desktop/multi-arch/)
-* [公式参考サイト:Docker Buildx](https://matsuand.github.io/docs.docker.jp.onthefly/buildx/working-with-buildx/)
+- [公式参考サイト:マルチCPUアーキテクチャ](https://matsuand.github.io/docs.docker.jp.onthefly/desktop/multi-arch/)
+- [公式参考サイト:Docker Buildx](https://matsuand.github.io/docs.docker.jp.onthefly/buildx/working-with-buildx/)
 
 #### [docker buildx](https://matsuand.github.io/docs.docker.jp.onthefly/buildx/working-with-buildx/)
 
@@ -233,3 +234,13 @@ docker buildx inspect --bootstrap
 # マルチアーキテクチャでのビルド実行例
 docker buildx build --platform linux/amd64,linux/arm64 -t イメージ名 --push .(Dockerfileのパス)
 ```
+
+## Docker for Mac
+
+- Macでvolumeに保存されているVMに入る
+
+```sh
+screen ~/Library/Containers/com.docker.docker/Data/vms/0/tty
+```
+
+- エフェメラルポート番号 -> 49152 ~ 65535
