@@ -64,6 +64,23 @@ yum repolist
 # 有効なリポジトリを確認
 yum repoinfo
 
+# リポジトリ関連コマンド yum-config-manager
+
+# リポジトリを有効にする
+yum-config-manager --enable epel
+
+# リポジトリを無効にする
+yum-config-manager --disable epel
+
+# リポジトリを追加
+yum-config-manager --add-repo=https://example.com/repo
+
+#　リポジトリの削除
+yum-config-manager --remove epel
+
+# リポジトリの優先度設定
+yum-config-manager --save --setopt="epel.priority=10"
+
 # リポジトリをアップデート
 yum update epel
 
