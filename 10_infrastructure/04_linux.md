@@ -66,10 +66,10 @@ yum repoinfo
 
 # リポジトリ関連コマンド yum-config-manager
 
-# リポジトリを有効にする
+# リポジトリを有効にする。enabled=1になる
 yum-config-manager --enable epel
 
-# リポジトリを無効にする
+# リポジトリを無効にする。enabled=0になる
 yum-config-manager --disable epel
 
 # リポジトリを追加
