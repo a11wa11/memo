@@ -83,7 +83,9 @@ git reset --hard HEAD@[1]
 git checkout コミットハッシュ ファイルパス
 ```
 
-- [マージ関連](https://qiita.com/horimislime/items/84fa431460c8d39f37e6)
+## [マージ関連](https://qiita.com/horimislime/items/84fa431460c8d39f37e6)
+
+* コンフリクトされるか確認したい時
 
 ```sh
 # コミットされないが、ローカルファイルはマージされてしまう
@@ -93,6 +95,17 @@ git merge ブランチ名 --no-commit
 (トピックブランチ) git checkout master
 (master) git apply test.patch --check # パッチが適用できるかチェック
 # コンフリクトが起きる場合はエラーが発生する
+```
+
+- git log　表記で見るコミットハッシュ
+  - yyyy => マージされるブランチ
+  - zzzz => マージするブランチ
+  - yyyyブランチにいて `git merge zzzz`して出来上がったブランチのコミットハッシュがXXXXとなる
+
+```sh
+commit XXXX (HEAD -> master, upstream/master)
+Merge: yyyy zzzz
+Author: sample <sample@users.noreply.github.com>
 ```
 
 ### stash関連
