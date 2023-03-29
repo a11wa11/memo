@@ -223,10 +223,23 @@ ansible-galaxy init ロール名
   * become       → 実行ユーザーを定義
   * connection
 
-* when →　条件分岐
-* block → `try except`のようにエラー処理
-* ansible_distribution →
-* with_items →　リストで値を保持し、`{{var}}`で展開が可能
+* when
+  * 条件分岐 -> 例 `when: ansible_architecture == 'x86_64'`
+* block
+  * `try except`のようにエラー処理
+* ansible_distribution → 実行中のホストのOSのディストリビューションを示す変数(Amazon,Ubuntu,CentOSなど)
+* with_items
+  * リストで値を保持し、以下のように `{{変数名}} `で展開が可能
+
+```yml
+- name: Install ruby
+  yum:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+    enablerepo: "{{ enablerepo }}"
+  with_items: "{{ yum_install }}"
+  tags: php
+```
 
 #### [モジュール公式一覧](https://docs.ansible.com/ansible/2.9/modules/modules_by_category.html)
 
@@ -241,14 +254,13 @@ ansible-galaxy init ロール名
 
 * [get_url](https://docs.ansible.com/ansible/2.9/modules/get_url_module.html)
 * [unarchive](https://docs.ansible.com/ansible/2.9/modules/unarchive_module.html)
-* [lineinfile](https://docs.ansible.com/ansible/2.9/modules/lineinfile_module.html#lineinfile-module) → マッチした行を置換する
+* [lineinfile](https://docs.ansible.com/ansible/2.9/modules/lineinfile_module.html#lineinfile-module) → マッチした行を置換する(1行のみ)
 * [copy](https://docs.ansible.com/ansible/2.9/modules/copy_module.html)
 * [file](https://docs.ansible.com/ansible/2.9/modules/file_module.html)
 * [shell](https://docs.ansible.com/ansible/2.9/modules/shell_module.html) → 　シェルを実行　※冪等製が保たれないので非推奨
 * [script](https://docs.ansible.com/ansible/2.9/modules/script_module.html) → 対象のスクリプトを実行
 * [service](https://docs.ansible.com/ansible/2.9/modules/service_module.html)
 * [user](https://docs.ansible.com/ansible/2.9/modules/user_module.html)
-* [item]
 * [pause](https://docs.ansible.com/ansible/2.9/modules/pause_module.html)
 * [set_fact](https://docs.ansible.com/ansible/2.9/modules/set_fact_module.html) → 変数の設置
 * [setup](https://docs.ansible.com/ansible/2.9/modules/setup_module.html) → ansibleコマンドで自動的に呼ばれる
@@ -257,7 +269,7 @@ ansible-galaxy init ロール名
 
 * ignore_errors
 
-ignore_errosをyesにすると、そのタスクでエラーが発生しても無視して次のタスクに進むことができる
+ignore_errosをyesにすると、そのタスクでエラーが発生しても無視して次のタスクに進むことができる。shellモジュールやcommandモジュールに使用する場合が多いかも
 
 ```yaml
 - name: 必ず失敗するタスク
@@ -267,6 +279,8 @@ ignore_errosをyesにすると、そのタスクでエラーが発生しても�
 - debug:
     msg: '直前タスクの失敗の場合でも次に進みます'
 ```
+
+### ログ出力
 
 * [ansible実行時のログ出力先の指定と出力形式を指定して改行を見やすくする](https://tekunabe.hatenablog.jp/entry/2019/07/11/ansible_vallback_plugin_yaml)
   * `ansible.cfg`というファイルをansible実行するルートディレクトリに配置する
