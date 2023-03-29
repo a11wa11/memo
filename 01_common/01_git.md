@@ -50,8 +50,11 @@ git push origin タグ名
 # 直近のコミットメッセージの変更
 git commit --amend -m "変更したいメッセージ"
 
-# チェリーピック
-git cherry-pick コミットID
+# チェリーピック(単体でも複数でも可)
+git cherry-pick コミットID1 コミットID2 
+
+# チェリーピックでマージコミットを対象とする時。 -m 1 がマージ先（左のコミットID）、-m 2 だとマージ元(右のコミットID)になるが、ほとんどのケースで-m 1 を使用する
+git cherry-pick -m 1 コミットID
 
 # マージを打ち消したい時
 git revert -m 1 コミットID
