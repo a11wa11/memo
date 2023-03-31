@@ -50,12 +50,6 @@ git push origin タグ名
 # 直近のコミットメッセージの変更
 git commit --amend -m "変更したいメッセージ"
 
-# チェリーピック(単体でも複数でも可)
-git cherry-pick コミットID1 コミットID2 
-
-# チェリーピックでマージコミットを対象とする時。 -m 1 がマージ先（左のコミットID）、-m 2 だとマージ元(右のコミットID)になるが、ほとんどのケースで-m 1 を使用する
-git cherry-pick -m 1 コミットID
-
 # マージを打ち消したい時
 git revert -m 1 コミットID
 
@@ -85,6 +79,35 @@ git reset --hard HEAD@[1]
 # 特定のファイルだけ前の状態に戻したいとき
 git checkout コミットハッシュ ファイルパス
 ```
+
+### チェリーピック
+
+```sh
+# チェリーピック(単体でも複数でも可)
+git cherry-pick コミットID
+git cherry-pick コミットID1 コミットID2 
+git cherry-pick コミットID1..コミットID9  # 1~9をまとめてチェリーピック 
+
+# メッセージを変更してチェリーピック
+git cherry-pick -e コミットID
+
+# 取り込みのみでコミットなし
+git cherry-pick -n コミットID
+
+# チェリーピックでマージコミットを対象とする時。 -m 1 がマージ先（左のコミットID）、-m 2 だとマージ元(右のコミットID)になるが、ほとんどのケースで-m 1 を使用する
+git cherry-pick -m 1 コミットID
+
+
+# こういう流れのgit log があるとして、
+      X-Y
+     /   \
+...-A-B-C-D-...
+
+# Dはマージコミット。親１がX,Yを、親2がB,Cのコミットを持つので
+git cherry-pick X Y  =  git cherry-pick -m 1 D
+git cherry-pick B C  =  git cherry-pick -m 2 D
+```
+
 
 ## [マージ関連](https://qiita.com/horimislime/items/84fa431460c8d39f37e6)
 
