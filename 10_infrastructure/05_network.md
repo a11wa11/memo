@@ -229,9 +229,19 @@ md5sum ファイル名
 
 ### サービス
 
+- 定義されているサービス一覧と自動起動の状態
+
 ```sh
-# 定義されているサービス一覧と自動起動の状態
 systemctl list-unit-files --type=service
+```
+
+- journalctl
+
+```sh
+# 基本的な使い方. -u で対象サービスを指定してログを確認
+journalctl -u php-fpm
+# -n 表示する行数を指定する
+journalctl -n 5 -u php-fpm
 ```
 
 ---
