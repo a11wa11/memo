@@ -19,6 +19,20 @@
 all: ;               # all は何も実行しないということになり、誤動作も防止することができる
 ```
 
+* 変数定義
+  * `x = foo`でも可能だが`x := foo`が理解しやすい
+
+```Makefile
+x := foo      # echo &(x) で foo が出力される
+y := $(x) bar
+
+# 現時刻を変数代入
+now := $(shell date '+%Y%m%d-%H%M')
+# カレントディレクトリを変数代入
+current_dir := $(shell pwd)
+result_dir := $(current_dir)/taurus/results/$(now)
+```
+
 * 実行コマンド
 
 ```sh

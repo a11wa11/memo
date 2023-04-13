@@ -43,6 +43,12 @@ Host NAME
     UserKnownHostsFile /dev/null
 ```
 
+## ポートフォワード
+
+```sh
+ssh -L ローカルポート:リモートホスト:リモートポート ユーザ名@SSH接続ホスト名
+```
+
 ## [ssh-keygen](https://www.attachmate.com/ja-jp/documentation/reflection-desktop-v16/rdesktop-guide/data/ssh-keygen_command_rf.htm)
 
 ### 鍵の作成

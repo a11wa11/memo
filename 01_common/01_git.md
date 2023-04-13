@@ -4,10 +4,14 @@
   - [設定](#設定)
   - [タグ関連](#タグ関連)
   - [コミット関連](#コミット関連)
+    - [チェリーピック](#チェリーピック)
+  - [マージ関連](#マージ関連)
     - [stash関連](#stash関連)
   - [ブランチ関連](#ブランチ関連)
   - [diff関連](#diff関連)
   - [フォーク関連](#フォーク関連)
+  - [submodule](#submodule)
+  - [github](#github)
 
 ## 設定
 
@@ -108,10 +112,9 @@ git cherry-pick X Y  =  git cherry-pick -m 1 D
 git cherry-pick B C  =  git cherry-pick -m 2 D
 ```
 
-
 ## [マージ関連](https://qiita.com/horimislime/items/84fa431460c8d39f37e6)
 
-* コンフリクトされるか確認したい時
+- コンフリクトされるか確認したい時
 
 ```sh
 # コミットされないが、ローカルファイルはマージされてしまう
@@ -155,6 +158,9 @@ git diff HEAD..stash@{0}
 
 # 一時退避した内容(stash)をリストから指定して戻す
 git stash pop stash@{0} # stash@{0}は適宜変更
+
+# 一時退避した内容(stash)を一部消去
+git stash drop stash@{0} # stash@{0}は適宜変更
 
 # 一時退避した内容(stash)を全て消去
 git stash clear
@@ -249,3 +255,42 @@ git push origin ブランチ名
 git fetch upstream pull/<ID>/head:pr/<ID>
 git checkout pr/<ID>
 ```
+
+## submodule
+
+- `.gitmodules`ファイルでサブモジュールの設定情報が管理されている
+
+```sh
+# 追加
+git submodule add クローン元 追加先パス
+# バージョン管理して追加
+git submodule add --branch ブランチ名 クローン元 追加先パス
+# 初期化
+git submodule init
+# 更新
+git submodule update
+git submodule update 指定サブモジュールパス # 特定のサブモジュールのみの時
+# 確認
+git submodule status
+```
+
+## github
+
+Personal access tokens
+
+- GitHubのリモートリポジトリにHTTP接続する際に、ユーザ名と合わせて必要となる情報
+
+[トークンの作成手順](https://docs.github.com/ja/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic)
+
+```sh
+# Personal access tokens発行後に下記のようにして使用する
+$ git clone https://github.com/USERNAME/REPO.git
+Username: YOUR_USERNAME
+Password: YOUR_PERSONAL_ACCESS_TOKEN
+```
+
+ブランチやコミット同士の比較
+
+- `https://github.com/リポジトリ/compare/stg...dev`のように`compare/ブランチ比較元...ブランチ比較先`のように打つ
+
+

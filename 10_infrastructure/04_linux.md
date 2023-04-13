@@ -48,6 +48,9 @@ yum list extras    # 利用できないパッケージ
 yum search --showduplicates パッケージ名
 yum search all --showduplicates パッケージ名
 
+# パッケージ詳細を表示
+yum info パッケージ名
+
 # ファイル名からパッケージを検索する
 yum provides パッケージ名
 
@@ -105,6 +108,17 @@ yum --disablerepo=epel install,update,search ライブラリ名
 rpm -ivh パッケージ名.rpm
 rpm -Uvh パッケージ名.rpm
 rpm -evh パッケージ名.rpm
+```
+
+### dnf
+
+```sh
+# パッケージ検索
+dnf search パッケージ名
+# インストール可能か確認
+dnf list available パッケージ名(正規表現も使える)
+# パッケージ詳細を表示
+dnf info パッケージ名
 ```
 
 ## amazon-linux
@@ -181,21 +195,75 @@ cat /etc/rsyslog
 *.info;cron.none;         /var/log/messages
 ```
 
-- logrotate
+### logrotate
+
+ログローテートとは、ログファイルのサイズが大きくならないように、1日、または1週、または1か月といった期間でファイル名を変更し、設定次第では古いファイルを圧縮したり、もっと古いファイルを削除したりすることができる仕組みのこと。  
+実体は`/usr/sbin/logrotate`というコマンドとcron.dailyの組合せであり、crondによってlogrotateコマンドが毎日実行されているため、デーモンとして起動されているわけではない
+
+- 実行記録
+
+一般的に`/var/lib/logrotate/logrotate.status`に前回の実行記録が保存されている。  
+`/etc/cron.daily/logrotate`などのファイルを見ると`/usr/sbin/logrotate -s /var/lib/logrotate/logrotate.status /etc/logrotate.conf`と記載があり、`-s`オプションで指定しているのが実行記録が保存されているファイルパス。  
+`-s`オプションで指定しなくても`/var/lib/logrotate/logrotate.status`がデフォルトファイルパスになっている
+
+- 構成
+
+```sh
+/etc/
+├── logrotate.conf # メイン設定ファイル
+├── logrotate.d    # 各サービスごとの設定ファイル
+│   ├── nginx
+│   ├── syslog
+│   ├── yum
+```
+
+- 各設定項目
   - 取得頻度 -> daily, weekly, monthly
   - ローテーション回数 -> `rotate 3`
   - 新規ファイル作成 -> create, nocreate
   - 拡張子 -> dateext(日付拡張子をローテートファイルにつける)
+  - 設定例
+```log
+/var/log/nginx/*log {
+    missingok                # ログファイルが存在しなくてもエラーを出力しない
+    notifempty               # ログファイルが空の場合、ローテーションしない
+    daily                    # ログファイルを1日単位でローテーションする
+    rotate 30                # ログファイルを30世代まで保持する
+    create 0644 nginx nginx  # ローテーション後に空のログファイルを新規作成し、パーミッションを 0644 に設定する。また、ログファイルの所有者を nginx に設定する
+    compress                 # ログファイルを圧縮する
+    delaycompress            # ログファイルを圧縮する際に、直前のローテーションで作成されたログファイルを圧縮する。compress設定と併用する必要がある
+    sharedscripts            # スクリプトを一度だけ実行する
+    postrotate               # ローテーション後に実行されるスクリプト
+        systemctl reload nginx      
+    endscript                # スクリプトの終了を示す
+    su root root             # スクリプトを実行するユーザーを root に設定する
+}
+```
 
+- logrotateコマンド
+
+```sh
+# 実行ログの確認
+less /var/lib/logrotate.status
+# 全テスト -dはdebugでdry-run実行。-vは詳細表示
+logrotate -dv /etc/logrotate.conf
+# 個別テスト
+logrotate -dv /etc/logrotate.d/nginx
+# 手動強制実行。-fは--forceで
+logrotate -fv /etc/logrotate.conf
+```
+
+- 参考
+  - [任意のログをlogrotateを使って管理する](https://qiita.com/Esfahan/items/a8058f1eb593170855a1)
+  - [【logrotate】の仕組みと書き方, オプション一覧, 設定反映と再起動について](https://milestone-of-se.nesuke.com/sv-basic/linux-basic/logrotate/)
+  - [logrotateの設定](https://humo-life.net/blog/centos/187/)
+  - [logrotateの全オプション解説](https://hackers-high.com/linux/man-jp-logrotate/)
+  
 - ファイルシステム
   - APFS Mac
   - FAT Windows
   - ext4 CentOS6
   - xfs CentOS7 -> EBSではxfsでフォーマットが推奨されている
-
-- [任意のログをlogrotateを使って管理する](https://qiita.com/Esfahan/items/a8058f1eb593170855a1)
-- [logrotateの簡単設定](https://qiita.com/Esfahan/items/a8058f1eb593170855a1)
-- [【logrotate】の仕組みと書き方, オプション一覧, 設定反映と再起動について](https://milestone-of-se.nesuke.com/sv-basic/linux-basic/logrotate/)
 
 ### RAID
 
@@ -284,6 +352,27 @@ UUID=XXXX / xfs defaults.noatime 1 1
   - ルートファイルシステムは１と記述する必要がある
   - 0の場合、`fsck`によるチェック不要とみなされる
   - `fsck`コマンドではファイルシステムを検査・修復するコマンド
+
+### glibc
+
+GNUシステム用の標準Cライブラリ。GNU/Linuxシステム上のほとんどのプログラムで使用されている
+
+- [glibcの更新方法
+](https://tutorials.tinkink.net/ja/linux/how-to-update-glibc.html)
+
+```sh
+# インストール
+mkdir ~/tmp/glibc
+cd ~/tmp/glibc
+wget --no-check-certificate https://ftp.gnu.org/gnu/glibc/glibc-2.28.tar.gz
+tar -xvf glibc-2.28.tar.gz
+cd glibc-2.28
+mkdir build && cd build
+../configure --prefix=/usr --disable-profile --enable-add-ons --with-headers=/usr/include --with-binutils=/usr/bin
+make&&make install
+# 確認
+strings /lib64/libc.so.6 | grep GLIBC_
+```
 
 ## 初期構築テンプレート
 

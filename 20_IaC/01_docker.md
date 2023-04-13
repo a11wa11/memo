@@ -11,10 +11,15 @@
       - [docker buildx](#docker-buildx)
   - [Docker for Mac](#docker-for-mac)
 
-[centos7へdockerのインストール](https://qiita.com/kichise/items/f8e56c6d2d08eaf4a6a0)
+## インストール
+
+- [centos7へdockerのインストール](https://qiita.com/kichise/items/f8e56c6d2d08eaf4a6a0)
+- mac
+  - `brew install docker`
 
 ## dockerのタグ一覧を取得するコマンドを生成
-
+<details>
+    <summary>展開</summary>
 ```sh
 # .bashrcなどに追記する
 
@@ -30,10 +35,17 @@ fi
 # Google chrome & driver インストール
 RUN yum install -y https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm --skip-broken
 ```
+</details>
 
 ## コマンド
 
 ### イメージ関連
+
+- イメージ確認
+
+```sh
+docker images
+```
 
 - イメージ検索
 
@@ -84,14 +96,6 @@ Successfully tagged sample:1  ←イメージ名とタグがつく。オプシ�
 docker history イメージ名
 ```
 
-- コンテナからイメージを作成
-
-```sh
-# 起動中であれば停止する
-docker stop コンテナ名
-docker commit コンテナ名 名付けたいイメージ名
-```
-
 - イメージを削除する
 
 ```sh
@@ -112,6 +116,33 @@ docker rmi -f `docker images -q`
 docker image prune -f
 ```
 
+#### よく使うオプション
+
+- 変数指定
+
+```sh
+docker build -t イメージ名 --build-arg AVERSION(指定したい変数名)=${入力したい変数名値} .
+```
+
+- デタッチ `-d,--detach` ※バックグラウンドで起動
+- 特権付与 `--privileged` ※systedなど使用したい時
+- 自動削除 `--rm`
+- マウント `-v ローカルホスト側パス:コンテナ側パス`
+
+```sh
+docker run -d --privileged --rm -v $(pwd):/home/ec2-user/workdir --name コンテナ名 イメージ名
+```
+
+#### commit 
+
+- コンテナからイメージを作成
+
+```sh
+# 起動中であれば停止する
+docker stop コンテナ名
+docker commit コンテナ名 名付けたいイメージ名
+```
+
 #### push
 
 - 下記の流れでdockerhubへpush
@@ -124,10 +155,15 @@ docker image prune -f
 - コンテナの中でbashを利用して起動
 
 ```sh
+# ※-iはコンテナの標準入力を有効化
+# ※-tはttyを有効化
 docker run -it イメージ名 bash
 
 # 作成するコンテナに名前をつける場合
 docker run --name 名付けたいコンテナ名 -it イメージ名 bash
+
+# ポートマッピング
+docker run -p 80(ローカルホストポート):80(コンテナポート) --name 名付けたいコンテナ名 -it イメージ名 bash
 ```
 
 - コンテナの状態確認

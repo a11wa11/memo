@@ -1,9 +1,49 @@
 # ネットワーク
 
-- [OSI](#osi)
-- [HTTP](#http)
-- [システム情報](#システム情報)
-- [パフォーマンス測定](#パフォーマンス測定)
+- [ネットワーク](#ネットワーク)
+  - [OSI](#osi)
+  - [URL](#url)
+  - [HTTP](#http)
+    - [HTTPヘッダー](#httpヘッダー)
+      - [User-Agentとは](#user-agentとは)
+      - [Referrerとは](#referrerとは)
+  - [システム情報](#システム情報)
+    - [ホストネーム](#ホストネーム)
+    - [タイムゾーン](#タイムゾーン)
+    - [ロケール](#ロケール)
+    - [IPアドレス](#ipアドレス)
+      - [ip](#ip)
+      - [iptables](#iptables)
+      - [ping](#ping)
+      - [ネットワーク設定を反映](#ネットワーク設定を反映)
+    - [ポート](#ポート)
+    - [ネットワークマネージャー](#ネットワークマネージャー)
+    - [名前解決](#名前解決)
+    - [nice値](#nice値)
+    - [稼働時間](#稼働時間)
+    - [ファイル系](#ファイル系)
+      - [ファイルタイプ確認](#ファイルタイプ確認)
+      - [ファイル上限数確認](#ファイル上限数確認)
+      - [md5sum](#md5sum)
+    - [サービス](#サービス)
+  - [パフォーマンス測定](#パフォーマンス測定)
+    - [vmstat](#vmstat)
+    - [netstat](#netstat)
+    - [sar](#sar)
+      - [インストール](#インストール)
+      - [コマンド例](#コマンド例)
+    - [CPU](#cpu)
+      - [top(CPU、メモリ、プロセスの状態表示)](#topcpuメモリプロセスの状態表示)
+      - [htop](#htop)
+      - [lscpu](#lscpu)
+    - [メモリ](#メモリ)
+    - [ディスク](#ディスク)
+      - [df](#df)
+      - [du](#du)
+      - [lsblk](#lsblk)
+      - [パーティション拡張](#パーティション拡張)
+      - [ファイルシステム拡張](#ファイルシステム拡張)
+  - [CPUアーキテクチャ](#cpuアーキテクチャ)
 
 ## OSI
 
@@ -19,6 +59,30 @@
 |  |  |  |  |  |
 
 ---
+
+## URL
+
+WHATWG URLの構造
+
+```sh
+┌─────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                            href                                             │
+├──────────┬──┬─────────────────────┬─────────────────────┬───────────────────────────┬───────┤
+│ protocol │  │        auth         │        host         │           path            │ hash  │
+│          │  │                     ├──────────────┬──────┼──────────┬────────────────┤       │
+│          │  │                     │   hostname   │ port │ pathname │     search     │       │
+│          │  │                     │              │      │          ├─┬──────────────┤       │
+│          │  │                     │              │      │          │ │    query     │       │
+"  https:   //    user   :   pass   @ sub.host.com : 8080   /p/a/t/h  ?  query=string   #hash "
+│          │  │          │          │   hostname   │ port │          │                │       │
+│          │  │          │          ├──────────────┴──────┤          │                │       │
+│ protocol │  │ username │ password │        host         │          │                │       │
+├──────────┴──┼──────────┴──────────┼─────────────────────┤          │                │       │
+│   origin    │                     │       origin        │ pathname │     search     │ hash  │
+├─────────────┴─────────────────────┴─────────────────────┴──────────┴────────────────┴───────┤
+│                                            href                                             │
+└─────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ## HTTP
 
@@ -67,6 +131,18 @@ hostnamectl set-hostname ホストネーム名
 hostname 'ホストネーム名'
 ```
 
+- ローカルで自分専用で名前解決したい場合
+
+[こちら](https://qiita.com/Hikosaburou/items/085a3fbcbd5cd04e834d)を参考
+
+```sh
+# macで操作前提
+# /private/etc/hostsに記述
+
+### ALBなどの任意のIPを登録
+111.111.xxx.yyy example.com
+```
+
 ### タイムゾーン
 
 - タイムゾーンを確認
@@ -104,6 +180,12 @@ localectl set-locale LANG=ja_JP.UTF-8
 
 ### IPアドレス
 
+- グローバルIPを確認
+
+```sh
+curl httpbin.org/ip
+```
+
 #### ip
 
 ```sh
@@ -126,7 +208,8 @@ NETMASK=255.255.255.0              # ネットマスク
 NETWORK=192.168.0.0                # ネットマスク
 ```
 
-`/etc/sysconfig/network` (RedHat系OS)でネットワークに接続する際に必要とされる情報が記述されている
+- `/etc/sysconfig/network` (RedHat系OS)でネットワークに接続する際に必要とされる情報が記述されている。  マシン全体のネットワーク設定が記述されている。
+- `/etc/sysconfig/network-scripts/ifcfg-[NIC名]`はNICごとのネットワーク設定が記述されている
 
 ```sh
 $ cat /etc/sysconfig/network
@@ -160,6 +243,14 @@ iptables -A INPUT -p tcp -s 10.0.0.0(IPアドレス) --sport 3000(ポート番�
 iptables -A INPUT -p tcp -s 10.0.0.0(IPアドレス) --sport 3000(ポート番号) --tcp-flags PSH,ACK PSH,ACK -j DROP
 ```
 
+#### ping
+
+- ネットワークの疎通を確認する
+- ICMPを使用している
+- 対象ホストでICMP受信許可がされていないければping応答が返らない
+- OSI参照モデルのネットワークそう(IPレベル)までが確認できる範囲
+- pingが通ればサーバがシャットダウンされておらずネットワークにも問題ないことがわかり、アプリケーション側などで問題がある可能性ありと切り分け可能
+
 #### ネットワーク設定を反映
 
 ```sh
@@ -182,9 +273,56 @@ nmcli device show ens160
 
 ### 名前解決
 
+nslookupは非推奨、digが推奨。hostコマンドとdigコマンドはIPアドレスを入力してドメイン名を逆引きしたりも可能
+
+- nslookup
+
 ```sh
 nslookup
 >google.com
+```
+
+- host
+
+```sh
+host google.com
+```
+
+- dig
+
+```sh
+dig google.com
+```
+
+- nc
+
+```sh
+# ボートの状態を確認。-vは冗長化
+nc -zv 対象ホスト名 ポート番号
+# サーバとして待受。-lはサーバーモードで待ち受け、-pはポート番号を指定
+nc -l -p ポート番号
+```
+
+- traceroute
+
+指定したホストまでの経路(ルーティング情報)を表示する
+
+```sh
+traceroute google.com
+# 出力結果に 「*」 と表示されたら、その経路で問題が発生している可能性がある
+```
+
+- route
+
+ルーティングテーブルの参照や変更が可能（廃止予定でipコマンドへ移行が進んでいる)
+
+```sh
+# route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         ip-192-168-x-x. 0.0.0.0         UG    0      0        0 eth0
+instance-data.a 0.0.0.0         255.255.255.255 UH    0      0        0 eth0
+192.168.x.x     0.0.0.0         255.255.255.0   U     0      0        0 eth0
 ```
 
 ### nice値
@@ -205,6 +343,21 @@ nice -20 [command]
 ```sh
 uptime
 >0:24  up 12 days,  1:36, 3 users, load averages: 1.69 2.10 2.02
+```
+
+- pmset
+
+Macで使用できる電源管理や省エネルギーモードに関するカスタマイズを行うコマンド
+
+```sh
+# 電源管理設定を表示
+pmset -g
+# スリープを無効にする
+pmset sleep 0
+# スリープになるまでを30分とする
+pmset sleep 30
+# ディスプレイオフになるまでを30分とする
+pmset displaysleep 15
 ```
 
 ### ファイル系
@@ -233,6 +386,12 @@ md5sum ファイル名
 
 ```sh
 systemctl list-unit-files --type=service
+```
+
+- 失敗しているサービスの確認
+
+```sh
+systemctl list-units --state=failed
 ```
 
 - journalctl
@@ -268,8 +427,21 @@ vmstat 2 7
 
 ### netstat
 
+- network-staticsの略
 - ネットワーク接続やルーティングの状況、ネットワークインターフェースの状態を表示する
 - CentOS7, RHEL7では非推奨(代替 ss)。ただしssの不具合も報告されている
+- Stateの内容
+  - ESTABLISHED: 通信中
+  - LISTENING: 待受中
+  - TIME_WAIT: 終了待ち
+  - CLOSE_WAIT: 通信終了
+
+```sh
+# 待機中も含めて全ポートを表示
+netstat -a
+# ホストやユーザーの名前解決を行わずにアドレス表示する
+netstat -n
+```
 
 ### sar
 
@@ -382,6 +554,7 @@ df
 df -kP      # ブロックサイズが1kで表示 P=POSIX出力形式
 df -i       # i=inode情報を表示する
 df -h       # サイズに応じて読みやすい単位で表示する
+df -T       # ファイルシステムタイプを含めて表示する
 df --total  # 空き領域の合計も併せて表示する
 ```
 
@@ -391,9 +564,37 @@ df --total  # 空き領域の合計も併せて表示する
 # 各ディレクトリやファイルごとに確認
 du -sh ./*
 du -h -d 1 . # カレントディレクトリ下の角ファイルやディレクトリのサイズを確認
+```
 
-# list block devices
-lsblk
+#### lsblk
+
+```sh
+# HDD、SSD、USBフラッシュドライブ、パーティションなどのブロック単位(ブロックデバイス)の情報を表示する
+$ lsblk
+NAME          MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
+nvme0n1       １２３:0    0  60G  0 disk
+├─nvme0n1p1   １２３:1    0  60G  0 part /
+└─nvme0n1p128 １２３:2    0   1M  0 part
+
+# メジャー番号 (MAJ) はカーネル内でデバイスドライバを特定するための番号
+# マイナー番号 (MIN) は特定のデバイスドライバ内で識別されるデバイスのインスタンスを表す番号
+```
+
+#### パーティション拡張
+
+```sh
+# パーティションのサイズを拡張する
+sudo growpart /dev/nvme0n1(変更を加えたいディスクを指定する) 1(変更を加えたいパーティションを指定する部分、1は最初のパーティション（通常、ルートパーティション）を指す)
+```
+
+#### ファイルシステム拡張
+
+```sh
+# xfsファイルシステムのサイズを拡張する
+sudo xfs_growfs -d(デバイスでサポートされる最大サイズまで増加させる) /(拡張対象のファイルシステム)
+
+# ext(2/3/4)ファイルシステムのサイズを拡張する
+sudo resize2fs /dev/nvme0n1p1(拡張対象のファイルシステム)
 ```
 
 ## [CPUアーキテクチャ](https://developer.a-blogcms.jp/blog/custom/docker-arm64.html)

@@ -1,0 +1,131 @@
+# データベース
+
+- [データベース](#データベース)
+  - [用語](#用語)
+  - [クエリ](#クエリ)
+  - [SQL構文ルール](#sql構文ルール)
+
+## 用語
+
+- バイナリログレプリケーション
+  - データベースの変更をログ形式で記録し、そのログを他のデータベースサーバーに転送して再実行することで、データベースの複製を行う仕組み
+
+## クエリ
+
+- select
+
+```sql
+# ソート昇順
+select * from テーブル名 order by カラム名 asc;
+# ソート降順
+select * from テーブル名 order by カラム名 desc;
+# 時刻指定
+select * from テーブル名 where created_at >= '20240101 050000'::TIMESTAMP limit 100;
+
+# テーブルのカラム名を横並びで取得する
+select group_concat(カラム名 separator ', ') as columns from information_schema.columns where table_schema = 'DB名' and table_name = 'テーブル名' order by ordinal_position asc;
+
+# データをグループ化する
+select カラム名1, カラム名2 from テーブル名 group by カラム名1;
+
+# データをグループ化し、条件抽出する
+select カラム名1, カラム名2 from テーブル名 group by カラム名1 having カラム名>1;
+
+# 複数の対象のどれかに該当する値を取得
+select * from テーブル名 where カラム名 in(1,2,3);
+
+# テーブルのカラム数を取得
+select count(カラム名) from information_schema.columns where table_name='テーブル名' and table_schema='DB名';
+
+# 外部キー確認
+select * from information_schema.key_column_usage where table_schema='DB名' and table_name='テーブル名';
+
+```
+
+- update
+
+```sql
+update TABLE_NAME set COLUMN_NAME1='AAA', COLUMN_NAME2='BBB',updated_at=now() where id=999;
+```
+
+- delete
+
+```sql
+delete from TABLE_NAME; # テーブルを削除する
+```
+
+- 複数insert
+
+```sql
+insert into words (english, japanese,created_at,updated_at) values 
+('availability','可用性',now(),now()),
+('arn','Amazon リソースネーム (ARN)',now(),now());
+```
+
+- トランザクション
+
+```sql
+begin;
+update table_name set column_name1=1, column_name2='test' where id=999;
+rollback; # 戻す
+commit;
+```
+
+## SQL構文ルール
+
+- 優先度
+
+下に行くほど優先度が下がる(上ほど処理の優先度が高い)
+
+| 機能 | 構文 |
+| -- | -- |
+| テーブルの指定 | FROM |
+| 結合 | ON / JOIN |
+| 取得条件 | WHERE |
+| グループ化 | GROUP BY |
+| 関数 | COUNT / SUM / AVG / MIN |
+| 取得条件 | HAVING |
+| 検索 | SELECT / DISTINCT |
+| 順序 | ORDER BY |
+| LIMIT | LIMIT |
+
+- `select ① from ②;`
+  - ①の部分に入れたカラムを指定し、②のテーブルから取得してくる。基本selectとfromはセットで使い単体では使用しない
+  - テキスト ""で囲む
+  - 数値 クオテーション不要
+  - 日付 ""(ダブルクオテーション)、もしくは’’(シングルクオテーション)で囲む
+- `select ① from ② where ③ = ④;`
+  - ③のカラムの中で④と一致するものを取得する
+- `select distinct(①) from ②;`
+  - ①で指定したカラムで重複したものを削除する
+- SUM
+  - `select SUM(①) from ②;`
+    - ①のカラムの合計値を取得。whereと併用可能
+- AVG
+  - `select AVG(①) from ②;`
+    - ①のカラムの平均値を取得。whereと併用可能
+- MAX
+  - `select MAX(①) from ②;`
+    - ①のカラムの最大値を取得。whereと併用可能
+- MIN
+  - `select MIN(①) from ②;`
+    - ①のカラムの最小値を取得。whereと併用可能。ただし、nullはカウントされない
+- COUNT
+  - `select COUNT(①) from ②;`
+    - ①のカラムのデータ合計値を取得。whereと併用可能。ただし、nullはカウントされない
+- GROUP BY
+  - 指定したカラムで、完全に同一のデータを持つレコード同士がグループ化する。sumやavgと組み合わせて集計しやすくなる。コンマで区切り、複数のグループ化も可能
+- 検索（where）、グループ化（group by）、関数（sum,count）、havingの順番で行われる
+- HAVING
+  - `group by ① having ②;`
+    - ②の条件を満たすグループを取得することができる。WHEREはグループ化される前のテーブル全体を検索対象とするのに対し、HAVINGはGROUP BYによってグループ化されたデータを検索対象
+- AS
+  - `select ① as "②"「カラム名 AS "名前"`
+    - カラム名に定義する名前を指定
+- JOIN
+  - `join ① on ②`
+    - ①のテーブルを結合し、結合条件は、「ON テーブル名.カラム名 = テーブル名.カラム名」で指定。JOINを含んだSQL文では、はじめにJOINが実行されます
+    - 複数のテーブルに同じカラム名が存在するときは、「テーブル名.カラム名」で指定
+    - LEFT JOIN FROMで指定したテーブルのレコードを全て取得します。外部キーがNULLのレコードもNULLのまま実行結果に表示されます
+- サブクエリ
+  - SQL文の中に他のSQL文を入れることができる。サブクエリの中にセミコロンは不要

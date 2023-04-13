@@ -11,12 +11,14 @@
 ```python
 print("abc")
 ```
+
 </td>
 <td>
 
 ```ruby
 puts "abc"
 ```
+
 </td>
 </tr>
 <tr>
@@ -26,12 +28,14 @@ puts "abc"
 ```python
 print("私の名前は%sです" % name)
 ```
+
 </td>
 <td>
   
 ```ruby
 puts "私の名前は#{name}です"
 ```
+
 </td>
 </tr>
 <tr>
@@ -42,6 +46,7 @@ puts "私の名前は#{name}です"
 if a == b:
     print("OK")
 ```
+
 </td>
 <td>
 
@@ -50,6 +55,7 @@ if a == b
   puts "OK"
 end
 ```
+
 </td>
 </tr>
 <tr>
@@ -64,6 +70,7 @@ elif a > b:
 else:
     print("NG")
 ```
+
 </td>
 <td>
 
@@ -76,6 +83,7 @@ else
   puts "NG"
 end
 ```
+
 </td>
 </tr>
 <tr>
@@ -85,12 +93,14 @@ end
 ```python
 names=["Tanaka","Yamada","Suzuki"]
 ```
+
 </td>
 <td>
 
 ```ruby
 names=["Tanaka","Yamada","Suzuki"]
 ```
+
 </td>
 </tr>
 <tr>
@@ -102,11 +112,13 @@ names=["Tanaka","Yamada","Suzuki"]
 names[0] # "Tanaka"
 names[-1] # "Suzuki"  
 ```
+
 </td>
 <td>
 
 ```ruby
 ```
+
 </td>
 </tr>
 <tr>
@@ -118,15 +130,16 @@ s = 'one,two,three'
 l = s.split(',')
 # ['one', 'two', 'three']
 ```
+
 </td>
 <td>
 
 ```ruby
 ```
+
 </td>
 </tr>
 
-  
 <tr>
 <td>繰り返し</td>
 <td>
@@ -137,6 +150,7 @@ for name in names:
 for i, name in enumerate(names):
     print(i, name)
 ```
+
 </td>
 <td>
 
@@ -151,6 +165,7 @@ end
 
 # ブロック変数の記述は|配列の要素として扱う変数名, インデックス番号として扱う変数名|
 ```
+
 </td>
 </tr>
 <tr>
@@ -160,6 +175,7 @@ end
 ```python
 user = {"name":"Suzuki","age":20}
 ```
+
 </td>
 <td>
 
@@ -169,6 +185,7 @@ user = {"name" => "Suzuki","age" => 20}
 # 書き方その2
 user = {:name => "Suzuki", :age => 20}
 ```
+
 </td>
 </tr>
 <tr>
@@ -178,12 +195,14 @@ user = {:name => "Suzuki", :age => 20}
 ```python
 None
 ```
+
 </td>
 <td>
   
 ```ruby
 nil
 ```
+
 </td>
 </tr>
 <tr>
@@ -207,6 +226,7 @@ hello()
 introduction("suzuki")
 add(5, 6)
 ```
+
 </td>
 <td>
 
@@ -237,6 +257,7 @@ end
 
 introduction_myself "suzuki", 20
 ```
+
 </td>
 </tr>
 <tr>
@@ -251,6 +272,7 @@ def introduction(name, age):
 # 呼出
 introduction(age=20, name="suzuki")
 ```
+
 </td>
 <td>
 
@@ -263,6 +285,7 @@ end
 # 呼出
 introduction(age: 20, name: "suzuki")
 ```
+
 </td>
 </tr>
 <tr>
@@ -276,6 +299,7 @@ class Menu:
 menu = Menu()
 menu.name = "コーヒー"
 ```
+
 </td>
 <td>
 
@@ -288,6 +312,7 @@ menu = Menu.new
 menu.name = "コーヒー"
 
 ```
+
 </td>
 </tr>
 <tr>
@@ -301,6 +326,7 @@ def __init__(self, name):
 
 menu = Menu("コーヒー")
 ```
+
 </td>
 <td>
 
@@ -313,6 +339,7 @@ menu = Menu("コーヒー")
 menu = Menu.new("コーヒー")
 
 ```
+
 </td>
 </tr>
 <tr>
@@ -322,12 +349,14 @@ menu = Menu.new("コーヒー")
 ```python
 class 新しいクラス名(もととなるクラス名):
 ```
+
 </td>
 <td>
 
 ```ruby
 class 新しいクラス名 < もととなるクラス名
 ```
+
 </td>
 </tr>
 <tr>
@@ -341,6 +370,7 @@ A and B
 ## or条件記法
 C or D
 ```
+
 </td>
 <td>
 
@@ -352,6 +382,7 @@ A and B
 C || D
 C or D
 ```
+
 </td>
 </tr>
 <tr>
@@ -361,12 +392,14 @@ C or D
 ```python
 pip install ipython==7.9
 ```
+
 </td>
 <td>
 
 ```ruby
 gem install rails -v 5.1.6
 ```
+
 </td>
 </tr>
 <tr>
@@ -375,11 +408,13 @@ gem install rails -v 5.1.6
 
 ```python
 ```
+
 </td>
 <td>
 
 ```ruby
 ```
+
 </td>
 </tr>
 <tr>
@@ -388,22 +423,13 @@ gem install rails -v 5.1.6
 
 ```python
 ```
+
 </td>
 <td>
 
 ```ruby
 ```
+
 </td>
 </tr>
-</table>
-
-<table>
-  <tr>
-    <th>ヘッダー1</th>
-    <th>ヘッダー2</th>
-  </tr>
-  <tr>
-    <td><code>print("test")</code></td>
-    <td><code>puts "test"</code></td>
-  </tr>
 </table>

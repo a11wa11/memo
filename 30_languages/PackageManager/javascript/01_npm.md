@@ -6,13 +6,12 @@
     - [確認](#確認)
     - [package.json](#packagejson)
     - [package-lock.json](#package-lockjson)
-  - [eslintの設定](#eslintの設定)
-  - [prettierの設定](#prettierの設定)
-  - [husky](#husky)
+    - [環境変数](#環境変数)
   - [よく使うライブラリ](#よく使うライブラリ)
-  - [Yarn](#yarn)
-    - [インストール](#インストール-1)
-  - [npmとyarn比較](#npmとyarn比較)
+  - [リンター](#リンター)
+    - [eslintの設定](#eslintの設定)
+    - [prettierの設定](#prettierの設定)
+    - [husky](#husky)
 
 ## [文法](https://zenn.dev/hedrall/articles/251441f391990f)
 
@@ -23,7 +22,7 @@
 npm install パッケージ名
 
 # 応用インストール
-npm i パッケージ名          # 省略形
+npm i パッケージ名           # 省略形
 npm ci                    # clean-install package-lock.jsonは更新されない(package-lock.jsonを元にインストール)
 npm install               # package.jsonに書かれているパッケージをインストール、package-lock.jsonは更新することがある
 npm install --production  # dependenciesに書かれているパッケージのみインストール
@@ -49,6 +48,10 @@ npm list --json
 # 依存関係の深さを指定して表示
 npm list --depth 0
 npm list --depth=1
+
+# 環境を指定して表示(npmの古いバージョンでのみ対応)
+npm ls -dev  # devDependenciesのみ
+npm ls -prod # dependenciesのみ
 
 # どのバージョンがあるか調べる
 npm info パッケージ名 versions
@@ -107,7 +110,38 @@ npm update -g npm
   - package-lock.jsonを使うことで`npm install`でインストールした孫依存モジュールを記録しておくことができる
   - 孫依存モジュールの新しいバージョンがリリースされたとしても以前インストールしたバージョンをインストールすることができる
 
-## [eslintの設定](https://maku.blog/p/xz9iry9/)
+### 環境変数
+
+- `package.json`の`config`項目に環境変数を定義できる
+- 環境変数を参照する際は`$npm_package_config_環境変数名`で可能
+
+```json
+{
+  "config": {
+    "xxx": "Yeah!"
+  },
+  "scripts": {
+    "var": "echo $npm_package_config_xxx"
+  }
+}
+
+# npm run var で Yeah!　と出力される
+```
+
+## よく使うライブラリ
+
+パッケージ検索は[公式サイト](https://www.npmjs.com/)でするのがおすすめ
+
+- npm-which
+
+```sh
+npm install npm-which
+npx npm-which ターゲット
+```
+
+## リンター
+
+### [eslintの設定](https://maku.blog/p/xz9iry9/)
 
 - コマンド
 
@@ -169,7 +203,7 @@ letを使っているが再代入していないので、constを使うべき
 宣言されているが、使っていない変数がある
 未定義の変数やモジュールを使用している
 
-## [prettierの設定](https://chaika.hatenablog.com/entry/2021/07/21/083000)
+### [prettierの設定](https://chaika.hatenablog.com/entry/2021/07/21/083000)
 
 - [公式](https://prettier.io/docs/en/cli.html)
 
@@ -199,7 +233,7 @@ prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json,css,scss}'
     - 宣言されているが、使っていない変数がある
     - 未定義の変数やモジュールを使用している
 
-## husky
+### husky
 
 gitのcommitやpushといったアクションのタイミングで、コマンドを実行する仕組みを提供するライブラリ
 
@@ -215,49 +249,3 @@ npx husky install #最初だけ実行 gitフックを有効にする
 ```sh
 npx husky add .husky/pre-commit "実行したいスクリプト"
 ```
-
-## よく使うライブラリ
-
-- npm-which
-
-```sh
-npm install npm-which
-npx npm-which ターゲット
-```
-
-## [Yarn](https://www.wakuwakubank.com/posts/307-javascript-yarn/)
-
-Yarn　とは?
-
-- Facebookが開発したJavaScriptのパッケージマネージャー
-- npmと互換性がある
-- インストールがより速い
-- ネットワーク接続失敗時、自動リトライする
-- `yarn.lock`によるバージョン固定化が行われる(`yarn.lock`はyarnでインストールした後に自動生成される)
-
-### インストール
-
-```sh
-npm install -g yarn
-```
-
-## npmとyarn比較
-
-| 機能 | npm | yarn |
-| -- | -- | -- |
-| 初期化 | npm init | yarn init |
-| package.jsonからインストール | npm install | yarn, yarn install |
-| パッケージ削除 | npm uninstall パッケージ名 | yarn remove パッケージ名 |
-| パッケージ追加 | npm install パッケージ名 | yarn add パッケージ名 |
-| パッケージ追加(devDependencies) | npm install --save-dev --dev パッケージ名 | yarn add --dev パッケージ名 |
-| グローバルインストール | npm install -g パッケージ名 | yarn global add パッケージ名 |
-| パッケージ削除 | npm uninstall パッケージ名 | yarn remove パッケージ名 |
-| ローカルプロジェクトの全パッケージを更新 | npm update | yarn upgrade |
-| 指定パッケージを更新 | npm update パッケージ名 | yarn upgrade パッケージ名 |
-| scriptを実行 | npm run スクリプト名 | yarn run スクリプト名 |
-| パッケージ一覧を表示 | npm ls | yarn list |
-| パッケージ情報 | npm info パッケージ名 | yarn info パッケージ名 |
-| 古い依存関係を表示 | npm outdated | yarn outdated |
-| キャッシュクリア | npm cache clean | yarn cache clean |
-| ローカルパッケージの実行 | npx パッケージ名 | yarn -s run パッケージ名 |
-|  |  |  |

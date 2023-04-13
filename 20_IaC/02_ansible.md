@@ -88,6 +88,9 @@ ansible_port=2222
 
 ```sh
 ansible インベントリ -m setup
+
+# hostsファイルなどに登録していないときにIPアドレスを指定して確認する場合
+ansible -m setup -i '192.168.1.xxx,' all --private-key=SSHキーパス
 ```
 
 * グループのホスト名を一覧表示する
@@ -153,7 +156,8 @@ ansible-playbook -i inventoryファイルのパス playbook.ymlファイルの�
 # インベントリファイルを指定せず、直接ホストを指定する場合はカンマをつける
 ansible-playbook -i ホスト名, playbook.ymlファイルのパス
 
-ansible-playbook -i inventoryファイルのパス -l サブセット名 playbook.ymlファイルのパス # 下記のインベントリファイルの指定のサブセットのみ実行する
+# 下記のインベントリファイルの指定のサブセットのみ実行する
+ansible-playbook -i inventoryファイルのパス -l サブセット名 playbook.ymlファイルのパス
 [サブセット1]
 192.168.111.101
 [サブセット2]
@@ -163,6 +167,10 @@ ansible-playbook -i inventoryファイルのパス -l サブセット名 playboo
 [サブセット4:children]
 web
 log
+
+# 並列実行する台数を指定する(デフォルトは5)
+ansible-playbook -i inventoryファイルのパス --forks=1 playbook.ymlファイルのパス # 1台ずつ実行
+ansible-playbook -i inventoryファイルのパス -f 2 playbook.ymlファイルのパス      # 2台ずつ実行 　オプション省略版
 ```
 
 * 一部タグのみ実行
@@ -238,7 +246,30 @@ ansible-galaxy init ロール名
     state: "{{ item.state }}"
     enablerepo: "{{ enablerepo }}"
   with_items: "{{ yum_install }}"
+  # with_items: "{{ yum_install + yum_install_plus }}" # ちなみに変数の型が同じなら複数の変数を組み合わせ可能
   tags: php
+```
+
+```yml
+# 変数の参考値
+yum_install:
+  - {
+      name: "php",
+      state: "latest"
+    }
+  - {
+      name: "ruby",
+      state: "latest"
+    }
+  - {
+      name: "python3",
+      state: "latest"
+    }
+yum_install_plus:
+  - {
+      name: "mysql",
+      state: "latest"
+    }
 ```
 
 #### [モジュール公式一覧](https://docs.ansible.com/ansible/2.9/modules/modules_by_category.html)
@@ -250,7 +281,15 @@ ansible-galaxy init ロール名
 | オプション名 | 説明　| 必須 | デフォルト値 |
 | - | - | - | - |
 | msg | 定義された文を表示する | × | Hello world! |
-| var | 変数名をデバッグする(msg引数と意お互いに排他的である) | × | |
+| var | 変数名をデバッグする(msg引数とお互いに排他的であり、msgと同時に使用できない) | × | |
+
+* 変数などを表示したい時
+
+```yml
+ - name: Show contents
+   debug:
+     var: contents
+```
 
 * [get_url](https://docs.ansible.com/ansible/2.9/modules/get_url_module.html)
 * [unarchive](https://docs.ansible.com/ansible/2.9/modules/unarchive_module.html)

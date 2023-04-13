@@ -30,13 +30,17 @@
   - libraries
     - [playwright](https://a11wa11.github.io/memo/30_languages/lib/01_playwright)
     - [cypress](https://a11wa11.github.io/memo/30_languages/lib/02_cypress)
+  - PackageManager
 - 40_database
   - [mysql](https://a11wa11.github.io/memo/40_database/01_mysql)
   - [postgresql](https://a11wa11.github.io/memo/40_database/02_postgresql)
   - [redis](https://a11wa11.github.io/memo/40_database/03_redis)
+- 50_CICD
+  - [githubActions](https://a11wa11.github.io/memo/50_CICD/01_githubActions)
 - 90_etc
   - [english](https://a11wa11.github.io/memo/90_etc/01_english)
   - [vscode](https://a11wa11.github.io/memo/90_etc/02_vscode)
+  - [cursor](https://a11wa11.github.io/memo/90_etc/03_cursor)
 
 ## Support or Contact
 
