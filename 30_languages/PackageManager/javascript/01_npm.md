@@ -104,6 +104,13 @@ npm update -g npm
 }
 ```
 
+- package.json作成
+
+```sh
+npm init
+# name, versionを埋めるのが必須項目
+```
+
 ### package-lock.json
 
 - `npm install`によって実際にインストールしたパッケージのバージョンのみが記載されている

@@ -108,6 +108,16 @@ console.log(myURL.host)
 
 ## 構文
 
+- console.log置換
+
+```node
+console.log("message: %s", "文字列")
+console.log("message: %d", 1234) //整数、または少数
+console.log("message: %i", 1234) //整数
+console.log("message: %f", 1234) //少数
+console.log("message: %o", {obj: "OBJECT"})
+```
+
 - パス確認
 
 ```node
