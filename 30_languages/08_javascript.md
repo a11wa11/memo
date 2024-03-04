@@ -1,14 +1,32 @@
 # javascript
 
 - [javascript](#javascript)
+  - [注意点](#注意点)
   - [文法](#文法)
     - [基本](#基本)
     - [javascript独自](#javascript独自)
   - [よく使う](#よく使う)
-  - [注意点](#注意点)
   - [linter](#linter)
 
+## 注意点
+
+- htmlファイルのscriptタグの中に書く
+- scriptタグのにjsファイルを読み込ませる → ```<script src="index.js"></script>```
+- head, bodyのどちらかに入れる → bodyの一番下がベストプラクティス
+
 ## 文法
+
+- プロパティ
+- メソッド
+
+```javascript
+let abc = "abc def";
+
+// プロパティ。末尾に()がつかない
+console.log(abc.length);
+// メソッド。末尾に()がつく
+console.log(abc.toUpperCase());
+```
 
 ### 基本
 
@@ -28,12 +46,85 @@ var height = 169   # 変数。古い記法で基本的に使うべきでない
 const height = 169 # 定数
 ```
 
+- 型確認
+
+```javascript
+typeof(cy.url())
+```
+
+- 型変換
+
+```javascript
+# string型へ変換
+String(値)
+値.toString()
+
+# jsonへ変換
+JSON.stringify(ターゲット)
+# jsonから変換
+JSON.parse(ターゲット)
+```
+
+- 配列
+
+```javascript
+let sample = [1,2,3]
+
+let sample = New Array(1,2,3) # 一般的でない定義方法
+
+sample.push(4)           # 末尾に追加 [1,2,3,4]
+sample.unshift(0)        # 先頭に追加 [0,1,2,3,4]
+sample.pop()             # 末尾を削除 [0,1,2,3]
+sample.shift()           # 先頭を削除 [1,2,3]
+
+let sample1 = [1,2,3]
+let sample2 = [4,5,6]
+sample1.push(sample2)    # 追加対象も配列として追加 [1,2,3,[4,5,6]]
+sample1.push(...sample2) # 追加対象を配列解除して追加 [1,2,3,4,5,6]
+```
+
+- オブジェクト型
+
+```javascript
+// オブジェクト型の中にオブジェクト型や関数も定義可能
+const person = {
+  hobby: {
+    music: guitar,
+    sports: baseball
+  },
+  getHobby: function() {
+    console.log(this.hobby.music + this.hobby.sports)
+  }
+};
+
+// キーの指定の仕方1
+person.hobby.music = 'organ' 
+// キーの指定の仕方2。キー名が動的な場合などに使える
+const keyName = 'hobby';
+person[keyName].music = 'piano' 
+```
+
 - 関数
 
 ```javascript
+// この書き方は呼出行より後に書かれても呼出可能
 function double(num) {
     return num * 2
 }
+
+// 上記と同じで違う書き方
+// ただし、この書き方は呼出行より後に書かれたら呼出不可
+const double = function (num) {
+    return num * 2
+}
+
+// 下記のように関数名を持たない関数を「無名関数(anonymous function)」という
+function (num) {
+    return num * 2
+}
+
+// 関数呼出
+double(4);
 ```
 
 コールバック関数とは?
@@ -116,37 +207,6 @@ if (text) {
 }
 ```
 
-- 配列
-
-```javascript
-let todos = [1,2,3]
-todos.push(4)          # 追加 [1,2,3,4]
-
-let todos1 = [1,2,3]
-let todos2 = [4,5,6]
-todos1.push(todos2)    # 追加対象も配列として追加 [1,2,3,[4,5,6]]
-todos1.push(...todos2) # 追加対象を配列解除して追加 [1,2,3,4,5,6]
-```
-
-- 型確認
-
-```javascript
-typeof(cy.url())
-```
-
-- 型変換
-
-```javascript
-# string型へ変換
-String(値)
-値.toString()
-
-# jsonへ変換
-JSON.stringify(ターゲット)
-# jsonから変換
-JSON.parse(ターゲット)
-```
-
 - 部分一致
 
 ```javascript
@@ -224,12 +284,6 @@ const filename = `result_${year}${month}${day}-${hour}${minute}.html`;
 
 - [javascriptで日付を表示したい場合1](https://web.plus-idea.net/on/javascript-date-string-convert/)
 - [javascriptで日付を表示したい場合2](https://qiita.com/toshimin/items/5f13c3b4c28825219231)
-
-## 注意点
-
-- htmlファイルのscriptタグの中に書く
-- scriptタグのにjsファイルを読み込ませる → ```<script src="index.js"></script>```
-- head, bodyのどちらかに入れる → bodyの一番下がベストプラクティス
 
 ## linter
 

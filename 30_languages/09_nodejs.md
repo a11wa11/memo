@@ -65,6 +65,8 @@ node -v
 
 ### デバッグ
 
+- repl
+
 ```sh
 node inspect 実行ファイル名.js
 
@@ -99,11 +101,38 @@ watchers              # watch(変数名)で記憶した変数を一覧表示
 node inspect 実行ファイル名.js
 ```
 
+- debugger
+
 ```node
 // node inspect 実行ファイル名.js で c(ont) 実行時に一気にdebuggerまでジャンプ可能
 console.log(myURL.port)
 debugger;
 console.log(myURL.host)
+```
+
+- console.Console
+  - ログファイルを作成
+
+```sample.js
+const fs = require('fs');
+const log = fs.createWriteStream('result.log');
+const logger = new console.Console(log);
+
+let user = {
+  name: 'Ichiro',
+  age: 20,
+  area: 'Okinawa'
+}
+// result.logへ各要素を書込
+logger.log(user);
+logger.log(user.name);
+logger.log(user.age);
+```
+
+```result.log
+{ name: 'Ichiro', age: 20, area: 'Okinawa' }
+Ichiro
+20
 ```
 
 ## 構文
@@ -407,7 +436,7 @@ let path = require("path");
 fs.readFile(path.join(__dirname, "読込ファイル名"), "utf8", (err, data) => {
   if (err) {
     console.log(err.message);
-    retune;
+    return;
   }
   console.log(data);
 });
@@ -423,12 +452,12 @@ let path = require("path");
 fs.readFile(path.join(__dirname, "読込ファイル名"), "utf8", (err, data) => {
   if (err) {
     console.log(err.message);
-    retune;
+    return;
   }
   fs.writeFile(path.join(__dirname, "書込ファイル名"), data, "utf8", (err) => {
   if (err) {
     console.log(err.message);
-    retune;
+    return;
   }
   console.log("Writing completed!");
   });
