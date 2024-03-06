@@ -4,6 +4,9 @@
   - [注意点](#注意点)
   - [文法](#文法)
     - [基本](#基本)
+      - [繰り返し](#繰り返し)
+      - [if文](#if文)
+      - [関数](#関数)
     - [javascript独自](#javascript独自)
   - [よく使う](#よく使う)
   - [linter](#linter)
@@ -104,148 +107,9 @@ const keyName = 'hobby';
 person[keyName].music = 'piano' 
 ```
 
-- 関数
+#### 繰り返し
 
-```javascript
-// この書き方は呼出行より後に書かれても呼出可能。javascriptでは関数の定義を先に確認してから実行文を上から読み込むため
-function double(num) {
-    return num * 2
-}
-
-// 上記と同じで違う書き方
-// ただし、この書き方は呼出行より後に書かれたら呼出不可
-const double = function (num) {
-    return num * 2
-}
-
-// 下記のように関数名を持たない関数を「無名関数(anonymous function)」という
-function (num) {
-    return num * 2
-}
-
-// デフォルト引数を設定する場合
-function double(num = 5) {
-    return num * 2
-}
-
-// 関数呼出
-double(4);
-```
-
-コールバック関数とは?
-
-ある関数を呼び出す時に、引数に指定する別の関数のこと。以下例でgreetingがコールバック関数となる
-
-```javascript
-function greeting(name) {
-  alert(`Hello, ${name}`);
-}
-
-function processUserInput(callback) {
-  const name = prompt("Please enter your name.");
-  callback(name);
-}
-
-processUserInput(greeting);
-```
-
-- アロー関数
-
-関数リテラル(匿名関数,無名関数ともいう)をシンプルに記述する手法をアロー関数という
-
-```javascript
-
-let getTriangle = (base, height) => {
-  return base * height / 2;
-};
-console.log('三角形の面積は' + getTriangle(10,2)); //三角形の面積は10
-
- # ↑は下記の関数リテラルと同様
-let getTriangle = function(base,height){
- return base * height / 2;
-};
-console.log('三角形の面積は' + getTriangle(10,2));//三角形の面積は10
-
-# 本文が一文の場合、さらに省略記述が可能
-let getTriangle = (base, height) => base * height / 2;
-console.log(getTriangle(10,2));//10
-
-# 引数が一つの場合、以下の省略記述が可能
-let getCircle = radius => radius * radius * Math.PI;
-console.log(getCircle(10))//314.1592653589793;
-
-# 引数がない場合はカッコを省略せずに記述
-let show =()=> console.log('Hello, world!'); 
-show(); //Hello, world!
-```
-
-<table>
-  <tr>
-    <th>通常関数</th>
-    <th>アロー関数</th>
-    <th>補足</th>
-  </tr>
-  <tr>
-    <td><code><pre>
-const double = function (num) {
-    return num * 2
-}
-    </code></td>
-    <td><code><pre>
-const double = (num) => {
-    return num * 2
-}
-    </code></td>
-    <td>引数1つの関数  まるかっこ()あり/波ブロック{}あり ※処理内容が２行以上なら波ブロック{}必要</td>
-
-  </tr>
-  <tr>
-    <td><code><pre>
-const double = function (num) {
-    return num * 2
-}
-    </code></td>
-    <td><code><pre>
-const double = (num) => return num * 2
-    </code></td>
-    <td>引数1つの関数  まるかっこ()あり/波ブロック{}なし 引数2つ以上 or デフォルト引数ありで処理内容1行ならこのパターン </td>
-  </tr>
-  <tr>
-    <td><code><pre>
-const double = function (num) {
-    return num * 2
-}
-    </code></td>
-    <td><code><pre>
-const double = <font color="red">num</font> => return num * 2
-    </code></td>
-    <td>引数1つの関数  デフォルト引数なし/処理内容1行ならならかっこ()も省略可能</td>
-  </tr>
-  <tr>
-    <td><code><pre>
-const double = function (num) {
-    return num * 2
-}
-    </code></td>
-    <td><code><pre>
-const double = <font color="red">num</font> => num * 2
-    </code></td>
-    <td>引数1つの関数  デフォルト引数なし/処理内容1行/return文ならreturnも省略可能</td>
-  </tr>
-  <tr>
-    <td><code><pre>
-array.forEach(function(value) {
-    console.log(value * 3);
-})
-    </code></td>
-    <td><code><pre>
-array.forEach( value => console.log(value * 3) );
-    </code></td>
-    <td></td>
-  </tr>
-</table>
-
-- 繰り返し
+- for文
 
 ```javascript
 // for 基本文
@@ -253,6 +117,7 @@ for (let i = 0; i < 10; i++) {
   console.log(i);
 }
 
+// 配列を扱う場合
 const array = [1, 2, 3, 4, 5]
 
 // for in はキーを出力
@@ -265,14 +130,32 @@ let arr = ["aa", "bb", "cc"]
 for (let v of arr) {
   console.log(v);
 }
+```
 
-// forEach
+- forEach
+  - 以下の引数が自動で渡される
+    - 第1引数 = 値(バリュー)
+    - 第2引数 = 添字(キー)、
+    - 第3引数 = 配列
+
+```javascript
+const array = [1, 2, 3, 4, 5]
+
+array.forEach(function(value, index, array ) {
+    console.log(`バリューを3倍: ${value * 3}`)
+    console.log(`キー: ${index}`)
+    console.log(`配列: ${array}`)
+})
+
+// アロー関数の場合
 array.forEach(value => {
     console.log(value * 3)
 })
+// 引数1つ、処理内容1行ならアロー関数を用いて以下まで省略可能
+array.forEach(v => console.log(v * 3))
 ```
 
-- if文
+#### if文
 
 ```javascript
 if (num > 80) {
@@ -304,19 +187,173 @@ if ( str.match('sample') ) {
 }
 ```
 
-### javascript独自
-
-- document → ブラウザのデータを取得
+#### 関数
 
 ```javascript
-# idクラスの値を取得
-document.getElementById("input").vaule
+// この書き方は呼出行より後に書かれても呼出可能。javascriptでは関数の定義を先に確認してから実行文を上から読み込むため
+function double(num) {
+    return num * 2
+}
 
-# 該当タグの全てを取得
+// 上記と同じで違う書き方。関数を変数として定義
+// ただし、この書き方は呼出行より後に書かれたら呼出不可
+const double = function (num) {
+    return num * 2
+}
+
+// 「無名関数(anonymous function)」 = 下記のように関数名を持たない関数
+function (num) {
+    return num * 2
+}
+
+// デフォルト引数を設定する場合
+function double(num = 5) {
+    return num * 2
+}
+
+// 関数呼出
+double(4);
+```
+
+- コールバック関数
+
+ある関数を呼び出す時に、引数に指定する別の関数のこと。以下例でgreetingがコールバック関数となる
+
+```javascript
+function greeting(name) {
+  alert(`Hello, ${name}`);
+}
+
+function processUserInput(callback) {
+  const name = prompt("Please enter your name.");
+  callback(name);
+}
+
+processUserInput(greeting);
+```
+
+- アロー関数
+  - 関数リテラル(匿名関数,無名関数ともいう)をシンプルに記述する手法をアロー関数という
+  - アロー関数は以下の条件で省略できる部分がある
+    - 条件なし
+      - `=>`の記述
+      - `function`の省略
+    - 処理内容が1行
+      - 処理内容の波かっこ`{}`の省略
+      - `return`の省略
+    - 引数が1つ
+      - 引数の丸かっこ`()`の省略
+
+```javascript
+// 変更元となる基本アロー関数。functionを省略、引数の丸かっこ()と処理内容の波かっこ{}の間にアロー=>を配置
+let getTriangle = (base, height) => {
+  return base * height / 2;
+};
+console.log('三角形の面積は' + getTriangle(10,2)); //三角形の面積は10
+
+// ↑は下記の関数リテラルと同様
+let getTriangle = function (base, height) {
+ return base * height / 2;
+};
+console.log('三角形の面積は' + getTriangle(10,2));//三角形の面積は10
+
+// 処理内容が1行の場合、波かっこ{}省略記述が可能
+let getTriangle = (base, height) => return base * height / 2;
+console.log(getTriangle(10,2)); //10
+
+// 処理内容が1行の場合、さらにreturn省略記述が可能
+let getTriangle = (base, height) => base * height / 2;
+console.log(getTriangle(10,2)); //10
+
+// 引数が一つの場合、引数の丸かっこ()省略記述が可能
+let getCircle = radius => radius * radius * Math.PI;
+console.log(getCircle(10))//314.1592653589793;
+
+// 引数がない場合はカッコを省略せずに記述
+let show = () => console.log('Hello, world!'); 
+show(); // Hello, world!
+```
+
+- 通常関数とアロー関数の比較表。通常関数の記述をアロー関数で記述した場合に省略できる箇所は<font color="red">赤文字</font>で表記
+
+<table>
+  <tr>
+    <th>通常関数</th>
+    <th>アロー関数</th>
+    <th>補足</th>
+  </tr>
+  <tr>
+    <td><code><pre>
+const double = <font color="red">function</font> (num) {
+    return num * 2
+}
+    </code></td>
+    <td><code><pre>
+const double = (num) => {
+    return num * 2
+}
+    </code></td>
+    <td>function省略<br>条件=なし</td>
+  </tr>
+  <tr>
+    <td><code><pre>
+const double = <font color="red">function</font> (num) <font color="red">{</font>
+    return num * 2
+<font color="red">}</font>
+    </code></td>
+    <td><code><pre>
+const double = (num) => return num * 2
+    </code></td>
+    <td>function省略<br>波かっこ{}省略<br>条件=処理内容1行</td>
+  </tr>
+  <tr>
+    <td><code><pre>
+const double = <font color="red">function</font> <font color="red">(</font>num<font color="red">) {</font>
+    return num * 2
+<font color="red">}</font>
+    </code></td>
+    <td><code><pre>
+const double = num => return num * 2
+    </code></td>
+    <td>function省略<br>波かっこ{}省略<br>丸かっこ()省略<br>条件=デフォルト引数なし&処理内容1行</td>
+  </tr>
+  <tr>
+    <td><code><pre>
+const double = <font color="red">function</font> <font color="red">(</font>num<font color="red">) {</font>
+    <font color="red">return</font> num * 2
+<font color="red">}</font>
+    </code></td>
+    <td><code><pre>
+const double = num => num * 2
+    </code></td>
+    <td>function省略<br>波かっこ{}省略<br>丸かっこ()省略<br>return省略<br>条件=デフォルト引数なし&処理内容1行</td>
+  </tr>
+  <tr>
+    <td><code><pre>
+array.forEach(function(value) {
+    console.log(value * 3);
+})
+    </code></td>
+    <td><code><pre>
+array.forEach( value => console.log(value * 3) );
+    </code></td>
+    <td>forEachも同様</td>
+  </tr>
+</table>
+
+### javascript独自
+
+- document(DOM) → ブラウザのデータを取得
+
+```javascript
+// idクラスの値を取得
+document.getElementById("input").value
+
+// 該当タグの全てを取得
 document.querySelectorAll("タグ")
 ```
 
-- addEventListner(イベント名, 関数)
+- addEventListener(イベント名, 関数)
 
 ```javascript
 form.addEventListener(submit, 
@@ -328,7 +365,7 @@ function () {
 - event
 
 ```javascript
-event.preventDefault() # デフォルトの動作を実行しない
+event.preventDefault() // デフォルトの動作を実行しない
 ```
 
 - setTimeout
@@ -336,7 +373,7 @@ event.preventDefault() # デフォルトの動作を実行しない
 ```javascript
 setTimeout(function abc() {
     console.log("処理内容")
-}, 2000)       # 秒数を指定する 2000ミリ秒なので2秒
+}, 2000)       // 秒数を指定する 2000ミリ秒なので2秒
 
 setTimeout(() => {
     console.log("処理内容")
@@ -346,10 +383,10 @@ setTimeout(() => {
 - localStorage → ブラウザに永続的に保存
 
 ```javascript
-# データの保存
+// データの保存
 localStorage.setItem('キー','値')
 
-# データの取得
+// データの取得
 localStorage.getItem('キー','値')
 ```
 
@@ -359,7 +396,7 @@ localStorage.getItem('キー','値')
 
 ```javascript
 // 現在の日付と時刻を取得
-const jstDiffTime = 9 * 60 * 60 * 1000;   // JSTはUTC+9なので、9時間をミリ秒で表現
+const jstDiffTime = 9 * 60 * 60 * 1000;                        // JSTはUTC+9なので、9時間をミリ秒で表現
 const date = new Date();
 const jstDate = new Date(date.getTime() + jstDiffTime);
 const year = jstDate.getFullYear();
@@ -386,6 +423,5 @@ npm install --save-dev eslint
 - 解析
 
 ```sh
-
 eslint 対象ファイル
 ```
