@@ -5,6 +5,8 @@
   - [詳細度](#詳細度)
     - [プロパティ](#プロパティ)
   - [構文](#構文)
+  - [Sass](#sass)
+    - [文法](#文法)
 
 ## 適用方法
 
@@ -68,9 +70,125 @@ cssには詳細度という概念があり、重複記述があった場合に�
 
 ## 構文
 
+- ボタンホバー
+
 ```css
-/* class要素を指定する時は.(ドット)をつける */
-.first
-/* id要素を指定する時は#(シャープ)をつける */
-#first
+.btn {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  padding: 10px 40px;
+  margin: 50px 0;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 3s;
+}
+
+.btn:hover {
+  background-color: pink;
+  color: yellowgreen;
+}
+```
+
+## [Sass](https://sass-lang.com/)
+
+- cssを便利に記述できるもの
+  - 変数が定義可能
+  - ネストが可能(ブロックの中にブロックを記述)
+- ブラウザはcssは読み込めるがscssは読み込めない
+
+<table>
+  <tr>
+    <th>scss</th>
+    <th>css</th>
+  </tr>
+  <tr>
+    <td><code><pre>
+$font-stack: Helvetica, sans-serif;
+$primary-color: #333;
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}</code></td>
+    <td><code><pre>
+  body {
+    font: 100% Helvetica, sans-serif;
+    color: #333;
+  }
+</code></td>
+  </tr>
+  <tr>
+    <td><code><pre>
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+
+  li
+    display: inline-block
+
+  a
+    display: block
+    padding: 6px 12px
+    text-decoration: none
+      </code></td>
+    <td><code><pre>
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+</code></td>
+  </tr>
+</table>
+
+### 文法
+
+- &(アンパサンド)
+  - 親のセレクタを`&`に代入できる
+    - ただし、スペースは含まれない
+
+```html
+<div class="parent">
+    親要素
+    <div class="element">子要素</div>
+    <div class="element second-child">子要素</div>
+    <div class="element">
+        子要素
+        <div class="element">孫要素</div>
+    </div>
+</div>
+```
+
+- 上記htmlを対象にしたscss例
+
+```scss
+.parent {
+  background-color: blue;
+  /* .parent .element と同じ意味 */
+  & .element {
+    background-color: purple;
+    /* >は１階層下のみの範囲となる。>がなければ下階層全てを範囲とする */
+    & > .element {
+      background-color: green;
+    }
+    /*
+      .parent の中の.element と .second-child のクラスを持つタグを範囲とする
+      スペースがない場合は二つのタグを併せ持つと言う意味
+    */
+    &.second-child {
+      background-color: pink;
+    }
+  }
+}
 ```

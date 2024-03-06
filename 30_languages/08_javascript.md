@@ -107,7 +107,7 @@ person[keyName].music = 'piano'
 - 関数
 
 ```javascript
-// この書き方は呼出行より後に書かれても呼出可能
+// この書き方は呼出行より後に書かれても呼出可能。javascriptでは関数の定義を先に確認してから実行文を上から読み込むため
 function double(num) {
     return num * 2
 }
@@ -120,6 +120,11 @@ const double = function (num) {
 
 // 下記のように関数名を持たない関数を「無名関数(anonymous function)」という
 function (num) {
+    return num * 2
+}
+
+// デフォルト引数を設定する場合
+function double(num = 5) {
     return num * 2
 }
 
@@ -146,8 +151,10 @@ processUserInput(greeting);
 
 - アロー関数
 
+関数リテラル(匿名関数,無名関数ともいう)をシンプルに記述する手法をアロー関数という
+
 ```javascript
-# 関数リテラル(匿名関数,無名関数ともいう)をシンプルに記述する手法をアロー関数という
+
 let getTriangle = (base, height) => {
   return base * height / 2;
 };
@@ -172,22 +179,97 @@ let show =()=> console.log('Hello, world!');
 show(); //Hello, world!
 ```
 
+<table>
+  <tr>
+    <th>通常関数</th>
+    <th>アロー関数</th>
+    <th>補足</th>
+  </tr>
+  <tr>
+    <td><code><pre>
+const double = function (num) {
+    return num * 2
+}
+    </code></td>
+    <td><code><pre>
+const double = (num) => {
+    return num * 2
+}
+    </code></td>
+    <td>引数1つの関数  まるかっこ()あり/波ブロック{}あり ※処理内容が２行以上なら波ブロック{}必要</td>
+
+  </tr>
+  <tr>
+    <td><code><pre>
+const double = function (num) {
+    return num * 2
+}
+    </code></td>
+    <td><code><pre>
+const double = (num) => return num * 2
+    </code></td>
+    <td>引数1つの関数  まるかっこ()あり/波ブロック{}なし 引数2つ以上 or デフォルト引数ありで処理内容1行ならこのパターン </td>
+  </tr>
+  <tr>
+    <td><code><pre>
+const double = function (num) {
+    return num * 2
+}
+    </code></td>
+    <td><code><pre>
+const double = <font color="red">num</font> => return num * 2
+    </code></td>
+    <td>引数1つの関数  デフォルト引数なし/処理内容1行ならならかっこ()も省略可能</td>
+  </tr>
+  <tr>
+    <td><code><pre>
+const double = function (num) {
+    return num * 2
+}
+    </code></td>
+    <td><code><pre>
+const double = <font color="red">num</font> => num * 2
+    </code></td>
+    <td>引数1つの関数  デフォルト引数なし/処理内容1行/return文ならreturnも省略可能</td>
+  </tr>
+  <tr>
+    <td><code><pre>
+array.forEach(function(value) {
+    console.log(value * 3);
+})
+    </code></td>
+    <td><code><pre>
+array.forEach( value => console.log(value * 3) );
+    </code></td>
+    <td></td>
+  </tr>
+</table>
+
 - 繰り返し
 
 ```javascript
-const array = [1, 2, 3]
-array.forEach(value => {
-    console.log(value * 3)
-})
-
+// for 基本文
 for (let i = 0; i < 10; i++) {
   console.log(i);
 }
 
-let arr = ["aa", "bb", "cc"]
-for (let i of arr) {
-  console.log(i);
+const array = [1, 2, 3, 4, 5]
+
+// for in はキーを出力
+for (let i in array) {
+  console.log(arr[i]);
 }
+
+// for of はバリューを出力
+let arr = ["aa", "bb", "cc"]
+for (let v of arr) {
+  console.log(v);
+}
+
+// forEach
+array.forEach(value => {
+    console.log(value * 3)
+})
 ```
 
 - if文
@@ -200,6 +282,14 @@ if (num > 80) {
 } else {
     console.log("numは60未満です。");
 }
+
+// === はデータ型も含めて比較
+if (1 === '1') {
+    console.log("このパターンはfalse");
+// === はデータ型含めず比較
+} else if (1 == '1') {
+    console.log("このパターンはtrue");  
+
 
 # 暗黙的型変換
 if (text) {
