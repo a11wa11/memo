@@ -37,16 +37,16 @@ console.log(abc.toUpperCase());
 
 ```javascript
 console.log("出力したい内容")
-console.trace("出力したい内容") # スタックトレースと一緒に出力
+console.trace("出力したい内容") // スタックトレースと一緒に出力
 ```
 
 - 変数
 
 ```javascript
-let height;        # 変数宣言のみ
-let height = 169   # 変数
-var height = 169   # 変数。古い記法で基本的に使うべきでない
-const height = 169 # 定数
+let height;        // 変数宣言のみ
+let height = 169   // 変数
+var height = 169   // 変数。古い記法で基本的に非推奨
+const height = 169 // 定数
 ```
 
 - 型確認
@@ -58,13 +58,13 @@ typeof(cy.url())
 - 型変換
 
 ```javascript
-# string型へ変換
+// string型へ変換
 String(値)
 値.toString()
 
-# jsonへ変換
+// jsonへ変換
 JSON.stringify(ターゲット)
-# jsonから変換
+// jsonから変換
 JSON.parse(ターゲット)
 ```
 
@@ -73,17 +73,17 @@ JSON.parse(ターゲット)
 ```javascript
 let sample = [1,2,3]
 
-let sample = New Array(1,2,3) # 一般的でない定義方法
+let sample = New Array(1,2,3) // 一般的でない定義方法
 
-sample.push(4)           # 末尾に追加 [1,2,3,4]
-sample.unshift(0)        # 先頭に追加 [0,1,2,3,4]
-sample.pop()             # 末尾を削除 [0,1,2,3]
-sample.shift()           # 先頭を削除 [1,2,3]
+sample.push(4)           // 末尾に追加 [1,2,3,4]
+sample.unshift(0)        // 先頭に追加 [0,1,2,3,4]
+sample.pop()             // 末尾を削除 [0,1,2,3]
+sample.shift()           // 先頭を削除 [1,2,3]
 
 let sample1 = [1,2,3]
 let sample2 = [4,5,6]
-sample1.push(sample2)    # 追加対象も配列として追加 [1,2,3,[4,5,6]]
-sample1.push(...sample2) # 追加対象を配列解除して追加 [1,2,3,4,5,6]
+sample1.push(sample2)    // 追加対象も配列として追加 [1,2,3,[4,5,6]]
+sample1.push(...sample2) // 追加対象を配列解除して追加 [1,2,3,4,5,6]
 ```
 
 - オブジェクト型
@@ -166,17 +166,17 @@ if (num > 80) {
     console.log("numは60未満です。");
 }
 
-// === はデータ型も含めて比較
+// ===(イコール3つ) はデータ型も含めて比較
 if (1 === '1') {
     console.log("このパターンはfalse");
-// === はデータ型含めず比較
+// ==(イコール2つ) はデータ型含めず比較
 } else if (1 == '1') {
     console.log("このパターンはtrue");  
 
 
-# 暗黙的型変換
+// 暗黙的型変換
 if (text) {
-    console.log("OK")
+  console.log("OK")
 }
 ```
 
@@ -184,30 +184,33 @@ if (text) {
 
 ```javascript
 if ( str.match('sample') ) {
+  console.log("OK")
 }
 ```
 
 #### 関数
 
+javascriptの特徴として関数を変数で定義できる
+
 ```javascript
 // この書き方は呼出行より後に書かれても呼出可能。javascriptでは関数の定義を先に確認してから実行文を上から読み込むため
-function double(num) {
+function double ( num ) {
     return num * 2
 }
 
 // 上記と同じで違う書き方。関数を変数として定義
 // ただし、この書き方は呼出行より後に書かれたら呼出不可
-const double = function (num) {
+const double = function ( num ) {
     return num * 2
 }
 
 // 「無名関数(anonymous function)」 = 下記のように関数名を持たない関数
-function (num) {
+function ( num ) {
     return num * 2
 }
 
 // デフォルト引数を設定する場合
-function double(num = 5) {
+function double ( num = 5 ) {
     return num * 2
 }
 
@@ -234,35 +237,35 @@ processUserInput(greeting);
 
 - アロー関数
   - 関数リテラル(匿名関数,無名関数ともいう)をシンプルに記述する手法をアロー関数という
-  - アロー関数は以下の条件で省略できる部分がある
+  - アロー関数は引数の丸かっこと処理内容の波かっこの間に`=>`の記述が必須
+  - 以下の条件で省略できる部分がある
     - 条件なし
-      - `=>`の記述
       - `function`の省略
     - 処理内容が1行
       - 処理内容の波かっこ`{}`の省略
       - `return`の省略
-    - 引数が1つ
+    - 引数が1つ & デフォルト引数なし
       - 引数の丸かっこ`()`の省略
 
 ```javascript
 // 変更元となる基本アロー関数。functionを省略、引数の丸かっこ()と処理内容の波かっこ{}の間にアロー=>を配置
-let getTriangle = (base, height) => {
+let getTriangle = ( base, height ) => {
   return base * height / 2;
 };
 console.log('三角形の面積は' + getTriangle(10,2)); //三角形の面積は10
 
 // ↑は下記の関数リテラルと同様
-let getTriangle = function (base, height) {
+let getTriangle = function ( base, height ) {
  return base * height / 2;
 };
 console.log('三角形の面積は' + getTriangle(10,2));//三角形の面積は10
 
 // 処理内容が1行の場合、波かっこ{}省略記述が可能
-let getTriangle = (base, height) => return base * height / 2;
+let getTriangle = ( base, height ) => return base * height / 2;
 console.log(getTriangle(10,2)); //10
 
 // 処理内容が1行の場合、さらにreturn省略記述が可能
-let getTriangle = (base, height) => base * height / 2;
+let getTriangle = ( base, height ) => base * height / 2;
 console.log(getTriangle(10,2)); //10
 
 // 引数が一つの場合、引数の丸かっこ()省略記述が可能
@@ -330,9 +333,9 @@ const double = num => num * 2
   </tr>
   <tr>
     <td><code><pre>
-array.forEach(function(value) {
+array.forEach(<font color="red">function(</font>value<font color="red">) {</font>
     console.log(value * 3);
-})
+<font color="red">}</font>)
     </code></td>
     <td><code><pre>
 array.forEach( value => console.log(value * 3) );
