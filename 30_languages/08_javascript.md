@@ -44,9 +44,21 @@ console.trace("出力したい内容") // スタックトレースと一緒に�
 
 ```javascript
 let height;        // 変数宣言のみ
-let height = 169   // 変数
-var height = 169   // 変数。古い記法で基本的に非推奨
-const height = 169 // 定数
+let height = 170   // 変数
+var height = 170   // 変数。古い記法で基本的に非推奨
+const height = 170 // 定数
+```
+
+- テンプレートリテラル
+  - 変数と文字列などを組み合わせて出力する内容が書きやすい
+    - 変数は`${変数名}`で表示し、\`(バッククォート)で文を囲む
+
+```javascript
+const height = "170"
+// 通常の書き方
+console.log("身長は" + height + "です。")
+// テンプレートリテラル
+console.log(`身長は${height}です。`)
 ```
 
 - 型確認
@@ -153,6 +165,58 @@ array.forEach(value => {
 })
 // 引数1つ、処理内容1行ならアロー関数を用いて以下まで省略可能
 array.forEach(v => console.log(v * 3))
+```
+
+- reduce
+  - 第1引数 = 配列で読み込んだ値を繋ぎ合わせた値 ※最初はそのままの値
+  - 第2引数 = 配列で読み込んだ値の次の値
+  - 第3引数 = 読み込み始める配列の値(オプション)
+
+```javascript
+const str = "sample";
+const strArry = str.split("");
+
+const result = strArry.reduce((accumulation, current ) => {
+  console.log(`accumulation: ${accumulation}`);
+  console.log(`current: ${current}`);
+  return `${accumulation}_${current}`
+})
+
+console.log(`result: ${result}`);
+// 以下が出力される
+accumulation: s
+current: a
+accumulation: s_a
+current: m
+accumulation: s_a_m
+current: p
+accumulation: s_a_m_p
+current: l
+accumulation: s_a_m_p_l
+current: e
+result: s_a_m_p_l_e
+
+// 配列の先頭に組み込みたい場合は第3引数に空文字を指定
+const result = strArry.reduce((accumulation, current ) => {
+  console.log(`accumulation: ${accumulation}`);
+  console.log(`current: ${current}`);
+  return `${accumulation}_${current}`
+}, "")
+
+// 配列の先頭に組み込みたい場合は第3引数に空文字を指定
+accumulation: 
+current: s
+accumulation: _s
+current: a
+accumulation: _s_a
+current: m
+accumulation: _s_a_m
+current: p
+accumulation: _s_a_m_p
+current: l
+accumulation: _s_a_m_p_l
+current: e
+result: _s_a_m_p_l_e
 ```
 
 #### if文
