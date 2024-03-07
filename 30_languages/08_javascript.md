@@ -6,6 +6,7 @@
     - [基本](#基本)
       - [繰り返し](#繰り返し)
       - [if文](#if文)
+      - [抽出](#抽出)
       - [関数](#関数)
     - [javascript独自](#javascript独自)
   - [よく使う](#よく使う)
@@ -73,6 +74,14 @@ typeof(cy.url())
 // string型へ変換
 String(値)
 値.toString()
+
+// number型へ変換
+Number('1234')
+// number型へ変換し、小数点を切り捨て。第2引数は10進数の10
+parseInt('24.82', 10);
+
+// ロケール（=言語、国、地域、などを表現する、例：ja）に合わせた数値表現を行う。日本語や英語の場合には数値を3桁カンマ区切りにする
+(123456).toLocaleString() // '123,456'
 
 // jsonへ変換
 JSON.stringify(ターゲット)
@@ -244,12 +253,47 @@ if (text) {
 }
 ```
 
+- switch文
+
+```javascript
+let pref = 'Osaka';
+
+switch (pref){
+  case 'Tokyo':
+    console.log('住所は東京都です');
+    break;
+  case 'Osaka':
+    console.log('住所は大阪府です');
+    break;
+  default:
+    console.log('住所はその他です');
+}
+```
+
+#### 抽出
+
 - 部分一致
 
 ```javascript
 if ( str.match('sample') ) {
   console.log("OK")
 }
+```
+
+- 一部抽出
+
+```javascript
+// 最後の文字列を抽出
+"ABC31ABC52".slice(-1);
+
+// 最後の文字列を除いて抽出
+"ABC31ABC52".slice(0, -1);
+```
+
+- 数字のみを抽出
+
+```javascript
+"ABC31ABC52".match(/\d+/g); // ['31', '52']
 ```
 
 #### 関数
@@ -410,14 +454,40 @@ array.forEach( value => console.log(value * 3) );
 
 ### javascript独自
 
-- document(DOM) → ブラウザのデータを取得
+- document(DOM)
+  - Document Object Model
+  - ブラウザのデータを取得
+  - DOMで取得した要素をノードという
 
 ```javascript
-// idクラスの値を取得
+// 指定idのhtmlを取得
+document.querySelector('#title')
+
+// 指定idのhtmlを取得。getElementByIdは古い記法
 document.getElementById("input").value
+
+// 指定classのhtmlを取得
+document.querySelector('.sub-title')
+
+// 該当タグで最初の値のみを取得
+document.querySelector("タグ")
 
 // 該当タグの全てを取得
 document.querySelectorAll("タグ")
+
+// bodyの子要素を取得
+document.body.children
+
+// 指定タグの内容を取得
+const sample = document.querySelector('.sub-title')
+sample.innerHTML    // htmlタグ含めて表示
+sample.textContent  // htmlタグ含めず表示
+sample.style.color  // cssスタイルを表示
+
+// 指定タグの内容を変更
+sample.classList.add('underline')    // classにunderlineを追加
+sample.classList.remove('underline') // classからunderline消去
+sample.classList.toggle('underline') // classからunderlineの有無(true/false)を切り替える
 ```
 
 - addEventListener(イベント名, 関数)
@@ -430,8 +500,21 @@ function () {
 ```
 
 - event
+  - ブラウザ上でホバーする、クリックする、テキスト入力するなどの全ての行為が認識されており、それらを常時監視しているものを`イベントリスナー`という
 
 ```javascript
+const sample = document.querySelector('#btn')
+
+// addEventListenerの基本形式
+sample.addEventListener('イベント名', callback)
+// クリック時のイベントを登録
+sample.addEventListener('click', callback)
+// イベント消去
+sample.removeEventListener('click', callback)
+
+// イベントハンドラでクリック時のイベントを登録。addEventListener('click', callback)と同様だが1つしかイベントを登録できないので可能な限りaddEventListenerを使用
+sample.onclick = (callback)
+
 event.preventDefault() // デフォルトの動作を実行しない
 ```
 
