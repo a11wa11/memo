@@ -41,6 +41,19 @@ console.log("出力したい内容")
 console.trace("出力したい内容") // スタックトレースと一緒に出力
 ```
 
+- 時間計測
+
+```node
+console.time("timerName")     // 計測開始
+console.timeEnd("timerName")  // 計測終了
+console.timeLog("timerName")  // 途中経過
+
+// 例
+console.time("timerName")
+page.waitForTimeout(10000)
+console.timeEnd("timerName")
+```
+
 - 変数
 
 ```javascript
@@ -126,6 +139,29 @@ person.hobby.music = 'organ'
 // キーの指定の仕方2。キー名が動的な場合などに使える
 const keyName = 'hobby';
 person[keyName].music = 'piano' 
+```
+
+- クラス
+
+```javascript
+// 変数化しなくてもOK
+let クラス名 = class {
+  constructor(値) {
+    this.メンバ変数 = 値
+    this._メソッド名()
+  }
+
+  メソッド名() {
+    処理内容
+  }
+  // プライベートメソッドの暗黙的表示
+  _メソッド名() {
+    処理内容
+  }
+};
+
+// クラス初期化
+let 変数 = new クラス名(値)
 ```
 
 #### 繰り返し
@@ -288,12 +324,22 @@ if ( str.match('sample') ) {
 
 // 最後の文字列を除いて抽出
 "ABC31ABC52".slice(0, -1);
+
+// 前後のスペースを消去
+"  ABC31  ABC52  ".trim() // 'ABC31  ABC52'
+"  ABC31ABC52  ".trim()   // 'ABC31ABC52'
 ```
 
 - 数字のみを抽出
 
 ```javascript
 "ABC31ABC52".match(/\d+/g); // ['31', '52']
+```
+
+- 置換
+
+```javascript
+"ABC31  ABC52".replace(/\s+/, ""); // スペースを消去 'ABC31ABC52'
 ```
 
 #### 関数
@@ -488,21 +534,37 @@ sample.style.color  // cssスタイルを表示
 sample.classList.add('underline')    // classにunderlineを追加
 sample.classList.remove('underline') // classからunderline消去
 sample.classList.toggle('underline') // classからunderlineの有無(true/false)を切り替える
+
+// 指定タグのプロパティ一覧表示
+document.querySelector('タグ').attributes
+// 指定タグの中に指定プロパティがあるかを確認
+document.querySelector('タグ').hasAttribute('loop')
 ```
 
-- addEventListener(イベント名, 関数)
+- DOMContentLoadedとloaded
 
 ```javascript
-form.addEventListener(submit, 
-function () {
-    console.log("test")
-})
+// DOMContentLoaded 画像や映像などのダウンロードを待たず、DOMツリーの読込が完了したら発火する
+// documentでもwindowでも登録可能
+document.addEventListener("DOMContentLoaded", callback)
+window.addEventListener("DOMContentLoaded", callback)
+
+// load 画像や映像などのダウンロードを待つ
+// windowでのみ登録可能
+window.addEventListener("load", callback)
 ```
 
 - event
   - ブラウザ上でホバーする、クリックする、テキスト入力するなどの全ての行為が認識されており、それらを常時監視しているものを`イベントリスナー`という
 
 ```javascript
+// addEventListener(イベント名, 関数)
+form.addEventListener(submit, 
+function () {
+    console.log("test")
+})
+
+
 const sample = document.querySelector('#btn')
 
 // addEventListenerの基本形式

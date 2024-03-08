@@ -167,19 +167,6 @@ process.exit([code]) # プロセスの終了
 process.on("uncaughtException", (err) => {}) // 例外処理
 ```
 
-- 時間計測
-
-```node
-console.time("timerName")     // 計測開始
-console.timeEnd("timerName")  // 計測終了
-console.timeLog("timerName")  // 途中経過
-
-// 例
-console.time("timerName")
-page.waitForTimeout(10000)
-console.timeEnd("timerName")
-```
-
 - json
 
 ```node
@@ -371,8 +358,8 @@ let call = function () {
 
 event.on("event", call);
 
-ee.emit("event");
-ee.emit("event"); // 2回目は呼び出されない
+event.emit("event");
+event.emit("event"); // 2回目は呼び出されない
 ```
 
 #### path
