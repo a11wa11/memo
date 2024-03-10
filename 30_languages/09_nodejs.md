@@ -174,22 +174,6 @@ process.on("uncaughtException", (err) => {}) // 例外処理
 JSON.stringify(オブジェクト)
 ```
 
-- クラス
-  - 継承
-
-```node
-let 子クラス名 = class extends 親クラス名 {
-  constructor(値) {
-    super(値);
-  }
-
-  メソッド名() {
-    // 親クラスのメソッド呼び出しの場合
-    super.親クラス名メソッド名
-  }
-};
-```
-
 - function(古い記法)を使用する場合
 
 <table>

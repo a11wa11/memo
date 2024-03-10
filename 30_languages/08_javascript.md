@@ -10,6 +10,7 @@
       - [関数](#関数)
     - [javascript独自](#javascript独自)
   - [よく使う](#よく使う)
+  - [ライブラリ](#ライブラリ)
   - [linter](#linter)
 
 ## 注意点
@@ -63,7 +64,7 @@ var height = 170   // 変数。古い記法で基本的に非推奨
 const height = 170 // 定数
 ```
 
-- テンプレートリテラル
+- テンプレートリテラル(テンプレート文字列ともいう)
   - 変数と文字列などを組み合わせて出力する内容が書きやすい
     - 変数は`${変数名}`で表示し、\`(バッククォート)で文を囲む
 
@@ -139,6 +140,10 @@ person.hobby.music = 'organ'
 // キーの指定の仕方2。キー名が動的な場合などに使える
 const keyName = 'hobby';
 person[keyName].music = 'piano' 
+
+// クラス内の関数は__proto__に格納されている
+// そのため、下記のように丁寧に書き出して呼出も可能だが一般的には省略
+person.__proto__.getHobby()
 ```
 
 - クラス
@@ -162,6 +167,71 @@ let クラス名 = class {
 
 // クラス初期化
 let 変数 = new クラス名(値)
+```
+
+- thisとグローバルオブジェクトとbind
+  - thisは直近で呼ばれているプロジェクトに依存する
+    - class内で呼ばれているのであればclassを参照
+    - グローバルオブジェクト内で呼ばれていればグローバルオブジェクトを参照
+  - `.bind(指定クラス名(thisもあり))`とすることでそのクラス内のthisを指定クラス名とする
+
+```javascript
+// 1 クラス外でthisを呼ぶとグローバルオブジェクトを対象とする
+console.log(this)
+
+let sampleClass = class {
+  constructor(値) {
+    this.メンバ変数 = 値
+    this._メソッド名()
+  }
+  // 2 このthisはsampleClassを参照
+  console.log(this)
+  
+  // setTimeoutはグローバルオブジェクトのためwindowを頭につけても動作する
+  // ただ、グローバルオブジェクトの関数は呼出時に省略可能なので慣例的にwindowとつけない
+  // 3 下記の場合はwindowのグローバルオブジェクト内でthisが呼ばれている
+  window.setTimeout(function abc() {
+      console.log(this)
+  }, 2000)
+  // 4 .bind(this)と付与することで.bind(this)の同階層(setTimeout内ではなくsetTimeout外)と同等のthisを付与することになる
+  window.setTimeout(function abc() {
+      console.log(this)
+  }.bind(this), 2000)
+};
+```
+
+- クラス継承
+
+```javascript
+class 親クラス名 {
+  constructor(値) {
+    this.メンバ変数 = 値
+    this._メソッド名()
+  }
+
+  メソッド名1() {
+    処理内容
+  }
+  // プライベートメソッドの暗黙的表示
+  _メソッド名() {
+    処理内容
+  }
+}
+
+class extends 親クラス名 {
+  constructor(値) {
+    super(値);
+  }
+
+  メソッド名() {
+    // 親クラスのメソッド呼び出しの場合
+    super.親クラス名メソッド名
+  }
+  // 親クラスの同名メソッドを上書きし、再定義(オーバーライド)
+  メソッド名1() {
+    console.log("オーバーライド")
+  }
+}
 ```
 
 #### 繰り返し
@@ -634,6 +704,13 @@ const filename = `result_${year}${month}${day}-${hour}${minute}.html`;
 
 - [javascriptで日付を表示したい場合1](https://web.plus-idea.net/on/javascript-date-string-convert/)
 - [javascriptで日付を表示したい場合2](https://qiita.com/toshimin/items/5f13c3b4c28825219231)
+
+## ライブラリ
+
+- GreenSock
+  - [gsap(**g**reen **s**ock **a**nimation **p**latform)](https://gsap.com/docs/v3/)
+    - version=2はTweenMaxと呼ばれる
+    - version=3がgsapと呼ばれる
 
 ## linter
 
