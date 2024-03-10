@@ -175,24 +175,7 @@ JSON.stringify(オブジェクト)
 ```
 
 - クラス
-
-```node
-let クラス名 = class {
-  constructor(値) {
-    this.メンバ変数 = 値
-  }
-
-  メソッド名() {
-    処理内容
-  }
-
-};
-
-// クラス初期化
-let 変数 = new クラス名(値)
-```
-
-- クラス継承
+  - 継承
 
 ```node
 let 子クラス名 = class extends 親クラス名 {

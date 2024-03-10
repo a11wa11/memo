@@ -264,6 +264,14 @@ current: e
 result: _s_a_m_p_l_e
 ```
 
+- while
+
+```javascript
+while (条件) {
+  // 処理内容
+}
+```
+
 #### if文
 
 ```javascript
@@ -590,6 +598,9 @@ setTimeout(function abc() {
 setTimeout(() => {
     console.log("処理内容")
 }, 2000)
+
+// 一定時間毎に処理を実行
+let intervalId = setInterval(callback, milliseconds);
 ```
 
 - localStorage → ブラウザに永続的に保存
