@@ -9,6 +9,10 @@
       - [抽出](#抽出)
       - [関数](#関数)
     - [javascript独自](#javascript独自)
+      - [document(DOM)](#documentdom)
+      - [event](#event)
+      - [setTimeout](#settimeout)
+      - [IntersectionObserver](#intersectionobserver)
   - [よく使う](#よく使う)
   - [ライブラリ](#ライブラリ)
   - [linter](#linter)
@@ -578,10 +582,11 @@ array.forEach( value => console.log(value * 3) );
 
 ### javascript独自
 
-- document(DOM)
-  - Document Object Model
-  - ブラウザのデータを取得
-  - DOMで取得した要素をノードという
+#### document(DOM)
+
+- Document Object Model
+- ブラウザのデータを取得
+- DOMで取得した要素をノードという
 
 ```javascript
 // 指定idのhtmlを取得
@@ -632,8 +637,9 @@ window.addEventListener("DOMContentLoaded", callback)
 window.addEventListener("load", callback)
 ```
 
-- event
-  - ブラウザ上でホバーする、クリックする、テキスト入力するなどの全ての行為が認識されており、それらを常時監視しているものを`イベントリスナー`という
+#### event
+
+- ブラウザ上でホバーする、クリックする、テキスト入力するなどの全ての行為が認識されており、それらを常時監視しているものを`イベントリスナー`という
 
 ```javascript
 // addEventListener(イベント名, 関数)
@@ -658,7 +664,7 @@ sample.onclick = (callback)
 event.preventDefault() // デフォルトの動作を実行しない
 ```
 
-- setTimeout
+#### setTimeout
 
 ```javascript
 setTimeout(function abc() {
@@ -681,6 +687,56 @@ localStorage.setItem('キー','値')
 
 // データの取得
 localStorage.getItem('キー','値')
+```
+
+#### IntersectionObserver
+
+- 交差を監視するというのが直訳の意味
+  - マウススクロールの動きを検知する
+
+```javascript
+// 対象を定義
+const target = document.querySelector('.target')
+// IntersectionObserverで使用するcallback関数を定義
+const callback = fucntion() {
+  alert('test')
+}
+// 初期化
+const io = new IntersectionObserver(callback)
+// 監視開始。対象を検知したらアラートが出る
+io.observe(target)
+```
+
+```javascript
+// 対象を定義
+const target = document.querySelector('.target')
+const callback = fucntion(entries, observer) {
+  entries.forEach(entry => {
+    // 対象を検知したら
+    if(entry.isIntersecting) {
+      console.log('対象検知内')
+      // 対象を監視対象から外す
+      observer.unobserve(entries.target)
+    } else {
+    console.log('対象検知外')
+  });
+}
+// IntersectionObserverのオプション定義
+const options = {
+  root: null,                      // そんなに使わない
+  rootMargin: "300px 0px 0px 0px", // 検知する範囲のマージン 上右下左の順
+  threshold: 1                     // 対象を検知する境界線のことで0が対象の端に触れ始め、1が触れ終わり
+}
+// 初期化
+const io = new IntersectionObserver(callback, options)
+// 監視開始
+io.observe(target)
+```
+
+```javascript
+```
+
+```javascript
 ```
 
 ## よく使う
