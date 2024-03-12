@@ -426,7 +426,9 @@ export LESS="-SRXF"
 - `-u,--user` 認証情報を指定する `-u username:password`と指定すると指定されたユーザー名とパスワードで認証される
 
 ```sh
-# 画像ダウンロード `curl -o 保管ディククトリ/保管ファイル名 -OL ダウンロードしたいURL`
+# ダウンロード
+curl -OL ファイルURL  # wget ファイルURL と同じ
+# 命名してダウンロード `curl -o 保管ディククトリ/保管ファイル名 -L ダウンロードしたいURL`
 curl -o app/assets/images/rails.png -OL railstutorial.jp/rails.png
 # ヘッダー表示
 curl -Iv 対象URI
