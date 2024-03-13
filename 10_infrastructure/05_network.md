@@ -170,6 +170,9 @@ timedatectl set-timezone Asia/Tokyo
 locale
 localectl
 
+# 使用可能なロケール一覧
+locale -a
+
 # ロケール変更パターン1
 export LC_ALL=ja_JP.UTF-8
 # ロケール変更パターン2
