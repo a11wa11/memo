@@ -78,6 +78,9 @@ SELECT * FROM pg_extension;
 
 # タイムアウト値確認
 show statement_timeout;
+
+# 指定テーブルのカラム確認
+select * from information_schema.columns where table_name='テーブル名' order by ordinal_position;
 ```
 
 - [explainコマンド](https://postgresweb.com/post-4047)で調査
