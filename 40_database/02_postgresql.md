@@ -43,6 +43,12 @@ select version();
 \x
 select * from テーブル名;
 
+# ページャーをlessに変更
+\setenv PAGER less
+
+# pagerのON/OFF切替
+\pset pager
+
 # バックグラウンド実行
 SELECT * FROM my_table \gexec
 ```
