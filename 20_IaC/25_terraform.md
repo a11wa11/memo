@@ -159,11 +159,16 @@ terraform console
 
 ## コマンド
 
-```sh
-### 初期化 ###
-terraform init
+- 初期化
 
-### 確認(現在の状態とコードに定義された状態を比較して、変更が必要な場合に変更内容を表示) ###
+```sh
+terraform init
+```
+
+- 確認
+
+```sh
+# 現在の状態とコードに定義された状態を比較して、変更が必要な場合に変更内容を表示)
 terraform plan
 # 特定のリソースのみ確認する
 terraform plan -target=指定したいリソース名
@@ -178,28 +183,47 @@ terraform apply -refresh-only
 terraform state list
 # tfstateで管理されているリソースの詳細表示
 terraform state show アドレス.リソース名
+```
 
-### リソース名の変更 ###
-terraform state mv アドレス.変更前リソース名 アドレス.変更後リソース名 # 注意点としてコードの方も合わせて変更しておくこと
+- リソース名の変更
 
-### リソースのインポート ###
-terraform import アドレス.リソース名(任意名)　ターゲットID # tfstateファイルへリソースのインポートがされるため、コード上は変化なし
+```sh
+# 注意点としてコードの方も合わせて変更しておくこと
+terraform state mv アドレス.変更前リソース名 アドレス.変更後リソース名
+```
 
-### デプロイ ###
+- リソースのインポート
+
+```sh
+# tfstateファイルへリソースのインポートがされるため、コード上は変化なし
+terraform import アドレス.リソース名(任意名)　ターゲットID 
+```
+
+- デプロイ
+
+```sh
+# y/nのプロンプトで最終確認あり
 terraform apply
 # 特定のリソースのみデプロイ
 terraform apply -target=指定したいリソース名
 # プロンプトを表示せずに自動的に承認(確認プロンプトが不要)
 terraform apply -auto-approve
+```
 
-### 削除 ###
+- 削除
+
+```sh
 terraform apply -destroy
 terraform apply -destroy -target=指定したいリソース名
 terraform destory -auto-approve # プロンプトを表示せずに自動的に承認(確認プロンプトが不要)
 
 # terraform管理外から外す
 terraform state rm アドレス.変更前リソース名 # コード上にリソースが残っていれば再構築されてしまうので注意
+```
 
+- フォーマット
+
+```sh
 ### フォーマット(カレントディレクトリ) ※変更したファイル名のみ表示 ###
 terraform fmt
 # フォーマット(変更されるファイル名を事前検証)
@@ -208,8 +232,11 @@ terraform fmt -check
 terraform fmt -recursive
 # フォーマット(サブディレクトリ含んでフォーマット内容をdiffで表示して事前検証)
 terraform fmt -recursive -diff -check
+```
 
-### その他 ###
+- その他
+
+```sh
 # 組み込み関数などや変数を試したい時のお試し
 terraform console
 >local.ターゲット名
