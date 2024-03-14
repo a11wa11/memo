@@ -170,6 +170,10 @@ timedatectl set-timezone Asia/Tokyo
 locale
 localectl
 
+# ロケール変更するための日本語言語パックのインストール
+yum install glibc-langpack-ja  # amazonlinux2やcentos7など
+dnf install langpacks-ja       # amazonlinux2023やcentos8など
+
 # 使用可能なロケール一覧
 locale -a
 
