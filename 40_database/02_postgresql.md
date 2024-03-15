@@ -91,6 +91,9 @@ show statement_timeout;
 
 # 指定テーブルのカラム確認
 select * from information_schema.columns where table_name='テーブル名' order by ordinal_position;
+
+# 使用ディスク容量を確認
+SELECT pg_size_pretty(pg_database_size('データベース名'));
 ```
 
 - [explainコマンド](https://postgresweb.com/post-4047)で調査
