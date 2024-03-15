@@ -44,10 +44,14 @@ select version();
 select * from テーブル名;
 
 # ページャーをlessに変更
-\setenv PAGER less
+## 表示中に-N と押下すると最下部に「Constantly display line numbers (press RETURN)」と表示されるのでRETURNキー押下で行番号表示が可能。再度で行番号表示消去
+\setenv PAGER less 
 
 # pagerのON/OFF切替
 \pset pager
+
+# 実行時間を表示する
+\timing
 
 # バックグラウンド実行
 SELECT * FROM my_table \gexec
