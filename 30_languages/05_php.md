@@ -10,6 +10,8 @@
   - [開発環境](#開発環境)
   - [php.ini](#phpini)
 
+バカーーー！！！
+
 ## [php-fpm](https://hackers-high.com/linux/php-fpm-config/)
 
 PHPをFastCGIインターフェイス経由でサーバーに提供するためのプロセスマネージャ
