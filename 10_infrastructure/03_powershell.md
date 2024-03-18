@@ -3,6 +3,8 @@
 ## 初期設定(セットアップ)画面でコマンドを使ってPCの電源をOFFにする方法
 
 ```powershell
+# /t "timeout"の略で、シャットダウンまでの待機時間を指定
+# /s /sは"shutdown"の略
 shutdown /s /t 0
 ```
 
