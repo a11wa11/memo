@@ -1,14 +1,17 @@
 # docker
 
 - [docker](#docker)
+  - [インストール](#インストール)
   - [dockerのタグ一覧を取得するコマンドを生成](#dockerのタグ一覧を取得するコマンドを生成)
   - [コマンド](#コマンド)
     - [イメージ関連](#イメージ関連)
+      - [よく使うオプション](#よく使うオプション)
+      - [commit](#commit)
       - [push](#push)
     - [コンテナ関連](#コンテナ関連)
     - [ネットワーク関連](#ネットワーク関連)
-    - [マルチCPUアーキテクチャ](#マルチcpuアーキテクチャ)
-      - [docker buildx](#docker-buildx)
+  - [マルチCPUアーキテクチャ](#マルチcpuアーキテクチャ)
+    - [docker buildx](#docker-buildx)
   - [Docker for Mac](#docker-for-mac)
 
 ## インストール
@@ -18,12 +21,15 @@
   - `brew install docker`
 
 ## dockerのタグ一覧を取得するコマンドを生成
+
 <details>
     <summary>展開</summary>
+
 ```sh
 # .bashrcなどに追記する
 
 # docker-tags centos でタグ一覧を取得。jq & curl が必要
+
 if [ -e /usr/bin/docker ]; then
     function docker-tags {
         curl -s https://registry.hub.docker.com/v2/repositories/library/$1/tags/ | jq -r '.results[].name'
@@ -35,6 +41,7 @@ fi
 # Google chrome & driver インストール
 RUN yum install -y https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm --skip-broken
 ```
+
 </details>
 
 ## コマンド
@@ -133,7 +140,7 @@ docker build -t イメージ名 --build-arg AVERSION(指定したい変数名)=$
 docker run -d --privileged --rm -v $(pwd):/home/ec2-user/workdir --name コンテナ名 イメージ名
 ```
 
-#### commit 
+#### commit
 
 - コンテナからイメージを作成
 
@@ -236,12 +243,12 @@ docker network inspect ネットワーク名 or ネットワークID
 docker network create --attachable -d ネットワーク名 --subnet=172.17.0.0/16 作成ネットワーク名
 ```
 
-### [マルチCPUアーキテクチャ](https://docs.docker.jp/docker-for-mac/multi-arch.html)
+## [マルチCPUアーキテクチャ](https://docs.docker.jp/docker-for-mac/multi-arch.html)
 
 - [公式参考サイト:マルチCPUアーキテクチャ](https://matsuand.github.io/docs.docker.jp.onthefly/desktop/multi-arch/)
 - [公式参考サイト:Docker Buildx](https://matsuand.github.io/docs.docker.jp.onthefly/buildx/working-with-buildx/)
 
-#### [docker buildx](https://matsuand.github.io/docs.docker.jp.onthefly/buildx/working-with-buildx/)
+### [docker buildx](https://matsuand.github.io/docs.docker.jp.onthefly/buildx/working-with-buildx/)
 
 **Docker Desktop for WindowsまたはDocker Desktop for Macの場合には、最初からbuildxが有効になっていてマルチCPUアーキテクチャーのコンテナーを作成することができるようになっている**
 
@@ -269,6 +276,26 @@ docker buildx inspect --bootstrap
 
 # マルチアーキテクチャでのビルド実行例
 docker buildx build --platform linux/amd64,linux/arm64 -t イメージ名 --push .(Dockerfileのパス)
+```
+
+- Dockerfile
+
+```yml
+FROM --platform=linux/amd64 golang:1.18
+```
+
+- docker-compose
+
+```yml
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    platform: linux/amd64
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always```
 ```
 
 ## Docker for Mac
