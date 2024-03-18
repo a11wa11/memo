@@ -62,6 +62,15 @@ insert into words (english, japanese,created_at,updated_at) values
 ('arn','Amazon リソースネーム (ARN)',now(),now());
 ```
 
+- drop
+
+```sql
+// 指定テーブル削除
+drop table テーブル名;
+// 依存テーブルも含めて指定テーブルを削除
+drop table テーブル名 cascade;
+```
+
 - トランザクション
 
 ```sql
