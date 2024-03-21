@@ -3,8 +3,9 @@
 - [vscode](#vscode)
   - [ショートカット](#ショートカット)
     - [よく使う機能](#よく使う機能)
-  - [playwrightのデバッグ設定例](#playwrightのデバッグ設定例)
-  - [使用したい拡張機能](#使用したい拡張機能)
+  - [使用する拡張機能一覧](#使用する拡張機能一覧)
+    - [playwright](#playwright)
+    - [シェルスクリプト](#シェルスクリプト)
     - [markdown](#markdown)
 
 ## ショートカット
@@ -237,38 +238,7 @@
 - ファイル検索
   - `cmd + P`で任意のファイル名(READMEなど)を入力
 
-## playwrightのデバッグ設定例
-  
-- launch.json
-
-```json
-"configurations": [
-    {
-        "type": "pwa-node",
-        "request": "launch",
-        "name": "playwright debug",
-        "env": { "PWDEBUG": "console" },
-        "program": "node_modules/.bin/playwright",
-        "args":["test", "${relativeFile}"]
-    },
-    {
-        "type": "pwa-node",
-        "request": "launch",
-        "name": "Run Test - headless",
-        "program": "node_modules/.bin/playwright",
-        "args":["test", "${relativeFile}"]
-    },
-    {
-        "type": "pwa-node",
-        "request": "launch",
-        "name": "Run Test - headed",
-        "program": "node_modules/.bin/playwright",
-        "args":["test", "--headed", "${relativeFile}"]
-    }
-]
-```
-
-## 使用したい拡張機能
+## 使用する拡張機能一覧
   
 - extensions.json
 
@@ -302,6 +272,59 @@
  // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
  "unwantedRecommendations": [
  ]
+}
+```
+
+### playwright
+
+- デバッグ設定例
+  - launch.json
+
+```json
+"configurations": [
+    {
+        "type": "pwa-node",
+        "request": "launch",
+        "name": "playwright debug",
+        "env": { "PWDEBUG": "console" },
+        "program": "node_modules/.bin/playwright",
+        "args":["test", "${relativeFile}"]
+    },
+    {
+        "type": "pwa-node",
+        "request": "launch",
+        "name": "Run Test - headless",
+        "program": "node_modules/.bin/playwright",
+        "args":["test", "${relativeFile}"]
+    },
+    {
+        "type": "pwa-node",
+        "request": "launch",
+        "name": "Run Test - headed",
+        "program": "node_modules/.bin/playwright",
+        "args":["test", "--headed", "${relativeFile}"]
+    }
+]
+```
+
+### シェルスクリプト
+
+- [Bash Debug](https://github.com/rogalmic/vscode-bash-debug)でシェルスクリプトのデバッグがvscodeで可能になる
+- macではzshの場合がbashは4or5のバージョンでばければ非対応
+- bashが古い場合、`brew install bash`でインストール
+  - システムとは別にbrewなどでインストールした場合は下記のように`pathBash`でbashのパスを指定する
+
+```json
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "bashdb",
+      "request": "launch",
+      "name": "Bash-Debug (simplest configuration)",
+      "program": "${file}",
+      "pathBash": "/opt/homebrew/bin/bash"
+    }
+  ]
 }
 ```
 
