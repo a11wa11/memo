@@ -8,7 +8,8 @@
       - [ファイル読込](#ファイル読込)
     - [フォーム](#フォーム)
   - [開発環境](#開発環境)
-  - [php.ini](#phpini)
+  - [参考](#参考)
+    - [php.ini](#phpini)
 
 ## [php-fpm](https://hackers-high.com/linux/php-fpm-config/)
 
@@ -326,7 +327,11 @@ XAMPP(windows)やMAMP(mac)といった開発環境がある
 brew install mamp
 ```
 
-## php.ini
+## 参考
+
+[php公式ドキュメント](https://www.php.net/manual/ja/index.php)
+
+### php.ini
 
 - display_errors
   - デフォルトではOFFになっているが、Onにしておくことでエラー内容を表示することが可能になる
