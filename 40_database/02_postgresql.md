@@ -6,119 +6,125 @@
     - [確認系](#確認系)
     - [便利系](#便利系)
     - [調査](#調査)
-    - [変更](#変更)
+    - [dump](#dump)
     - [リストア](#リストア)
     - [メンテナンス・パフォーマンス改善](#メンテナンスパフォーマンス改善)
     - [論理レプリケーション](#論理レプリケーション)
+  - [pgbenchを使って測定](#pgbenchを使って測定)
 
 ## コマンド
 
 ### 接続
 
-```psql
+```sh
 psql -h ホスト名 -U ユーザー名 -p 5432 -d データベース名
 ```
 
 ### 確認系
 
-```psql
-# データベース
+```sql
+-- データベース
 \l (show databases;)
-# テーブル
+
+-- テーブル
 \d (show tables;)
-# テーブルのカラム名
+
+-- テーブルのカラム名
 \d+ テーブル名;
-# ユーザー権限
+
+-- ユーザー権限
 \du
-# タイムゾーン
+
+-- タイムゾーン
 show timezone;
-# 現在時間
+
+-- 現在時間
 select now();
-# バージョン
+
+-- バージョン
 select version();
 ```
 
 ### 便利系
 
-```psql
-# 見やすく
+```sql
+-- 見やすく縦表示の切替
 \x
 select * from テーブル名;
 
-# ページャーをlessに変更
-## 表示中に-N と押下すると最下部に「Constantly display line numbers (press RETURN)」と表示されるのでRETURNキー押下で行番号表示が可能。再度で行番号表示消去
+-- ページャーをlessに変更
+--- 表示中に-N と押下すると最下部に「Constantly display line numbers (press RETURN)」と表示されるのでRETURNキー押下で行番号表示が可能。再度で行番号表示消去
 \setenv PAGER less 
 
-# pagerのON/OFF切替
+-- pagerのON/OFF切替
 \pset pager
 
-# 実行時間を表示する
+-- 実行時間を表示する
 \timing
 
-# バックグラウンド実行
+-- バックグラウンド実行
 SELECT * FROM my_table \gexec
+
+-- タイムアウト値変更
+set statement_timeout = '10min';  #10分
+set statement_timeout = '300s';   #300秒(5分)
 ```
 
 ### 調査
 
 - pg_stat_activityビューに含まれる主な列は以下の通り
-  - datid: データベースのOID（識別子）
-  - datname: データベース名
-  - pid: プロセスID（セッションID）
-  - usename: 接続ユーザー名
-  - client_addr: クライアントのIPアドレス
-  - client_hostname: クライアントのホスト名
-  - query: 実行中のクエリ
-  - state: セッションの状態（例: active, idle, idle in transactionなど）
-  - wait_event_type: セッションが待機しているイベントの種類
-  - wait_event: セッションが待機している具体的なイベント
-  - backend_start: バックエンドプロセスの開始時刻
-  - backend_type: バックエンドプロセスのタイプ（例: client backend, autovacuum launcherなど）
 
-```psql
-# 現在実行中のセッション（プロセス）に関する情報を取得
+| 項目名 | 説明 |
+|-|-|
+| datid | データベースのOID（識別子） |
+| datname | データベース名 |
+| pid | プロセスID（セッションID） |
+| usename | 接続ユーザー名 |
+| client_addr | クライアントのIPアドレス |
+| client_hostname | クライアントのホスト名 |
+| query | 実行中のクエリ |
+| state | セッションの状態（例 active, idle, idle in transactionなど） |
+| wait_event_type | セッションが待機しているイベントの種類 |
+| wait_event | セッションが待機している具体的なイベント |
+| backend_start | バックエンドプロセスの開始時刻 |
+| backend_type | バックエンドプロセスのタイプ（例: client backend, autovacuum launcherなど） |
+
+```sql
+-- 現在実行中のセッション（プロセス）に関する情報を取得
 SELECT * FROM pg_stat_activity;
 
-# 準備済みトランザクション（Prepared Transaction）の数をカウントする
+-- 準備済みトランザクション（Prepared Transaction）の数をカウントする
 SELECT count(*) FROM pg_catalog.pg_prepared_xacts;
 
-# インストール可能な拡張機能を確認する
+-- インストール可能な拡張機能を確認する
 SELECT * FROM pg_available_extensions;
 
-# 現在のデータベースにインストールされているすべての拡張機能の情報を取得
+-- 現在のデータベースにインストールされているすべての拡張機能の情報を取得
 SELECT * FROM pg_extension;
 
-# タイムアウト値確認
+-- タイムアウト値確認
 show statement_timeout;
 
-# 指定テーブルのカラム確認
+-- 指定テーブルのカラム確認
 select * from information_schema.columns where table_name='テーブル名' order by ordinal_position;
 
-# 使用ディスク容量を確認
+-- 使用ディスク容量を確認
 SELECT pg_size_pretty(pg_database_size('データベース名'));
 ```
 
 - [explainコマンド](https://postgresweb.com/post-4047)で調査
 
- ```psql
-# 推定された実行計画を表示する
+ ```sql
+-- 推定された実行計画を表示する
 explain select * from テーブル名;
 
-# 実際に実行した結果を表示する
+-- 実際に実行した結果を表示する
 explain analyze select * from テーブル名; 
-```
-
-### 変更
-
-```psql
-# タイムアウト値変更
-set statement_timeout = '10min';  #10分
-set statement_timeout = '300s';   #300秒(5分)
 ```
 
 ### dump
 
-```psql
+```sh
 pg_dump -h ホスト名 -U ユーザー名 -p 5432 -d データベース名 > backup_file名
 # バイナリ形式でdump保存 -F=ファイル形式 c=ファイル形式をPostgresqlのバイナリ形式
 pg_dump -Fc -f ファイル名.dump -h ホスト名 -d データベース名 -U ユーザー名
@@ -128,7 +134,7 @@ pg_dump -Fc -f ファイル名.dump -h ホスト名 -d データベース名 -U 
 
 pg_restoreでバイナリファイル形式のバックファイルからのリストアの方が確実
 
-```psql
+```sh
 pg_restore -h ホスト名 -C -d データベース名 バックアップファイル名
 psql -h ホスト名 -U ユーザー名 -d データベース名 -f バックアップファイル名
 
@@ -139,14 +145,17 @@ psql -h ホスト名 -U ユーザー名 -d データベース名 -t テーブル
 
 ### メンテナンス・パフォーマンス改善
 
-```psql
-# データベース内のテーブルから削除された行や更新された行によって生じたスペースを回収し、データベースのスペースを最適化する
-# PostgreSQLはデータを消しても実際には消えてはなく、削除フラグがついていて見えなくなっているだけの状態になっている。この削除データは定期的にきれいにする必要があり、この処理をVACUUMという
+```sql
+/*
+データベース内のテーブルから削除された行や更新された行によって生じたスペースを回収し、データベースのスペースを最適化する
+PostgreSQLはデータを消しても実際には消えてはなく、削除フラグがついていて見えなくなっているだけの状態になっている。この削除データは定期的にきれいにする必要があり、この処理をVACUUMという
+*/
 VACUUM;
-# ANALYZEはテーブル内のデータの分布や統計情報を収集し、クエリプランナーが適切なインデックスや結合方法を選択するための情報を提供する
+
+-- ANALYZEはテーブル内のデータの分布や統計情報を収集し、クエリプランナーが適切なインデックスや結合方法を選択するための情報を提供する
 ANALYZE;
 
-# VACUUMとANALYZEは下記のように同時実行可能
+-- VACUUMとANALYZEは下記のように同時実行可能
 vacuum analyze;
 ```
 
@@ -157,8 +166,8 @@ vacuum analyze;
 受信側のデータベース（レプリカ）は、定期的にそのスロットからデータを取得して自身のデータベースに反映させる。
 データの複製元をパブリッシャー、複製先をサブスクライバーと呼ぶ（PUB/SUBモデルをベースにしている）
 
-```psql
-# 既存の論理レプリケーションスロットを確認
+```sql
+-- 既存の論理レプリケーションスロットを確認
 select * from pg_replication_slots;
 ```
 
@@ -167,7 +176,7 @@ select * from pg_replication_slots;
 インストール
 
 ```sh
-#amazonlinux2
+# amazonlinux2
 sudo amazon-linux-extras install postgresql11
 sudo yum install postgresql-contrib
 ```
