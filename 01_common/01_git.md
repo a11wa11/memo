@@ -2,14 +2,16 @@
 
 - [git](#git)
   - [設定](#設定)
-  - [タグ関連](#タグ関連)
   - [コミット関連](#コミット関連)
+    - [リセット](#リセット)
+    - [stash](#stash)
     - [チェリーピック](#チェリーピック)
   - [マージ関連](#マージ関連)
-    - [stash関連](#stash関連)
   - [ブランチ関連](#ブランチ関連)
+    - [リモートリポジトリ設定](#リモートリポジトリ設定)
+    - [フォーク](#フォーク)
   - [diff関連](#diff関連)
-  - [フォーク関連](#フォーク関連)
+  - [タグ](#タグ)
   - [submodule](#submodule)
   - [github](#github)
 
@@ -27,25 +29,6 @@ git config --global user.email "test_address"
 ```sh
 git config --local user.name "test_name"
 git config --local user.email "test_address"
-```
-
-## タグ関連
-
-```sh
-# リモートブランチのタグの一覧
-git ls-remote --tags
-
-# リモートリポジトリのタグをローカルに強制的に持ってくる
-git fetch --tags -f
-
-# タグへのチェックアウト
-git checkout -b v.1.0.0 refs/tags/v1.0.0
-
-# タグを消す
-git tag -d タグ名
-
-# リモートタグを消去
-git push origin タグ名
 ```
 
 ## コミット関連
@@ -67,7 +50,11 @@ git merge リバートしたブランチ
 
 # トピックブランチなど空のコミットを打ちたい時
 git commit --allow-empty -m "# プルリクエストのタイトル"
+```
 
+### リセット
+
+```sh
 # addを取り消す
 git reset HEAD addしたファイル名
 
@@ -82,6 +69,35 @@ git reset --hard HEAD@[1]
 
 # 特定のファイルだけ前の状態に戻したいとき
 git checkout コミットハッシュ ファイルパス
+
+# リモートブランチをローカルブランチに強制的にもってくる（ローカルでコンフリクト発生して手に負えない時など）
+git fetch origin ブランチ名
+git reset --hard origin/ブランチ名
+```
+
+### stash
+
+```sh
+# コミットしていない内容を一時退避(変更内容をコミットしないとブランチ変更できないのでそういう時に使う)
+git stash
+
+# 一時退避する内容を名前をつけて保存
+git stash save "後で見るけど消してもいいstash"
+
+# 一時退避したリストの一覧
+git stash list
+
+# 退避した内容をdiffで確認
+git diff HEAD..stash@{0}
+
+# 一時退避した内容(stash)をリストから指定して戻す
+git stash pop stash@{0} # stash@{0}は適宜変更
+
+# 一時退避した内容(stash)を一部消去
+git stash drop stash@{0} # stash@{0}は適宜変更
+
+# 一時退避した内容(stash)を全て消去
+git stash clear
 ```
 
 ### チェリーピック
@@ -137,35 +153,6 @@ Merge: yyyy zzzz
 Author: sample <sample@users.noreply.github.com>
 ```
 
-### stash関連
-
-```sh
-# リモートブランチをローカルブランチに強制的にもってくる（ローカルでコンフリクト発生して手に負えない時など）
-git fetch origin ブランチ名
-git reset --hard origin/ブランチ名
-
-# コミットしていない内容を一時退避(変更内容をコミットしないとブランチ変更できないのでそういう時に使う)
-git stash
-
-# 一時退避する内容を名前をつけて保存
-git stash save "後で見るけど消してもいいstash"
-
-# 一時退避したリストの一覧
-git stash list
-
-# 退避した内容をdiffで確認
-git diff HEAD..stash@{0}
-
-# 一時退避した内容(stash)をリストから指定して戻す
-git stash pop stash@{0} # stash@{0}は適宜変更
-
-# 一時退避した内容(stash)を一部消去
-git stash drop stash@{0} # stash@{0}は適宜変更
-
-# 一時退避した内容(stash)を全て消去
-git stash clear
-```
-
 ## ブランチ関連
 
 ```sh
@@ -194,7 +181,7 @@ git fetch -p
 git fetch --prune
 ```
 
-- リモートリポジトリの設定
+### リモートリポジトリ設定
 
 ```sh
 git remote add origin(任意のリモートリポジトリ名) git@github.com:hoge/test.git
@@ -217,24 +204,7 @@ git push -f origin ローカルブランチ:リモートブランチ
 GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa' git clone リモートリポジトリ
 ```
 
-## diff関連
-
-```sh
-# ２つのブランチの差分を確認
-git diff branch1 branch2
-
-# ２つのブランチの指定のファイルの差分を確認
-git diff branch1 branch2 sample.txt
-
-# ２つのブランチの差分のファイル名のみ表示
-git diff --name-only branch1 branch2
-
-# 特定のブランチ間やタグ間のログを指定の形式で出力する
-git log branch1..branch2 --pretty=oneline --pretty=format:"%n - %ad : %s" --date-order
-
-```
-
-## フォーク関連
+### フォーク
 
 ```sh
 # フォーク元をリモートリポジトリに追加
@@ -254,6 +224,41 @@ git push origin ブランチ名
 # フォーク先の未マージのブランチを使用したい時
 git fetch upstream pull/<ID>/head:pr/<ID>
 git checkout pr/<ID>
+```
+
+## diff関連
+
+```sh
+# ２つのブランチの差分を確認
+git diff branch1 branch2
+
+# ２つのブランチの指定のファイルの差分を確認
+git diff branch1 branch2 sample.txt
+
+# ２つのブランチの差分のファイル名のみ表示
+git diff --name-only branch1 branch2
+
+# 特定のブランチ間やタグ間のログを指定の形式で出力する
+git log branch1..branch2 --pretty=oneline --pretty=format:"%n - %ad : %s" --date-order
+```
+
+## タグ
+
+```sh
+# リモートブランチのタグの一覧
+git ls-remote --tags
+
+# リモートリポジトリのタグをローカルに強制的に持ってくる
+git fetch --tags -f
+
+# タグへのチェックアウト
+git checkout -b v.1.0.0 refs/tags/v1.0.0
+
+# タグを消す
+git tag -d タグ名
+
+# リモートタグを消去
+git push origin タグ名
 ```
 
 ## submodule
@@ -292,5 +297,3 @@ Password: YOUR_PERSONAL_ACCESS_TOKEN
 ブランチやコミット同士の比較
 
 - `https://github.com/リポジトリ/compare/stg...dev`のように`compare/ブランチ比較元...ブランチ比較先`のように打つ
-
-
