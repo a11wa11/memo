@@ -68,6 +68,9 @@ SELECT * FROM my_table \gexec
 -- タイムアウト値変更
 set statement_timeout = '10min';  #10分
 set statement_timeout = '300s';   #300秒(5分)
+
+-- メタコマンド シェルなど外部コマンドをpsql接続中に実施する
+\! ls -l
 ```
 
 ### 調査
