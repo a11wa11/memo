@@ -15,31 +15,30 @@
 - select
 
 ```sql
-# ソート昇順
+-- ソート昇順
 select * from テーブル名 order by カラム名 asc;
-# ソート降順
+-- ソート降順
 select * from テーブル名 order by カラム名 desc;
-# 時刻指定
+-- 時刻指定
 select * from テーブル名 where created_at >= '20240101 050000'::TIMESTAMP limit 100;
 
-# テーブルのカラム名を横並びで取得する
+-- テーブルのカラム名を横並びで取得する
 select group_concat(カラム名 separator ', ') as columns from information_schema.columns where table_schema = 'DB名' and table_name = 'テーブル名' order by ordinal_position asc;
 
-# データをグループ化する
+-- データをグループ化する
 select カラム名1, カラム名2 from テーブル名 group by カラム名1;
 
-# データをグループ化し、条件抽出する
+-- データをグループ化し、条件抽出する
 select カラム名1, カラム名2 from テーブル名 group by カラム名1 having カラム名>1;
 
-# 複数の対象のどれかに該当する値を取得
+-- 複数の対象のどれかに該当する値を取得
 select * from テーブル名 where カラム名 in(1,2,3);
 
-# テーブルのカラム数を取得
+-- テーブルのカラム数を取得
 select count(カラム名) from information_schema.columns where table_name='テーブル名' and table_schema='DB名';
 
-# 外部キー確認
+-- 外部キー確認
 select * from information_schema.key_column_usage where table_schema='DB名' and table_name='テーブル名';
-
 ```
 
 - update
@@ -51,7 +50,7 @@ update TABLE_NAME set COLUMN_NAME1='AAA', COLUMN_NAME2='BBB',updated_at=now() wh
 - delete
 
 ```sql
-delete from TABLE_NAME; # テーブルを削除する
+delete from TABLE_NAME; -- テーブルを削除する
 ```
 
 - 複数insert
@@ -65,10 +64,17 @@ insert into words (english, japanese,created_at,updated_at) values
 - drop
 
 ```sql
-// 指定テーブル削除
+-- 指定テーブル削除
 drop table テーブル名;
-// 依存テーブルも含めて指定テーブルを削除
+-- 依存テーブルも含めて指定テーブルを削除
 drop table テーブル名 cascade;
+```
+
+- alter
+
+```sql
+-- 型変更
+ALTER TABLE テーブル名 ALTER COLUMN 絡む名 TYPE タイプ;
 ```
 
 - トランザクション
@@ -76,7 +82,7 @@ drop table テーブル名 cascade;
 ```sql
 begin;
 update table_name set column_name1=1, column_name2='test' where id=999;
-rollback; # 戻す
+rollback; -- 戻す
 commit;
 ```
 
