@@ -39,6 +39,9 @@ psql -a -h ホスト名 -U ユーザー名 -p 5432 -d データベース名 < �
 -- ユーザー権限
 \du
 
+-- ユーザー一覧
+select * from pg_user;
+
 -- タイムゾーン
 show timezone;
 
