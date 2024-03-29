@@ -135,7 +135,10 @@ explain analyze select * from テーブル名;
 ### dump
 
 ```sh
+# データベース全体dump
 pg_dump -h ホスト名 -U ユーザー名 -p 5432 -d データベース名 > backup_file名
+# テーブル指定(複数)
+pg_dump -h ホスト名 -U ユーザー名 -p 5432 -d データベース名 -t テーブル1 -t テーブル2 -t テーブル3 > backup_file名
 # バイナリ形式でdump保存 -F=ファイル形式 c=ファイル形式をPostgresqlのバイナリ形式
 pg_dump -Fc -f ファイル名.dump -h ホスト名 -d データベース名 -U ユーザー名
 ```
