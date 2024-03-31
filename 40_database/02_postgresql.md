@@ -56,6 +56,9 @@ select now();
 
 -- バージョン
 select version();
+
+--ディスク容量
+SELECT pg_size_pretty(pg_database_size('データベース名'));
 ```
 
 ### 便利系
