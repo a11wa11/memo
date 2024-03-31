@@ -74,7 +74,10 @@ drop table テーブル名 cascade;
 
 ```sql
 -- 型変更
-ALTER TABLE テーブル名 ALTER COLUMN 絡む名 TYPE タイプ;
+ALTER TABLE テーブル名 ALTER COLUMN カラム名 TYPE タイプ;
+
+-- カラム追加
+ALTER TABLE テーブル名 ADD COLUMN カラム名 TYPE タイプ;
 ```
 
 - トランザクション
