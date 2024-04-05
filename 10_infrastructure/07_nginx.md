@@ -18,6 +18,8 @@ yum install -y nginx
 
 ## [locationディレクティブ](https://heartbeats.jp/hbblog/2012/04/nginx05.html)
 
+| 正規表現 | 内容 |
+|-|-|
 | なし | 前方一致 |
 | ^~ | 前方一致。一致したら、正規表現の条件を評価しない |
 | = | 完全一致。パスが等しい|
@@ -46,5 +48,16 @@ location ^~ /foo/bar.html {
 # 301の場合 恒久リダイレクト
 location  /name/ {
   proxy_pass /http://example.com/;
+}
+```
+
+## [upstream](https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/)
+
+```nginx
+stream {
+    server {
+        listen     12345;
+        proxy_pass https://転送先URL:443(ポート);
+    }
 }
 ```
