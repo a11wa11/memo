@@ -95,6 +95,15 @@ set statement_timeout = '300s';   #300秒(5分)
 \! ls -l
 ```
 
+### function
+
+```sql
+-- INTERSECT演算子で複数のSELECT結果の共通部分を取得
+SELECT カラムA FROM テーブルA
+INTERSECT
+SELECT カラムB FROM テーブルB;
+```
+
 ### 調査
 
 - pg_stat_activityビューに含まれる主な列は以下の通り
