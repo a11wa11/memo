@@ -42,6 +42,9 @@ psql -a -h ホスト名 -U ユーザー名 -p 5432 -d データベース名 < �
 -- スキーマ
 \dn
 
+-- スキーマに所属するテーブル一覧
+\d スキーマ名.*
+
 -- ユーザー権限
 \du
 
@@ -60,7 +63,7 @@ select version();
 --ディスク容量
 SELECT pg_size_pretty(pg_database_size('データベース名'));
 
---インデックス
+--インデックス一覧
 SELECT * FROM pg_indexes;
 ```
 
