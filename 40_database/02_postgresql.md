@@ -59,6 +59,9 @@ select version();
 
 --ディスク容量
 SELECT pg_size_pretty(pg_database_size('データベース名'));
+
+--インデックス
+SELECT * FROM pg_indexes;
 ```
 
 ### 便利系
