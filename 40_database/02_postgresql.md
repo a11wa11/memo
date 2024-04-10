@@ -156,6 +156,13 @@ explain select * from テーブル名;
 explain analyze select * from テーブル名; 
 ```
 
+### 拡張機能
+
+```sql
+# 指定拡張機能アップグレードコマンド  
+ALTER EXTENSION 拡張機能名 UPDATE TO '新バージョン';
+```
+
 ### dump
 
 ```sh
