@@ -48,6 +48,9 @@ psql -a -h ホスト名 -U ユーザー名 -p 5432 -d データベース名 < �
 -- ユーザー権限
 \du
 
+-- インデックス一覧
+\di
+
 -- ユーザー一覧
 select * from pg_user;
 
@@ -102,6 +105,21 @@ set statement_timeout = '300s';   #300秒(5分)
 SELECT カラムA FROM テーブルA
 INTERSECT
 SELECT カラムB FROM テーブルB;
+```
+
+### index
+
+```sql
+# インデックス作成
+create index on テーブル名 (カラム名);
+CREATE INDEX IF NOT EXISTS インデックス名 ON テーブル名 (カラム名); -- 存在しない場合のみ
+
+# インデックス削除
+DROP INDEX インデックス名;
+DROP INDEX IF EXISTS インデックス名; -- 存在する場合のみ
+
+# インデックスはデフォルトではB-treeなのでB-tree以外で作成する場合
+CREATE INDEX インデックス名 ON テーブル名 USING gist (カラム名) -- gistで作成の場合
 ```
 
 ### 調査
