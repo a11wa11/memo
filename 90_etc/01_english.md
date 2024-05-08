@@ -109,6 +109,8 @@
 | ingestion | 摂取 | |
 | rc | バージョン候補(release candidate) | |
 | clobber | 打ち消す、打ちのめす | |
+| solve |  | 「客観的に正解のある問題」を解決する|
+| resolve | 「主観的で正解のない問題」を解消する | |
 | vendor | 売主、出品者 | |
 | FQDN | Fully Qualified Domain Name 完全修飾ドメイン名 | ドメイン名 + ホスト名 (www.google.com)|
 | fleet | 艦隊、ものの集まり | |
