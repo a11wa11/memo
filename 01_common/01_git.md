@@ -31,6 +31,12 @@ git config --local user.name "test_name"
 git config --local user.email "test_address"
 ```
 
+- [コンテナユーザー設定](https://www.kenmuse.com/blog/avoiding-dubious-ownership-in-dev-containers/)
+
+```sh
+git config --global --add safe.directory
+```
+
 ## コミット関連
 
 ```sh
