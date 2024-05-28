@@ -207,7 +207,11 @@ git push -f origin ローカルブランチ:リモートブランチ
 - 特定の鍵を指定してリモートリポジトリに接続
 
 ```sh
+# 変数で使用する鍵を指定
 GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa' git clone リモートリポジトリ
+
+# 常に特定の鍵を使用する設定を作成
+git config --local core.sshCommand "ssh -i 秘密鍵のパス"
 ```
 
 ### フォーク
