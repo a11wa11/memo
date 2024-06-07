@@ -71,6 +71,9 @@ npm dedupe
 npm cache clean 
 npm cache clean --force
 
+# 脆弱性監査
+npm audit
+
 # package.jsonに記載されていないパッケージをnode_modulesから削除する
 npm prune
 

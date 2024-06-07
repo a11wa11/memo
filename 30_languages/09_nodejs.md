@@ -39,6 +39,10 @@ nvm install node   # 最新版インストール
 nvm install --lts  # 安定版インストール
 nvm install v0.0.0 # バージョン指定インストール
 
+## バージョンアップグレード時に使用可能なオプション
+### 旧バージョンで使用していたグルーバルパッケージを新バージョンでもインストールする
+nvm install --reinstall-packages-from=18.20.3(旧バージョン) 20.14.0(新バージョン)
+
 # インストールされているnodeバージョン確認
 nvm ls
 
@@ -47,6 +51,10 @@ nvm use v16.15.0
 
 # インストール可能なバージョン一覧
 nvm ls-remote
+
+# エイリアス
+## nvm alias エイリアス名 バージョン名 でエイリアスを作成し、バージョンを割り当てる
+nvm alias default 16.15.0
 
 # nodeのアンインストール
 nvm uninstall v16.15.0
