@@ -1,7 +1,7 @@
 # node.js
 
 - [node.js](#nodejs)
-  - [リリースサイクル](#リリースサイクル)
+  - [公式情報](#公式情報)
   - [インストール](#インストール)
   - [コマンド](#コマンド)
     - [デバッグ](#デバッグ)
@@ -16,7 +16,11 @@
       - [HTTP](#http)
       - [マルチスレッド](#マルチスレッド)
 
-## [リリースサイクル](https://github.com/nodejs/Release)
+## 公式情報
+
+- [リリースサイクル](https://github.com/nodejs/Release)
+- [チェンジログ](https://github.com/nodejs/node/tree/main/doc/changelogs)
+  - nodeアップグレードの際にどういう変更があるか要確認
 
 ## インストール
 
