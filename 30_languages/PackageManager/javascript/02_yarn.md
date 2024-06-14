@@ -33,6 +33,7 @@ npm install -g yarn
 | 指定パッケージを更新 | npm update パッケージ名 | yarn upgrade パッケージ名 |
 | scriptを実行 | npm run スクリプト名 | yarn run スクリプト名 |
 | パッケージ一覧を表示 | npm ls | yarn list |
+| グローバルパッケージ一覧表示 | npm ls -g | yarn global list |
 | パッケージ情報 | npm info パッケージ名 | yarn info パッケージ名 |
 | 古い依存関係を表示 | npm outdated | yarn outdated |
 | キャッシュクリア | npm cache clean | yarn cache clean |
