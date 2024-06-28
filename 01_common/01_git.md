@@ -2,6 +2,7 @@
 
 - [git](#git)
   - [設定](#設定)
+    - [文字化け時のトラブルシューティング](#文字化け時のトラブルシューティング)
   - [コミット関連](#コミット関連)
     - [リセット](#リセット)
     - [stash](#stash)
@@ -35,6 +36,13 @@ git config --local user.email "test_address"
 
 ```sh
 git config --global --add safe.directory
+```
+
+### 文字化け時のトラブルシューティング
+
+```sh
+git config --local core.quotepath false     # ローカル適用
+$ git config --global core.quotepath false  # 全体適用
 ```
 
 ## コミット関連
