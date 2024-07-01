@@ -38,4 +38,5 @@ npm install -g yarn
 | 古い依存関係を表示 | npm outdated | yarn outdated |
 | キャッシュクリア | npm cache clean | yarn cache clean |
 | ローカルパッケージの実行 | npx パッケージ名 | yarn -s run パッケージ名 |
+| ローカルにあるパッケージをpublishすることなしに別プロジェクトで利用できるようにする | npm link | yarn link |
 |  |  |  |
