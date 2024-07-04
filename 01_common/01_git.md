@@ -293,6 +293,8 @@ git submodule init
 # 更新
 git submodule update
 git submodule update 指定サブモジュールパス # 特定のサブモジュールのみの時
+# 既存のサブモジュールを初期化および更新
+git submodule update --init --recursive
 # 確認
 git submodule status
 ```

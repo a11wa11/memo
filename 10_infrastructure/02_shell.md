@@ -260,8 +260,20 @@ read -p "Are you sure you're trying to delete the stack? [y/n]: " YN
 
 #### ファイル系
 
+- 作成日付を指定
+
 ```sh
-touch -d '2019/01/01' sample.txt # 作成日付を指定
+touch -d '2019/01/01' sample.txt
+```
+
+- ファイル確認
+
+```sh
+# どのタイプのファイルか確認
+file 対象のパス
+
+# ファイルシステムステータスを表示
+stat 対象のパス
 ```
 
 ### ユーザー系
