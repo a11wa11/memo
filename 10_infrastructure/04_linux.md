@@ -6,15 +6,18 @@
   - [redhat](#redhat)
     - [yum](#yum)
     - [RPM](#rpm)
+    - [dnf](#dnf)
   - [amazon-linux](#amazon-linux)
   - [代表的なファイルシステムに格納されているもの](#代表的なファイルシステムに格納されているもの)
     - [log](#log)
     - [syslog](#syslog)
+    - [logrotate](#logrotate)
     - [RAID](#raid)
     - [マウント関連](#マウント関連)
       - [マウント](#マウント)
       - [アンマウント](#アンマウント)
       - [fstab](#fstab)
+    - [glibc](#glibc)
   - [初期構築テンプレート](#初期構築テンプレート)
 
 ## ubuntu
@@ -31,6 +34,10 @@ apt-get install パッケージ名=バージョン
 
 # mysqlclientのインストール
 apt-get install -y libmysqlclient-dev
+
+# インストール済パッケージ一覧
+apt list
+apt list --installed
 ```
 
 ## redhat
@@ -223,6 +230,7 @@ cat /etc/rsyslog
   - 新規ファイル作成 -> create, nocreate
   - 拡張子 -> dateext(日付拡張子をローテートファイルにつける)
   - 設定例
+
 ```log
 /var/log/nginx/*log {
     missingok                # ログファイルが存在しなくてもエラーを出力しない
