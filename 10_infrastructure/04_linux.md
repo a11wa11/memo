@@ -38,6 +38,9 @@ apt-get install -y libmysqlclient-dev
 # インストール済パッケージ一覧
 apt list
 apt list --installed
+
+# パッケージ詳細確認
+apt show パッケージ名
 ```
 
 ## redhat
