@@ -179,6 +179,10 @@ git branch -m 古いブランチ名 新しいブランチ名
 # 任意のブランチ名をつけてチェックアウト
 git checkout -b ブランチ名 origin/リモートブランチ名
 
+# リモート追跡設定を削除
+git branch --unset-upstream # 所属ブランチで実行
+git branch --unset-upstream 対象ブランチ名
+
 # ブランチを削除する
 git branch -d ブランチ名
 
