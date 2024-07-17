@@ -14,6 +14,8 @@
 
 ## インストール
 
+[ドキュメント](https://classic.yarnpkg.com/en/docs/cli/install)
+
 ```sh
 npm install -g yarn
 ```
