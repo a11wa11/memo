@@ -9,6 +9,7 @@
       - [ファイル読込](#ファイル読込)
     - [便利コマンド](#便利コマンド)
     - [フォーム](#フォーム)
+    - [laravel](#laravel)
   - [開発環境](#開発環境)
   - [参考](#参考)
     - [php.ini](#phpini)
@@ -334,12 +335,26 @@ $_GET['your_name']
 $_POST['your_name'] //post通信はURL末尾にクエリが表示されない
 ```
 
+### laravel
+
 ```sh
 # laravelの起動
 php artisan serve
 
+# laravelを起動し、ホストを0.0.0.0に設定して外部からの接続を受け付け。portは8000を指定
+php artisan serve --host 0.0.0.0 --port 8000
+
 # laravel使用可能コマンドの一覧
 php artisan list
+
+# 設定のキャッシュ。 設定ファイルを1つのキャッシュファイルにまとめる。デプロイ後、設定が確定した時などに使用
+php artisan config:cache
+
+# キャッシュのクリア
+## 全般的なキャッシュのクリア。 設定、ルート、ビューキャッシュ、およびコンパイル済みファイルをクリア。アプリケーション全体のキャッシュをリセットしたい時
+php artisan optimize:clear
+## 設定キャッシュのクリア。 設定のキャッシュをクリアする。設定ファイルを変更した後や開発中に設定をリセットしたい時
+php artisan config:clear
 ```
 
 ## 開発環境
