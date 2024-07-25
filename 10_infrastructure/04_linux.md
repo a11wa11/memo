@@ -43,6 +43,18 @@ apt list --installed
 apt show パッケージ名
 ```
 
+- apt-getよく使うパッケージやコマンド
+
+```sh
+# psコマンドやfreeコマンド
+apt-get install procps
+
+# キャッシュクリア
+apt-get clean
+# or
+apt-get clean && rm -rf /var/lib/apt/lists/*
+```
+
 ## redhat
 
 ### yum
