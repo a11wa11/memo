@@ -45,6 +45,9 @@ composer create-project --prefer-dist laravel/laravel プロジェクト名 "6.0
 # 対象パッケージをインストール
 composer install
 composer install パッケージ名
+
+# composer.json に必要なパッケージを追加してインストール
+composer require パッケージ名
 ```
 
 - デバッグ
@@ -71,6 +74,21 @@ composer remove パッケージ名
 composer remove --update-with-dependencies パッケージ名
 # composer.json を修正するのみ
 composer remove --no-update パッケージ名
+```
+
+- 調査
+
+```sh
+# パッケージ詳細
+composer show パッケージ名
+# 依存関係を表示
+composer show -t
+# パッケージ調査
+composer search パッケージ名
+# composer.json ファイルの構文と内容が正しいかどうかを検証
+composer validate
+# 指定パッケージのインストールを妨げるパッケージを表示する
+composer why-not パッケージ名 バージョン
 ```
 
 - パッケージキャッシュクリア
