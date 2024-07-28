@@ -3,7 +3,8 @@
 - [composer](#composer)
   - [インストール(mac)](#インストールmac)
   - [文法](#文法)
-    - [パッケージインストール](#パッケージインストール)
+    - [パッケージ操作](#パッケージ操作)
+  - [設定](#設定)
 
 ## インストール(mac)
 
@@ -36,11 +37,47 @@ composer self-update 1.9.1(指定したバージョン)
 composer create-project --prefer-dist laravel/laravel プロジェクト名 "6.0.*(バージョン名)"
 ```
 
-### パッケージインストール
+### パッケージ操作
+
+- インストール
 
 ```sh
 # 対象パッケージをインストール
 composer install
+composer install パッケージ名
+```
+
+- デバッグ
+
+```sh
+# 実際には実行せず
+composer update --dry-run
+```
+
+- アップデート
+
+```sh
+composer update
+composer update パッケージ名
+# 指定したパッケージから依存しているパッケージも一緒に更新
+composer update --with-dependencies パッケージ名
+```
+
+- アンインストール
+
+```sh
+composer remove パッケージ名
+# 指定したパッケージから依存しているパッケージも一緒に更新
+composer remove --update-with-dependencies パッケージ名
+# composer.json を修正するのみ
+composer remove --no-update パッケージ名
+```
+
+
+- パッケージキャッシュクリア
+
+```sh
+composer clear-cache
 ```
 
 ## 設定
@@ -54,7 +91,10 @@ composer install
 ```json
 {
     "require": {
-        "monolog/monolog": "1.0.*"
+        "monolog/monolog": "1.0.*",
+        "google/apiclient-services": "~0.200", # 最小バージョンが200でメジャーバージョンは同一という意味
+        "google/apiclient-services": "^0.200", # 最小バージョンが200でメジャーバージョンは同一という意味
+
     }
 }
 ```
