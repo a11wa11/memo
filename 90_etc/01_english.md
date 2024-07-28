@@ -103,6 +103,7 @@
 | duration | 持続範囲 | |
 | ratio | 対比、割合 | |
 | relevant | 適切な、関連した | |
+| rsync | remote syncの略 | ファイルおよびディレクトリを効率的にコピーおよび同期するためのツール |
 | deallocate | 割り当てを解除する | |
 | implicit | 暗黙 | |
 | truncate | 切り捨てる | |
@@ -112,7 +113,7 @@
 | solve |  | 「客観的に正解のある問題」を解決する|
 | resolve | 「主観的で正解のない問題」を解消する | |
 | vendor | 売主、出品者 | |
-| FQDN | Fully Qualified Domain Name 完全修飾ドメイン名 | ドメイン名 + ホスト名 (www.google.com)|
+| FQDN | Fully Qualified Domain Name 完全修飾ドメイン名 | ドメイン名 + ホスト名 <www.google.com>|
 | fleet | 艦隊、ものの集まり | |
 | SKU | スキュー（Stock Keeping Unit）作成可能なリソースで選択可能な機能種類　| Azure用語 |
 | LVM | Logical Volume Manager) 複数のハードディスクやパーティションにまたがった記憶領域をまとめて単一の論理ボリューム（LV）として扱うことのできるディスク管理機能 | クラウド用語 |
