@@ -13,6 +13,7 @@
   - [マルチCPUアーキテクチャ](#マルチcpuアーキテクチャ)
     - [docker buildx](#docker-buildx)
   - [Docker for Mac](#docker-for-mac)
+  - [docker-compose](#docker-compose)
 
 ## インストール
 
@@ -307,3 +308,12 @@ screen ~/Library/Containers/com.docker.docker/Data/vms/0/tty
 ```
 
 - エフェメラルポート番号 -> 49152 ~ 65535
+
+## docker-compose
+
+```yml
+syncs:        # ファイルやディレクトリの同期設定を行うための同期に関する設定
+  syncs_name: # 任意の名前
+    src: './path/to/directory'  # 対象ディレクトリを同期元として指定。ホスト側の対象ディレクトリが同期対象のディレクトリ
+    sync_strategy: 'unison'     # 同期の戦略（方法）を指定。unisonは双方向のファイル同期ツールであり、ホストとコンテナ間で変更されたファイルを効率的に同期する。ホストとコンテナ間でファイルが変更された際に、自動的に両方に変更が反映
+```
