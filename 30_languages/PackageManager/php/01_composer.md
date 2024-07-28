@@ -48,6 +48,9 @@ composer install パッケージ名
 
 # composer.json に必要なパッケージを追加してインストール
 composer require パッケージ名
+# バージョン指定する場合
+composer require パッケージ名:^2.0
+
 ```
 
 - デバッグ
