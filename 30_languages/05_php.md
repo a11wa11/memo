@@ -360,6 +360,9 @@ php artisan config:cache
 php artisan optimize:clear
 ## 設定キャッシュのクリア。 設定のキャッシュをクリアする。設定ファイルを変更した後や開発中に設定をリセットしたい時
 php artisan config:clear
+
+# ルーティング一覧
+php artisan route:list
 ```
 
 ## 開発環境
