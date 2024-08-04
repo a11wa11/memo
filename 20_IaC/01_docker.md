@@ -224,6 +224,11 @@ docker logs コンテナ名 or コンテナID
 docker cp {コンテナID|コンテナ名}:ファイルパス コピー先
 ```
 
+```yml
+# composerイメージ(公式)からファイルコピーの例
+COPY --from=composer:2.7.7 /usr/bin/composer /usr/bin/composer
+```
+
 ### ネットワーク関連
 
 - dockerネットワークを表示
