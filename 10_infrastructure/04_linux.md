@@ -7,6 +7,7 @@
     - [yum](#yum)
     - [RPM](#rpm)
     - [dnf](#dnf)
+  - [alpine](#alpine)
   - [amazon-linux](#amazon-linux)
   - [代表的なファイルシステムに格納されているもの](#代表的なファイルシステムに格納されているもの)
     - [log](#log)
@@ -145,6 +146,16 @@ dnf search パッケージ名
 dnf list available パッケージ名(正規表現も使える)
 # パッケージ詳細を表示
 dnf info パッケージ名
+```
+
+## alpine
+
+```sh
+# アップデート
+apk update
+# パッケージインストール
+apk add パッケージ名
+apk add --no-cache パッケージ名 # インストール後にキャッシュクリア
 ```
 
 ## amazon-linux
