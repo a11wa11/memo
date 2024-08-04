@@ -16,6 +16,25 @@ echo 'module_hotfixes=true' >> /etc/yum.repos.d/nginx.repo
 yum install -y nginx
 ```
 
+## コマンド
+
+```sh
+# シンタックス確認
+nginx -t
+
+# 強制停止
+nginx -s stop
+
+# 現在処理中のリクエストが完了するのを待ってから停止
+nginx -s quit
+
+# 設定再読込
+nginx -s reload
+
+# ログファイルを再オープンする。ログファイルのローテーション（例: ログファイルをアーカイブして新しいログファイルを作成する）後に使用され、Nginxに新しいログファイルを使用させるために使われる
+nginx -s reopen
+```
+
 ## [locationディレクティブ](https://heartbeats.jp/hbblog/2012/04/nginx05.html)
 
 | 正規表現 | 内容 |
