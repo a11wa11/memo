@@ -53,6 +53,19 @@ composer require パッケージ名:^2.0
 
 ```
 
+- 再インストール
+
+```sh
+# キャッシュクリア
+composer clear-cache
+
+# インストール済パッケージ削除
+rm -rf vendor/
+
+# 再インストール
+composer install
+```
+
 - デバッグ
 
 ```sh
