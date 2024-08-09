@@ -25,6 +25,8 @@
 
 ### apt
 
+- debianでも使用する
+
 ```sh
 # インストール可能なバージョンを確認
 apt-cache policy パッケージ名
@@ -42,6 +44,11 @@ apt list --installed
 
 # パッケージ詳細確認
 apt show パッケージ名
+
+# リポジトリの最新情報更新
+apt update
+# インストール済パッケージ更新
+apt upgrade
 ```
 
 - apt-getよく使うパッケージやコマンド
