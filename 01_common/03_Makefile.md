@@ -1,6 +1,12 @@
 # Makefile
 
-* 書き方
+- [Makefile](#makefile)
+  - [構文](#構文)
+  - [実行コマンド](#実行コマンド)
+
+## 構文
+
+- 基本文
 
 ```Makefile
 # 基本的な記載の仕方
@@ -19,8 +25,8 @@
 all: ;               # all は何も実行しないということになり、誤動作も防止することができる
 ```
 
-* 変数定義
-  * `x = foo`でも可能だが`x := foo`が理解しやすい
+- 変数定義
+  - `x = foo`でも可能だが`x := foo`が理解しやすい
 
 ```Makefile
 x := foo      # echo &(x) で foo が出力される
@@ -33,7 +39,24 @@ current_dir := $(shell pwd)
 result_dir := $(current_dir)/taurus/results/$(now)
 ```
 
-* 実行コマンド
+- カレントディレクトリの解釈
+  - `cd`で移動しても次の行では元のディレクトリに戻るので注意
+
+```Makefile
+# pwd
+/path/to/current
+
+# ↑こういう状況だとする
+cd /path/to/current/somewhere
+pwd    # /path/to/current と出力
+
+cd /path/to/current/somewhere; pwd  # /path/to/current/somewhere と出力
+
+cd /path/to/current/somewhere && \
+    pwd                             # /path/to/current/somewhere と出力
+```
+
+## 実行コマンド
 
 ```sh
 make ターゲット        # 指定したターゲット内容を実行する
