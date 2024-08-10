@@ -158,11 +158,28 @@ dnf info パッケージ名
 ## alpine
 
 ```sh
-# アップデート
-apk update
 # パッケージインストール
 apk add パッケージ名
 apk add --no-cache パッケージ名 # インストール後にキャッシュクリア
+
+# アンインストール
+apk del パッケージ名
+
+# パッケージ検索
+apk search パッケージ名
+
+# パッケージ詳細
+apk info パッケージ名
+
+# リポジトリアップデート
+apk update
+
+# パッケージアップグレード
+apk upgrade
+
+# パッケージリスト
+apk list --installed # インストール済
+apk list --available # 利用可能
 ```
 
 ## amazon-linux
