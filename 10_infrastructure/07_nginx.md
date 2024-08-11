@@ -21,6 +21,8 @@ yum install -y nginx
 ```sh
 # シンタックス確認
 nginx -t
+# シンタックス確認して現在適用されている設定(include含めて)を出力
+nginx -T
 
 # 強制停止
 nginx -s stop
@@ -46,6 +48,8 @@ nginx -s reopen
 | ~* | 正規業限(大文字・小文字を区別しない) |
 
 [優先順位参考](https://muziyoshiz.hatenablog.com/entry/2019/06/30/203903)
+
+rootなどが複数の設定ファイルで定義されていると、includeで後から読み込まれたファイルが基本は優先的に反映される
 
 ## リダイレクト設定
 
