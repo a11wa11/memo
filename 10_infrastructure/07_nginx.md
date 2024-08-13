@@ -1,8 +1,20 @@
 # nginx
 
+- [nginx](#nginx)
+  - [インストール](#インストール)
+  - [コマンド](#コマンド)
+  - [構文](#構文)
+    - [ディレクティブ](#ディレクティブ)
+      - [location](#location)
+      - [server](#server)
+    - [リダイレクト設定](#リダイレクト設定)
+    - [proxy\_pass](#proxy_pass)
+    - [stream](#stream)
+    - [upstream](#upstream)
+
 ## インストール
 
-* centos7
+- centos7
 
 ```sh
 touch /etc/yum.repos.d/nginx.repo
@@ -37,7 +49,11 @@ nginx -s reload
 nginx -s reopen
 ```
 
-## [locationディレクティブ](https://heartbeats.jp/hbblog/2012/04/nginx05.html)
+## 構文
+
+### ディレクティブ
+
+#### [location](https://heartbeats.jp/hbblog/2012/04/nginx05.html)
 
 | 正規表現 | 内容 |
 |-|-|
@@ -51,7 +67,31 @@ nginx -s reopen
 
 rootなどが複数の設定ファイルで定義されていると、includeで後から読み込まれたファイルが基本は優先的に反映される
 
-## リダイレクト設定
+#### [server](https://nginx.org/en/docs/http/server_names.html)
+
+- listen
+  - 一つのサーバーブロックで複数のlistenディレクティブを指定し、複数のポートでリクエストを受け付けることが可能
+- default_server
+  - そのポートへのリクエストが他のserver_nameに一致しない場合に、このサーバーブロックが選ばれるようになる
+- server_name
+  - サーバーブロックをどのドメイン名で識別するかを設定する
+
+```nginx
+server {
+    listen       80;
+    listen       8080  default_server; # default_server
+    server_name  example.net;
+}
+
+server {
+    listen       80  default_server;
+    listen       8080;
+    server_name  example.org;
+}
+
+```
+
+### リダイレクト設定
 
 ```nginx
 # 301の場合 恒久リダイレクト
@@ -65,7 +105,7 @@ location ^~ /foo/bar.html {
 }
 ```
 
-## proxy_pass
+### proxy_pass
 
 ```nginx
 # 301の場合 恒久リダイレクト
@@ -74,13 +114,49 @@ location  /name/ {
 }
 ```
 
-## [upstream](https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/)
+### stream
+
+TCPやUDPプロトコルを使用したリクエストを他のサーバーにプロキシする。これにより、HTTP以外のプロトコルを使用するアプリケーションもnginx経由でアクセス可能
+
+- ロードバランシング
+  - 複数のバックエンドサーバーにトラフィックを分散させることで、負荷分散を行い、システムの可用性とスケーラビリティを向上させる
+- セキュリティとアクセス制御
+  - Nginxを通じてアクセスすることで、特定のIPアドレスに対するアクセス制限や、TLS/SSLの暗号化を行える
 
 ```nginx
 stream {
     server {
         listen     12345;
         proxy_pass https://転送先URL:443(ポート);
+    }
+}
+```
+
+### [upstream](https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/)
+
+upstreamは複数のバックエンドサーバーに対するロードバランシングやフェイルオーバーの設定を可能にする重要なディレクティブ  
+システムの可用性を高め、スケールアウトのアプローチを取ることができる
+
+- 役割
+  - ロードバランシング
+    - リクエストを複数のバックエンドサーバーに分散させることができる。nginxは、ラウンドロビン、最小接続数、IPハッシュなど、さまざまなアルゴリズムを使用してリクエストを分散させる
+  - フェイルオーバー
+    - あるサーバーが応答しない場合、nginxは他のサーバーにリクエストを転送して、サービスの継続性を確保する
+  - ヘルスチェック
+  - nginxは、各バックエンドサーバーの状態をモニタリングし、ダウンしているサーバーにはリクエストを送らないようにすることも可能
+
+```nginx
+upstream backend {
+    server backend1.example.com;
+    server backend2.example.com;
+    server backend3.example.com;
+}
+
+server {
+    listen 80;
+
+    location / {
+        proxy_pass http://backend;
     }
 }
 ```
