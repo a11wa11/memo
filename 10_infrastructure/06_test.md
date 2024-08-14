@@ -1,12 +1,19 @@
 # testで使えるツール
 
-* メモ アイドリング状態→安定動作時
+- [testで使えるツール](#testで使えるツール)
+  - [Webサーバやアプリケーションサーバの性能テスト](#webサーバやアプリケーションサーバの性能テスト)
+    - [apache bench](#apache-bench)
+    - [k6](#k6)
+    - [Taurus](#taurus)
+  - [stress](#stress)
+  - [ポートスキャン](#ポートスキャン)
+  - [IPアドレスを確認できるサイト](#ipアドレスを確認できるサイト)
 
 ## Webサーバやアプリケーションサーバの性能テスト
 
 ### apache bench
 
-* コマンド
+- コマンド
 
 ```sh
 yum install httpd
@@ -18,7 +25,7 @@ ab -n 100 -c 10 -A hogehoge:password example.com
 # -A 認証に必要なアカウント:パスワードの形式で送信可能
 ```
 
-* 表記
+- 表記
 
 ```sh
 Connection Times (ms)
@@ -83,13 +90,13 @@ Transfer rate:          19.33 [Kbytes/sec] received
 
 ### [k6](https://k6.io/docs/get-started/running-k6/)
 
-* 実行コマンド
+- 実行コマンド
 
 ```sh
 k6 run script.js(任意のファイルパス)
 ```
 
-* 実行ファイル(基本)
+- 実行ファイル(基本)
 
 ```script.js
 import http from 'k6/http';
@@ -104,7 +111,7 @@ export default function () {
 }
 ```
 
-* 実行ファイル(応用)
+- 実行ファイル(応用)
 
 ```script.js
 import http from 'k6/http';
@@ -181,19 +188,19 @@ export function handleSummary(data) {
 
 参考
 
-* [負荷テストを手軽にできるツール「k6」を試してみた](https://zenn.dev/rescuenow/articles/8349deb470470e)
-* [負荷テストツール k6 の基本的な使い方](https://zenn.dev/yumemi_inc/articles/k6-load-test)
-* [負荷テストツール K6 について調べてみた](https://sreake.com/blog/learn-about-k6/)
-* [イチオシな負荷テストツール k6 の始め方](https://blog1.mammb.com/entry/2023/06/27/090000)
-* 試験評価の参考
-    * [k6による負荷試験 入門から実践まで](https://speakerdeck.com/fujiwara3/k6niyorufu-he-shi-yan-ru-men-karashi-jian-made)
+- [負荷テストを手軽にできるツール「k6」を試してみた](https://zenn.dev/rescuenow/articles/8349deb470470e)
+- [負荷テストツール k6 の基本的な使い方](https://zenn.dev/yumemi_inc/articles/k6-load-test)
+- [負荷テストツール K6 について調べてみた](https://sreake.com/blog/learn-about-k6/)
+- [イチオシな負荷テストツール k6 の始め方](https://blog1.mammb.com/entry/2023/06/27/090000)
+- 試験評価の参考
+  - [k6による負荷試験 入門から実践まで](https://speakerdeck.com/fujiwara3/k6niyorufu-he-shi-yan-ru-men-karashi-jian-made)
 
 ### [Taurus](https://gettaurus.org/install/Installation/)
 
 使い方
 
-* 以下のymlファイルでテストが可能
-    * k6でテストするように設定しているので上記のk6ファイルを流用している
+- 以下のymlファイルでテストが可能
+  - k6でテストするように設定しているので上記のk6ファイルを流用している
 
 ```load_test.yml
 execution:
@@ -207,17 +214,17 @@ execution:
     script: ../k6/script.js  # 使用するスクリプトのパスをk6/loadTest.jsに設定
 ```
 
-* Taurusで負荷試験実行コマンド
-    * 以下の条件が揃っている前提
-        * 上記の`load_test.yml`という実行ファイル名がカレントディレクトリにある状態
-        * `load_test.yml`内にk6で実行する定義があり、k6の実行ファイルはカレントディレクトリの`k6/loadTest.js`になる状態
-    * ※`brew install bzt`でもインストールして実行可能だが、依存パッケージが多いのでdockerが無難
+- Taurusで負荷試験実行コマンド
+  - 以下の条件が揃っている前提
+    - 上記の`load_test.yml`という実行ファイル名がカレントディレクトリにある状態
+    - `load_test.yml`内にk6で実行する定義があり、k6の実行ファイルはカレントディレクトリの`k6/loadTest.js`になる状態
+  - ※`brew install bzt`でもインストールして実行可能だが、依存パッケージが多いのでdockerが無難
 
 ```sh
 docker run -it --rm -v $(pwd):/bzt-configs blazemeter/taurus load_test.yml
 ```
 
-* taurusで実行結果をローカルに保存して実行するためのMakefile
+- taurusで実行結果をローカルに保存して実行するためのMakefile
 
 ```make
 now := $(shell date '+%Y%m%d-%H%M')
@@ -225,28 +232,28 @@ current_dir := $(shell pwd)
 result_dir := $(current_dir)/taurus/results/$(now)
 
 taurus: # taurusをdockerで実行し、結果を`taurus/results/yyyymmdd-hhmm`へ出力する
-	mkdir $(result_dir)
-	docker run -it --rm -v $(current_dir):/bzt-configs -v $(result_dir):/tmp/artifacts blazemeter/taurus taurus/load_test.yml
-	echo "taurus/results/$(now) へ負荷試験の結果が出力されました"
+    mkdir $(result_dir)
+    docker run -it --rm -v $(current_dir):/bzt-configs -v $(result_dir):/tmp/artifacts blazemeter/taurus taurus/load_test.yml
+    echo "taurus/results/$(now) へ負荷試験の結果が出力されました"
 
 .PHONY: taurus
 ```
 
 参考
 
-* [手軽に負荷テストができるツール「Taurus」がスゴい](https://zenn.dev/tonchan1216/articles/11afd147ea3dd2734315)
-* [負荷テストフレームワークのTaurusはいいぞ](https://engineer.retty.me/entry/2022/12/09/123459)
+- [手軽に負荷テストができるツール「Taurus」がスゴい](https://zenn.dev/tonchan1216/articles/11afd147ea3dd2734315)
+- [負荷テストフレームワークのTaurusはいいぞ](https://engineer.retty.me/entry/2022/12/09/123459)
 
 ## stress
 
-* インストール
+- インストール
 
 ```sh
 yum install stree
 stress --version
 ```
 
-* 使用例
+- 使用例
 
 ```sh
 # CPU負荷がけ
@@ -276,8 +283,8 @@ nmap -sS -sV -oN nmap-result example.jp(対象ホスト or IP)
 
 ## IPアドレスを確認できるサイト
 
-* [1](https://al-batross.net/2020/11/02/check_my_global_ip_address/)
-* [2](http://checkip.dyndns.org/)
-* [3](http://httpbin.org/ip)
+- [1](https://al-batross.net/2020/11/02/check_my_global_ip_address/)
+- [2](http://checkip.dyndns.org/)
+- [3](http://httpbin.org/ip)
 
 [SYNフラッド攻撃の対策](https://www.shadan-kun.com/blog/measure/2664/)
