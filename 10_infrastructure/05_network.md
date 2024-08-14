@@ -123,6 +123,7 @@ Webブラウザの固有情報。ブラウザーなどの種類を表す情報�
 cat /etc/hostname  
 hostnamectl status
 hostname
+getent hosts
 ```
 
 - ホスト名変更

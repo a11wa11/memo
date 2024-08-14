@@ -293,6 +293,8 @@ uid=0(root) gid=0(root) groups=0(root)
 
 ```sh
 groups
+cat /etc/gshadow
+getent group グループ名 # 存在するか確認
 ```
 
 #### 権限変更
@@ -303,11 +305,22 @@ useradd -m -s /bin/bash -U 新規ユーザー名
 # -m：ホームディレクトリを作成する
 # -s：デフォルトのシェルを指定する
 # -U：新しいグループを作成する
-useradd -r nginx
+useradd -r グループ名
 # -r 一般ユーザーアカウントとは異なる範囲のUIDを持つシステムアカウントを作成
-useradd -u 101 -g 101 -r nginx
+useradd -u 101 -g 101 -r グループ名
 # -u ユーザーID番号を指定する
 # -g グループID番号を指定する
+
+# グループ追加
+groupadd グループ名
+groupadd -g 101(グループID) グループ名 # グループIDを指定
+
+# 消去
+userdel ユーザー名
+groupdel グループ名
+
+# ユーザーをグループに追加 -aG = 既存グループを維持しながらユーザーを指定をグループに追加
+usermod -aG グループ名 ユーザー名
 
 # 再起的にオーナーを変更する
 chown -R ユーザー名:グループ名 対象フォルダ
