@@ -273,6 +273,7 @@ systemctl restart network
 netstat -an | grep ポートナンバー
 ss | grep ポートナンバー
 lsof -i ポートナンバー
+nc -zv 対象ホスト名 ポート番号
 ```
 
 ### ネットワークマネージャー
