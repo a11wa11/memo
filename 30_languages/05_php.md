@@ -38,6 +38,12 @@ ls /usr/src/php/ext
 php -i
 ```
 
+- php-fpmの再起動
+
+```sh
+kill -USR2 プロセス番号(php-fpm: master process)
+```
+
 ## 構文
 
 ### 基本
