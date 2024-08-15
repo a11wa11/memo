@@ -49,6 +49,9 @@ apt show パッケージ名
 apt update
 # インストール済パッケージ更新
 apt upgrade
+
+# インストール済不要パッケージの削除
+apt autoremove
 ```
 
 - apt-getよく使うパッケージやコマンド
