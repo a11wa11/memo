@@ -4,6 +4,7 @@
   - [インストール](#インストール)
   - [コマンド](#コマンド)
   - [構文](#構文)
+    - [変数](#変数)
     - [ディレクティブ](#ディレクティブ)
       - [location](#location)
       - [server](#server)
@@ -50,6 +51,38 @@ nginx -s reopen
 ```
 
 ## 構文
+
+### 変数
+
+- setディレクティブ
+
+```nginx
+server {
+    listen 80;
+    server_name example.com;
+
+    set $backend_url "http://backend.example.com";
+
+    location / {
+        proxy_pass $backend_url;
+    }
+}
+```
+
+- envディレクティブ
+
+```nginx
+env BACKEND_HOST;
+
+server {
+    listen 80;
+    server_name example.com;
+
+    location / {
+        proxy_pass http://$BACKEND_HOST;
+    }
+}
+```
 
 ### ディレクティブ
 
