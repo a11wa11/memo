@@ -532,6 +532,7 @@ EOF
 envsubst  < template.txt
 # 指定したテンプレート内の${VARIABLE_NAME}のみ置換
 envsubst '${USER}' < template.txt
+envsubst '${USER_NAME} ${PROJECT_NAME}' < template.txt
 ```
 
 ### ステータス
