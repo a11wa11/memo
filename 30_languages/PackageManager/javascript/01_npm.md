@@ -55,6 +55,8 @@ npm ls -prod # dependenciesのみ
 
 # どのバージョンがあるか調べる
 npm info パッケージ名 versions
+npm view パッケージ名 versions --json
+
 # バージョンを絞り込み
 npm info パッケージ名@0.1 version
 # 最新バージョンを表示
@@ -145,8 +147,18 @@ npm init
 - npm-which
 
 ```sh
-npm install npm-which
+npm install -g npm-which
 npx npm-which ターゲット
+```
+
+- npm-check-updates
+
+package.jsonの依存関係を最新バージョンに更新。指定されたバージョン範囲を無視して最新のバージョンをインストールする場合に便利
+
+```sh
+npm install -g npm-check-updatesh
+ncu # package.jsonがあるディレクトリで実行する
+ncu -u # package.jsonをアップデートする
 ```
 
 ## リンター
