@@ -42,6 +42,8 @@ php -i
 
 ```sh
 kill -USR2 プロセス番号(php-fpm: master process)
+    or
+pkill -o -USR2 php-fpm # -oはoldest(一番古いという意味)
 ```
 
 ## 構文
