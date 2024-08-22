@@ -10,6 +10,7 @@
       - [push](#push)
     - [コンテナ関連](#コンテナ関連)
     - [ネットワーク関連](#ネットワーク関連)
+  - [Dockerfile](#dockerfile)
   - [マルチCPUアーキテクチャ](#マルチcpuアーキテクチャ)
     - [docker buildx](#docker-buildx)
   - [Docker for Mac](#docker-for-mac)
@@ -247,6 +248,17 @@ docker network inspect ネットワーク名 or ネットワークID
 
 ```sh
 docker network create --attachable -d ネットワーク名 --subnet=172.17.0.0/16 作成ネットワーク名
+```
+
+## Dockerfile
+
+- arg
+
+```yml
+FROM --platform=linux/amd64 php:8.1.29-fpm
+
+ARG stage=inspection  # Dockerfile内でのみ有効
+ENV STAGE=development # イメージ内でも環境変数として有効
 ```
 
 ## [マルチCPUアーキテクチャ](https://docs.docker.jp/docker-for-mac/multi-arch.html)
