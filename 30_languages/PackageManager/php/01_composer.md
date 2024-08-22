@@ -51,6 +51,8 @@ composer require パッケージ名
 # バージョン指定する場合
 composer require パッケージ名:^2.0
 
+# composer.jsonのrequire-devを除いてインストール
+composer install --no-dev
 ```
 
 - 再インストール
