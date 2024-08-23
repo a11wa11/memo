@@ -5,7 +5,10 @@
     - [接続](#接続)
     - [確認系](#確認系)
     - [便利系](#便利系)
+    - [function](#function)
+    - [index](#index)
     - [調査](#調査)
+    - [拡張機能](#拡張機能)
     - [dump](#dump)
     - [リストア](#リストア)
     - [メンテナンス・パフォーマンス改善](#メンテナンスパフォーマンス改善)
@@ -79,7 +82,7 @@ select * from テーブル名;
 
 -- ページャーをlessに変更
 --- 表示中に-N と押下すると最下部に「Constantly display line numbers (press RETURN)」と表示されるのでRETURNキー押下で行番号表示が可能。再度で行番号表示消去
-\setenv PAGER less 
+\setenv PAGER less
 
 -- pagerのON/OFF切替
 \pset pager
