@@ -157,8 +157,11 @@ package.jsonの依存関係を最新バージョンに更新。指定された�
 
 ```sh
 npm install -g npm-check-updatesh
-ncu # package.jsonがあるディレクトリで実行する
+
+# package.jsonがあるディレクトリで実行する
+ncu    # アップデート可能なパッケージを表示
 ncu -u # package.jsonをアップデートする
+ncu --target minor # メジャーバージョンは更新せず、マイナーバージョン以下で更新可能調査
 ```
 
 ## リンター
