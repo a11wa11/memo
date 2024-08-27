@@ -268,7 +268,7 @@ ENV STAGE=development # イメージ内でも環境変数として有効
 
 ### [docker buildx](https://matsuand.github.io/docs.docker.jp.onthefly/buildx/working-with-buildx/)
 
-**Docker Desktop for WindowsまたはDocker Desktop for Macの場合には、最初からbuildxが有効になっていてマルチCPUアーキテクチャーのコンテナーを作成することができるようになっている**
+- **Docker Desktop for WindowsまたはDocker Desktop for Macの場合には、最初からbuildxが有効になっていてマルチCPUアーキテクチャーのコンテナーを作成することができるようになっている**
 
 ```sh
 # 現在のビルダーインスタンスの一覧
