@@ -8,6 +8,10 @@ Serverless Applicationを構成管理デプロイするためのツール。AWS,
 
 ```sh
 npm install -g serverless
+
+# ServerlessFrameworkのプラグインインストール
+serverless plugin install -n プラグイン名
+serverless plugin install --name プラグイン名
 ```
 
 ## 基本コマンド
