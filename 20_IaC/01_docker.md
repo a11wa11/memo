@@ -18,9 +18,26 @@
 
 ## インストール
 
-- [centos7へdockerのインストール](https://qiita.com/kichise/items/f8e56c6d2d08eaf4a6a0)
 - mac
   - `brew install docker`
+- [centos7へdockerのインストール](https://qiita.com/kichise/items/f8e56c6d2d08eaf4a6a0)
+
+- amazonlinux2023
+
+```sh
+#!/bin/bash
+dnf update -y
+
+# install docker
+dnf install -y docker git
+systemctl enable docker
+systemctl start docker
+usermod -aG docker ec2-user
+
+# install docker-compose
+curl -L https://github.com/docker/compose/releases/download/1.6.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+```
 
 ## dockerのタグ一覧を取得するコマンドを生成
 
