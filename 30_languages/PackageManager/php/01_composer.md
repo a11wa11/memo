@@ -97,6 +97,8 @@ composer remove --no-update パッケージ名
 - 調査
 
 ```sh
+# インストール済パッケージ一覧
+composer show
 # パッケージ詳細
 composer show パッケージ名
 # 依存関係を表示
