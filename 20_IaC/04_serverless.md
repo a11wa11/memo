@@ -4,6 +4,8 @@
 
 Serverless Applicationを構成管理デプロイするためのツール。AWS, GCP, Azure, IBM Cloudなど様々なクラウドプロバイダーに対応している
 
+[公式ドキュメント](https://www.serverless-dev.com/framework/docs)
+
 ## インストール
 
 ```sh
