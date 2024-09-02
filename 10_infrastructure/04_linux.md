@@ -5,10 +5,10 @@
     - [apt](#apt)
   - [redhat](#redhat)
     - [yum](#yum)
-    - [RPM](#rpm)
     - [dnf](#dnf)
-  - [alpine](#alpine)
+    - [RPM](#rpm)
   - [amazon-linux](#amazon-linux)
+  - [alpine](#alpine)
   - [代表的なファイルシステムに格納されているもの](#代表的なファイルシステムに格納されているもの)
     - [log](#log)
     - [syslog](#syslog)
@@ -123,6 +123,20 @@ yum update epel
 # 一時的にリポジトリを有効にして実行
 yum --enablerepo=epel install ライブラリ名
 yum --disablerepo=epel install,update,search ライブラリ名
+
+# Google chrome & driver インストール
+RUN yum install -y https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm --skip-broken
+```
+
+### dnf
+
+```sh
+# パッケージ検索
+dnf search パッケージ名
+# インストール可能か確認
+dnf list available パッケージ名(正規表現も使える)
+# パッケージ詳細を表示
+dnf info パッケージ名
 ```
 
 ### RPM
@@ -147,15 +161,15 @@ rpm -evh パッケージ名.rpm
 
 RPMパッケージにおける“アップグレードは慎重に”という方針に基づいて作成されるバックアップファイルのようなもので、.rpmsaveというファイルを使って復元用の情報を保存させるようにしている
 
-### dnf
+## amazon-linux
 
 ```sh
-# パッケージ検索
-dnf search パッケージ名
-# インストール可能か確認
-dnf list available パッケージ名(正規表現も使える)
-# パッケージ詳細を表示
-dnf info パッケージ名
+# amazon-linuxでのEPEL追加
+amazon-linux-extras install -y epel
+
+# amazon-linux-extras のリスト確認
+amazon-linux-extras
+amazon-linux-extras list # list省略可能
 ```
 
 ## alpine
@@ -183,17 +197,6 @@ apk upgrade
 # パッケージリスト
 apk list --installed # インストール済
 apk list --available # 利用可能
-```
-
-## amazon-linux
-
-```sh
-# amazon-linuxでのEPEL追加
-amazon-linux-extras install -y epel
-
-# amazon-linux-extras のリスト確認
-amazon-linux-extras
-amazon-linux-extras list # list省略可能
 ```
 
 ## 代表的なファイルシステムに格納されているもの

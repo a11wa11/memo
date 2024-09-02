@@ -56,11 +56,6 @@ if [ -e /usr/bin/docker ]; then
 fi
 ```
 
-```sh
-# Google chrome & driver インストール
-RUN yum install -y https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm --skip-broken
-```
-
 </details>
 
 ## コマンド
