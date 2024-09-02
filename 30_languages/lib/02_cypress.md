@@ -161,10 +161,10 @@ cy.visit('url', {
 [参考](https://future-architect.github.io/articles/20210428a/)
 [公式](https://docs.cypress.io/guides/getting-started/installing-cypress#Opt-out-of-sending-exception-data-to-Cypress)
 
-https://engineer-ninaritai.com/cypress-install/  
-https://www.kaizenprogrammer.com/entry/2017/12/23/144242  
-https://yaruki-strong-zero.hatenablog.jp/entry/cypress  
-https://qiita.com/eyuta/items/a2454719c2d82c8bacd5  
-https://qiita.com/oh_rusty_nail/items/58dcec335d67e81816dd
+* <https://engineer-ninaritai.com/cypress-install/>
+* <https://www.kaizenprogrammer.com/entry/2017/12/23/144242>
+* <https://yaruki-strong-zero.hatenablog.jp/entry/cypress>
+* <https://qiita.com/eyuta/items/a2454719c2d82c8bacd5>
+* <https://qiita.com/oh_rusty_nail/items/58dcec335d67e81816dd>
 
 ## [ダッシュボード](https://dashboard.cypress.io/login)
