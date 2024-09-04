@@ -33,9 +33,9 @@ sls print --stage dev
 # デプロイ済のサービスの情報（エンドポイントやリソースなど）を確認
 sls info
 
-# デプロイ済バージョンを表示
+# デプロイ済リストと日付を表示
 sls deploy list
-# デプロイ済関数とそのバージョンを表示
+# デプロイ済lambda(関数:バージョン)を表示
 sls deploy list functions
 
 # ログ確認
