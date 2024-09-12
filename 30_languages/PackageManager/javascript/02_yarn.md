@@ -2,6 +2,7 @@
 
 - [yarn](#yarn)
   - [インストール](#インストール)
+  - [コマンド](#コマンド)
   - [npmとyarn比較](#npmとyarn比較)
 
 [Yarn](https://www.wakuwakubank.com/posts/307-javascript-yarn/)　とは?
@@ -18,6 +19,20 @@
 
 ```sh
 npm install -g yarn
+```
+
+## コマンド
+
+```sh
+# 実行可能ファイルが保存されているディレクトリ（バイナリのパス）を確認
+yarn bin
+yarn bin パッケージ名
+yarn global bin
+
+# パッケージの保存先ディレクトリを確認
+yarn dir
+yarn dir パッケージ名
+yarn global dir
 ```
 
 ## npmとyarn比較
