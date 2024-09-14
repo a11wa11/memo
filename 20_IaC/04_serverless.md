@@ -58,5 +58,5 @@ sls deploy -v
 
 ```sh
 # serverless.ymlがあるパスで実施
-sls remove
+sls remove -s dev
 ```
