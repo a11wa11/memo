@@ -3,7 +3,8 @@
 - 01_common
   - [git](https://a11wa11.github.io/memo/01_common/01_git)
   - [yaml](https://a11wa11.github.io/memo/01_common/02_yaml)
-  - [Makefile](https://a11wa11.github.io/memo/01_common/03_Makefile)
+  - [json](https://a11wa11.github.io/memo/01_common/03_json)
+  - [Makefile](https://a11wa11.github.io/memo/01_common/04_Makefile)
 - 10_infrastructure
   - [ssh](https://a11wa11.github.io/memo/10_infrastructure/01_ssh)
   - [shell](https://a11wa11.github.io/memo/10_infrastructure/02_shell)
