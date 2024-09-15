@@ -1,10 +1,89 @@
 # typescript
 
 - [typescript](#typescript)
-  - [基本](#基本)
-  - [コンパイル](#コンパイル)
+  - [コマンド](#コマンド)
+    - [コンパイル](#コンパイル)
+  - [構文](#構文)
 
-## 基本
+## コマンド
+
+### コンパイル
+
+`tsc` -> typescriptファイルをjavascriptにコンパイルするためのコンパイラコマンド
+
+```sh
+# 基本コンパイル
+tsc
+# 指定ファイルのみコンパイル
+tsc 対象ファイル.ts
+
+# watchモードでリアルタイムコンパイル
+tsc 対象ファイル.ts --watch
+
+# 出力ディレクトリを指定してコンパイル
+tsc --outDir dist
+```
+
+- 注意点
+  - `tsc --outDir ディレクトリ名`でコンパイル指定しなければデフォルトでは、元あるtsファイルの場所にそのままコンパイルファイル(js)が作成される
+
+- `.d.ts` -> typescriptの型定義ファイル。javascriptで記述されたコードやライブラリをtypescriptで使用するときに、型の補完と型チェックを提供する
+  - 型情報の宣言
+    - `.d.ts`ファイルは型情報のみを宣言し、実際のコード（ロジック）は含まない。関数やクラス、変数、モジュールなどがどのような型を持つかを定義
+  - javascriptライブラリの型サポート：
+    - javascriptで書かれたライブラリ（例 jQueryやLodash）をtypescriptで使う場合、型情報がないとtypescriptの型チェックや型補完が機能しない。そこで、`.d.ts`ファイルを使って、そのライブラリに対して型を定義し、typescriptのコードで型安全性を確保できる
+  - コンパイル対象外
+    - `.d.ts`ファイルは型定義だけなので、typescriptのコンパイラで .ts ファイルをjavascriptに変換するときに、.d.ts ファイルはコンパイルされません。あくまで開発時の補助として機能する
+  - 型チェックの補完
+    - `.d.ts`ファイルがあれば、typescriptのエディタやコンパイラは型チェックを行い、エラーの検出やコード補完をサポートする
+
+- `tsconfig.json` -> デフォルトではtsconfig.jsonファイルがプロジェクト内にある場合、その設定に従ってtypescriptファイルをコンパイルする
+
+```tsconfig.json
+{
+  "include": ["./src/**/*.ts"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "target": "es6",                          // typescriptコードをどのバージョンのjavascriptに変換するかを指定。ES6(ECMAScript 2015)を出力ターゲットとする
+    "module": "commonjs",                     // CommonJS形式のモジュール
+    "lib": [
+      "es6",
+      "es2018",
+      "esnext.asynciterable"
+    ],
+    "rootDir": "src",
+    "outDir": "./dist",                        // コンパイル後のファイルを./distディレクトリに出力
+    "typeRoots": ["node_modules/@types"],
+    "moduleResolution": "node",                // typescriptがモジュールをどのように解決(探索)するかを指定。主に"node"と"classic"の2つのオプションがある。"node"はnode.jsのモジュール解決アルゴリズムを模倣し、"classic"はtypescriptの古い解決方法を使用する
+    "baseUrl": ".",
+
+    /* Code Quality checks */
+    "noUnusedLocals": true,                    // 使用されていないローカル変数がある場合にエラー
+    "noUnusedParameters": true,                // 使用されていない関数のパラメータがある場合にエラー
+    "noFallthroughCasesInSwitch": true,        // breakを忘れた場合に警告
+    "removeComments": true,                    // コンパイル後のファイルからコメントを削除
+    "forceConsistentCasingInFileNames": true,  // ファイル名の大文字小文字を区別する
+
+    /* Strict Type Checks */
+    "noImplicitAny": true,                     // 型が明示されていない変数やパラメータが暗黙的にany型になることを禁止
+    "noImplicitThis": true,                    // thisの型が暗黙的にanyになることを禁止
+    "noImplicitReturns": true,                 // 必ず戻り値を返すことが求められる
+    "strictNullChecks": true,                  // null,undefinedを厳密にチェック
+    "strictFunctionTypes": true,               // 関数の型互換性をより厳密にチェック
+
+    /* Module Resolution Options */
+    "emitDecoratorMetadata": true,             // デコレーターが使用されているクラスに対して、メタデータを生成
+    "experimentalDecorators": true,            // TypeScriptの実験的なデコレーター機能を有効にする
+
+    /* Advanced Options */
+    "skipLibCheck": true,                      // ライブラリの型チェックをスキップ
+    "composite": false,                        // 他のTypeScriptプロジェクトと一緒にビルドされない
+    "allowSyntheticDefaultImports": false,     // デフォルトインポートは許可しない
+  },
+}
+```
+
+## 構文
 
 - object
 
@@ -184,16 +263,6 @@ export default const target;          // importされた時に任意の名前で
 
 ```typescript
 console.log("process.env.対象変数")
-```
-
-## コンパイル
-
-```sh
-# 基本コンパイル
-tsc 対象ファイル.ts 
-
-# watchモードでリアルタイムコンパイル
-tsc 対象ファイル.ts --watch
 ```
 
 - インデックスシグネチャ
