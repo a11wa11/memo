@@ -1,6 +1,12 @@
 # Serverless Framework
 
-## 特徴
+- [Serverless Framework](#serverless-framework)
+  - [概要](#概要)
+  - [インストール](#インストール)
+  - [コマンド](#コマンド)
+  - [serverless.yml](#serverlessyml)
+
+## 概要
 
 Serverless Applicationを構成管理デプロイするためのツール。AWS, GCP, Azure, IBM Cloudなど様々なクラウドプロバイダーに対応している
 
@@ -16,15 +22,15 @@ serverless plugin install -n プラグイン名
 serverless plugin install --name プラグイン名
 ```
 
-## 基本コマンド
+## コマンド
 
-* サービス作成
+- サービス作成
 
 ```sh
 serverless create --template aws-nodejs(ランタイム指定) --name my-service(サービス名) --path my-service(パス)
 ```
 
-* 確認
+- 確認
 
 ```sh
 # デプロイされる設定内容を確認。serverless.ymlの内容を出力し、実際にどのような設定が適用されるかを確認できる
@@ -42,7 +48,7 @@ sls deploy list functions
 sls logs --function 関数名(serverless.ymlで定義されている関数名)
 ```
 
-* デプロイ
+- デプロイ
 
 ```sh
 sls deploy -v
@@ -52,11 +58,43 @@ sls deploy -v
 # --force              変更がない場合でも強制的にデプロイ
 # --package            既に作成したパッケージを使用してデプロイ 例: sls deploy --package ./path/to/package
 # --function または -f  特定の関数のみをデプロイ             例: sls deploy --function myFunction
+# --config または -c    severless.ymlファイル相当パスを指定  例: sls deploy -c serverless.stg.yml
 ```
 
-* 破棄
+- 破棄
+  - `sls remove`コマンドが無難だが、serverless.ymlファイルの変遷でサービス名が変わったり、消し忘れがあった場合はcloudformationからスタック削除でも消去可能
 
 ```sh
 # serverless.ymlがあるパスで実施
 sls remove -s dev
+```
+
+## serverless.yml
+
+```yml
+service: サービス名
+
+# serverlessのバージョン
+frameworkVersion: '3'
+
+# awsの詳細の指定
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: ap-northeast-1
+  stage: dev # defaultでdev
+
+# aws lambda function
+functions:
+  関数名:
+    handler: dist/lambda.handler
+    environment:
+
+# 自作変数を定義したい時
+custom:
+  defaultStage: dev
+
+# プラグイン
+plugins:
+  - serverless-offline
 ```
