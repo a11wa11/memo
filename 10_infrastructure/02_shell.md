@@ -1,8 +1,8 @@
 # shell
 
 - [コマンド](#コマンド)
-- [便利コマンド](#便利コマンド)
 - [シグナル](#シグナル)
+- [便利コマンド](#便利コマンド)
 - [プロンプト](#プロンプト)
 
 ## コマンド
@@ -347,6 +347,23 @@ set +x      # ここでデバッグ終了
 strings 対象パス
 ```
 
+- eval
+  - 引数として与えられたコマンドを再度評価して実行する
+  - ex. `eval echo '$'$ENV`
+    - これは次のように実行される。`$ENV`という環境変数が HOMEであれば、次のように展開される
+    - `echo $HOME`
+
+- command
+  - エイリアスを無視して実行
+
+```sh
+alias ls='ls --color=auto'  # lsにエイリアスを設定
+command ls                  # エイリアスを無視してオリジナルのlsを実行
+
+# lsコマンドがどこにあるかを表示。whichと似ている
+command -v ls
+```
+
 ### 記号
 
 #### &&
@@ -394,9 +411,9 @@ nohup 実行したいコマンド
 - [時刻系](#時刻系)
 - [less](#less)
 - [curl](#curl)
-- [jq](#jq)
 - [cron](#cron)
 - [ヒアドキュメント](#ヒアドキュメント)
+- [変数](#変数)
 - [ステータス](#ステータス)
 - [ブレース展開](#ブレース展開)
 
@@ -464,17 +481,6 @@ curl -o app/assets/images/rails.png -OL railstutorial.jp/rails.png
 curl -Iv 対象URI
 # User-Agent設定
 curl --user-agent 任意のUser-Agent名 -Iv 対象URI
-```
-
-### jq
-
-```sh
-# 特定の値を取得する
-cat ***.json | jq ".キー名"
-# row形式で表示(ダブルクオテーションの除去など)
-cat ***.json | jq -r
-# resultという任意のキーを作成してその内容を決定
-cat ***.json | jq -r '.StackSummaries[] | .任意のキー = .StackStatus + " " + .LastUpdatedTime + " " + .StackName | .任意のキー'
 ```
 
 ### cron
