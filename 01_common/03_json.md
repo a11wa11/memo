@@ -1,5 +1,16 @@
 # json
 
+## jq
+
+```sh
+# 特定の値を取得する
+cat ***.json | jq ".キー名"
+# row形式で表示(ダブルクオテーションの除去など)
+cat ***.json | jq -r
+# resultという任意のキーを作成してその内容を決定
+cat ***.json | jq -r '.StackSummaries[] | .任意のキー = .StackStatus + " " + .LastUpdatedTime + " " + .StackName | .任意のキー'
+```
+
 ## jsonからymlへ変換するツール
 
 ### yq
