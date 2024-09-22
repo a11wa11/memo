@@ -90,6 +90,15 @@ functions:
     handler: dist/lambda.handler
     environment:
 
+# デプロイパッケージの細かい指定をしたい時  https://www.serverless-dev.com/framework/docs/providers/aws/guide/packaging
+package:
+  include:  # 含めるファイル
+    - dist/**
+    - env/**
+    - node_modules/**
+  exclude:  # 除外したいファイル
+    - package.json
+
 # 自作変数を定義したい時
 custom:
   defaultStage: dev
