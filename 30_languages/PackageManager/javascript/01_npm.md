@@ -26,6 +26,8 @@ npm i パッケージ名           # 省略形
 npm ci                    # clean-install package-lock.jsonは更新されない(package-lock.jsonを元にインストール)
 npm install               # package.jsonに書かれているパッケージをインストール、package-lock.jsonは更新することがある
 npm install --production  # dependenciesに書かれているパッケージのみインストール
+# インストール先ディレクトリを指定
+npm install --prefix 対象パス package.jsonのパス # 対象パス配下にnode_modulersディレクトリができてパッケージがインストールされる
 
 # バージョン指定インストール
 npm install パッケージ名@バージョン名
