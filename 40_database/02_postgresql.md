@@ -252,6 +252,7 @@ sudo yum install postgresql-contrib
 # 基本
 pgbench -i -h ホスト名 -p ポート番号 -U ユーザー名 -d データベース名
 # スケーリングファクター数を調整
+## スケーリングファクター数は1あたり、１０万件のデータ量(テーブル名:pgbench_accounts)があるので、数値が高いほど扱うデータ量が増え、負荷を高めたテストが可能
 pgbench -i -h ホスト名 -p ポート番号 -U ユーザー名 -d データベース名 -s 2(スケーリングファクター数。デフォルトは1)
 ```
 
@@ -269,6 +270,12 @@ pgbench -h ホスト名 -U ユーザー名 -p ポート番号 -d データベー
 
 # select文のみ
 pgbench -h ホスト名 -U ユーザー名 -p ポート番号 -d データベース名 -T 300(テストしたい期間秒数) -c 10(想定クライアント数) -S
+```
+
+- 後片付け
+
+```psql
+DROP TABLE IF EXISTS pgbench_accounts, pgbench_branches, pgbench_tellers, pgbench_history;
 ```
 
 結果の見方
