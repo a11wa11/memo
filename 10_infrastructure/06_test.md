@@ -1,6 +1,7 @@
 # testで使えるツール
 
 - [testで使えるツール](#testで使えるツール)
+  - [障害検知サイト](#障害検知サイト)
   - [Webサーバやアプリケーションサーバの性能テスト](#webサーバやアプリケーションサーバの性能テスト)
     - [apache bench](#apache-bench)
     - [k6](#k6)
@@ -8,6 +9,12 @@
   - [stress](#stress)
   - [ポートスキャン](#ポートスキャン)
   - [IPアドレスを確認できるサイト](#ipアドレスを確認できるサイト)
+
+## 障害検知サイト
+
+- [downdetector](https://downdetector.jp/)
+- [GitHub Status](https://www.githubstatus.com/)
+- [AWS Health](https://health.aws.amazon.com/health/status)
 
 ## Webサーバやアプリケーションサーバの性能テスト
 
