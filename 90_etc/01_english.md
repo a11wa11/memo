@@ -96,6 +96,7 @@
 | duplicate | 複製 | |
 | deprecate(d) | 非推奨 | |
 | metrics | 測定基準 | |
+| assume | 責任を引き受ける | 想定する、装う |
 | assumable | 仮定できる | |
 | resume | 再開する| |
 | notice | 注意する | |
