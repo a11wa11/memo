@@ -99,6 +99,7 @@
 | assume | 責任を引き受ける | 想定する、装う |
 | assumable | 仮定できる | |
 | resume | 再開する| |
+| pseudo | 擬似| |
 | notice | 注意する | |
 | federated |連合した(いろいろなシステム等を統合して使えるようにしたりしたもの)| |
 | duration | 持続範囲 | |
