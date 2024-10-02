@@ -49,6 +49,18 @@ Host NAME
 ssh -L ローカルポート:リモートホスト:リモートポート ユーザ名@SSH接続ホスト名
 ```
 
+## その他
+
+```sh
+# 接続テスト。実際にログインはしない
+ssh -T github.com
+# 成功の場合
+## Hi ユーザー名! You've successfully authenticated, but GitHub does not provide shell access.
+
+# 失敗の場合
+## Permission denied (publickey).
+```
+
 ## [ssh-keygen](https://www.attachmate.com/ja-jp/documentation/reflection-desktop-v16/rdesktop-guide/data/ssh-keygen_command_rf.htm)
 
 ### 鍵の作成
