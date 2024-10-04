@@ -46,6 +46,7 @@
 | arn | Amazon リソースネーム (ARN) | |
 | amend | 修正する | |
 | benchmark | 性能評価 | |
+| elapsed | 経過 | |
 | inference | 推論 | |
 | struggling | 悪戦苦闘 | |
 | waste | 無駄 | |
