@@ -3,6 +3,7 @@
 - [git](#git)
   - [設定](#設定)
     - [文字化け時のトラブルシューティング](#文字化け時のトラブルシューティング)
+  - [用語](#用語)
   - [コミット関連](#コミット関連)
     - [リセット](#リセット)
     - [stash](#stash)
@@ -44,6 +45,17 @@ git config --global --add safe.directory
 git config --local core.quotepath false     # ローカル適用
 $ git config --global core.quotepath false  # 全体適用
 ```
+
+## 用語
+
+- 以下プルリクエストやマージの際の参照元を表す用語
+  - BASE_REF
+  - HEAD_REF
+
+|BASE_REF|HEAD_REF|
+|-|-|
+| マージ先のブランチ | 変更元のブランチ |
+| dev,mainなど | feature,fix_XXなど |
 
 ## コミット関連
 
