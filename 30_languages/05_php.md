@@ -8,6 +8,7 @@
       - [組込関数](#組込関数)
       - [ファイル読込](#ファイル読込)
     - [設定関連](#設定関連)
+      - [debug](#debug)
     - [フォーム](#フォーム)
     - [laravel](#laravel)
   - [開発環境](#開発環境)
@@ -327,6 +328,42 @@ php -r phpコード
 
 # 例 PHPの設定情報をコマンドラインに表示
 php -r 'phpinfo();'
+```
+
+#### debug
+
+Xdebugの使い方
+
+- インストール
+
+```sh
+pecl install xdebug
+```
+
+- php.iniへ反映
+
+```php.ini
+zend_extension="［サーバーのパス］php/modules/xdebug.so"
+```
+
+```sh
+# $arr = array('Tokyo', 'Osaka', array('Yokohama', 'Kawasaki'));
+
+$php sample.php
+
+array(3) {
+  [0]=>
+  string(5) "Tokyo"
+  [1]=>
+  string(5) "Osaka"
+  [2]=>
+  array(2) {
+    [0]=>
+    string(8) "Yokohama"
+    [1]=>
+    string(8) "Kawasaki"
+  }
+}
 ```
 
 ### フォーム
