@@ -33,6 +33,17 @@ yarn global bin
 yarn dir
 yarn dir パッケージ名
 yarn global dir
+
+# 対象パッケージの依存関係を表示
+yarn list --pattern パッケージ名
+yarn why パッケージ名
+
+# 脆弱性や問題があるか調査
+yarn audit
+
+# UIで依存関係の更新を選択できる
+yarn upgrade-interactive
+yarn upgrade-interactive --latest
 ```
 
 ## npmとyarn比較
@@ -41,6 +52,7 @@ yarn global dir
 | -- | -- | -- |
 | 初期化 | npm init | yarn init |
 | package.jsonからインストール | npm install | yarn, yarn install |
+| package.jsonのdependenciesからインストール | npm install --production | yarn install --production |
 | パッケージ削除 | npm uninstall パッケージ名 | yarn remove パッケージ名 |
 | パッケージ追加 | npm install パッケージ名 | yarn add パッケージ名 |
 | パッケージ追加(devDependencies) | npm install --save-dev --dev パッケージ名 | yarn add --dev パッケージ名 |
