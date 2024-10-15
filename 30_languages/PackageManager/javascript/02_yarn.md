@@ -3,6 +3,8 @@
 - [yarn](#yarn)
   - [インストール](#インストール)
   - [コマンド](#コマンド)
+    - [yarn 1.x](#yarn-1x)
+    - [yarn berry(バージョン2以上)](#yarn-berryバージョン2以上)
   - [npmとyarn比較](#npmとyarn比較)
 
 [Yarn](https://www.wakuwakubank.com/posts/307-javascript-yarn/)　とは?
@@ -22,6 +24,8 @@ npm install -g yarn
 ```
 
 ## コマンド
+
+### yarn 1.x
 
 ```sh
 # 実行可能ファイルが保存されているディレクトリ（バイナリのパス）を確認
@@ -44,9 +48,25 @@ yarn audit
 # UIで依存関係の更新を選択できる
 yarn upgrade-interactive
 yarn upgrade-interactive --latest
+
+# yarnのメジャーバージョンの調整
+yarn set version classic # yarn1.xをインストール
+yarn set version berry   # yarn2.x以上をインストール
+yarn set version 3       # yarn3.xをインストール
+yarn set version 4       # yarn4.xをインストール
+yarn set version stable  # yarn stableバージョンをインストール
+```
+
+### yarn berry(バージョン2以上)
+
+```sh
+yarn install --inline-builds # 冗長オプション
+
 ```
 
 ## npmとyarn比較
+
+- ※yarn 1.xとして記述
 
 | 機能 | npm | yarn |
 | -- | -- | -- |
