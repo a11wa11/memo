@@ -54,7 +54,7 @@ sls logs --function 関数名(serverless.ymlで定義されている関数名)
 sls deploy -v
 # --stage または -s     デプロイするステージを指定            例: sls deploy --stage dev
 # --region             AWSリージョンを指定                 例: sls deploy --region us-east-1
-# --verbose            詳細なデプロイログを表示
+# --verbose または -v   詳細なデプロイログを表示
 # --force              変更がない場合でも強制的にデプロイ
 # --package            既に作成したパッケージを使用してデプロイ 例: sls deploy --package ./path/to/package
 # --function または -f  特定の関数のみをデプロイ             例: sls deploy --function myFunction

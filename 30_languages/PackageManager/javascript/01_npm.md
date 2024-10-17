@@ -20,6 +20,7 @@
 ```sh
 # 基本インストール
 npm install パッケージ名
+npm install パッケージ名 --verbose # 冗長オプション
 
 # 応用インストール
 npm i パッケージ名           # 省略形
