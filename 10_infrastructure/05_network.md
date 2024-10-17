@@ -191,7 +191,6 @@ localectl set-locale LANG=ja_JP.UTF-8
 - debian系のロケール変更手順
 
 ```sh
-
 apt update && apt install -y locales
 
 # ja_JP.UTF-8の行のコメントを解除
