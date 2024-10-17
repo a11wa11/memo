@@ -188,6 +188,20 @@ echo "LANG=ja_JP.UTF-8" > /etc/sysconfig/i18n
 localectl set-locale LANG=ja_JP.UTF-8
 ```
 
+- debian系のロケール変更手順
+
+```sh
+
+apt update && apt install -y locales
+
+# ja_JP.UTF-8の行のコメントを解除
+sed -i -E 's/# (ja_JP.UTF-8)/\1/' /etc/locale.gen
+# locale-gen を使うと、/etc/locale.gen ファイルに指定されたロケールが有効化され、システムで使用可能になる
+locale-gen
+# システム全体でデフォルトとして使用されるロケール設定を更新する
+update-locale LANG=ja_JP.UTF-8
+```
+
 ### IPアドレス
 
 - グローバルIPを確認
