@@ -44,6 +44,7 @@ yarn bin パッケージ名
 yarn global bin
 
 # インストールオプション
+yarn install --verbose         # 冗長オプション
 yarn install --production      # package.jsonのdependenciesのみインストール
 yarn install --frozen-lockfile # yarn.lockを更新しない
 yarn install --ignore-optional # オプションの依存関係をインストールしないようにする
@@ -71,7 +72,6 @@ yarn upgrade-interactive --latest
 
 ```sh
 yarn install --inline-builds # 冗長オプション
-
 ```
 
 ## npmとyarn比較
