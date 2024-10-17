@@ -44,6 +44,7 @@ yarn bin パッケージ名
 yarn global bin
 
 # インストールオプション
+yarn install --production      # package.jsonのdependenciesのみインストール
 yarn install --frozen-lockfile # yarn.lockを更新しない
 yarn install --ignore-optional # オプションの依存関係をインストールしないようにする
 
