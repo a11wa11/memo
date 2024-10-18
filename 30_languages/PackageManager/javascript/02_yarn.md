@@ -71,6 +71,9 @@ yarn upgrade-interactive --latest
 ### yarn berry(バージョン2以上)
 
 ```sh
+# node_nodulesにインストールするように設定
+yarn config set nodeLinker node-modules
+
 yarn install --inline-builds # 冗長オプション
 ```
 
