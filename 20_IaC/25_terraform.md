@@ -13,6 +13,7 @@
     - [拡張機能](#拡張機能)
     - [参考ドキュメント](#参考ドキュメント)
     - [よく使う事例](#よく使う事例)
+      - [lifecycle](#lifecycle)
   - [コマンド](#コマンド)
   - [トラブルシューティング](#トラブルシューティング)
   - [参考](#参考)
@@ -180,6 +181,17 @@ terraform console
 # dataブロックで事前に定義しておくこと
 terraform console
 >data.aws_ec2_managed_prefix_list.プレフィックスリスト名.entries[*].cidr
+```
+
+#### lifecycle
+
+```terraform
+# passwordなど変更する余地があるリソースが変更されても更新対象としないように設定する
+  lifecycle {
+    ignore_changes = [
+      master_password
+    ]
+  }
 ```
 
 ## コマンド
