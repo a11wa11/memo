@@ -54,8 +54,15 @@ yarn dir
 yarn dir パッケージ名
 yarn global dir
 
-# 対象パッケージの依存関係を表示
+# パッケージ一覧
+yarn list --depth=0 #依存関係先非表示
+yarn list --depth=1 #依存関係先を1段階表示
+
+# 対象パッケージを依存関係先の場合も含めて表示
 yarn list --pattern パッケージ名
+yarn list --pattern "パッケージ名1|パッケージ名2" # 複数検索の場合
+
+# 対象パッケージが他のどのパッケージから依存されているかを表示
 yarn why パッケージ名
 
 # 脆弱性や問題があるか調査
@@ -64,8 +71,6 @@ yarn audit
 # UIで依存関係の更新を選択できる
 yarn upgrade-interactive
 yarn upgrade-interactive --latest
-
-
 ```
 
 ### yarn berry(バージョン2以上)
