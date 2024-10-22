@@ -60,8 +60,8 @@
 | validity | 有効 | |
 | square | 二乗 | |
 | optional | 任意 | |
-| exclusive | 独占 | |
-| exclusion | 除外 | |
+| exclusive | 独占的な | |
+| exclusion | 除外、排除 | |
 | threshold | 閾値 | |
 | payload | パケットに含まれるヘッダやトレーラなどの不可情報を除いたデータ本体のこと | |
 | compatible | 互換性のある | |

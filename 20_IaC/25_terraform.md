@@ -218,7 +218,7 @@ terraform refresh
 terraform apply -refresh-only
 # tfstateで管理されているリソースの一覧表示
 terraform state list
-# tfstateで管理されているリソースの詳細表示
+# tfstateで管理されているリソースの詳細表示。terraform planで差分ない時に詳細確認した場合にも便利
 terraform state show アドレス.リソース名
 ```
 
