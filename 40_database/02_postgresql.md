@@ -151,6 +151,9 @@ SELECT * FROM pg_stat_activity;
 -- 準備済みトランザクション（Prepared Transaction）の数をカウントする
 SELECT count(*) FROM pg_catalog.pg_prepared_xacts;
 
+-- プライマリキーなど制約を確認
+SELECT * FROM information_schema.table_constraints;
+
 -- インストール可能な拡張機能を確認する
 SELECT * FROM pg_available_extensions;
 
@@ -234,6 +237,9 @@ vacuum analyze;
 ```sql
 -- 既存の論理レプリケーションスロットを確認
 select * from pg_replication_slots;
+
+-- 論理レプリケーションスロットを削除
+SELECT pg_drop_replication_slot(スロット名);
 ```
 
 ## [pgbench](https://www.postgresql.org/docs/current/pgbench.html)を使って測定
