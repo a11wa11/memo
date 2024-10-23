@@ -92,6 +92,10 @@ docker build -t 名付けたいイメージ名 .(Dockerfileのあるパス)
 # Dockerfileを指定してbuild
 docker build -f Dockerfile_demo(Dockerfile以外の名前の場合) .(Dockerfileのあるパス)
 
+# 鍵などシークレットを定義してbuild
+docker build --secret id=任意のID名,src=対象のパス  -t 名付けたいイメージ名 .(Dockerfileのあるパス)
+docker build --secret id=ssh_key,src=${HOME}/.ssh/my-key_rsa  -t 名付けたいイメージ名 .(Dockerfileのあるパス)
+
 # マルチステージビルドで定義されたイメージを指定してbuild
 docker build --target 定義されたイメージ -t 名付けたいイメージ名 .(Dockerfileのあるパス)
 
