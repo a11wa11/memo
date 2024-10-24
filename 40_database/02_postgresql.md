@@ -13,6 +13,7 @@
     - [リストア](#リストア)
     - [メンテナンス・パフォーマンス改善](#メンテナンスパフォーマンス改善)
     - [論理レプリケーション](#論理レプリケーション)
+    - [プライマリキー関連](#プライマリキー関連)
   - [pgbenchを使って測定](#pgbenchを使って測定)
 
 ## コマンド
@@ -240,6 +241,35 @@ select * from pg_replication_slots;
 
 -- 論理レプリケーションスロットを削除
 SELECT pg_drop_replication_slot(スロット名);
+```
+
+### プライマリキー関連
+
+- プライマリキーがないテーブル一覧を表示
+
+```sql
+-- その１
+SELECT schemaname || '.' || tablename AS table_name FROM pg_tables
+WHERE schemaname NOT IN ('pg_catalog', 'information_schema')
+AND   tablename NOT IN (
+    SELECT c.relname
+    FROM 
+        pg_constraint AS con
+        JOIN pg_class AS c ON con.conrelid = c.oid
+    WHERE con.contype = 'p'
+);
+-- その2
+SELECT schemaname || '.' || tablename AS table_name FROM pg_tables
+WHERE schemaname NOT IN ('pg_catalog', 'information_schema')
+AND tablename NOT IN (
+    SELECT tablename FROM pg_indexes WHERE indexname LIKE '%_pkey'
+);
+-- その3
+SELECT table_schema || '.' || table_name AS table_name FROM information_schema.tables
+WHERE table_schema NOT IN ('pg_catalog', 'information_schema')
+AND   table_name NOT IN (
+    SELECT table_name FROM information_schema.table_constraints WHERE constraint_type = 'PRIMARY KEY'
+);
 ```
 
 ## [pgbench](https://www.postgresql.org/docs/current/pgbench.html)を使って測定
