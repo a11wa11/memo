@@ -9,6 +9,7 @@
     - [折り畳み](#折り畳み)
     - [色](#色)
     - [サイズ](#サイズ)
+    - [左右横並び](#左右横並び)
   - [エディタでの使い方](#エディタでの使い方)
 
 ## 特徴
@@ -224,6 +225,19 @@
 <font size="-2">サイズが相対サイズで-2</font><br>
 <font size="+2">サイズが相対サイズで+2</font><br>
 ```
+
+### 左右横並び
+
+<div style="display: flex;">
+
+<div style="flex: 1; padding: 10px; border: 1px solid #ddd; margin-right: 10px;">
+記事 1 左側の記事
+</div>
+
+<div style="flex: 1; padding: 10px; border: 1px solid #ddd;">
+記事 2 右側の記事
+</div>
+</div>
 
 ## エディタでの使い方
 
