@@ -51,6 +51,7 @@
 | struggling | 悪戦苦闘 | |
 | waste | 無駄 | |
 | omit | 省く | |
+| obsolete | 廃止 | |
 | suppressed | 抑制された | |
 | diagram | 図 | |
 | diagnostic | 診断 | |
