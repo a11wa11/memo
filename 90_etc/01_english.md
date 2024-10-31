@@ -89,6 +89,7 @@
 | assign | 割り当てる | |
 | ingress | 進入 | |
 | egress | 出口 | |
+| extraneous | 無関係な | |
 | concisely | 簡潔に | |
 | procedure | 手続き、戻り地のない関数 | |
 | ambiguous | あいまい | |
