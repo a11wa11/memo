@@ -425,8 +425,7 @@ UUID=XXXX / xfs defaults.noatime 1 1
 
 GNUシステム用の標準Cライブラリ。GNU/Linuxシステム上のほとんどのプログラムで使用されている
 
-- [glibcの更新方法
-](https://tutorials.tinkink.net/ja/linux/how-to-update-glibc.html)
+- [glibcの更新方法](https://tutorials.tinkink.net/ja/linux/how-to-update-glibc.html)
 
 ```sh
 # インストール
