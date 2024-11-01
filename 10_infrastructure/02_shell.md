@@ -481,6 +481,8 @@ curl -o app/assets/images/rails.png -OL railstutorial.jp/rails.png
 curl -Iv 対象URI
 # User-Agent設定
 curl --user-agent 任意のUser-Agent名 -Iv 対象URI
+# ステータスコードのみ表示
+curl -I -s -o /dev/null -w "%{http_code}\n"
 ```
 
 ### cron
