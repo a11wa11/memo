@@ -51,6 +51,7 @@
 | struggling | 悪戦苦闘 | |
 | waste | 無駄 | |
 | omit | 省く | |
+| completion | 完成 | |
 | obsolete | 廃止 | |
 | suppressed | 抑制された | |
 | diagram | 図 | |
@@ -111,6 +112,7 @@
 | rsync | remote syncの略 | ファイルおよびディレクトリを効率的にコピーおよび同期するためのツール |
 | deallocate | 割り当てを解除する | |
 | implicit | 暗黙 | |
+| prerequisites | 前提条件 | |
 | truncate | 切り捨てる | |
 | ingestion | 摂取 | |
 | rc | バージョン候補(release candidate) | |

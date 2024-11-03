@@ -1,23 +1,38 @@
 # git
 
 - [git](#git)
-  - [設定](#設定)
-    - [文字化け時のトラブルシューティング](#文字化け時のトラブルシューティング)
   - [用語](#用語)
-  - [コミット関連](#コミット関連)
+  - [設定](#設定)
+    - [初期設定](#初期設定)
+    - [リモートリポジトリ](#リモートリポジトリ)
+    - [フォーク](#フォーク)
+  - [コマンド](#コマンド)
+    - [コミット関連](#コミット関連)
     - [リセット](#リセット)
     - [stash](#stash)
     - [チェリーピック](#チェリーピック)
-  - [マージ関連](#マージ関連)
-  - [ブランチ関連](#ブランチ関連)
-    - [リモートリポジトリ設定](#リモートリポジトリ設定)
-    - [フォーク](#フォーク)
-  - [diff関連](#diff関連)
-  - [タグ](#タグ)
+    - [マージ関連](#マージ関連)
+    - [ブランチ関連](#ブランチ関連)
+    - [diff関連](#diff関連)
+    - [タグ](#タグ)
   - [submodule](#submodule)
   - [github](#github)
+  - [トラブルシューティング](#トラブルシューティング)
+
+## 用語
+
+- 以下プルリクエストやマージの際の参照元を表す用語
+  - BASE_REF
+  - HEAD_REF
+
+|BASE_REF|HEAD_REF|
+|-|-|
+| マージ先のブランチ | 変更元のブランチ |
+| dev,mainなど | feature,fix_XXなど |
 
 ## 設定
+
+### 初期設定
 
 - グローバルユーザー設定(初期設定)
 
@@ -39,25 +54,62 @@ git config --local user.email "test_address"
 git config --global --add safe.directory
 ```
 
-### 文字化け時のトラブルシューティング
+### リモートリポジトリ
 
 ```sh
-git config --local core.quotepath false     # ローカル適用
-$ git config --global core.quotepath false  # 全体適用
+# リモートリポジトリを確認
+git remote -v
+
+# リモートリポジトリを追加
+git remote add origin(任意のリモートリポジトリ名) git@github.com:hoge/test.git
+
+# githubに既存ローカルリポジトリをプッシュする場合
+git remote add origin git@github.com:hoge/test.git
+git branch -M main
+git push -u origin main
 ```
 
-## 用語
+- 対象のローカルブランチをリモートブランチに強制プッシュ
 
-- 以下プルリクエストやマージの際の参照元を表す用語
-  - BASE_REF
-  - HEAD_REF
+```sh
+git push -f origin ローカルブランチ:リモートブランチ
+```
 
-|BASE_REF|HEAD_REF|
-|-|-|
-| マージ先のブランチ | 変更元のブランチ |
-| dev,mainなど | feature,fix_XXなど |
+- 特定の鍵を指定してリモートリポジトリに接続
 
-## コミット関連
+```sh
+# 変数で使用する鍵を指定
+GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa' git clone リモートリポジトリ
+
+# 常に特定の鍵を使用する設定を作成
+git config --local core.sshCommand "ssh -i 秘密鍵のパス"
+```
+
+### フォーク
+
+```sh
+# フォーク元をリモートリポジトリに追加
+git remote add upstream git@github.com:XXXXXXXXXXXXXXXX
+
+# フォーク元からpull
+git pull upstream ブランチ名
+
+# フォーク元のPRにチェックアウト
+git fetch upstream pull/ID番号/head:pr/ID番号(任意のブランチ名)
+git checkout pr/ID番号
+
+# フォーク元の最新状態をリモート先に反映
+git pull upstream ブランチ名
+git push origin ブランチ名
+
+# フォーク先の未マージのブランチを使用したい時
+git fetch upstream pull/<ID>/head:pr/<ID>
+git checkout pr/<ID>
+```
+
+## コマンド
+
+### コミット関連
 
 ```sh
 # 直近のコミットメッセージの変更
@@ -154,7 +206,7 @@ git cherry-pick X Y  =  git cherry-pick -m 1 D
 git cherry-pick B C  =  git cherry-pick -m 2 D
 ```
 
-## [マージ関連](https://qiita.com/horimislime/items/84fa431460c8d39f37e6)
+### [マージ関連](https://qiita.com/horimislime/items/84fa431460c8d39f37e6)
 
 - コンフリクトされるか確認したい時
 
@@ -179,7 +231,7 @@ Merge: yyyy zzzz
 Author: sample <sample@users.noreply.github.com>
 ```
 
-## ブランチ関連
+### ブランチ関連
 
 ```sh
 # 変更したいブランチにいる時
@@ -206,61 +258,10 @@ git remote set-url origin git@0.0.0.0:*****.git
 
 # リモートブランチの最新状態を取得（リモートブランチの削除も同期）
 git fetch -p
-
-# リモートで削除されているブランチをローカルでも削除する
 git fetch --prune
 ```
 
-### リモートリポジトリ設定
-
-```sh
-git remote add origin(任意のリモートリポジトリ名) git@github.com:hoge/test.git
-
-# githubに既存ローカルリポジトリをプッシュする場合
-git remote add origin git@github.com:hoge/test.git
-git branch -M main
-git push -u origin main
-```
-
-- 対象のローカルブランチをリモートブランチに強制プッシュ
-
-```sh
-git push -f origin ローカルブランチ:リモートブランチ
-```
-
-- 特定の鍵を指定してリモートリポジトリに接続
-
-```sh
-# 変数で使用する鍵を指定
-GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa' git clone リモートリポジトリ
-
-# 常に特定の鍵を使用する設定を作成
-git config --local core.sshCommand "ssh -i 秘密鍵のパス"
-```
-
-### フォーク
-
-```sh
-# フォーク元をリモートリポジトリに追加
-git remote add upstream git@github.com:XXXXXXXXXXXXXXXX
-
-# フォーク元からpull
-git pull upstream ブランチ名
-
-# フォーク元のPRにチェックアウト
-git fetch upstream pull/ID番号/head:pr/ID番号(任意のブランチ名)
-git checkout pr/ID番号
-
-# フォーク元の最新状態をリモート先に反映
-git pull upstream ブランチ名
-git push origin ブランチ名
-
-# フォーク先の未マージのブランチを使用したい時
-git fetch upstream pull/<ID>/head:pr/<ID>
-git checkout pr/<ID>
-```
-
-## diff関連
+### diff関連
 
 ```sh
 # ２つのブランチの差分を確認
@@ -276,7 +277,7 @@ git diff --name-only branch1 branch2
 git log branch1..branch2 --pretty=oneline --pretty=format:"%n - %ad : %s" --date-order
 ```
 
-## タグ
+### タグ
 
 ```sh
 # リモートブランチのタグの一覧
@@ -333,3 +334,12 @@ Password: YOUR_PERSONAL_ACCESS_TOKEN
 ブランチやコミット同士の比較
 
 - `https://github.com/リポジトリ/compare/stg...dev`のように`compare/ブランチ比較元...ブランチ比較先`のように打つ
+
+## トラブルシューティング
+
+- 文字化け時
+
+```sh
+git config --local core.quotepath false   # ローカル適用
+git config --global core.quotepath false  # 全体適用
+```
