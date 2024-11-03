@@ -111,6 +111,9 @@ git checkout pr/<ID>
 ### コミット関連
 
 ```sh
+# 直近のコミットからの変更内容を（新コミットを追加せず）直近コミットに反映する 
+git commit --amend
+
 # 直近のコミットメッセージの変更
 git commit --amend -m "変更したいメッセージ"
 
@@ -143,6 +146,9 @@ git reset --soft HEAD^
 
 # reflogの履歴からもとに戻す
 git reset --hard HEAD@[1]
+
+# ワーキングディレクトリ内の変更を破棄（元に戻す)
+git checkout -- ファイル名
 
 # 特定のファイルだけ前の状態に戻したいとき
 git checkout コミットハッシュ ファイルパス
@@ -233,6 +239,12 @@ Author: sample <sample@users.noreply.github.com>
 ### ブランチ関連
 
 ```sh
+# ブランチの詳細表示
+git branch -vvv
+
+# リモートリポジトリのブランチの一覧
+git branch --remote
+
 # 変更したいブランチにいる時
 git branch -m 新ブランチ名
 
