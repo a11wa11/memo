@@ -7,13 +7,13 @@
     - [リモートリポジトリ](#リモートリポジトリ)
     - [フォーク](#フォーク)
   - [コマンド](#コマンド)
-    - [コミット関連](#コミット関連)
+    - [ブランチ](#ブランチ)
+    - [diff](#diff)
+    - [コミット](#コミット)
     - [リセット](#リセット)
     - [stash](#stash)
+    - [マージ](#マージ)
     - [チェリーピック](#チェリーピック)
-    - [マージ関連](#マージ関連)
-    - [ブランチ関連](#ブランチ関連)
-    - [diff関連](#diff関連)
     - [タグ](#タグ)
   - [submodule](#submodule)
   - [トラブルシューティング](#トラブルシューティング)
@@ -108,7 +108,59 @@ git checkout pr/<ID>
 
 ## コマンド
 
-### コミット関連
+### ブランチ
+
+```sh
+# ブランチの詳細表示
+git branch -vvv
+
+# リモートリポジトリのブランチの一覧
+git branch --remote
+
+# 変更したいブランチにいる時
+git branch -m 新ブランチ名
+
+# ローカルブランチの設定変更(別ブランチにいる時)
+git branch -m 古いブランチ名 新しいブランチ名
+
+# 任意のブランチ名をつけてチェックアウト
+git checkout -b ブランチ名 origin/リモートブランチ名
+
+# リモート追跡設定を削除
+git branch --unset-upstream # 所属ブランチで実行
+git branch --unset-upstream 対象ブランチ名
+
+# ブランチを削除する
+git branch -d ブランチ名
+
+# ブランチを強制削除
+git branch -D ブランチ名
+
+# リモートブランチのIPアドレス変更
+git remote set-url origin git@0.0.0.0:*****.git
+
+# リモートブランチの最新状態を取得（リモートブランチの削除も同期）
+git fetch -p
+git fetch --prune
+```
+
+### diff
+
+```sh
+# ２つのブランチの差分を確認
+git diff branch1 branch2
+
+# ２つのブランチの指定のファイルの差分を確認
+git diff branch1 branch2 sample.txt
+
+# ２つのブランチの差分のファイル名のみ表示
+git diff --name-only branch1 branch2
+
+# 特定のブランチ間やタグ間のログを指定の形式で出力する
+git log branch1..branch2 --pretty=oneline --pretty=format:"%n - %ad : %s" --date-order
+```
+
+### コミット
 
 ```sh
 # 直近のコミットからの変更内容を（新コミットを追加せず）直近コミットに反映する 
@@ -183,6 +235,31 @@ git stash drop stash@{0} # stash@{0}は適宜変更
 git stash clear
 ```
 
+### [マージ](https://qiita.com/horimislime/items/84fa431460c8d39f37e6)
+
+- コンフリクトされるか確認したい時
+
+```sh
+# コミットされないが、ローカルファイルはマージされてしまう
+git merge ブランチ名 --no-commit
+
+(トピックブランチ) git format-patch master --stdout > test.patch
+(トピックブランチ) git checkout master
+(master) git apply test.patch --check # パッチが適用できるかチェック
+# コンフリクトが起きる場合はエラーが発生する
+```
+
+- git log　表記で見るコミットハッシュ
+  - yyyy => マージされるブランチ
+  - zzzz => マージするブランチ
+  - yyyyブランチにいて `git merge zzzz`して出来上がったブランチのコミットハッシュがXXXXとなる
+
+```sh
+commit XXXX (HEAD -> master, upstream/master)
+Merge: yyyy zzzz
+Author: sample <sample@users.noreply.github.com>
+```
+
 ### チェリーピック
 
 ```sh
@@ -209,83 +286,6 @@ git cherry-pick -m 1 コミットID
 # Dはマージコミット。親１がX,Yを、親2がB,Cのコミットを持つので
 git cherry-pick X Y  =  git cherry-pick -m 1 D
 git cherry-pick B C  =  git cherry-pick -m 2 D
-```
-
-### [マージ関連](https://qiita.com/horimislime/items/84fa431460c8d39f37e6)
-
-- コンフリクトされるか確認したい時
-
-```sh
-# コミットされないが、ローカルファイルはマージされてしまう
-git merge ブランチ名 --no-commit
-
-(トピックブランチ) git format-patch master --stdout > test.patch
-(トピックブランチ) git checkout master
-(master) git apply test.patch --check # パッチが適用できるかチェック
-# コンフリクトが起きる場合はエラーが発生する
-```
-
-- git log　表記で見るコミットハッシュ
-  - yyyy => マージされるブランチ
-  - zzzz => マージするブランチ
-  - yyyyブランチにいて `git merge zzzz`して出来上がったブランチのコミットハッシュがXXXXとなる
-
-```sh
-commit XXXX (HEAD -> master, upstream/master)
-Merge: yyyy zzzz
-Author: sample <sample@users.noreply.github.com>
-```
-
-### ブランチ関連
-
-```sh
-# ブランチの詳細表示
-git branch -vvv
-
-# リモートリポジトリのブランチの一覧
-git branch --remote
-
-# 変更したいブランチにいる時
-git branch -m 新ブランチ名
-
-# ローカルブランチの設定変更(別ブランチにいる時)
-git branch -m 古いブランチ名 新しいブランチ名
-
-# 任意のブランチ名をつけてチェックアウト
-git checkout -b ブランチ名 origin/リモートブランチ名
-
-# リモート追跡設定を削除
-git branch --unset-upstream # 所属ブランチで実行
-git branch --unset-upstream 対象ブランチ名
-
-# ブランチを削除する
-git branch -d ブランチ名
-
-# ブランチを強制削除
-git branch -D ブランチ名
-
-# リモートブランチのIPアドレス変更
-git remote set-url origin git@0.0.0.0:*****.git
-
-# リモートブランチの最新状態を取得（リモートブランチの削除も同期）
-git fetch -p
-git fetch --prune
-```
-
-### diff関連
-
-```sh
-# ２つのブランチの差分を確認
-git diff branch1 branch2
-
-# ２つのブランチの指定のファイルの差分を確認
-git diff branch1 branch2 sample.txt
-
-# ２つのブランチの差分のファイル名のみ表示
-git diff --name-only branch1 branch2
-
-# 特定のブランチ間やタグ間のログを指定の形式で出力する
-git log branch1..branch2 --pretty=oneline --pretty=format:"%n - %ad : %s" --date-order
 ```
 
 ### タグ
