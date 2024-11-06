@@ -16,6 +16,7 @@
       - [lifecycle](#lifecycle)
   - [コマンド](#コマンド)
   - [トラブルシューティング](#トラブルシューティング)
+  - [コード例](#コード例)
   - [参考](#参考)
 
 ## インストール
@@ -302,6 +303,18 @@ terraform force-unlock xxxxxx(ID)
 
 # 状態ロックを無視してapply
 terraform apply -lock=false
+```
+
+## コード例
+
+- 三項演算子
+
+```terraform
+variable "env" {
+  default = "dev"
+}
+// 例 条件 ? true : false
+value = var.env == "prod" ? "t2.large" : "t2.micro"
 ```
 
 ## 参考
