@@ -381,8 +381,8 @@ pmset -g
 pmset sleep 0
 # スリープになるまでを30分とする
 pmset sleep 30
-# ディスプレイオフになるまでを30分とする
-pmset displaysleep 15
+# ディスプレイオフになるまでを60分とする
+pmset displaysleep 60
 ```
 
 ### ファイル系
