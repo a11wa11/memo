@@ -96,6 +96,7 @@
 | procedure | 手続き、戻り地のない関数 | |
 | ambiguous | あいまい | |
 | invoke | 呼び出す | |
+| revoke | 取り消す、無効にする | reは逆にの意味|
 | change for | 付け替える | |
 | outdated | 時代遅れ | |
 | duplicate | 複製 | |

@@ -173,6 +173,13 @@ sed -e "s/$str/hoge/g"                             # 変数を使用する時 �
 
 #### 検索系
 
+- ls
+
+```sh
+# ディレクトリのみ表示
+ls -d */
+```
+
 - find
 
 ```sh
@@ -242,6 +249,19 @@ ps aux | grep python | grep -v grep | awk '{print $2}'
 ps aux | grep python | grep -v grep | awk '{print $4}'
 # 標準出力で表示される内容のうち、空白区切りで最後の内容を取得
 ps aux | grep python | grep -v grep | awk '{print $NF}'
+```
+
+##### cut
+
+```sh
+# 標準出力で表示される内容のうち、/で区切られた最初の内容を取得
+cut -f1 -d'/' sample.txt
+
+# 標準出力で表示される内容のうち、,で区切られた2番目の内容を取得
+cut -d',' -f2 sample.csv
+
+# 標準出力で表示される内容のうち、1文字目から5文字目までを取得
+cut -c1-5 file.txt
 ```
 
 ##### xargs
