@@ -6,12 +6,23 @@
 
 ### asdfのインストール
 
+- brewでインストール
+
 ```sh
 # mac
 brew install asdf
+```
 
-# git
-git clone https://github.com/asdf-vm/asdf.git
+- [gitでインストール](https://asdf-vm.com/guide/getting-started.html)
+
+```sh
+# gitでインストール
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.1
+
+# bashの場合
+# asdf必要な環境変数を設定
+. "$HOME/.asdf/asdf.sh"
+. "$HOME/.asdf/completions/asdf.bash"
 ```
 
 ### asdfからパッケージマネージャーのインストール
@@ -35,7 +46,7 @@ asdf plugin add terraform # terraform
 - 対象バージョンをインストール
 
 ```sh
-asdf install バージョン名 バージョン名
+asdf install パッケージ名 バージョン名
 
 asdf install php 7.3.33
 ```
