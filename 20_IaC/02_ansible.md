@@ -237,7 +237,7 @@ ansible-galaxy init ロール名
   * `try except`のようにエラー処理
 * ansible_distribution → 実行中のホストのOSのディストリビューションを示す変数(Amazon,Ubuntu,CentOSなど)
 * with_items
-  * リストで値を保持し、以下のように `{{変数名}} `で展開が可能
+  * リストで値を保持し、以下のように `{{変数名}}`で展開が可能
 
 ```yml
 - name: Install ruby
