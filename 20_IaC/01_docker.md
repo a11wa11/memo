@@ -315,7 +315,12 @@ docker buildx build --platform linux/amd64,linux/arm64 -t イメージ名 --push
 - Dockerfile
 
 ```yml
+# 固定のプラットフォームを指定(WARN: この場合は指定したプラットフォームのみビルドされる)
 FROM --platform=linux/amd64 golang:1.18
+
+# ビルド時にプラットフォームを指定
+ARG TARGETPLATFORM
+FROM --platform=${TARGETPLATFORM:-linux/arm64} amazonlinux:2023.3.20240304.0
 ```
 
 - docker-compose
