@@ -137,6 +137,8 @@ dnf search パッケージ名
 dnf list available パッケージ名(正規表現も使える)
 # パッケージ詳細を表示
 dnf info パッケージ名
+# システムに設定されているすべてのリポジトリの一覧を有効か無効かも含めて表示
+dnf repolist all
 ```
 
 ### RPM
