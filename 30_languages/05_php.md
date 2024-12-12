@@ -423,7 +423,8 @@ brew install mamp
 
 ## 参考
 
-[php公式ドキュメント](https://www.php.net/manual/ja/index.php)
+- [php公式ドキュメント](https://www.php.net/manual/ja/index.php)
+- [php拡張モジュール](https://www.php.net/manual/ja/funcref.php)
 
 ### php.ini
 

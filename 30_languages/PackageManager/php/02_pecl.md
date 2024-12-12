@@ -25,4 +25,5 @@ pecl upgrade-all
 
 ## 参考
 
-[公式サイト](https://pecl.php.net)でインストール可能なパッケージのバージョンなど確認可能
+- [公式サイト](https://pecl.php.net)でインストール可能なパッケージのバージョンなど確認可能
+- [php拡張モジュール](https://www.php.net/manual/ja/funcref.php)
