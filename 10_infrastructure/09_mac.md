@@ -14,3 +14,11 @@ vm.swapusage: total = 2048.00M  used = 1462.50M  free = 585.50M  (encrypted)
 ```sh
 sudo purge
 ```
+
+- otool
+  - macOSに標準でインストールされている
+  - バイナリファイルの依存関係を確認する
+
+```sh
+otool -L ~/.asdf/installs/php/8.1.29/bin/php
+```

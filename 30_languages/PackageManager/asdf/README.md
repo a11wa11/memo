@@ -23,6 +23,9 @@ git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.1
 # asdf必要な環境変数を設定
 . "$HOME/.asdf/asdf.sh"
 . "$HOME/.asdf/completions/asdf.bash"
+
+# PATHを通す場合
+export PATH="$HOME/.asdf/shims:$PATH"
 ```
 
 ### asdfからパッケージマネージャーのインストール
