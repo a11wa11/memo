@@ -51,4 +51,8 @@ brew leaves
 brew --prefix パッケージ名
 # パッケージの保管されているディレクトリを確認
 brew ls パッケージ名
+
+# Homebrewで管理しているパッケージをシステムの標準パス（通常 /usr/local または /opt/homebrew）にシンボリックリンクとしてリンクするコマンド
+brew link パッケージ名
+brew link パッケージ名 --force # すでに存在するシンボリックリンクがあればそれを上書き
 ```
