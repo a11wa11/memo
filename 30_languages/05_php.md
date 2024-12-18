@@ -403,9 +403,11 @@ php artisan config:cache
 
 # キャッシュのクリア
 ## 全般的なキャッシュのクリア。 設定、ルート、ビューキャッシュ、およびコンパイル済みファイルをクリア。アプリケーション全体のキャッシュをリセットしたい時
-php artisan optimize:clear
+php artisan optimize:clear # php artisan config:clearを含むわけではない
 ## 設定キャッシュのクリア。 設定のキャッシュをクリアする。設定ファイルを変更した後や開発中に設定をリセットしたい時
 php artisan config:clear
+## アプリケーションのデータキャッシュのみ削除
+php artisan cache:clear
 
 # ルーティング一覧
 php artisan route:list
