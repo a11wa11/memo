@@ -10,6 +10,7 @@
       - [push](#push)
     - [コンテナ関連](#コンテナ関連)
     - [ネットワーク関連](#ネットワーク関連)
+    - [調査](#調査)
   - [Dockerfile](#dockerfile)
   - [マルチCPUアーキテクチャ](#マルチcpuアーキテクチャ)
     - [docker buildx](#docker-buildx)
@@ -264,6 +265,14 @@ docker network inspect ネットワーク名 or ネットワークID
 
 ```sh
 docker network create --attachable -d ネットワーク名 --subnet=172.17.0.0/16 作成ネットワーク名
+```
+
+### 調査
+
+```sh
+# Dockerが使用しているディスクスペースの概要を表示
+docker system df
+docker system df -v # 詳細表示
 ```
 
 ## Dockerfile
