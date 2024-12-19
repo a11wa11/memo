@@ -11,6 +11,7 @@
     - [コンテナ関連](#コンテナ関連)
     - [ネットワーク関連](#ネットワーク関連)
     - [調査](#調査)
+    - [整理](#整理)
   - [Dockerfile](#dockerfile)
   - [マルチCPUアーキテクチャ](#マルチcpuアーキテクチャ)
     - [docker buildx](#docker-buildx)
@@ -273,6 +274,13 @@ docker network create --attachable -d ネットワーク名 --subnet=172.17.0.0/
 # Dockerが使用しているディスクスペースの概要を表示
 docker system df
 docker system df -v # 詳細表示
+```
+
+### 整理
+
+```sh
+# 未使用のイメージ、コンテナ、ボリューム、ネットワークを削除
+docker system prune -a
 ```
 
 ## Dockerfile
