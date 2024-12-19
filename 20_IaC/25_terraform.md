@@ -125,6 +125,13 @@ terraform {
 2. 指定したリソースをインポート(`terraform import 取り込み先リソース名 ターゲットID`)
 3. インポートしたリソースを`terraform state show アドレス.リ対象リソース名`で表示し、１のコードに落とし込む
 
+```terraform
+import {
+  to = aws_codestarconnections_connection.リソース名
+  id = "arn:aws:codestar-connections:us-west-1:0123456789:connection/idididididididididididididididididid"
+}
+```
+
 #### リソースの移動
 
 ```terraform
