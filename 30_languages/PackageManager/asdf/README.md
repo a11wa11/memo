@@ -88,6 +88,7 @@ asdf list all パッケージ名
 
 asdf list all nodejs
 asdf list all php
+asdf list-all golang # list-allでも可能
 ```
 
 - 対象パッケージマネージャーの最新バージョンを確認
@@ -99,7 +100,6 @@ asdf latest nodejs
 
 # インストール済パッケージマネージャーの最新バージョンを表示
 asdf latest --all
-
 ```
 
 - 設定されたバージョンを確認
@@ -109,6 +109,13 @@ asdf current # 全体
 
 asdf current 対象パッケージ名
 asdf current nodejs
+```
+
+### パッケージの更新
+
+```sh
+asdf plugin update golang
+asdf plugin-update golang
 ```
 
 ### 設定
