@@ -20,6 +20,8 @@ goenv install -l
 
 - パッケージマネージャーをインストール
 
+- ※Go言語はバージョン1.16からmacOSのARM64（Apple Silicon、通称M1チップ）を[公式にサポート](https://go.dev/dl/)。それ以前のバージョンはサポート外
+
 ```sh
 goenv install 1.16(任意のバージョン)
 
