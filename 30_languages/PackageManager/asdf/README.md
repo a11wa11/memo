@@ -79,6 +79,7 @@ asdf uninstall php 7.3.33
 asdf plugin list
 # インストール済パッケージマネージャーとインストール済バージョンの表示
 asdf list
+asdf list nodejs # 個別のパッケージマネージャーのインストール済バージョンの表示
 ```
 
 - 対象パッケージマネージャーのインストール可能なバージョンを確認
@@ -115,7 +116,7 @@ asdf current nodejs
 
 ```sh
 asdf plugin update golang
-asdf plugin-update golang
+asdf plugin-update nodejs
 ```
 
 ### 設定

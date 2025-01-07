@@ -59,9 +59,10 @@ go modはgo.modファイルを作成し、依存関係やバージョン情報�
 ```sh
 cd path/to/dir
 # プロジェクトの作成とgo.modという設定ファイルを新規作成
-go mod init github.com/${GITHUB_USER}/${PROJECT_NAME}
+go mod init モジュール名                                # ローカル向け
+go mod init github.com/${GITHUB_USER}/${PROJECT_NAME} # リモート向け
 
-# 使われていない依存モジュールを削除
+# 依存モジュールを更新。使われていないモジュールを削除したり、必要なモジュールを追追加する
 go mod tidy
 ```
 
