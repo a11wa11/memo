@@ -161,7 +161,7 @@ npx npm-which ターゲット
 package.jsonの依存関係を最新バージョンに更新。指定されたバージョン範囲を無視して最新のバージョンをインストールする場合に便利
 
 ```sh
-npm install -g npm-check-update
+npm install -g npm-check-updates
 
 # package.jsonがあるディレクトリで実行する
 ncu                # アップデート可能なパッケージを表示

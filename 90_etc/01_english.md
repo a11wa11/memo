@@ -122,6 +122,7 @@
 | solve |  | 「客観的に正解のある問題」を解決する|
 | resolve | 「主観的で正解のない問題」を解消する | |
 | vendor | 売主、出品者 | |
+| Integration | 統合 | |
 | FQDN | Fully Qualified Domain Name 完全修飾ドメイン名 | ドメイン名 + ホスト名 <www.google.com>|
 | fleet | 艦隊、ものの集まり | |
 | SKU | スキュー（Stock Keeping Unit）作成可能なリソースで選択可能な機能種類　| Azure用語 |
