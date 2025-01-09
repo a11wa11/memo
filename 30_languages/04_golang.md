@@ -175,6 +175,23 @@ b main.main
 b main
 ```
 
+- vscodeでのデバッグ設定例
+
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "golang debug # 任意の名前",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${file}"
+        }
+    ]
+}
+```
+
 ## 基本文
 
 - package
