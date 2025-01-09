@@ -2,7 +2,7 @@
 
 - [go](#go)
   - [インストール](#インストール)
-  - [go mod](#go-mod)
+  - [依存関係](#依存関係)
     - [dep](#dep)
   - [コマンド](#コマンド)
     - [デバッグ](#デバッグ)
@@ -12,6 +12,7 @@
 
 - [公式ダウンロードサイト](https://go.dev/dl/)
 - [goenvインストール](https://tech.librastudio.co.jp/entry/2021/07/23/153304)
+- [github](https://github.com/golang/go/tags)
 
 ```sh
 git clone https://github.com/syndbg/goenv.git ~/.goenv
@@ -48,11 +49,13 @@ export PATH="$PATH:$GOPATH/bin"
 export GO111MODULE=on // 1.13 以降は不要
 ```
 
-## go mod
+## 依存関係
 
-go modはgo.modファイルを作成し、依存関係やバージョン情報を記録する
+- go.mod
 
-- パッケージやモジュールの概念はを参照
+go.modファイルは依存関係やバージョン情報を記録する
+
+- パッケージやモジュールの概念は下記を参照
   - [Go: Moduleについて調べる](https://zenn.dev/masaruxstudy/articles/7965c98289caf5)
   - [パッケージ/モジュールやgo modコマンドについてまとめ](https://blog.framinal.life/entry/2021/04/11/013819)
 
@@ -64,7 +67,12 @@ go mod init github.com/${GITHUB_USER}/${PROJECT_NAME} # リモート向け
 
 # 依存モジュールを更新。使われていないモジュールを削除したり、必要なモジュールを追追加する
 go mod tidy
+go mod tidy -v # 詳細表示
 ```
+
+- go.sum
+
+go.sumファイルは依存関係の検証情報を記録したファイル。package-lock.jsonに近い
 
 ### dep
 
@@ -85,6 +93,21 @@ dep ensure
 
 ## コマンド
 
+- `go get`
+  - 依存関係（モジュールやパッケージ）を取得、更新、インストールするためのコマンド
+  - `npm install`や`npm update`に相当する
+
+```sh
+# 取得し、go.modに追加
+go get github.com/golang/dep/cmd/dep
+# 特定のバージョンを取得
+go get example.com/パッケージ名@v1.2.3
+# 最新バージョンに更新
+go get -u github.com/golang/dep/cmd/dep
+# 現在のディレクトリ以下のすべてのパッケージを取得
+go get ./...
+```
+
 - godocのインストール
 
 ```sh
@@ -98,6 +121,29 @@ go get golang.org/x/tools/cmd/godoc
 go build
 # 環境指定
 GOOS=linux GOARCH=amd64 go build
+# main.goを指定して任意のバイナリ名でビルド
+go build -o ./バイナリ名 main.go
+# 複数のファイル(main.go hello.go)を指定してビルド
+go build -o ./バイナリ名 main.go hello.go
+# カレントディレクトリのすべてのファイルをビルド
+go build -o ./バイナリ名 ./
+```
+
+- `go install`
+  - `go get` + `go build`のようなイメージ
+  - 対象パッケージをビルドして、`$GOPATH/bin`(デフォルトのままの場合)にインストールする
+
+```sh
+# bin配下に置かれるのでdlvコマンドが使えるようになる
+go install github.com/go-delve/delve/cmd/dlv@latest
+```
+
+- `go env`
+  - golangの環境変数を確認する
+
+```sh
+go env
+go env 対象変数 # 指定の変数のみ表示
 ```
 
 ### デバッグ
@@ -172,7 +218,7 @@ func add(x, y int) int { // 関数基本形
 
 func main() {
   var j int = 1 //変数宣言+代入基本形
-  k := 2    //↑変数宣言+代入省略形
+  k := 2        //↑変数宣言+代入省略形
   fmt.Println(j, k)
 
   r := add(5,6) //rという変数にadd関数の結果を代入している
