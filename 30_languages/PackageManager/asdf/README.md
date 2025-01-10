@@ -112,6 +112,13 @@ asdf current 対象パッケージ名
 asdf current nodejs
 ```
 
+- インストールされているパスを表示
+
+```sh
+asdf where nodejs
+asdf where golang
+```
+
 ### パッケージの更新
 
 ```sh
