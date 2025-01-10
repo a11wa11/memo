@@ -6,6 +6,7 @@
     - [dep](#dep)
   - [コマンド](#コマンド)
     - [デバッグ](#デバッグ)
+  - [go変数](#go変数)
   - [基本文](#基本文)
 
 ## インストール
@@ -185,12 +186,26 @@ b main
             "name": "golang debug # 任意の名前",
             "type": "go",
             "request": "launch",
-            "mode": "auto",
-            "program": "${file}"
+            "mode": "auto  # デバッグするか自動選択", 
+            "mode": "debug # デバッグモード",
+            "program": "${fileDirname}",
+            "env": {},
+            "args": [],
+            "args": [ # 単体テストのデバッグを行う場合
+                "-test.v",
+                "-test.run",
+                "対象関数名"
+            ],
         }
     ]
 }
 ```
+
+## go変数
+
+- GOPATH
+  - `$HOME/go`がデフォルト値
+  - asdfなどでインストールするとGOPATHが`$HOME/.asdf/installs/golang/バージョン名`になる
 
 ## 基本文
 
