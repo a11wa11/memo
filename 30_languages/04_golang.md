@@ -2,11 +2,14 @@
 
 - [go](#go)
   - [インストール](#インストール)
+  - [go変数](#go変数)
   - [依存関係](#依存関係)
+    - [go.mod](#gomod)
     - [dep](#dep)
   - [コマンド](#コマンド)
     - [デバッグ](#デバッグ)
-  - [go変数](#go変数)
+    - [gdb](#gdb)
+    - [dlv](#dlv)
   - [基本文](#基本文)
 
 ## インストール
@@ -50,9 +53,15 @@ export PATH="$PATH:$GOPATH/bin"
 export GO111MODULE=on // 1.13 以降は不要
 ```
 
+## go変数
+
+- GOPATH
+  - `$HOME/go`がデフォルト値
+  - asdfなどでインストールするとGOPATHが`$HOME/.asdf/installs/golang/バージョン名`になる
+
 ## 依存関係
 
-- go.mod
+### go.mod
 
 go.modファイルは依存関係やバージョン情報を記録する
 
@@ -149,6 +158,8 @@ go env 対象変数 # 指定の変数のみ表示
 
 ### デバッグ
 
+### gdb
+
 ```sh
 # gdb引数ありで実行
 # パターン1
@@ -160,7 +171,9 @@ gdb --args プログラム名 --foo --bar
 (gdb) run
 ```
 
-- dlvパッケージの追加
+### dlv
+
+- インストール
 
 ```sh
 go install github.com/go-delve/delve/cmd/dlv@latest
@@ -176,7 +189,7 @@ b main.main
 b main
 ```
 
-- vscodeでのデバッグ設定例
+- vscodeでのデバッグ(dlv)設定例
 
 ```json
 {
@@ -200,12 +213,6 @@ b main
     ]
 }
 ```
-
-## go変数
-
-- GOPATH
-  - `$HOME/go`がデフォルト値
-  - asdfなどでインストールするとGOPATHが`$HOME/.asdf/installs/golang/バージョン名`になる
 
 ## 基本文
 
@@ -235,6 +242,8 @@ func init(){
 }
 ```
 
+- 関数
+
 ```go
 package main
 
@@ -247,7 +256,11 @@ import (
 func add(x, y int) int { // 関数基本形
   return x + y
 }
+```
 
+- 変数宣言
+
+```go
 func main() {
   var j int = 1 //変数宣言+代入基本形
   k := 2        //↑変数宣言+代入省略形
@@ -257,20 +270,26 @@ func main() {
   fmt.Println(r)
   fmt.Println("Hello awa", time.Now())
   fmt.Println(user.Current())
-  var ( // 連続で変数宣言+代入したいとき
+
+  // 連続で変数宣言+代入したいとき
+  var (
     i int = 1
   f64 float64 = 1.2
   s string = "test"
   t, f bool = true, false
   )
+
   xi := 3
   fmt.Println(i, f64, s, t, f, xi)
   fmt.Println("Hello" + "World")
   fmt.Println(string("Hello"[0]) + "World")
   fmt.Printf("%T", f64)
 }
+```
 
-<!-- 型変換 -->
+- 型変換
+
+```go
 package main
 
 import (
