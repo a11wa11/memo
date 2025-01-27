@@ -3,6 +3,7 @@
 - [linux](#linux)
   - [ubuntu](#ubuntu)
     - [apt](#apt)
+  - [debian](#debian)
   - [redhat](#redhat)
     - [yum](#yum)
     - [dnf](#dnf)
@@ -64,6 +65,20 @@ apt-get install procps
 apt-get clean
 # or
 apt-get clean && rm -rf /var/lib/apt/lists/*
+```
+
+## debian
+
+- 古いリリースのパッケージを引き続き使用できるように変更
+  - DebianベースのLinuxシステムで、/etc/apt/sources.listファイルを更新
+    - 古いリポジトリをarchive.debian.orgに切り替えた後、パッケージ情報を更新する
+
+```sh
+# Update repository to use archive.debian.org and remove stretch-updates
+sed -i 's|http://deb.debian.org/debian|http://archive.debian.org/debian|g' /etc/apt/sources.list                        # URLをarchive.debian.orgに変更
+sed -i 's|http://security.debian.org/debian-security|http://archive.debian.org/debian-security|g' /etc/apt/sources.list # セキュリティリポジトリを変更
+sed -i '/stretch-updates/d' /etc/apt/sources.list                                                                       # stretch-updatesを(このリポジトリを/etc/apt/sources.listに残したままだとAPTの更新時にエラーが発生し、システムのパッケージ管理がスムーズに行えなくなるため)削除
+apt-get -o Acquire::Check-Valid-Until=false update                                                                      # APTのリポジトリの有効期限チェックを無効にしつつ、パッケージリストを更新する
 ```
 
 ## redhat
