@@ -74,6 +74,11 @@ nvm uninstall v16.15.0
 node
 # バージョン確認
 node -v
+
+# node.jsが使用するV8ヒープ領域の最大サイズ（メモリ上限）を指定するオプション
+# デフォルト値: 約 1.5GB のメモリ（32ビット環境では約512MB）
+# メモリ上限値を変更することで、より大きなメモリを使用可能にする
+NODE_OPTIONS="--max-old-space-size=4096 yarn install
 ```
 
 ### デバッグ
