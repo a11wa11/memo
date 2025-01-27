@@ -398,6 +398,9 @@ php artisan serve --host 0.0.0.0 --port 8000
 # laravel使用可能コマンドの一覧
 php artisan list
 
+# laravelコマンドの内容表示
+php artisan help コマンド名
+
 # 設定のキャッシュ。 設定ファイルを1つのキャッシュファイルにまとめる。デプロイ後、設定が確定した時などに使用
 php artisan config:cache
 
