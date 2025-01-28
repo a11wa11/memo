@@ -508,6 +508,10 @@ curl -Iv 対象URI
 curl --user-agent 任意のUser-Agent名 -Iv 対象URI
 # ステータスコードのみ表示
 curl -I -s -o /dev/null -w "%{http_code}\n"
+# -X HTTPリクエストメソッドを指定
+# -H 'Content-type: application/json' HTTPヘッダーを指定
+# --data '{"text":"Hello, World!"}' リクエストのボディ部分を指定
+curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"}' https://hooks.slack.com/services/XXXXXXXXXXX/YYYYYYYYYYY/ZZZZZZZZZZZZZZZZZZZZZZZZ
 ```
 
 ### cron
