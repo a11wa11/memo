@@ -414,6 +414,10 @@ php artisan cache:clear
 
 # ルーティング一覧
 php artisan route:list
+
+# デバッグ
+php artisan tinker
+php -r "echo getenv('環境変数名');" # 環境変数の確認
 ```
 
 ## 開発環境
