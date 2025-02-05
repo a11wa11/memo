@@ -101,7 +101,7 @@ docker build --secret id=ssh_key,src=${HOME}/.ssh/my-key_rsa  -t 名付けたい
 # マルチステージビルドで定義されたイメージを指定してbuild
 docker build --target 定義されたイメージ -t 名付けたいイメージ名 .(Dockerfileのあるパス)
 
-# マルチステージビルドで定義されたイメージを指定してbuild
+# ビルド時に失敗したコンテナや不要な中間コンテナを削除する
 docker build --force-rm=true -t 名付けたいイメージ名 .(Dockerfileのあるパス)
 
 # イメージ名とタグを独自につける
@@ -282,6 +282,8 @@ docker stats
 ### 整理
 
 ```sh
+# ビルドキャッシュ削除
+docker builder prune
 # 未使用のイメージ、コンテナ、ボリューム、ネットワークを削除
 docker system prune -a
 ```
