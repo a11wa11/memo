@@ -274,6 +274,9 @@ docker network create --attachable -d ネットワーク名 --subnet=172.17.0.0/
 # Dockerが使用しているディスクスペースの概要を表示
 docker system df
 docker system df -v # 詳細表示
+
+# リアルタイムのメモリ使用量を表示
+docker stats
 ```
 
 ### 整理
@@ -388,4 +391,20 @@ secrets:
 ```yml
 depends_on: # appのサービスに対して依存するため、サービス起動はappが起動してからとなる
       - app
+```
+
+- メモリ制限設定
+
+```yml
+version: "3.9"
+
+services:
+  app:
+    build: .
+    deploy:           # デプロイ時のリソース管理設定を指定
+      resources:      # コンテナのリソース制限（メモリなど）設定
+        limits:       # 最大メモリ制限（超えるとコンテナが強制終了される
+          memory: 8G  # コンテナが使用可能な最大メモリ
+        reservations: # 最小メモリ制限（コンテナが使用する最小メモリ）
+          memory: 4G  # コンテナが使用する最小メモリ
 ```
