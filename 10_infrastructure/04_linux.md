@@ -30,6 +30,7 @@
 
 ```sh
 # インストール可能なバージョンを確認
+apt list -a パッケージ名
 apt-cache policy パッケージ名
 apt-cache showpkg パッケージ名
 
@@ -91,6 +92,10 @@ yum list installed # インストール済パッケージ
 yum list available # 利用可能なパッケージ
 yum list updates   # アップデート可能なパッケージ
 yum list extras    # 利用できないパッケージ
+
+# パッケージのインストール
+yum install パッケージ名
+yum install パッケージ名-バージョン名(例 httpd-2.4.6-97 など)
 
 # どのバージョンが存在するかを検索
 yum search --showduplicates パッケージ名
