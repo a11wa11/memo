@@ -34,6 +34,8 @@
 
 # nvmリポジトリをクローン
 git clone https://github.com/nvm-sh/nvm /opt/nvm/
+# またはインストーラーからインストール
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
 # 全ユーザーにアクティベートするためにprofileを作成
 echo '#!/bin/sh' > /etc/profile.d/nvm.sh && echo -e "\nsource /opt/nvm/nvm.sh" >> /etc/profile.d/nvm.sh
@@ -63,6 +65,9 @@ nvm alias default 16.15.0
 
 # nodeのアンインストール
 nvm uninstall v16.15.0
+
+# nvmのバージョン確認
+nvm current
 ```
 
 ## コマンド
