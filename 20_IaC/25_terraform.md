@@ -191,7 +191,7 @@ terraform console
 >data.aws_ec2_managed_prefix_list.プレフィックスリスト名.entries[*].cidr
 ```
 
-#### lifecycle
+#### [lifecycle](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle)
 
 ```terraform
 # passwordなど変更する余地があるリソースが変更されても更新対象としないように設定する
