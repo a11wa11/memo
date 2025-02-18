@@ -11,7 +11,6 @@
       - [debug](#debug)
     - [フォーム](#フォーム)
     - [テンプレート](#テンプレート)
-    - [laravel](#laravel)
   - [開発環境](#開発環境)
   - [参考](#参考)
     - [php.ini](#phpini)
@@ -80,6 +79,10 @@ $test1 = 456;
 $test2 = 789;
 $test3 = $test1 . $test2
 echo $test3;
+
+$test99 = 'テスト科目: ';
+$test .= '社会' // 文字列結合する場合は.を使用 ※数字も文字列として扱われる
+echo $test99; // テスト科目: 社会
 ```
 
 - 配列
@@ -220,7 +223,7 @@ switch($i){
 - 関数
 
 ```php
-function 関数名(引数1, 引数2 ){
+function 関数名( 引数1, 引数2 ){
   処理内容
   return 戻り値;
 }
@@ -229,26 +232,124 @@ function 関数名(引数1, 引数2 ){
 関数名();
 ```
 
-- アロー演算子
-
-プロパティやメソッドへのアクセスで使用
+- クラス
+  - アクセス修飾子
+    - クラス内のプロパティやメソッドにアクセスする際に使用
+      - public: どこからでもアクセス可能
+      - private: そのクラス内からのみアクセス可能
+      - protected: そのクラス内と継承したクラス内からのみアクセス可能
+  - アロー演算子
+    -プロパティやメソッドへのアクセスで使用
 
 ```php
 <?php
- 
+// class クラス名( 引数1, 引数2 ) で定義
+  // public: どこからでもアクセス可能な
+  // private: そのクラス内からのみアクセス可能
+  // protected: そのクラス内と継承したクラス内からのみアクセス可能
 class User {
     public $name;       // 名前
     public $age;        // 年齢
- 
-    function __construct(string $name, int $age)
-    {
+    // コンストラクタ(初期化)
+    function __construct(string $name, int $age){
         // アロー演算子を使ってプロパティにアクセス
         $this->name = $name;
         $this->age = $age;
     }
 }
  
-$sample_user = new User("Yamada Taro", 25);
+$sample_user = new User("Yamada Taro", 25); // インスタンス化
+```
+
+- 継承
+  - 親クラス(基底クラス・スーパークラス)を引き継いで新しいクラスを作成することができる
+  - 親クラスのプロパティやメソッドを引き継いで使用することができる
+  - 子クラス(派生クラス・サブクラス)で親クラスの同名メソッドを上書きして使用すること(オーバーライド)ができる
+  - extendsを使って継承できるのは1つのクラスだけ
+
+```php
+<?php
+class 親クラス名 {
+
+}
+class クラス名(子クラス) extends 親クラス名 {
+    function 関数名( 引数 ) {
+        処理内容
+    }
+}
+// final
+final class クラス名 {              // クラスの継承を禁止（このクラスを基にしたサブクラスを作れない）
+    final function 関数名( 引数 ) { // メソッドのオーバーライドを禁止（子クラスで上書きできない）
+        処理内容
+    }
+}
+```
+
+- 抽象クラス
+  - 抽象クラスを継承した子クラスで、抽象クラスの抽象メソッドを実装しなければならない
+  - 抽象クラスは、abstractキーワードを使って宣言する
+  - 普通クラスとインターフェースの中間のようなもの
+
+```php
+<?php
+abstract class 抽象クラス名Abstract { // よくクラス名にAbstractをつける
+    abstract function 抽象関数名( 引数 ); // 抽象メソッド
+      処理内容
+}
+// 抽象クラスを継承した子クラス
+class クラス名 extends 抽象クラス名Abstract {
+    function 抽象関数名( 引数 ) { // 抽象メソッドの実装は必須
+        処理内容
+    }
+}
+```
+
+- インターフェース
+  - クラスが実装しなければならないメソッドを定義するためのもの
+  - interfaceキーワードを使って宣言する
+  - インターフェースを実装するクラスは、implementsキーワードを使って実装する
+
+```php
+<?php
+interface class クラス名Interface { // よくクラス名にInterfaceをつける
+    public function 関数名( 引数 ); // インターフェースのメソッド
+    // 処理内容は書かない
+}
+// インターフェースを継承した子クラス
+class クラス名 implements クラス名Interface1, クラス名Interface2 { // 複数のインターフェースを実装することが可能
+    function 関数名( 引数 ) { // 抽象メソッドの実装は必須
+        処理内容
+    }
+}
+```
+
+- trait
+  - クラスの継承を使わずに、複数のクラスで共通のメソッドを使いたい場合に使用
+  - useキーワードを使ってトレイトをクラスに適用する
+
+```php
+<?php
+trait クラス名1Trait { // よくクラス名にTraitをつける
+    public function 関数名1( 引数 ); // トレイトのメソッド
+      処理内容
+}
+
+trait クラス名2Trait {
+    public function 関数名2( 引数 );
+      処理内容
+}
+
+// トレイトを適用したクラス
+class クラス名 {
+  use クラス名1Trait, クラス名2Trait; // 複数のトレイトを適用することが可能
+    function 関数名( 引数 ) { // 抽象メソッドの実装は必須
+        処理内容
+    }
+}
+
+$sample = new クラス名("引数"); // インスタンス化
+sample.関数名1(); // トレイトのメソッドを呼び出し
+sample.関数名2(); // トレイトのメソッドを呼び出し
 ```
 
 - html内記述
@@ -392,40 +493,6 @@ $_POST['your_name'] //post通信はURL末尾にクエリが表示されない
 - Twig = 小枝という意味
   - シンプルで軽量なテンプレートエンジン
   - pythonのjinja2と似た構文
-
-### laravel
-
-```sh
-# laravelの起動
-php artisan serve
-
-# laravelを起動し、ホストを0.0.0.0に設定して外部からの接続を受け付け。portは8000を指定
-php artisan serve --host 0.0.0.0 --port 8000
-
-# laravel使用可能コマンドの一覧
-php artisan list
-
-# laravelコマンドの内容表示
-php artisan help コマンド名
-
-# 設定のキャッシュ。 設定ファイルを1つのキャッシュファイルにまとめる。デプロイ後、設定が確定した時などに使用
-php artisan config:cache
-
-# キャッシュのクリア
-## 全般的なキャッシュのクリア。 設定、ルート、ビューキャッシュ、およびコンパイル済みファイルをクリア。アプリケーション全体のキャッシュをリセットしたい時
-php artisan optimize:clear # php artisan config:clearを含むわけではない
-## 設定キャッシュのクリア。 設定のキャッシュをクリアする。設定ファイルを変更した後や開発中に設定をリセットしたい時
-php artisan config:clear
-## アプリケーションのデータキャッシュのみ削除
-php artisan cache:clear
-
-# ルーティング一覧
-php artisan route:list
-
-# デバッグ
-php artisan tinker
-php -r "echo getenv('環境変数名');" # 環境変数の確認
-```
 
 ## 開発環境
 
