@@ -117,6 +117,12 @@ composer why-not パッケージ名 バージョン
 composer clear-cache
 ```
 
+- プロジェクト初期化
+
+```sh
+composer init
+```
+
 ## 設定
 
 - composer.lockファイルは実際にインストールされたライブラリを記録する。
@@ -127,6 +133,11 @@ composer clear-cache
 
 ```json
 {
+    "autoload": {           #  オートロードの設定
+        "psr-4": {          #  オートロードのお勧め設定
+            "App\\": "app/" #  名前空間(左側\\(バックスラッシュ2個要)):ディレクトリ(右側の実際のフォルダ名)の対応
+        }
+    },
     "require": {
         "monolog/monolog": "1.0.*",
         "google/apiclient-services": "~0.200", # 最小バージョンが200でメジャーバージョンは同一という意味
@@ -134,4 +145,12 @@ composer clear-cache
 
     }
 }
+```
+
+- オートロード
+  - プロジェクト内で`use App\SomeClass;`のような形でクラスを自動的に読み込めるようになるため、手動で`require`する手間が省け、コードの管理が簡単になる
+
+```sh
+# オートロードを更新
+composer dump-autoload
 ```
