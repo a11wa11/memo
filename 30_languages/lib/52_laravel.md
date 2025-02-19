@@ -28,8 +28,32 @@ php artisan cache:clear
 
 # ルーティング一覧
 php artisan route:list
+```
 
-# デバッグ
+### デバッグ
+
+- デバッグコマンド
+
+```sh
 php artisan tinker
 php -r "echo getenv('環境変数名');" # 環境変数の確認
 ```
+
+- デバッグバー(barryvdh/laravel-debugbar)
+
+```sh
+# インストール
+composer require barryvdh/laravel-debugbar
+# 起動
+php artisan serve # 画面上にデバッグバーが表示される
+# .envファイルで管理可能
+# APP_DEBUG=trueの場合は自動で表示される。APP_DEBUG=falseの場合は表示されない
+```
+
+## 初期設定
+
+- config/app.php
+  - `locale`を`ja`に変更し、言語設定を日本語にする
+  - `timezone`を`Asia/Tokyo`に変更し、タイムゾーンを日本時間にする
+
+##
