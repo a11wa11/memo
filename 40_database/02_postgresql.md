@@ -184,8 +184,11 @@ explain analyze select * from テーブル名;
 ### 拡張機能
 
 ```sql
-# 指定拡張機能アップグレードコマンド  
+-- 指定拡張機能アップグレードコマンド  
 ALTER EXTENSION 拡張機能名 UPDATE TO '新バージョン';
+
+-- インストール済拡張機能でデフォルトバージョンより低いものを抽出
+SELECT * FROM pg_available_extensions WHERE default_version > installed_version;
 ```
 
 ### dump
