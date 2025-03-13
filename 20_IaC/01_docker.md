@@ -2,8 +2,8 @@
 
 - [docker](#docker)
   - [インストール](#インストール)
-  - [dockerのタグ一覧を取得するコマンドを生成](#dockerのタグ一覧を取得するコマンドを生成)
   - [コマンド](#コマンド)
+    - [設定](#設定)
     - [イメージ関連](#イメージ関連)
       - [よく使うオプション](#よく使うオプション)
       - [commit](#commit)
@@ -41,26 +41,31 @@ curl -L https://github.com/docker/compose/releases/download/1.6.2/docker-compose
 chmod +x /usr/local/bin/docker-compose
 ```
 
-## dockerのタグ一覧を取得するコマンドを生成
+## コマンド
 
-<details>
-    <summary>展開</summary>
+### 設定
 
 ```sh
-# .bashrcなどに追記する
+# 現在のDockerエンジンの状態や設定情報を確認
+docker info
 
-# docker-tags centos でタグ一覧を取得。jq & curl が必要
+# Dockerエンジン（例: ローカルの Docker、リモートの Docker サーバ、Rancher Desktop 経由の Docker など）を確認
+docker context ls
 
-if [ -e /usr/bin/docker ]; then
-    function docker-tags {
-        curl -s https://registry.hub.docker.com/v2/repositories/library/$1/tags/ | jq -r '.results[].name'
-    }
-fi
+## Dockerエンジン切替
+docker context use エンジン名
+
+# DOCKER_HOST -> Docker CLIがどのホスト（およびポート）に接続してDockerデーモンと通信するかを指定するための環境変数
+## デフォルトのDockerエンジンの場合
+DOCKER_HOST=unix:///var/run/docker.sock
+## rancher-desktopのDockerエンジンの場合
+DOCKER_HOST=unix://$HOME/.rd/docker.sock
+
+## rancher-desktopなどの場合、ソケットを指定して切り替える
+DOCKER_HOST=unix://$HOME/.rd/docker.sock docker info
+## もしくはシンボリックリンクを貼る(管理者権限必要かも)
+ln -s $HOME/.rd/docker.sock /var/run/docker.sock
 ```
-
-</details>
-
-## コマンド
 
 ### イメージ関連
 
