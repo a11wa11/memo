@@ -46,6 +46,9 @@ sls deploy list functions
 
 # ログ確認
 sls logs --function 関数名(serverless.ymlで定義されている関数名)
+
+# .serverless配下にデプロイパッケージが作成される
+sls package
 ```
 
 - デプロイ
