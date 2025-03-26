@@ -233,6 +233,17 @@ ANALYZE;
 
 -- VACUUMとANALYZEは下記のように同時実行可能
 vacuum analyze;
+
+-- VACUUMとANALYZEの実行状況を確認
+SELECT
+  schemaname,
+  relname,
+  last_vacuum,
+  last_autovacuum,
+  last_analyze,
+  last_autoanalyze
+FROM
+  pg_stat_user_tables;
 ```
 
 ### 論理レプリケーション
