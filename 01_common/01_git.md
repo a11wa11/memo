@@ -225,11 +225,14 @@ git stash list
 # 退避した内容をdiffで確認
 git diff HEAD..stash@{0}
 
-# 一時退避した内容(stash)をリストから指定して戻す
-git stash pop stash@{0} # stash@{0}は適宜変更
+# 一時退避した内容(stash)をリストから指定して取り込み
+git stash apply stash@{0}
 
 # 一時退避した内容(stash)を一部消去
 git stash drop stash@{0} # stash@{0}は適宜変更
+
+# 一時退避した内容(stash)をリストから指定して戻す -> apply + drop
+git stash pop stash@{0} # stash@{0}は適宜変更
 
 # 一時退避した内容(stash)を全て消去
 git stash clear
