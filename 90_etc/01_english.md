@@ -69,6 +69,7 @@
 | amend | 修正する | |
 | aggregate | 集計する | |
 | benchmark | 性能評価 | |
+| concurrency | 同時実行数 | 同時に何個のリクエストを処理できるか |
 | elapsed | 経過 | |
 | inference | 推論 | |
 | struggling | 悪戦苦闘 | |
