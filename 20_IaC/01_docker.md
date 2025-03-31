@@ -276,7 +276,7 @@ docker network create --attachable -d ネットワーク名 --subnet=172.17.0.0/
 ### 調査
 
 ```sh
-# Dockerが使用しているディスクスペースの概要を表示
+# Dockerが使用しているディスクスペースの概要を表示。dfはdisk freeの略
 docker system df
 docker system df -v # 詳細表示
 
@@ -289,7 +289,15 @@ docker stats
 ```sh
 # ビルドキャッシュ削除
 docker builder prune
-# 未使用のイメージ、コンテナ、ボリューム、ネットワークを削除
+# 未使用のイメージ削除
+docker image prune
+# 未使用のコンテナ削除
+docker container prune
+# 未使用のネットワーク削除
+docker network prune
+# ボリューム削除
+docker volume prune
+# 未使用のイメージ、コンテナ、ネットワーク、ボリュームを削除
 docker system prune -a
 ```
 
