@@ -463,8 +463,8 @@ nohup 実行したいコマンド
 ```sh
 # yyyymmddの形で取得
 date '+%Y%m%d'
-# yyyymmdd-HHMMの形で取得
-date '+%Y%m%d-%H%M'
+# TZを東京にしてyyyymmdd-HHMMの形で取得
+TZ=Asia/Tokyo date '+%Y%m%d-%H%M'
 ```
 
 #### 時間変更
