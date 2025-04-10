@@ -17,6 +17,21 @@ cat ***.json | jq ".キー名"
 cat ***.json | jq -r
 # resultという任意のキーを作成してその内容を決定
 cat ***.json | jq -r '.StackSummaries[] | .任意のキー = .StackStatus + " " + .LastUpdatedTime + " " + .StackName | .任意のキー'
+
+# 指定のキーで特定の値があるものを取得
+{
+"name": "ruby",
+"image": "xxxx.dkr.ecr.ap-northeast-1.amazonaws.com/ecr-app:latest",
+},
+{
+"name": "nginx",
+"image": "xxxx.dkr.ecr.ap-northeast-1.amazonaws.com/ecr-nginx:latest",
+}
+
+cat ***.json | jq '.キー名 | select(.name == "指定したい値")' # rubyだったらrubyのみ取得
+
+# 定義した変数を使って内容を変更
+jq --arg image_name "任意のイメージ名" 'select(.name == "nginx") | .image=$image_name' 対象ファイル名
 ```
 
 ## jsonからymlへ変換するツール
