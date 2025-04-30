@@ -351,6 +351,8 @@ host google.com
 
 ```sh
 dig google.com
+# クエリするレコードタイプをNSで指定。デフォルトはA
+dig NS google.com
 ```
 
 - nc
