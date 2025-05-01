@@ -94,8 +94,8 @@ git remote add upstream git@github.com:XXXXXXXXXXXXXXXX
 git pull upstream ブランチ名
 
 # フォーク元のPRにチェックアウト
-git fetch upstream pull/ID番号/head:pr/ID番号(任意のブランチ名)
-git checkout pr/ID番号
+git fetch upstream pull/ID番号/head:任意のブランチ名
+git checkout 任意のブランチ名
 
 # フォーク元の最新状態をリモート先に反映
 git pull upstream ブランチ名
