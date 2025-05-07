@@ -324,6 +324,49 @@ variable "env" {
 value = var.env == "prod" ? "t2.large" : "t2.micro"
 ```
 
+```terraform
+# リスナールールの加重ルーティング例
+resource "aws_lb_listener_rule" "ecs_https_1" {
+  listener_arn = aws_lb_listener.tmp_https.arn
+  priority     = 100
+
+  action {
+    type             = "forward"
+
+    forward {
+      target_group {
+        arn    = ターゲットグループarn1
+        weight = 90
+      }
+
+      target_group {
+        arn    = ターゲットグループarn2
+        weight = 10
+      }
+      stickiness {
+        enabled  = true
+        duration = 600
+      }
+    }
+  }
+
+  condition {
+    host_header {
+      values = [
+        対象ドメイン名
+      ]
+    }
+  }
+
+  lifecycle {
+    ignore_changes = [
+      # target_groupはBlue/Greenデプロイで動的に変更される
+      action["forward"],
+    ]
+  }
+}
+```
+
 ## 参考
 
 - [スタイルガイド](https://developer.hashicorp.com/terraform/language/style)
