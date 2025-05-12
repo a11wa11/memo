@@ -114,6 +114,7 @@
 | gist | 要旨 | |
 | distribution | 分布、配布、流通 | |
 | shard | 破片 | |
+| Impaired | 障害のある | |
 | implementation | 実装 | |
 | assign | 割り当てる | |
 | ingress | 進入 | |
