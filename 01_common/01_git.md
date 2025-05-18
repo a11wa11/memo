@@ -293,6 +293,9 @@ git cherry-pick -m 1 コミットID
 # Dはマージコミット。親１がX,Yを、親2がB,Cのコミットを持つので
 git cherry-pick X Y  =  git cherry-pick -m 1 D
 git cherry-pick B C  =  git cherry-pick -m 2 D
+
+# コミット履歴を作らずワーキングツリーに適用したい場合
+git resotre -s(source) コミットID
 ```
 
 ### タグ
