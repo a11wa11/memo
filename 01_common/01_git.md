@@ -200,7 +200,11 @@ git reset --soft HEAD^
 git reset --hard HEAD@[1]
 
 # ワーキングディレクトリ内の変更を破棄（元に戻す)
+git restore
+git checkout -f # 未保存の変更も含めて元に戻す
+# 個別ファイル指定してワーキングディレクトリ内の変更を破棄（元に戻す)
 git checkout -- ファイル名
+git restore -p ファイル名 # e(dit)でさらに個別の箇所を指定して元に戻せる
 
 # 特定のファイルだけ前の状態に戻したいとき
 git checkout コミットハッシュ ファイルパス
