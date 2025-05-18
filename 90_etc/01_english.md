@@ -149,6 +149,7 @@
 | clobber | 打ち消す、打ちのめす | |
 | solve |  | 「客観的に正解のある問題」を解決する|
 | resolve | 「主観的で正解のない問題」を解消する | |
+| restore | 復元する・回復する、元に戻す | recoverは「失ったもの」を回復するというニュアンス|
 | vendor | 売主、出品者 | |
 | Integration | 統合 | |
 | FQDN | Fully Qualified Domain Name 完全修飾ドメイン名 | ドメイン名 + ホスト名 <www.google.com>|
