@@ -163,6 +163,9 @@ git log branch1..branch2 --pretty=oneline --pretty=format:"%n - %ad : %s" --date
 ### コミット
 
 ```sh
+# コミット作成時にdiffを表示
+git commit -v
+
 # 直近のコミットからの変更内容を（新コミットを追加せず）直近コミットに反映する 
 git commit --amend
 
