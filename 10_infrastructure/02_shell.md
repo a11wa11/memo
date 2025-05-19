@@ -602,6 +602,12 @@ envsubst '${USER}' < template.txt
 envsubst '${USER_NAME} ${PROJECT_NAME}' < template.txt
 ```
 
+### ソート
+
+```sh
+du -h / | sort -hr # 降順でソート
+```
+
 ### ステータス
 
 - ジョブ １つ以上のコマンドで動作するひとまとまりの処理単位
