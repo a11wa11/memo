@@ -606,8 +606,13 @@ EOF
 # 基本形式(テンプレート内の${VARIABLE_NAME}をすべて置換)
 envsubst  < template.txt
 # 指定したテンプレート内の${VARIABLE_NAME}のみ置換
+export USER_NAME="hoge"
+export PROJECT_NAME="fuga"
 envsubst '${USER}' < template.txt
 envsubst '${USER_NAME} ${PROJECT_NAME}' < template.txt
+
+export NAME="ABC"
+echo 'Hello, $NAME!' | envsubst # Hello, ABC!
 ```
 
 ### ソート
