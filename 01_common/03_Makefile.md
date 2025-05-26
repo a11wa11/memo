@@ -48,12 +48,20 @@ result_dir := $(current_dir)/taurus/results/$(now)
 
 # ↑こういう状況だとする
 cd /path/to/current/somewhere
-pwd    # /path/to/current と出力
+pwd    # /path/to/current と出力。次の行では元のディレクトリに戻っている
 
 cd /path/to/current/somewhere; pwd  # /path/to/current/somewhere と出力
 
 cd /path/to/current/somewhere && \
     pwd                             # /path/to/current/somewhere と出力
+```
+
+- エラー処理
+
+```Makefile
+# Makefileの組込関数
+error "only supported in dev environment."                # エラーを出力して即時終了
+$(error "only supported in dev environment. ENV: $(ENV)") # 変数組み込みたい場合
 ```
 
 ## 実行コマンド
