@@ -49,6 +49,16 @@ sls logs --function 関数名(serverless.ymlで定義されている関数名)
 
 # .serverless配下にデプロイパッケージが作成される
 sls package
+
+# 作成したデプロイパッケージから変更セットを作成する場合
+aws cloudformation create-change-set \
+  --stack-name スタック名 \
+  --template-body file://.serverless/cloudformation-template-update-stack.json \
+  --change-set-name 任意の変更セット名 \
+  --capabilities CAPABILITY_NAMED_IAM
+
+# 作成した変更セットを実行する場合
+aws cloudformation execute-change-set --change-set-name 任意の変更セット名
 ```
 
 - デプロイ
