@@ -114,6 +114,12 @@ npm update -g npm
 }
 ```
 
+```json
+  "engines": {        # nodeの推奨バージョンを指定
+    "node": "^18.0.0"
+  },
+```
+
 - package.json作成
 
 ```sh
