@@ -39,6 +39,17 @@ current_dir := $(shell pwd)
 result_dir := $(current_dir)/taurus/results/$(now)
 ```
 
+- 引数を渡す
+
+```Makefile
+build:
+  echo "ENV is $(ENV)"
+```
+
+```sh
+make build ENV=production
+```
+
 - カレントディレクトリの解釈
   - `cd`で移動しても次の行では元のディレクトリに戻るので注意
 
