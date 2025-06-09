@@ -11,7 +11,13 @@
 - Personal access tokens
   - GitHubのリモートリポジトリにHTTP接続する際に、ユーザ名と合わせて必要となる情報
 
-[トークンの作成手順](https://docs.github.com/ja/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic)
+- [トークンの作成手順](https://docs.github.com/ja/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic)
+  1. githubのsetting
+  2. Developer Settings(一番左下)
+  3. Personal access tokens(classic)
+  4. 既存のトークンから「Regenerate」で更新可能(だが新規で作った方がいい場合もある)
+  5. 「repo」を選択
+  6. その後、terraform initなどで表示されるpassword欄にgithubユーザー名を入力
 
 ```sh
 # Personal access tokens発行後に下記のようにして使用する
