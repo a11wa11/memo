@@ -15,6 +15,7 @@
 - [downdetector](https://downdetector.jp/)
 - [GitHub Status](https://www.githubstatus.com/)
 - [AWS Health](https://health.aws.amazon.com/health/status)
+- [Google Cloud](https://status.cloud.google.com/)
 
 ## Webサーバやアプリケーションサーバの性能テスト
 
