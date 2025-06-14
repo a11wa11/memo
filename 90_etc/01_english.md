@@ -101,6 +101,7 @@
 | extract | 展開 | |
 | credential | 信任状 | |
 | annotation | 注釈 | |
+| substitution | 代用、置換 | string substitution=文字列置換|
 | subscriptable | 添字 | |
 | per_page | 1ページあたり | |
 | parse | 解析 | |
