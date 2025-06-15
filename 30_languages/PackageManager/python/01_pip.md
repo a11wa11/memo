@@ -17,6 +17,9 @@ pip install 対象パッケージ==バージョン
 # インストール可能なバージョンを表示。　※あえてバージョン指定しないことでインストール可能なバージョンが表示される
 pip install ipython==
 
+# 強制再インストール
+pip install --force-reinstall 対象パッケージ
+
 # インターネットではなローカルの指定のパスからパッケージをインストールする
 pip install --no-index --find-links=/path/path/libraries -c path/requirements.lock
 pip install --no-index --find-links=/path/path/libraries -c path/requirements.txt
