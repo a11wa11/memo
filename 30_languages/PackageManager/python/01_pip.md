@@ -1,8 +1,18 @@
 # pip
 
+## コマンド
+
+### インストール
+
 ```sh
 # dry-run（実際にはインストールしない）
 pip install --dry-run 対象パッケージ
+
+# 基本インストールコマンド
+pip install 対象パッケージ
+
+# バージョンを指定。ダウングレードも可能
+pip install ライブラリ名==バージョン
 
 # インストール可能なバージョンを表示。　※あえてバージョン指定しないことでインストール可能なバージョンが表示される
 pip install ipython==
@@ -10,65 +20,70 @@ pip install ipython==
 # インターネットではなローカルの指定のパスからライブラリをインストールする
 pip install --no-index --find-links=/path/path/libraries -c path/requirements.lock
 pip install --no-index --find-links=/path/path/libraries -c path/requirements.txt
-pip install --no-index --find-links=/path/path/libraries -c path/requirements.lock -r path/reuirements.txt
+pip install --no-index --find-links=/path/path/libraries -c path/requirements.lock -r path/requirements.txt
 ```
 
-* [poetry](https://zenn.dev/canonrock/articles/poetry_basics)
+### アンインストール
 
 ```sh
-# poetryの導入・pyproject.tomlの作成や対話式でプロジェクトに関する情報を決定する
-poetry init
+pip uninstall ライブラリ名
+```
 
-# パッケージ追加
-poetry add パッケージ名
-# オプションや引数指定例
-poetry add パッケージ名 --dry-run # インストールされる内容を確認
-poetry add "パッケージ名>1.15"    # 1.15より大きいバージョンの指定
-poetry add "パッケージ名@latest"  # 最新のバージョンをインストール
-# バージョン指定について
-"^3.8" #3.8以上4.0より小さいバージョンという意味。3.9も含んでいる
-"^3.8,<3.9" #3.8のみ指定し、3.9は含まず
-"=3.8"      #3.8のみ指定し、3.9は含まず。上記と同じ
+### アップグレード
 
-# パッケージの削除
-poetry remove パッケージ名
+```sh
 
-# パッケージの確認
-poetry show
-# >> オプション例
-poetry show --tree         # ツリー形式で依存関係を表示
-poetry show --latest       # 最新バージョンを表示
-poetry show -o(--outdated) # 古くなっているパッケージを表示
+pip install -U ライブラリ名
+pip install --upgrade ライブラリ名
+```
 
-# パッケージ検索
-poetry search
+### 確認
 
-# パッケージの更新
-poetry update パッケージ名 # 個別更新
-poetry update            # 前パッケージの更新
-poetry update --dry-run  # アップグレードされるパッケージを確認
-# poetry自身の更新
-poetry self update
+```sh
+# インストール済パッケージを確認
+pip list
 
-# poetry.lockの生成
-poetry lock
+# インストール済パッケージが最新版かどうか確認
+pip list --outdated
 
-# 仮想環境からコマンド実行
-poetry shell
-poetry run python -m unittest ~~~
+# パッケージの詳細や依存関係(Requiresに表示される)を確認
+pip show ライブラリ名
+```
 
-# pyproject.tomlの検証
-portry check
+### パッケージの保存
 
-# pyproject.tomlから一括インストール。poetry.lockがあればそれを参考にする
-poetry install
+```sh
+# 保存ファイル名は何でもOKだが、requirements.txtが一般的によく見る
+pip freeze > requirements.txt
 
-# 環境関連
-poetry env info             # 現在の仮想環境の情報
-poetry env list             # 仮想環境一覧
-poetry env remove <python>  # 仮想環境の削除
-poetry env use <python>     # 仮想環境を作成、アクティベート
+# 保存したライブラリ名をrequirements.txtからインストール
+pip install -r requirements.txt
+```
 
-# pip freeze をpoetryで実行したい時
-poetry run pip --disable-pip-version-check list --format=freeze
+### 依存関係確認
+
+- pipdeptree
+  - 依存関係をツリー状で表示する
+  - pipdeptreeは標準で入っていないため、要インストール
+
+```sh
+# インストール
+pip install pipdeptree
+
+# 全ライブラリの依存関係をツリー状で表示
+pipdeptree
+
+# 指定のライブラリの依存関係を表示
+pipdeptree -p ライブラリ名
+```
+
+- pip-autoremove
+  - pip-autoremoveは依存関係にあるライブラリをまとめて削除する
+  - pip-autoremoveは標準で入っていないため、要インストール
+
+```sh
+# インストール
+pip install pipdeptree
+# 依存関係にあるライブラリをまとめて削除
+pip-autoremove ライブラリ名
 ```
