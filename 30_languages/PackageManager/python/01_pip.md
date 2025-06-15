@@ -12,12 +12,12 @@ pip install --dry-run 対象パッケージ
 pip install 対象パッケージ
 
 # バージョンを指定。ダウングレードも可能
-pip install ライブラリ名==バージョン
+pip install 対象パッケージ==バージョン
 
 # インストール可能なバージョンを表示。　※あえてバージョン指定しないことでインストール可能なバージョンが表示される
 pip install ipython==
 
-# インターネットではなローカルの指定のパスからライブラリをインストールする
+# インターネットではなローカルの指定のパスからパッケージをインストールする
 pip install --no-index --find-links=/path/path/libraries -c path/requirements.lock
 pip install --no-index --find-links=/path/path/libraries -c path/requirements.txt
 pip install --no-index --find-links=/path/path/libraries -c path/requirements.lock -r path/requirements.txt
@@ -26,15 +26,15 @@ pip install --no-index --find-links=/path/path/libraries -c path/requirements.lo
 ### アンインストール
 
 ```sh
-pip uninstall ライブラリ名
+pip uninstall 対象パッケージ
 ```
 
 ### アップグレード
 
 ```sh
 
-pip install -U ライブラリ名
-pip install --upgrade ライブラリ名
+pip install -U 対象パッケージ
+pip install --upgrade 対象パッケージ
 ```
 
 ### 確認
@@ -47,7 +47,7 @@ pip list
 pip list --outdated
 
 # パッケージの詳細や依存関係(Requiresに表示される)を確認
-pip show ライブラリ名
+pip show 対象パッケージ
 ```
 
 ### パッケージの保存
@@ -56,7 +56,7 @@ pip show ライブラリ名
 # 保存ファイル名は何でもOKだが、requirements.txtが一般的によく見る
 pip freeze > requirements.txt
 
-# 保存したライブラリ名をrequirements.txtからインストール
+# 保存したパッケージをrequirements.txtからインストール
 pip install -r requirements.txt
 ```
 
@@ -70,20 +70,20 @@ pip install -r requirements.txt
 # インストール
 pip install pipdeptree
 
-# 全ライブラリの依存関係をツリー状で表示
+# 全パッケージの依存関係をツリー状で表示
 pipdeptree
 
-# 指定のライブラリの依存関係を表示
-pipdeptree -p ライブラリ名
+# 指定のパッケージの依存関係を表示
+pipdeptree -p 対象パッケージ
 ```
 
 - pip-autoremove
-  - pip-autoremoveは依存関係にあるライブラリをまとめて削除する
+  - pip-autoremoveは依存関係にあるパッケージをまとめて削除する
   - pip-autoremoveは標準で入っていないため、要インストール
 
 ```sh
 # インストール
 pip install pipdeptree
-# 依存関係にあるライブラリをまとめて削除
-pip-autoremove ライブラリ名
+# 依存関係にあるパッケージをまとめて削除
+pip-autoremove 対象パッケージ
 ```
