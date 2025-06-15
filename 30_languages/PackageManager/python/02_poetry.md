@@ -1,4 +1,6 @@
-# poetry:[参考](https://zenn.dev/canonrock/articles/poetry_basics)
+# poetry
+
+[参考](https://zenn.dev/canonrock/articles/poetry_basics)
 
 ```sh
 # poetryの導入・pyproject.tomlの作成や対話式でプロジェクトに関する情報を決定する
