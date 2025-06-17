@@ -222,7 +222,7 @@ terraform plan -out=ファイル名
 # デバッグログを有効にして詳細な情報を表示
 TF_LOG=DEBUG terraform plan
 # クラウド上の現状を反映させる
-terraform refresh
+terraform refresh             # こちらはterraform1.0未満の古いコマンドで1.x系では非推奨
 terraform apply -refresh-only
 # tfstateで管理されているリソースの一覧表示
 terraform state list
