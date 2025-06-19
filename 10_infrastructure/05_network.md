@@ -320,7 +320,7 @@ systemctl restart network
 ```sh
 netstat -an | grep ポートナンバー
 ss | grep ポートナンバー
-lsof -i ポートナンバー
+lsof -i ポートナンバー # プロセス確認可能
 nc -zv 対象ホスト名 ポート番号
 ```
 
