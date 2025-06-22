@@ -163,6 +163,13 @@ mock.assert_called()      #呼び出されたかどうかを確認
 mock.assert_called_once() #呼び出されたか回数が１度だけかどうかを確認
 ```
 
+#### デバッグ
+
+* vscode
+  * venv環境のpythonを適用したい場合
+    1. Ctl + Shift + P で`Python: Select interPereter`をクリック
+    2. `Enter interpreter path...`を選択してvenvのパスを設定
+
 ### よく使うライブラリ
 
 * subprocess -> pythonからコマンドを実行
