@@ -172,11 +172,20 @@ mock.assert_called_once() #呼び出されたか回数が１度だけかどう�
 
 ### よく使うライブラリ
 
-* subprocess -> pythonからコマンドを実行
+* subprocess
+  * pythonからコマンドを実行
 
 ```python
 import subprocess
 
 subprocess.run(["ls", "-l"])
 subprocess.run("ls -l", shell=True)
+```
+
+* pipreqs
+  * Pythonプロジェクトの依存関係を自動的に検出し、requirements.txtファイルを生成するツール
+
+```sh
+pip install pipreqs
+pipreqs .  # 現在のディレクトリに requirements.txt を自動生成
 ```
