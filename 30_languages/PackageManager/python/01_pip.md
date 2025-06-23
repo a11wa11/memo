@@ -17,6 +17,9 @@ pip install 対象パッケージ==バージョン
 # インストール可能なバージョンを表示。　※あえてバージョン指定しないことでインストール可能なバージョンが表示される
 pip install ipython==
 
+# インストールするディレクトリを指定
+pip install -t 対象ディレクトリ 対象パッケージ
+
 # 強制再インストール
 pip install --force-reinstall 対象パッケージ
 
