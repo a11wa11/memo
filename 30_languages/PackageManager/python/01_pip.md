@@ -89,7 +89,7 @@ pipdeptree -p 対象パッケージ
 
 ```sh
 # インストール
-pip install pipdeptree
+pip install pip-autoremove
 # 依存関係にあるパッケージをまとめて削除
 pip-autoremove 対象パッケージ
 ```

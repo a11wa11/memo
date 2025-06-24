@@ -156,6 +156,18 @@ coverage report -m sample.py
 coverage html
 ```
 
+- 処理速度計算
+
+```python
+import time
+start = time.time()
+
+# 処理の内容
+
+end = time.time()
+print(f"create_csvの処理時間: {end - start:.4f}秒") # .4f = 小数点下4桁まで表示
+```
+
 #### unittest
 
 ```python
