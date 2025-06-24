@@ -156,7 +156,7 @@ coverage report -m sample.py
 coverage html
 ```
 
-- 処理速度計算
+* 処理速度計算
 
 ```python
 import time
