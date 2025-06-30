@@ -201,3 +201,17 @@ subprocess.run("ls -l", shell=True)
 pip install pipreqs
 pipreqs .  # 現在のディレクトリに requirements.txt を自動生成
 ```
+
+* ログ
+
+```python
+# ログの一括設定(ルートログ)
+logging.basicConfig(
+    level=logging.INFO,  # INFOレベル以上を出力
+    format="%(asctime)s [%(levelname)s] %(message)s"
+)
+
+# ログの個別設定
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+```

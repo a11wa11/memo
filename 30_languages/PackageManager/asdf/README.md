@@ -133,8 +133,11 @@ asdf plugin-update nodejs
 ```sh
 # どのディレクトリでも対象のバージョンを使うように設定
 asdf global nodejs 18.19.0
+asdf set --global python 3.13.5 # asdf v0.10.0 以降は asdf global コマンドは廃止され、asdf set に統一
+
 # カレントディレクトリでのみ対象のバージョンを使うように設定
 asdf local nodejs 18.19.0
+asdf set python 3.13.5 # 現在のディレクトリの.tool-versionsに反映
 # 一時的に対象のバージョンを使うように設定(ターミナルを閉じたり、新しいターミナルを開いたらリセットされる)
 asdf shell nodejs 16.14.2
 ```
