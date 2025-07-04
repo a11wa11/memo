@@ -51,6 +51,8 @@ ssh -L ローカルポート:リモートホスト:リモートポート ユー�
 
 ## その他
 
+- 接続テスト
+
 ```sh
 # 接続テスト。実際にログインはしない
 ssh -T github.com
@@ -59,6 +61,18 @@ ssh -T github.com
 
 # 失敗の場合
 ## Permission denied (publickey).
+```
+
+- ssh-add
+
+```sh
+# ローカルPCの「SSHエージェント（鍵管理プログラム）」に秘密鍵を一時的に登録する
+ssh-add ~/.ssh/id_rsa(鍵パス)
+
+# 現在登録されている鍵を一覧表示
+ssh-add -l
+# 指定した鍵を削除
+ssh-add -d 鍵パス
 ```
 
 ## [ssh-keygen](https://www.attachmate.com/ja-jp/documentation/reflection-desktop-v16/rdesktop-guide/data/ssh-keygen_command_rf.htm)
