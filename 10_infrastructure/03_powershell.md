@@ -8,6 +8,8 @@
 shutdown /s /t 0
 ```
 
+### WSL
+
 ```powershell
 wsl -u root -- ~/sample.sh; sleep 3;wsl --shutdown; sleep 5;
 wsl -- ~/sample.sh; sleep 3;wsl --shutdown; sleep 5;
