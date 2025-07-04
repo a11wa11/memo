@@ -23,9 +23,25 @@ git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.1
 # asdf必要な環境変数を設定
 . "$HOME/.asdf/asdf.sh"
 . "$HOME/.asdf/completions/asdf.bash"
-
 # PATHを通す場合
 export PATH="$HOME/.asdf/shims:$PATH"
+
+
+# 最近のv16以降は手順が違う https://asdf-vm.com/guide/getting-started.html
+## 予めgoをインストール
+dnf install -y golang    # amazonlinux2023の場合
+apt install -y golang-go # ubuntuの場合
+git clone https://github.com/asdf-vm/asdf.git --branch v0.18.0
+cd asdf
+make
+cp asdf(makeでできるasdfのバイナリパス) /usr/local/bin(通したいパス)
+
+asdf # asdfのバージョンが表示されれば成功
+```
+
+- dockerでのインストール手順
+
+```sh
 ```
 
 ### asdfからパッケージマネージャーのインストール
@@ -141,3 +157,7 @@ asdf set python 3.13.5 # 現在のディレクトリの.tool-versionsに反映
 # 一時的に対象のバージョンを使うように設定(ターミナルを閉じたり、新しいターミナルを開いたらリセットされる)
 asdf shell nodejs 16.14.2
 ```
+
+## ドキュメント
+
+- [github](https://github.com/asdf-vm/asdf)
