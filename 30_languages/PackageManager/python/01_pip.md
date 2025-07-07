@@ -23,6 +23,9 @@ pip install -t 対象ディレクトリ 対象パッケージ
 # 強制再インストール
 pip install --force-reinstall 対象パッケージ
 
+# キャッシュなしでインストール
+pip install --no-cache-dir 対象パッケージ
+
 # インターネットではなローカルの指定のパスからパッケージをインストールする
 pip install --no-index --find-links=/path/path/libraries -c path/requirements.lock
 pip install --no-index --find-links=/path/path/libraries -c path/requirements.txt
