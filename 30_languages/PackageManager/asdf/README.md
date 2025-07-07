@@ -10,7 +10,6 @@
     - [言語設定](#言語設定)
   - [ドキュメント](#ドキュメント)
 
-
 [公式ガイド](https://asdf-vm.com/guide/getting-started.html#_1-install-dependencies)
 
 ## コマンド
@@ -75,6 +74,7 @@ asdf plugin list
 ```sh
 asdf plugin add パッケージ名
 
+asdf plugin add python    # python
 asdf plugin add nodejs    # nodejs
 asdf plugin add php       # php
 asdf plugin add terraform # terraform
@@ -108,6 +108,7 @@ asdf list nodejs # 個別のパッケージマネージャーのインストー�
 ```sh
 asdf list all パッケージ名
 
+asdf list all python
 asdf list all nodejs
 asdf list all php
 asdf list-all golang # list-allでも可能
@@ -140,7 +141,6 @@ asdf where nodejs
 asdf where golang
 ```
 
-
 ### 言語インストール
 
 - 対象バージョンをインストール
@@ -148,11 +148,11 @@ asdf where golang
 ```sh
 asdf install パッケージ名 バージョン名
 
+asdf install python 3.13.5
 asdf install php 7.3.33
 ```
 
 ### 言語アンインストール
-
 
 - 対象バージョンをアンインストール
 
