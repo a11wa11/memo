@@ -1,5 +1,16 @@
 # asdf
 
+- [asdf](#asdf)
+  - [コマンド](#コマンド)
+    - [asdfのインストール](#asdfのインストール)
+    - [パッケージマネージャー管理](#パッケージマネージャー管理)
+    - [言語確認](#言語確認)
+    - [言語インストール](#言語インストール)
+    - [言語アンインストール](#言語アンインストール)
+    - [言語設定](#言語設定)
+  - [ドキュメント](#ドキュメント)
+
+
 [公式ガイド](https://asdf-vm.com/guide/getting-started.html#_1-install-dependencies)
 
 ## コマンド
@@ -44,12 +55,19 @@ asdf # asdfのバージョンが表示されれば成功
 ```sh
 ```
 
-### asdfからパッケージマネージャーのインストール
+### パッケージマネージャー管理
 
 - インストール可能なパッケージマネージャーを表示
 
 ```sh
 asdf plugin list all
+```
+
+- パッケージマネージャーの確認
+
+```sh
+# インストール済パッケージマネージャーのみ表示
+asdf plugin list
 ```
 
 - パッケージマネージャーをインストール
@@ -62,37 +80,24 @@ asdf plugin add php       # php
 asdf plugin add terraform # terraform
 ```
 
-- 対象バージョンをインストール
-
-```sh
-asdf install パッケージ名 バージョン名
-
-asdf install php 7.3.33
-```
-
-### アンインストール
-
 - パッケージマネージャーをアンインストール
 
 ```sh
 asdf plugin remove パッケージ名
 ```
 
-- 対象バージョンをアンインストール
+- パッケージの更新
 
 ```sh
-asdf uninstall パッケージ名 バージョン名
-
-asdf uninstall php 7.3.33
+asdf plugin update golang
+asdf plugin-update nodejs
 ```
 
-### 確認
+### 言語確認
 
 - インストールしたパッケージマネージャーの確認
 
 ```sh
-# インストール済パッケージマネージャーのみ表示
-asdf plugin list
 # インストール済パッケージマネージャーとインストール済バージョンの表示
 asdf list
 asdf list nodejs # 個別のパッケージマネージャーのインストール済バージョンの表示
@@ -135,14 +140,29 @@ asdf where nodejs
 asdf where golang
 ```
 
-### パッケージの更新
+
+### 言語インストール
+
+- 対象バージョンをインストール
 
 ```sh
-asdf plugin update golang
-asdf plugin-update nodejs
+asdf install パッケージ名 バージョン名
+
+asdf install php 7.3.33
 ```
 
-### 設定
+### 言語アンインストール
+
+
+- 対象バージョンをアンインストール
+
+```sh
+asdf uninstall パッケージ名 バージョン名
+
+asdf uninstall php 7.3.33
+```
+
+### 言語設定
 
 - 使用バージョン設定
 
