@@ -124,6 +124,13 @@ lambda_ver = lambda n: n * 3 # doubleと同じ
 print(double(3) == lambda_ver(3)) # Trueとなる
 ```
 
+* for文
+
+```python
+# 1行で出力
+for x in my_list: print(x)
+```
+
 ### 調査
 
 * メソッドの一覧を取得する
