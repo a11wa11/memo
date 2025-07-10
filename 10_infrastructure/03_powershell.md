@@ -10,6 +10,8 @@ shutdown /s /t 0
 
 ### WSL
 
+- [wslコマンド](https://learn.microsoft.com/ja-jp/windows/wsl/basic-commands)
+
 ```powershell
 wsl -u root -- ~/sample.sh; sleep 3;wsl --shutdown; sleep 5;
 wsl -- ~/sample.sh; sleep 3;wsl --shutdown; sleep 5;
@@ -23,7 +25,22 @@ wsl.exe --shutdown
 
 # wslの一覧表示
 wsl -l
+wsl -l --verbose
+
+# インストール可能なwslディストリビューション一覧
+wsl.exe -l -o
+
+# ディストリビューションをインストール
+wsl.exe --install ディストリビューション名
 ```
+
+
+```sh
+# WSLからwindowsにアクセス
+cd /mnt/c
+```
+
+- エクスプローラーからLunuxファイルにアクセスしたい場合、`\\wsl.localhost` に移動
 
 * wslの名前解決できない時の対処
 
