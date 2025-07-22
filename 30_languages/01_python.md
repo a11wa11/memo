@@ -170,6 +170,15 @@ hello()
 # 処理後
 ```
 
+- 非同期
+
+```python
+# 関数の頭にasyncとつけるとawaitを使った非同期処理が使える
+async def sample():
+    await asyncio.sleep(1)      # 非同期で1秒待つ
+    return {"message": "Async after 1s"}
+```
+
 ### 調査
 
 - メソッドの一覧を取得する
