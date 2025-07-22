@@ -138,8 +138,36 @@ print(double(3) == lambda_ver(3)) # Trueとなる
 - for文
 
 ```python
+for i in range(5):
+    print(i)
 # 1行で出力
 for x in my_list: print(x)
+```
+
+* デコレータ
+  * 関数やメソッドに「特別な機能や処理」を簡単に追加するための記法・仕組み
+    * ログ出力を自動化
+    * 例外処理を共通化
+    * 関数の前後で何かを実行（タイミング計測、認証、キャッシュ化など）
+
+```python
+def my_decorator(func):
+    def wrapper(*args, **kwargs):
+        print("処理前")
+        result = func(*args, **kwargs)
+        print("処理後")
+        return result
+    return wrapper
+
+@my_decorator
+def hello():
+    print("こんにちは")
+
+hello()
+
+# 処理前
+# こんにちは
+# 処理後
 ```
 
 ### 調査
