@@ -148,6 +148,24 @@ for x in inspect.getmembers(obj):
 obj.__dir__()
 ```
 
+### 整形
+
+* PEP8とは？
+  * 「どこにスペースを入れるか」「インデントは何文字か」「関数名はどう付けるか」など、可読性の高いPythonコードを書くための公式スタイルガイドルール集
+
+```sh
+# インストール
+pip install flake8 autopep8
+
+# 指定のpythonファイルがPEP8に準拠しているか確認
+flake8 ファイル名.py
+
+# 指定のpythonファイルをPEP8に準拠するようコードを修正する
+autopep8 --in-place ファイル名.py
+# より積極的に修正する(aggressive1回指定で中程度、複数指定でさらに強力)
+autopep8 --in-place --aggressive --aggressive ファイル名.py
+```
+
 ### テスト系
 
 ```sh
