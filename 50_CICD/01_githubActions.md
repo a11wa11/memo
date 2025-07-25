@@ -2,6 +2,7 @@
 
 - [CI/CD](#cicd)
   - [github actions](#github-actions)
+    - [デバッグ](#デバッグ)
 
 CI/CD(Continuous Integration/Continuous Deployment)はアプリケーション開発にて効率的にビルド、テスト、デプロイするための方法
 
@@ -53,4 +54,32 @@ jobs:                           　 # ワークフロー内のジョブを定義
         with:
           name: output-log-file
           path: output.log
+```
+
+### デバッグ
+
+- `act`はGitHub ActionsのワークフローをローカルDocker環境で実行・デバッグできるCLIツール
+
+```sh
+# インストール
+brew install act
+
+# 確認
+act -l
+act -l --container-architecture linux/arm64 # アーキテクチャを指定
+
+# 実行
+## デフォルトイベント（pull_requestなど）で実行
+act
+## リポジトリ直下で全ワークフローをpushイベント相当で実行
+act push
+## 特定ジョブだけ実行
+act -j build
+
+# シークレット使用
+## シークレットを直接指定
+act -s MY_SECRET=foo
+## .secretsファイルを利用
+echo "MY_SECRET=foo" > .secrets
+act --secret-file .secrets(シークレットファイル名)
 ```
