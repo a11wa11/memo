@@ -2,6 +2,26 @@
 
 ## コマンド
 
+### 確認
+
+```sh
+# インストール済パッケージを確認
+pip list
+
+# インストール済パッケージが最新版かどうか確認
+pip list --outdated
+
+# パッケージの詳細や依存関係(Requiresに表示される)を確認
+pip show 対象パッケージ
+```
+
+### パッケージ保存
+
+```sh
+# 保存ファイル名は何でもOKだが、requirements.txtが一般的によく見る
+pip freeze > requirements.txt
+```
+
 ### インストール
 
 ```sh
@@ -30,12 +50,18 @@ pip install --no-cache-dir 対象パッケージ
 pip install --no-index --find-links=/path/path/libraries -c path/requirements.lock
 pip install --no-index --find-links=/path/path/libraries -c path/requirements.txt
 pip install --no-index --find-links=/path/path/libraries -c path/requirements.lock -r path/requirements.txt
+
+# requirements.txtから一括インストール
+pip install -r requirements.txt
 ```
 
 ### アンインストール
 
 ```sh
 pip uninstall 対象パッケージ
+
+# requirements.txtから一括アンインストール
+pip uninstall -y -r requirements.txt
 ```
 
 ### アップグレード
@@ -44,29 +70,6 @@ pip uninstall 対象パッケージ
 
 pip install -U 対象パッケージ
 pip install --upgrade 対象パッケージ
-```
-
-### 確認
-
-```sh
-# インストール済パッケージを確認
-pip list
-
-# インストール済パッケージが最新版かどうか確認
-pip list --outdated
-
-# パッケージの詳細や依存関係(Requiresに表示される)を確認
-pip show 対象パッケージ
-```
-
-### パッケージの保存
-
-```sh
-# 保存ファイル名は何でもOKだが、requirements.txtが一般的によく見る
-pip freeze > requirements.txt
-
-# 保存したパッケージをrequirements.txtからインストール
-pip install -r requirements.txt
 ```
 
 ### 依存関係確認
