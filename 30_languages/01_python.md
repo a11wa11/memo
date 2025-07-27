@@ -1,9 +1,20 @@
 # python
 
+- [python](#python)
+  - [インストール](#インストール)
+  - [環境系](#環境系)
+  - [基本系](#基本系)
+    - [調査](#調査)
+    - [整形](#整形)
+    - [テスト系](#テスト系)
+      - [unittest](#unittest)
+      - [デバッグ](#デバッグ)
+    - [よく使うライブラリ](#よく使うライブラリ)
+
 ## インストール
 
-* [バイナリ(直インストール):参考１](https://www.build-python-from-source.com/)
-* [バイナリ(直インストール):参考２](https://docs.posit.co/resources/install-python-source/)
+- [バイナリ(直インストール):参考１](https://www.build-python-from-source.com/)
+- [バイナリ(直インストール):参考２](https://docs.posit.co/resources/install-python-source/)
 
 <details>
     <summary>Dockerでのamazonlinux2イメージでのpythonインストール</summary>
@@ -49,7 +60,7 @@ RUN yum -y install wget gcc openssl-devel bzip2-devel libffi-devel xz-devel tk-d
 
 </details>
 
-* [pyenv(バージョン管理パッケージ)のインストール](https://github.com/pyenv/pyenv#basic-github-checkout)
+- [pyenv(バージョン管理パッケージ)のインストール](https://github.com/pyenv/pyenv#basic-github-checkout)
 
 ```sh
 # linux、bashrcを使用する場合
@@ -63,7 +74,7 @@ pyenv install 任意のバージョン
 pyenv global 任意のバージョン
 ```
 
-* pythonのバイナリインストール(ちょっと古い3.5.9の時)
+- pythonのバイナリインストール(ちょっと古い3.5.9の時)
 
 ```sh
 wget https://www.python.org/ftp/python/3.5.9/Python-3.5.9.tar.xz
@@ -79,7 +90,7 @@ echo "export PATH=$PATH:/usr/local/python/bin" >> ~/.bashrc
 
 ## 環境系
 
-* 仮想環境作成
+- 仮想環境作成
 
 ```sh
 # 仮想環境構築
@@ -95,7 +106,7 @@ deactivate
 rm -rf 仮想環境名
 ```
 
-* メモリのサイズを確認する
+- メモリのサイズを確認する
 
 ```python
 sys.getsizeof(リストとか)
@@ -103,7 +114,7 @@ sys.getsizeof(リストとか)
 
 ## 基本系
 
-* 埋込出力
+- 埋込出力
 
 ```python
 # %sは文字列埋込、%dは整数、浮動小数が%f
@@ -113,7 +124,7 @@ print('合計 %s 個です' % len(list))
 print('{} is {} years old'.format(s, i))
 ```
 
-* lambda
+- lambda
 
 ```python
 def double(n):
@@ -124,7 +135,7 @@ lambda_ver = lambda n: n * 3 # doubleと同じ
 print(double(3) == lambda_ver(3)) # Trueとなる
 ```
 
-* for文
+- for文
 
 ```python
 # 1行で出力
@@ -133,7 +144,7 @@ for x in my_list: print(x)
 
 ### 調査
 
-* メソッドの一覧を取得する
+- メソッドの一覧を取得する
 
 ```python
 import inspect
@@ -142,7 +153,7 @@ for x in inspect.getmembers(obj):
     print(x)
 ```
 
-* pdbでメソッドの一覧を取得する
+- pdbでメソッドの一覧を取得する
 
 ```pdb
 obj.__dir__()
@@ -150,8 +161,8 @@ obj.__dir__()
 
 ### 整形
 
-* PEP8とは？
-  * 「どこにスペースを入れるか」「インデントは何文字か」「関数名はどう付けるか」など、可読性の高いPythonコードを書くための公式スタイルガイドルール集
+- PEP8とは？
+  - 「どこにスペースを入れるか」「インデントは何文字か」「関数名はどう付けるか」など、可読性の高いPythonコードを書くための公式スタイルガイドルール集
 
 ```sh
 # インストール
@@ -181,7 +192,7 @@ coverage report -m sample.py
 coverage html
 ```
 
-* 処理速度計算
+- 処理速度計算
 
 ```python
 import time
@@ -202,15 +213,15 @@ mock.assert_called_once() #呼び出されたか回数が１度だけかどう�
 
 #### デバッグ
 
-* vscode
-  * venv環境のpythonを適用したい場合
+- vscode
+  - venv環境のpythonを適用したい場合
     1. Ctl + Shift + P で`Python: Select interPereter`をクリック
     2. `Enter interpreter path...`を選択してvenvのパスを設定
 
 ### よく使うライブラリ
 
-* subprocess
-  * pythonからコマンドを実行
+- subprocess
+  - pythonからコマンドを実行
 
 ```python
 import subprocess
@@ -219,15 +230,15 @@ subprocess.run(["ls", "-l"])
 subprocess.run("ls -l", shell=True)
 ```
 
-* pipreqs
-  * Pythonプロジェクトの依存関係を自動的に検出し、requirements.txtファイルを生成するツール
+- pipreqs
+  - Pythonプロジェクトの依存関係を自動的に検出し、requirements.txtファイルを生成するツール
 
 ```sh
 pip install pipreqs
 pipreqs .  # 現在のディレクトリに requirements.txt を自動生成
 ```
 
-* ログ
+- ログ
 
 ```python
 # ログの一括設定(ルートログ)
