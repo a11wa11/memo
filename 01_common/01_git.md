@@ -93,17 +93,13 @@ git remote add upstream git@github.com:XXXXXXXXXXXXXXXX
 # フォーク元からpull
 git pull upstream ブランチ名
 
-# フォーク元のPRにチェックアウト
-git fetch upstream pull/ID番号/head:任意のブランチ名
-git checkout 任意のブランチ名
-
 # フォーク元の最新状態をリモート先に反映
 git pull upstream ブランチ名
 git push origin ブランチ名
 
-# フォーク先の未マージのブランチを使用したい時
-git fetch upstream pull/<ID>/head:pr/<ID>
-git checkout pr/<ID>
+# フォーク元のPRにチェックアウト、フォーク先の未マージのブランチを使用したい時
+git fetch upstream pull/ID番号/head:任意のブランチ名
+git checkout 任意のブランチ名
 ```
 
 ## コマンド
