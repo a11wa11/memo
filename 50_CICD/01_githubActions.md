@@ -65,12 +65,16 @@ jobs:                           　 # ワークフロー内のジョブを定義
 brew install act
 
 # 確認
-act -l
-act -l --container-architecture linux/arm64 # アーキテクチャを指定
+act -l       # workflowsリストを確認
+act --dryrun # 実際に実行せずテスト
 
 # 実行
 ## デフォルトイベント（pull_requestなど）で実行
 act
+act -v 　　　　　　　　　　　　　　　　　　　　     # 冗長出力
+act workflow_dispatch(push, pull_requestなど) # イベントを指定する
+act --container-architecture linux/arm64     # アーキテクチャを指定
+
 ## リポジトリ直下で全ワークフローをpushイベント相当で実行
 act push
 ## 特定ジョブだけ実行
