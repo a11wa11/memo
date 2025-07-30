@@ -8,7 +8,7 @@
     - [フォーク](#フォーク)
   - [コマンド](#コマンド)
     - [ブランチ](#ブランチ)
-    - [diff](#diff)
+    - [差分確認](#差分確認)
     - [コミット](#コミット)
     - [リセット](#リセット)
     - [stash](#stash)
@@ -96,6 +96,9 @@ git pull upstream ブランチ名
 # フォーク元の最新状態をリモート先に反映
 git pull upstream ブランチ名
 git push origin ブランチ名
+# このパターンでもフォーク元(upstream)のブランチをフォーク先(origin)に作れる
+git checkout -b ブランチ名 upstream/ブランチ名
+git push origin HEAD
 
 # フォーク元のPRにチェックアウト、フォーク先の未マージのブランチを使用したい時
 git fetch upstream pull/ID番号/head:任意のブランチ名
@@ -140,7 +143,7 @@ git fetch -p
 git fetch --prune
 ```
 
-### diff
+### 差分確認
 
 ```sh
 # ２つのブランチの差分を確認
@@ -154,6 +157,9 @@ git diff --name-only branch1 branch2
 
 # 特定のブランチ間やタグ間のログを指定の形式で出力する
 git log branch1..branch2 --pretty=oneline --pretty=format:"%n - %ad : %s" --date-order
+
+# ファイルの変更履歴追跡
+git blame ファイル名
 ```
 
 ### コミット
