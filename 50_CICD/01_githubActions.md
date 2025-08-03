@@ -32,8 +32,8 @@ jobs:                           　 # ワークフロー内のジョブを定義
     env:                           # 環境変数を定義
         NODE_ENV: 16.19.0
 
-    steps:                         # ジョブ内のステップを定義。各ステップは特定のアクションを実行
-      - uses: actions/checkout@v3
+    steps:                          # ジョブ内のステップを定義。各ステップは特定のアクションを実行
+      - uses: actions/checkout@v4   # GitHub公式のアクションで、対象リポジトリのコードをチェックアウトする役割を持つ
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_ENV }}
