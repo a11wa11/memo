@@ -190,6 +190,8 @@ docker commit コンテナ名 名付けたいイメージ名
 # ※-iはコンテナの標準入力を有効化
 # ※-tはttyを有効化
 docker run -it イメージ名 bash
+# ユーザーを指定して起動
+docker run -it --user root イメージ名 bash
 
 # 作成するコンテナに名前をつける場合
 docker run --name 名付けたいコンテナ名 -it イメージ名 bash
