@@ -7,15 +7,19 @@
 
 クラウドストレージやリモートストレージを、ローカルファイルのように扱えるコマンドラインツール
 
+- [AWS公式rclone記事](https://aws.amazon.com/jp/blogs/storage/migrate-data-from-dropbox-to-amazon-s3-using-rclone/)
+- [rclone公式記事](https://rclone.org/remote_setup/)
+
 ```sh
-# rclone設定を設定を確認
+# rclone設定を確認
 ## ~/.config/rclone/rclone.conf に設定ファイル格納
-rclone config
+rclone config show
 
 # 対話で設定する
 rclone config
 # n → dropbox → APIキー入力 → ブラウザで許可など
 
+# コマンドのみでリモート設定(対話不要)
 rclone config create リモート設定名 dropbox(タイプ指定) \
   client_id "APP_KEY" \
   client_secret "APP_SECRET" \
