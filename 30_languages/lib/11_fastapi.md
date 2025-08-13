@@ -32,3 +32,12 @@ app = FastAPI()
 async def read_root():
     return {"message": "Hello, FastAPI!"}
 ```
+
+```python
+# リクエストボディの定義時などの例
+from pydantic import BaseModel
+class RequestName(BaseModel):
+    user_id: str
+    class Config:
+        extra = "allow" # 定義外の値をそのまま許可して取込む
+```
