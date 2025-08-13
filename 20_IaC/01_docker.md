@@ -165,6 +165,12 @@ docker build -t イメージ名 --build-arg AVERSION(指定したい変数名)=$
 docker run -d --privileged --rm -v $(pwd):/home/ec2-user/workdir --name コンテナ名 イメージ名
 ```
 
+- ポート開放 `-p 8080:8080`
+
+```sh
+docker run -it -p 8080:8080 イメージ名
+```
+
 #### commit
 
 - コンテナからイメージを作成
