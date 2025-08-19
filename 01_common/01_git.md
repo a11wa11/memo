@@ -53,6 +53,12 @@ git config --local user.email "test_address"
 git config --global --add safe.directory
 ```
 
+- エディタをvimに設定
+
+```sh
+git config --global core.editor "vim"
+```
+
 ### リモートリポジトリ
 
 ```sh
