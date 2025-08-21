@@ -53,10 +53,19 @@ git config --local user.email "test_address"
 git config --global --add safe.directory
 ```
 
+- 初期化
+
+```sh
+git init
+git add 対象ファイル
+git commit
+```
+
 - エディタをvimに設定
 
 ```sh
 git config --global core.editor "vim"
+git config --global diff.tool vimdiff # difftoolでvimを設定
 ```
 
 ### リモートリポジトリ
