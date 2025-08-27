@@ -122,6 +122,7 @@
 | Impaired | 障害のある | |
 | implementation | 実装 | |
 | assign | 割り当てる | |
+| sanitize | (不快なものや汚れを)取り除く、和らげる | 消毒する、清潔にする |
 | ingress | 進入 | |
 | egress | 出口 | |
 | extraneous | 無関係な | |
