@@ -26,6 +26,9 @@ rclone config create リモート設定名 dropbox(タイプ指定) \
   token '{"access_token":"...","refresh_token":"...","expiry":"..."}' \
   --non-interactive
 
+# コマンドのみで一部設定のみ更新(対話不要)
+rclone config update dropbox-remote client_id=新しい値
+
 # リモート接続先確認
 rclone listremotes # 設定済接続先一覧
 
