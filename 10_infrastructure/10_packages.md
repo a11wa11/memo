@@ -29,6 +29,9 @@ rclone config create リモート設定名 dropbox(タイプ指定) \
 # コマンドのみで一部設定のみ更新(対話不要)
 rclone config update dropbox-remote client_id=新しい値
 
+# dry-run
+rclone ls 接続タイプ名:ディレクトリ名/ファイル名 --dry-run -v
+
 # リモート接続先確認
 rclone listremotes # 設定済接続先一覧
 
