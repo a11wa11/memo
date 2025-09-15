@@ -10,6 +10,7 @@
       - [unittest](#unittest)
       - [デバッグ](#デバッグ)
     - [よく使うライブラリ](#よく使うライブラリ)
+      - [ログ](#ログ)
 
 ## インストール
 
@@ -275,7 +276,9 @@ pip install pipreqs
 pipreqs .  # 現在のディレクトリに requirements.txt を自動生成
 ```
 
-- ログ
+#### ログ
+
+- 基本
 
 ```python
 # ログの一括設定(ルートログ)
@@ -287,4 +290,38 @@ logging.basicConfig(
 # ログの個別設定
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
+```
+
+- 応用
+  - ログを`../log/log_file_name.log`に保存する
+  - 日次でローテートする
+    - 30世代分保管する
+    - ローテートファイル名には`log_file_name.log.20250101`と命名する
+
+```python
+log_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../log'))
+os.makedirs(log_dir, exist_ok=True)
+log_path = os.path.join(log_dir, 'log_file_name.log')
+file_handler = TimedRotatingFileHandler(
+    log_path, when='midnight', interval=1, backupCount=30, encoding='utf-8', utc=False
+)
+file_handler.suffix = "%Y%m%d"  # ローテート後のファイル名にYYYYMMDDを付与
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s %(levelname)s %(message)s',
+    handlers=[
+        file_handler,
+        logging.StreamHandler()
+    ]
+)
+
+- スタックトレースを出力
+
+```python
+    except Exception as error:
+        import traceback
+        logging.error(f"エラーが発生しました: {error}")
+        logging.error(traceback.format_exc())
+        raise
 ```
