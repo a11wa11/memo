@@ -41,3 +41,43 @@ class RequestName(BaseModel):
     class Config:
         extra = "allow" # 定義外の値をそのまま許可して取込む
 ```
+
+## OpenAPI
+
+```yml
+components:    # 共通部品置き場
+  schemas:     # データ構造（リクエスト/レスポンス）
+    StartTime:
+      type: string
+      description: 始業時刻[形式：hh:mm]
+      example: "09:00" # exampleは例1つ
+    EndTime:
+      type: string
+      description: 終業時刻[形式：hh:mm]
+      examples: # examplesは例複数
+        morning:
+            summary: "午前"
+            value: "09:00"
+        evening:
+            summary: "午後"
+            value: "18:30"
+    UserId:
+      type: string
+      description: ユーザーID
+      required: true
+
+  parameters:  # クエリ/パスパラメータ
+    UserIdParam:
+      name: id
+      in: query
+      required: true
+      schema:
+        $ref: '#/components/schemas/UserId'
+    UserNameParam:
+      name: name
+      in: query
+      required: true
+      schema:
+        $ref: '#/components/schemas/UserName'
+  headers:     # ヘッダー定義
+```
