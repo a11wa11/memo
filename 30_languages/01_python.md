@@ -5,13 +5,13 @@
   - [環境系](#環境系)
   - [基本系](#基本系)
     - [実行オプション](#実行オプション)
+  - [整形](#整形)
+  - [よく使うライブラリ](#よく使うライブラリ)
+  - [テスト系](#テスト系)
+    - [unittest](#unittest)
+  - [ログ](#ログ)
+  - [デバッグ](#デバッグ)
     - [調査](#調査)
-    - [整形](#整形)
-    - [テスト系](#テスト系)
-      - [unittest](#unittest)
-      - [デバッグ](#デバッグ)
-    - [よく使うライブラリ](#よく使うライブラリ)
-      - [ログ](#ログ)
 
 ## インストール
 
@@ -19,7 +19,9 @@
 - [バイナリ(直インストール):参考２](https://docs.posit.co/resources/install-python-source/)
 
 <details>
-    <summary>Dockerでのamazonlinux2イメージでのpythonインストール</summary>
+    <summary>python直インストール</summary>
+
+- Dockerでのamazonlinux2イメージでのpythonインストール
 
 ```Dokerfile
 FROM amazonlinux:2
@@ -60,8 +62,6 @@ RUN yum -y install wget gcc openssl-devel bzip2-devel libffi-devel xz-devel tk-d
     pip3 install boto3;
 ```
 
-</details>
-
 - [pyenv(バージョン管理パッケージ)のインストール](https://github.com/pyenv/pyenv#basic-github-checkout)
 
 ```sh
@@ -89,6 +89,8 @@ ln -s /usr/local/python/bin/python3.5 /usr/local/bin/python
 ln -s /usr/local/python/bin/pip3.5 /usr/local/bin/pip
 echo "export PATH=$PATH:/usr/local/python/bin" >> ~/.bashrc
 ```
+
+</details>
 
 ## 環境系
 
@@ -126,6 +128,28 @@ print('合計 %s 個です' % len(list))
 print('{} is {} years old'.format(s, i))
 ```
 
+- 辞書
+
+```python
+event.get("test", [])  # 第2引数は取得できなかった場合の値
+```
+
+- for文
+  - pythonにはcase文はない
+
+```python
+for i in range(5):
+    print(i)
+# 1行で出力
+for x in my_list: print(x)
+```
+
+- リスト内包表記
+
+```python
+event_name = [event.get("name") for event in events]
+```
+
 - lambda
 
 ```python
@@ -135,15 +159,6 @@ def double(n):
 lambda_ver = lambda n: n * 3 # doubleと同じ
 
 print(double(3) == lambda_ver(3)) # Trueとなる
-```
-
-- for文
-
-```python
-for i in range(5):
-    print(i)
-# 1行で出力
-for x in my_list: print(x)
 ```
 
 - デコレータ
@@ -187,24 +202,7 @@ async def sample():
 PYTHONDONTWRITEBYTECODE=1 python スクリプト名.py
 ```
 
-### 調査
-
-- メソッドの一覧を取得する
-
-```python
-import inspect
-obj = "test"
-for x in inspect.getmembers(obj):
-    print(x)
-```
-
-- pdbでメソッドの一覧を取得する
-
-```pdb
-obj.__dir__()
-```
-
-### 整形
+## 整形
 
 - PEP8とは？
   - 「どこにスペースを入れるか」「インデントは何文字か」「関数名はどう付けるか」など、可読性の高いPythonコードを書くための公式スタイルガイドルール集
@@ -222,7 +220,27 @@ autopep8 --in-place ファイル名.py
 autopep8 --in-place --aggressive --aggressive ファイル名.py
 ```
 
-### テスト系
+## よく使うライブラリ
+
+- subprocess
+  - pythonからコマンドを実行
+
+```python
+import subprocess
+
+subprocess.run(["ls", "-l"])
+subprocess.run("ls -l", shell=True)
+```
+
+- pipreqs
+  - Pythonプロジェクトの依存関係を自動的に検出し、requirements.txtファイルを生成するツール
+
+```sh
+pip install pipreqs
+pipreqs .  # 現在のディレクトリに requirements.txt を自動生成
+```
+
+## テスト系
 
 ```sh
 # 全体テスト
@@ -249,41 +267,14 @@ end = time.time()
 print(f"create_csvの処理時間: {end - start:.4f}秒") # .4f = 小数点下4桁まで表示
 ```
 
-#### unittest
+### unittest
 
 ```python
 mock.assert_called()      #呼び出されたかどうかを確認
 mock.assert_called_once() #呼び出されたか回数が１度だけかどうかを確認
 ```
 
-#### デバッグ
-
-- vscode
-  - venv環境のpythonを適用したい場合
-    1. Ctl + Shift + P で`Python: Select interPereter`をクリック
-    2. `Enter interpreter path...`を選択してvenvのパスを設定
-
-### よく使うライブラリ
-
-- subprocess
-  - pythonからコマンドを実行
-
-```python
-import subprocess
-
-subprocess.run(["ls", "-l"])
-subprocess.run("ls -l", shell=True)
-```
-
-- pipreqs
-  - Pythonプロジェクトの依存関係を自動的に検出し、requirements.txtファイルを生成するツール
-
-```sh
-pip install pipreqs
-pipreqs .  # 現在のディレクトリに requirements.txt を自動生成
-```
-
-#### ログ
+## ログ
 
 - 基本
 
@@ -331,4 +322,28 @@ logging.basicConfig(
         logging.error(f"エラーが発生しました: {error}")
         logging.error(traceback.format_exc())
         raise
+```
+
+## デバッグ
+
+- vscode
+  - venv環境のpythonを適用したい場合
+    1. Ctl + Shift + P で`Python: Select interPereter`をクリック
+    2. `Enter interpreter path...`を選択してvenvのパスを設定
+
+- pdbでメソッドの一覧を取得する
+
+```pdb
+obj.__dir__()
+```
+
+### 調査
+
+- メソッドの一覧を取得する
+
+```python
+import inspect
+obj = "test"
+for x in inspect.getmembers(obj):
+    print(x)
 ```
