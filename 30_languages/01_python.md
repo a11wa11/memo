@@ -4,6 +4,7 @@
   - [インストール](#インストール)
   - [環境系](#環境系)
   - [基本系](#基本系)
+    - [実行オプション](#実行オプション)
     - [調査](#調査)
     - [整形](#整形)
     - [テスト系](#テスト系)
@@ -178,6 +179,12 @@ hello()
 async def sample():
     await asyncio.sleep(1)      # 非同期で1秒待つ
     return {"message": "Async after 1s"}
+```
+
+### 実行オプション
+
+```python
+PYTHONDONTWRITEBYTECODE=1 python スクリプト名.py
 ```
 
 ### 調査
