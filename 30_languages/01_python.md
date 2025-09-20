@@ -10,6 +10,7 @@
   - [テスト系](#テスト系)
     - [unittest](#unittest)
   - [ログ](#ログ)
+    - [構造](#構造)
   - [デバッグ](#デバッグ)
     - [調査](#調査)
 
@@ -276,21 +277,35 @@ mock.assert_called_once() #呼び出されたか回数が１度だけかどう�
 
 ## ログ
 
-- 基本
+### 構造
+
+- ロガー: 誰がログを出力するか(ルートか個別の名前のログかなど)の窓口
+  - ログレベル: どの重要度以上ならログを吐くかという基準
+  - ハンドラー: どこで出力するか(標準出力かファイル化などかなど)
+    - フォーマッター: どの様な形式でログを出力するか
+
+- ルートロガー
+  - `logging.basicConfig`で一括設定。一度のみの設定
+  - 設定は子ロガーにも引き継がれる
+- 個別ロガー
+  - ルートロガーの設定引き継ぎ
+  - 個別の設定更新可能
+
+- ルートロガー基本設定
 
 ```python
 # ログの一括設定(ルートログ)
 logging.basicConfig(
     level=logging.INFO,  # INFOレベル以上を出力
-    format="%(asctime)s [%(levelname)s] %(message)s"
+    format="%(asctime)s %(name)s [%(levelname)s] %(message)s" 
+    # デフォルトは%(levelname)s:%(name)s:%(message)s
 )
 
-# ログの個別設定
+# ロガー取得(引数なしならルートロガーとなる)
 logger = logging.getLogger()
-logger.setLevel(logging.INFO)
 ```
 
-- 応用
+- 応用1(ローカルサーバーで長時間利用時など)
   - ログを`../log/log_file_name.log`に保存する
   - 日次でローテートする
     - 30世代分保管する
@@ -307,12 +322,39 @@ file_handler.suffix = "%Y%m%d"  # ローテート後のファイル名にYYYYMMD
 
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s %(levelname)s %(message)s',
+    format="%(asctime)s %(name)s [%(levelname)s] %(message)s" 
+    # ハンドラーを複数(ファイルと標準出力)設定
     handlers=[
         file_handler,
         logging.StreamHandler()
     ]
 )
+```
+
+- 応用2(サーバレスなどファイル保存不可の場合など)
+
+```python
+# ローカル出力用
+logging.basicConfig(
+    level=logging.INFO,  # INFOレベル以上を出力
+    format="%(asctime)s [%(levelname)s] %(message)s"
+)
+
+# logging環境起動(AWS Cloudwatch書き込み用)
+logger = logging.getLogger("app")
+
+# JSTタイムゾーンのconverterを追加
+formatter = logging.Formatter(
+    fmt="%(asctime)s %(name)s [%(levelname)s] %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
+formatter.converter = lambda *args: datetime.datetime.now(
+    ZoneInfo("Asia/Tokyo")).timetuple()
+
+# Lambdaでは既存のハンドラ（handler）があるので、全てのhandlerに適用
+for handler in logger.handlers:
+    handler.setFormatter(formatter)
+```
 
 - スタックトレースを出力
 
