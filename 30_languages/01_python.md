@@ -297,7 +297,7 @@ mock.assert_called_once() #呼び出されたか回数が１度だけかどう�
 # ログの一括設定(ルートログ)
 logging.basicConfig(
     level=logging.INFO,  # INFOレベル以上を出力
-    format="%(asctime)s %(name)s [%(levelname)s] %(message)s" 
+    format="%(asctime)s %(name)s [%(levelname)s] %(message)s"
     # デフォルトは%(levelname)s:%(name)s:%(message)s
 )
 
@@ -322,7 +322,7 @@ file_handler.suffix = "%Y%m%d"  # ローテート後のファイル名にYYYYMMD
 
 logging.basicConfig(
     level=logging.INFO,
-    format="%(asctime)s %(name)s [%(levelname)s] %(message)s" 
+    format="%(asctime)s %(name)s [%(levelname)s] %(message)s"
     # ハンドラーを複数(ファイルと標準出力)設定
     handlers=[
         file_handler,
