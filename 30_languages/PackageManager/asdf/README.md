@@ -41,17 +41,13 @@ export PATH="$HOME/.asdf/shims:$PATH"
 ## 予めgoをインストール
 dnf install -y golang    # amazonlinux2023の場合
 apt install -y golang-go # ubuntuの場合
+apt install -y make
 git clone https://github.com/asdf-vm/asdf.git --branch v0.18.0
 cd asdf
 make
 cp asdf(makeでできるasdfのバイナリパス) /usr/local/bin(通したいパス)
 
 asdf # asdfのバージョンが表示されれば成功
-```
-
-- dockerでのインストール手順
-
-```sh
 ```
 
 ### パッケージマネージャー管理
@@ -150,13 +146,58 @@ asdf install パッケージ名 バージョン名
 
 asdf install python 3.13.5
 asdf install php 7.3.33
+
+# PATHを通す
+echo 'export PATH="$HOME/.asdf/shims:$PATH"' >> ~/.bashrc
 ```
 
 - pythonインストール時の注意
 
 ```sh
-yum install zlib-devel openssl-devel # ubuntuならzlib1g-devに相当
+yum install zlib-devel openssl-devel # amazonlinux2
+dnf install zlib-devel openssl-devel bzip2-devel ncurses-devel libffi-devel readline-devel sqlite-devel tk-devel # alma
+apt install zlib1g-dev libncurses-dev libreadline-dev libssl-dev build-essential libsqlite3-dev libffi-dev liblzma-dev xz-utils tk-dev # ubuntu2404
 ```
+
+- phpインストール時の注意
+
+```sh
+# ubuntu2404へphp8.4.13インストール
+apt install -y autoconf bison re2c libxml2-dev libcurl4-openssl-dev libgd-dev libonig-dev libpq-dev libzip-dev ca-certificates openssl
+```
+#### asdfインストールから言語インストールまでの一連
+
+- python
+
+```sh
+# amazonlinux2023の場合
+dnf install -y golang make
+dnf install -y zlib-devel openssl-devel
+git clone https://github.com/asdf-vm/asdf.git --branch v0.18.0
+cd asdf
+make
+cp asdf /usr/local/bin
+asdf plugin add python
+asdf install python 3.13.5
+asdf set -u python 3.13.5
+asdf list python
+echo 'export PATH="$HOME/.asdf/shims:$PATH"' >> ~/.bashrc
+
+# ubuntu2404の場合
+apt install -y golang-go make
+apt install -y zlib1g-dev libncurses-dev libreadline-dev libssl-dev build-essential libsqlite3-dev libffi-dev liblzma-dev xz-utils tk-dev
+git clone https://github.com/asdf-vm/asdf.git --branch v0.18.0
+cd asdf
+make
+cp asdf /usr/local/bin
+asdf plugin add python
+asdf install python 3.13.5
+asdf set -u python 3.13.5
+asdf list python
+echo 'export PATH="$HOME/.asdf/shims:$PATH"' >> ~/.bashrc
+```
+
+
 
 ### 言語アンインストール
 
