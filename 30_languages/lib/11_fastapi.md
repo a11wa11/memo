@@ -44,6 +44,87 @@ class RequestName(BaseModel):
 
 ## OpenAPI
 
+- ルートオブジェクト
+
+```yml
+# 必須
+openapi: "3.0.3" # OpenAPIバージョン
+
+# 必須
+info:            # メタデータ
+  title: Sample
+  version: "1.0.0"
+
+servers: []      # APIを提供するサーバー
+
+tags: []         # 分類してタグ付けするため
+
+# 必須
+paths: {}        # 利用可能なパスを定義
+
+security: []     # API全体にかけるセキュリティ要件
+
+components: {}   # 部品化して共通利用する
+```
+
+- 共通項目
+
+```yml
+openapi: "3.0.3"
+
+info:
+  title: Sample
+  # マークダウン記述可能
+  description: |
+  # 概要
+  - ユーザー
+  - プロダクト
+  version: "1.0.0"
+
+
+paths: {}
+```
+
+### parameter
+
+```yml
+openapi: "3.0.3"
+
+info:
+  title: Sample
+  # マークダウン記述可能
+  description: |
+  # 概要
+  - ユーザー
+  - プロダクト
+  version: "1.0.0"
+
+
+paths: {}
+    get:
+      parameters:
+      # パスパラメーター
+      - PathUserId:
+        description: ユーザーID
+        name: user_id
+        in: path
+        required: true # パスの場合は必ずtrueになる
+        schema: { type: string }
+      # クエリパラメーター
+      - Limit:
+        description: 1回あたりの取得件数
+        name: limit
+        in: query
+        required: false
+        schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+```
+
+### components
+
 ```yml
 components:    # 共通部品置き場
   schemas:     # データ構造（リクエスト/レスポンス）
