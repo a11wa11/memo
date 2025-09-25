@@ -17,6 +17,34 @@ yml形式
 | `*` | エイリアス | アンカーでつけられた名前の箇所を参照する |
 | `<<` | マージ | 指定箇所と同じ値をもつ |
 
+- 配列の応用
+
+```yaml
+# - が配列を表すのでネストする場合以下の表記
+key:
+  - 
+    - value1
+    - value2
+  -
+    - valueA
+    - valueB
+
+key: [
+    [value1, value2],
+    [valueA, valueB]
+]
+
+# 配列内オブジェクト
+parent_key:
+  - child_key1: value1,
+    child_key2: value2
+
+parent_key: [{
+    child_key1: value1,
+    child_key2: value2
+}]
+```
+
 ## yaml内容を表示するモジュール
 
 * `show_yaml_python.sh`
