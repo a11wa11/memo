@@ -19,7 +19,6 @@ uvicorn main:app --host 0.0.0.0 --port 8000 --reload # ホストやポート指�
 
 ```
 
-
 ## 構文
 
 ```python

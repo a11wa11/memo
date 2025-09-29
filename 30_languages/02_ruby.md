@@ -1,11 +1,13 @@
 # ruby
 
 ### 記法
+
 * 真偽値を返すメソッドは、メソッド名の末尾に?を付ける慣習
+
 <details>
   <summary>コード</summary>
 
-```
+```ruby
 def natural_number?(number)
   return number > 0
 end
@@ -13,6 +15,7 @@ end
 puts natural_number?(3) 
 
 ```
+
 </details>
 
 ## bundle
@@ -25,14 +28,16 @@ puts natural_number?(3)
 <details>
   <summary>コード</summary>
 
-```
+```sh
 # gemのインストール
 bundle install --path vendor/bundle
 bundle update
 ```
+
 </details>
 
 ### エラー解消
+
 * エラー検索方法
   * `is:issue is:open キーワード` githubで検索する
   * スタックオーバーフローは✔がベストアンサー、しかし投票数が多いものの方が参考すべき
@@ -40,21 +45,21 @@ bundle update
 <details>
   <summary>コード</summary>
 
-```
+```ruby
 gem "better errors"
 gem "binding of caller"
 
 byebug # railsに恐らくデフォルトで入っている。import pdb;pdb.trace()のように仕込めばデバッグ可能
 ```
-</details>
 
+</details>
 
 ## Ruby環境構築(AWS-amazonlinux)  -> [参考](https://qiita.com/Ekodhikodhi/items/01eab1b2b5785163e684)
 
 <details>
   <summary>1. rbenvのインストール</summary>
 
-```
+```sh
 # yum更新
 sudo yum update -y
 
@@ -72,6 +77,7 @@ source ~/.bash_profile
 # rbenvのバージョンが表示されればインストールは成功
 rbenv -v
 ```
+
 </details>
 
 <details>
@@ -80,7 +86,7 @@ rbenv -v
 `※Rubyをrbenv経由でインストールする時に必要なrbenvのプラグイン。これ入ってないとRubyインストール不可`
 </summary>
 
-```
+```sh
 # リポジトリからクローン
 git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 
@@ -91,12 +97,13 @@ sudo ./install.sh
 # インストール可能なRubyのバージョン一覧が表示されればruby-buildのインストールは成功
 rbenv install -l
 ```
+
 </details>
 
 <details>
   <summary>3. Rubyのインストール</summary>
 
-```
+```sh
 # Rubyインストールに必要なパッケージをインストール
 sudo yum -y install gcc-c++ glibc-headers openssl-devel readline libyaml-devel readline-devel zlib zlib-devel libffi-devel libxml2 libxslt libxml2-devel libxslt-devel sqlite-devel
 
@@ -109,18 +116,20 @@ rbenv global 2.7.0
 # Rubyのバージョンを確認する（指定したバージョンが表示されれば成功）
 ruby -v
 ```
+
 </details>
 
 ## Rails
+
 * 外部からのアクセスを可能にする
 
-```
+```sh
 rails s -b 0.0.0.0
 ```
 
 * rails new
 
-```
+```sh
 # バージョンを指定して rails new
 rails _5.1.6_ new アプリ名
 cd アプリ名
@@ -134,23 +143,24 @@ nvm install node
 * Railsでmysql使用
   1. mysqlに接続するアダプターのgemを追加する
 
-```
+```sh
 # Gemfile
 gem 'mysql2'
 bundle install --path vendor/bundle
 # mysql-develないとエラーになるため、インストール
 sudo yum install mysql-devel
 ```
+
   2. 最初からmysqlを使用する際はオプションあり
 
-```
+```sh
 rails _5.1.6_ new english_words -d mysql
 # 後、config/database.ymlの接続設定を行う
 ```
 
 * 簡易アプリ制作例。Wordクラスのテーブルを作成し、english,japanese,remarksの3カラムを作成
 
-```
+```sh
 rails generate scaffold Word english:string japanese:string remarks:string
 rails db:create
 # DBを作成する。下と同じ
@@ -164,59 +174,64 @@ rails db:seed
 * 初期データ投入
   1. `db/seeds.rb`を編集。以下参考文
 
-```
+```ruby
 require "csv"
 
 CSV.foreach('db/words.csv') do |info|
   Word.create(:english => info[0], :japanese => info[1], :remarks => info[2], :created_at => info[3], :updated_at => info[4])
 end
 ```
+
   2. 初期データを反映させる
 
-```
+```sh
 rails db:seed
 ```
 
 ### railsコマンド
+
 * モデルの作成
 
-```
+```sh
 rails generate model モデル名 フィールド名1:データ型1 ...
 ```
+
 * コントローラーの作成
 
-```
+```sh
 rails generate controller StaticPages home help
 ```
+
 * generateの取り消し
 
-```
+```sh
 rails destroy controller StaticPages home help
 rails destroy model User
 ```
+
 * マイグレーションの取り消し
 
-```
+```sh
 # 1つ前の状態に戻る
 rails db:rollback
 
 # 最初の状態に戻る
 rails db:migrate VERSION=0
 ```
+
 * 正規コマンドと省略コマンド
 
 | 完全なコマンド | 短縮形コマンド |
 | - | - |
 | rails server | rails s |
-| rails console	| rails c |
+| rails console | rails c |
 | rails generate | rails g |
 | rails test | rails t |
 | bundle install | bundle |
 
-
 * test
 
-```
+```sh
 rails test
 ```
 
@@ -228,22 +243,21 @@ controllerでアクション追加
 viewでhtmlファイル作成
 ↑でtest通る
 
-
-```
+```sh
 test/test_helper.rb
 
 require "minitest/reporters"
 Minitest::Reporters.use!
 ```
 
-
-```
+```ruby
 "#{foo} bar" # ダブルクオテーションでは式展開される
 '#{foo} bar' # シングルクオテーションでは式展開されない
 ```
+
 * よく使うメソッド
 
-```
+```ruby
 >> "foobar".length        # 文字列に "length" というメッセージを送る
 => 6
 
@@ -289,9 +303,10 @@ user = { :name => "Michael Hartl", :email => "michael@example.com" }
 
 * ヘルパー
 
-```
+```ruby
 link_to
 ```
+
 * navタグには「その内側がナビゲーションリンクである」という意図を明示的に伝える役割があり
 * yieldメソッドはWebサイトのレイアウトにページごとの内容を挿入します
 
@@ -299,12 +314,11 @@ link_to
   <summary>コード</summary>
 </details>
 
-
 * パーシャル
-  - 用途はコード整理
-  - 別ファイルに保存したコードを呼び出す
-  - 呼び出し元での呼出方　`<%= render 'ディレクトリ/パーシャル名' %>`
-  - 呼び出し先でのファイル名　`'ディレクトリ_/パーシャル名'`  ※アンダースコアを書く
+  * 用途はコード整理
+  * 別ファイルに保存したコードを呼び出す
+  * 呼び出し元での呼出方　`<%= render 'ディレクトリ/パーシャル名' %>`
+  * 呼び出し先でのファイル名　`'ディレクトリ_/パーシャル名'`  ※アンダースコアを書く
 * Railsのルーティング
 * Asset Pipeline
 CSS、JavaScript、画像などの静的コンテンツの生産性と管理を大幅に強化するのが「アセットパイプライン (Asset Pipeline)」
@@ -313,7 +327,8 @@ Asset Pipelineの最大のメリットの1つは、本番のアプリケーシ�
 * Sass
 CSS生成ツール
 cssのネストが可能
-```
+
+```ruby
 #logo {
   float: left;
   margin-right: 10px;
@@ -329,18 +344,22 @@ cssのネストが可能
   }
 }
 ```
+
 変数を使用することが可能
 `light-gray: #777;`
 
-```
+```ruby
 unless 条件式 then
   条件式が偽の時に実行する処理
 end
 ```
 
-
 * 参考
+
 #### [マイグレーション](https://railsguides.jp/active_record_migrations.html)
+
 #### [git 万葉](https://github.com/everyleaf/el-training)
+
 #### [rails 設定](https://railsguides.jp/configuring.html)
-https://jpcloud.net/q/qheojrok
+
+<https://jpcloud.net/q/qheojrok>

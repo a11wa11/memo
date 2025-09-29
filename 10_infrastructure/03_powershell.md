@@ -34,15 +34,14 @@ wsl.exe -l -o
 wsl.exe --install ディストリビューション名
 ```
 
-
 ```sh
 # WSLからwindowsにアクセス
 cd /mnt/c
 ```
 
-- エクスプローラーからLunuxファイルにアクセスしたい場合、`\\wsl.localhost` に移動
+- エクスプローラーからLinuxファイルにアクセスしたい場合、`\\wsl.localhost` に移動
 
-* wslの名前解決できない時の対処
+- wslの名前解決できない時の対処
 
-* [参考1](https://zenn.dev/ekuinox/articles/520500939e5242a6393c)
-* [参考2](https://qiita.com/kkato233/items/1fc71bde5a6d94f1b982)
+- [参考1](https://zenn.dev/ekuinox/articles/520500939e5242a6393c)
+- [参考2](https://qiita.com/kkato233/items/1fc71bde5a6d94f1b982)
