@@ -162,6 +162,25 @@ lambda_ver = lambda n: n * 3 # doubleと同じ
 print(double(3) == lambda_ver(3)) # Trueとなる
 ```
 
+- 辞書アンパック
+  - 動的に引数を変更できる
+
+```python
+config = {
+    'region_name': 'ap-northeast-1',
+    'aws_access_key_id': 'dummy',
+    'aws_secret_access_key': 'dummy'
+}
+
+# **configで辞書をアンパック
+boto3.resource('dynamodb', **config)
+# ↓これと同じ意味
+boto3.resource('dynamodb', 
+               region_name='ap-northeast-1',
+               aws_access_key_id='dummy',
+               aws_secret_access_key='dummy')
+```
+
 - デコレータ
   - 関数やメソッドに「特別な機能や処理」を簡単に追加するための記法・仕組み
     - ログ出力を自動化
