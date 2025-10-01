@@ -84,7 +84,7 @@ info:
 paths: {}
 ```
 
-### parameter
+### parameter, requestBody, responses
 
 ```yml
 openapi: "3.0.3"
@@ -120,6 +120,20 @@ paths: {}
             minimum: 1
             maximum: 100
             default: 20
+      requestBody:
+        description: "内容説明"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user: { type: integer, example: 3 }
+                team: { type: string, example: "sales" }
+      responses:
+        "201":
+          description: "Success operation"
+
 ```
 
 ### components
@@ -160,4 +174,67 @@ components:    # 共通部品置き場
       schema:
         $ref: '#/components/schemas/UserName'
   headers:     # ヘッダー定義
+```
+
+#### スキーマオブジェクト種別
+
+```yml
+components:
+  schemas:
+    SampleCommon:
+      type: string
+      # 下記5項目はどの種別のスキーマでも使用可能
+      description: "説明" # 説明
+      default: "TEST"    # デフォルト値
+      nullable: true     # nullを許容するかどうか
+      example: "事例"     # サンプル
+      deprecated: false  # 廃止かどうか
+
+    SampleInt:
+      type: integer
+      # 下記項目はinteger型で使用可能
+      multipleOf: 5           # 指定した数字の倍数かどうか
+      minimum: 0              # 最小値
+      exclusiveMinimum: false # 最小値含まない falseの場合 x>0 trueの場合 x>=0 
+      maximum: 10             # 最大値
+      exclusiveMaximum: true  # 最大値含まない falseの場合 x=<10 trueの場合 x<10
+    SampleString:
+      type: string
+      format: email
+      minLength: 10  # 最小文字数
+      maxLength: 20  # 最大文字数
+    SampleBool:
+      type: boolean
+    SampleArray:
+      type: array
+      items: {type: string}    # 配列内スキーマ定義
+      minItems: 1              # 最小個数
+      maxItems: 5　　　　　　　　 # 最大個数
+      uniqueItems: true        # 配列内で重複を許すかどうか
+    SampleEnum:
+      type: string
+      enum: ["blue", "red"]    # 選択肢
+    SampleObject:
+      type: object
+      properties:
+        place:
+          type: object
+          properties:
+            name: { type: string }   # 中身はスキーマで定義
+            place: { type: string }
+          additionalProperties: True # 元の定義以外のスキーマを許可するかどうか
+          required:                  # 必須項目定義
+            - name
+          minProperties: 1           # 最小オブジェクト数
+          maxProperties: 4           # 最大オブジェクト数
+        user:
+          type: array
+          items:
+            type: object
+            properties:
+              score:
+                type: integer
+                enum: [1, 2, 3, 4, 5]
+              comment:
+                type: string
 ```
