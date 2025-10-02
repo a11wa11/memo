@@ -38,7 +38,9 @@ from pydantic import BaseModel
 class RequestName(BaseModel):
     user_id: str
     class Config:
-        extra = "allow" # 定義外の値をそのまま許可して取込む
+        extra = "allow"  # 定義外の値をそのまま許可して取込む
+        extra = "forbid" # 定義外の値を許可しない(エラーになる。デフォルト)
+        extra = "ignore" # 定義外の値を無視する(エラーにならない)
 ```
 
 ## OpenAPI
