@@ -162,6 +162,19 @@ lambda_ver = lambda n: n * 3 # doubleと同じ
 print(double(3) == lambda_ver(3)) # Trueとなる
 ```
 
+- スライス記法
+  - `[開始位置:終了位置]`の形式で抽出可能
+
+```python
+# 文字列の場合
+alphabet = "ABCDEFGHIJ"
+var = alphabet[:5]  # 結果: "ABCDE"
+
+# リストの場合
+list_var = [10, 20, 30, 40, 50, 60, 70]
+var = list_var[:5]  # 結果: [10, 20, 30, 40, 50]
+```
+
 - 辞書アンパック
   - 動的に引数を変更できる
 
