@@ -15,6 +15,9 @@
 ## ~/.config/rclone/rclone.conf に設定ファイル格納
 rclone config show
 
+# rclone設定パスを表示
+rclone config file
+
 # 対話で設定する
 rclone config
 # n → dropbox → APIキー入力 → ブラウザで許可など
