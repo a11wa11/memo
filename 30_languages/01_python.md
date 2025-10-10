@@ -143,12 +143,21 @@ for i in range(5):
     print(i)
 # 1行で出力
 for x in my_list: print(x)
+
+# enumerate(インデックスと値を同時出力)
+for i, fruit in enumerate(fruits):
+  print(f"{i}: {fruit}")
 ```
 
 - リスト内包表記
 
 ```python
+# リスト
+[print(i) for i in events]
 event_name = [event.get("name") for event in events]
+
+# 辞書
+{key: value for i in events}
 ```
 
 - lambda
