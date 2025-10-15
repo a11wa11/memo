@@ -23,6 +23,7 @@
 ```sh
 -- 基本
 psql -h ホスト名 -U ユーザー名 -p 5432 -d データベース名
+psql "host=ホスト名 port=5432 dbname=データベース名 user=ユーザー名 sslmode=require"
 
 -- ファイル実行(-aでコメントも出力する)
 psql -a -h ホスト名 -U ユーザー名 -p 5432 -d データベース名 < ファイル名.sql
