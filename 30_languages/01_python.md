@@ -132,6 +132,16 @@ print('{} is {} years old'.format(s, i))
 - 辞書
 
 ```python
+# 基本
+data = {"name": "John", "age": 30}
+# 新しいキーを追加
+data["city"] = "Tokyo"
+# 複数のキーを一度に追加
+data.update({"city": "Tokyo", "country": "Japan"})
+# キーを修正
+data["age"] = 31
+
+# 取得
 event.get("test", [])  # 第2引数は取得できなかった場合の値
 ```
 
@@ -290,11 +300,16 @@ coverage run -m unittest discover
 
 # 個別テスト
 python -m unittest -v tests/test_sample.py
+python -m unittest -v tests.test_sample.クラス名.メソッド名
 coverage run -m unittest -v tests/test_sample.py
 
 # 結果出力
 coverage report -m sample.py
 coverage html
+
+# デバッグ
+## 該当業にbreakpont()を定義したうえで実行
+python -m pdb -m unittest -v tests.test_sample.クラス名.メソッド名
 ```
 
 - 処理速度計算
