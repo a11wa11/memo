@@ -140,6 +140,9 @@ data["city"] = "Tokyo"
 data.update({"city": "Tokyo", "country": "Japan"})
 # キーを修正
 data["age"] = 31
+# キーを削除
+data.pop("city")
+data.pop("city", None)
 
 # 取得
 event.get("test", [])  # 第2引数は取得できなかった場合の値
