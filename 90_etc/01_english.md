@@ -146,6 +146,7 @@
 | ratio | 対比、割合 | |
 | relevant | 適切な、関連した | |
 | rsync | remote syncの略 | ファイルおよびディレクトリを効率的にコピーおよび同期するためのツール |
+| synthetics | 人工的に作られたテスト | 人工的に作ったユーザー行動で監視する仕組み |
 | deallocate | 割り当てを解除する | |
 | implicit | 暗黙 | |
 | prerequisites | 前提条件 | |
