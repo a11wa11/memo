@@ -129,13 +129,16 @@
 | concisely | 簡潔に | |
 | procedure | 手続き、戻り地のない関数 | |
 | ambiguous | あいまい | |
+| drill down | 詳しく掘り下げる | |
+| figure out | 理由や仕組みを理解する、問題の答えを突き止める | 「分かった」「見えてきた」という感覚の動詞 |
 | invoke | 呼び出す | |
 | revoke | 取り消す、無効にする | reは逆にの意味|
 | change for | 付け替える | |
 | outdated | 時代遅れ | |
 | duplicate | 複製 | |
 | deprecate(d) | 非推奨 | |
-| metrics | 測定基準 | |
+| metrics | 測定基準、観測指標 | システムの状態を数字として捉える指標 |
+| throttles | リクエストや処理を意図的に制限すること | 制限された回数を示すメトリクス |
 | assume | 責任を引き受ける | 想定する、装う |
 | assumable | 仮定できる | |
 | resume | 再開する| |
