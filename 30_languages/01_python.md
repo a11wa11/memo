@@ -24,7 +24,7 @@
 
 - Dockerでのamazonlinux2イメージでのpythonインストール
 
-```Dokerfile
+```Dockerfile
 FROM amazonlinux:2
 
 WORKDIR /root
