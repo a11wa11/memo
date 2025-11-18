@@ -32,6 +32,9 @@ rclone config create リモート設定名 dropbox(タイプ指定) \
 # コマンドのみで一部設定のみ更新(対話不要)
 rclone config update dropbox-remote client_id=新しい値
 
+# どんな機能に対応しているかを確認する
+rclone backend features 接続タイプ名:
+
 # dry-run
 rclone ls 接続タイプ名:ディレクトリ名/ファイル名 --dry-run -v
 
@@ -45,6 +48,7 @@ rclone lsf --format sp 接続タイプ名:  # ディレクトリも表示して�
 rclone lsd 接続タイプ名:              # ディレクトリのみ表示
 rclone lsl 接続タイプ名:              # 詳細表示
 rclone size 接続タイプ名:ディレクトリ名 # ファイル数と合計サイズを表示
+rclone about 接続タイプ名:            # ストレージの使用量確認
 
 # コピー
 rclone copy ./ローカルパス s3:バケット名/パス --progress
@@ -61,13 +65,25 @@ rclone sync dropbox:/ s3:バケット名/パス --fast-list --progress
 rclone sync s3:バケット名/パス ./ローカルパス --progress # ローカルにもミラー可能
 
 # その他オプション
---progress              # 進捗を表示
---stats 30s             # 標準出力間隔                                 デフォルト1秒
---transfers 16          # 同時転送ファイル数                            デフォルト8個
---checkers 32           # メタ情報チェックの並列数                       デフォルト8個
---stats-one-line        # 進捗表示を1行にまとめて表示する                 デフォルト複数行
---retries 8             # rcloneコマンド自体失敗時のリトライ回数          デフォルト3回
---low-level-retries 20  # 個別のファイル転送やAPI呼び出し単位での再試行回数 デフォルト10回
+--progress              # 進捗を常に表示
+--stats 30s             # 標準出力間隔                                                  デフォルト1秒
+--stats-one-line        # 進捗表示を1行にまとめてコンパクトに表示する                        デフォルト複数行
+
+--checkers 4            # メタ情報チェックの並列数(チェックフェーズで差分あるか確認)            デフォルト8個
+--transfers 4           # 同時転送ファイル数(チェックフェーズで必要となったものから随時転送開始)  デフォルト8個
+--tpslimit 5.0          # Transactions Per Second(1秒ごとに何回APIコールするか)           デフォルト0 =　無制限
+# tpslimit,checkers,transfersの関係性
+## tpslimitは1秒あたりのAPIコールの最大値のため、checkers,transfersがtpslimitを上回ると待機になり、意味がない。
+## tpslimit > checkers + transfers となるのが理想的
+
+--retries 8             # rcloneコマンド自体失敗時のリトライ回数                           デフォルト3回
+--retries-sleep 60s     #  --retriesの待機時間
+--low-level-retries 20  # 個別のファイル転送やAPI呼び出し単位での再試行回数                  デフォルト10回
+
+--max-duration 4h       # 4時間で強制停止
+
+--max-size 100M         # 100MB未満のファイルのみ対象
+--min-size 100M         # 100MB以下のファイルのみ対象
 
 ## タイプ別オプション
 --dropbox-chunk-size 128M  # 大きくするとスループットやメモリ上昇だが転送速度早い デフォルト48M
@@ -76,7 +92,8 @@ rclone sync s3:バケット名/パス ./ローカルパス --progress # ロー�
 
 ## コマンド例
 ### コピーコマンドで転送速度早め
-rclone copy dropbox:/パス s3:バケット名/パス --dropbox-chunk-size 128M --transfers 16
+rclone copy dropbox:/パス s3:バケット名/パス --dropbox-chunk-size 128M --transfers 8 --progress
+
 ### syncコマンドで転送速度早め
 rclone sync dropbox:/ s3:バケット名/パス \
   --fast-list --transfers 16 --checkers 32 \
