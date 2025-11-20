@@ -9,6 +9,14 @@
 
 ## 用語
 
+- DDL
+  - Data Definition Language(データ定義言語)
+  - `CREATE TABLE`でテーブルを新規作成、`ALTER TABLE`で既存テーブルの列や制約を追加・変更、`DROP TABLE`でテーブルを削除するといった操作が該当
+  - 他にも`CREATE INDEX`でインデックスを作成、`CREATE VIEW`でビューを作成するのもDDL
+- DML
+  - Data Manipulation Language
+  - テーブル内のデータを操作するもの
+  - INSERT でデータを挿入、UPDATE で既存データを更新、DELETE でデータを削除、SELECT でデータを取得するといった操作がDML
 - バイナリログレプリケーション
   - データベースの変更をログ形式で記録し、そのログを他のデータベースサーバーに転送して再実行することで、データベースの複製を行う仕組み
 - パーティション(Partitioning)
