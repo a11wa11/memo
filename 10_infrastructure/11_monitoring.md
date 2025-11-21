@@ -6,6 +6,7 @@
   - [監視用語](#監視用語)
   - [newrelic](#newrelic)
     - [ログ監視](#ログ監視)
+    - [トレース監視](#トレース監視)
 
 ## 監視種類
 
@@ -38,6 +39,8 @@
   - Trace＝リクエスト全体、Span=各サービスの処理,ParentSpanID=呼び出し元SpanID
 - OTLP(OpenTelemetry Protocol)
   - 「テレメトリデータを送受信するための標準プロトコル
+- W3C Trace Context
+  - サービス間ヘッダーでトレース情報を伝搬
 
 ## [newrelic](https://docs.newrelic.com/jp/docs/new-relic-solutions/get-started/intro-new-relic/)
 
@@ -54,4 +57,6 @@
     - [ECSのログ転送選択肢](https://newrelic.com/blog/how-to-relic/forward-logs-from-amazon-ecs-to-new-relic)
   - [Lambda](https://docs.newrelic.com/jp/docs/serverless-function-monitoring/aws-lambda-monitoring/instrument-lambda-function/introduction-lambda/)
     - [NewRelic-log-ingestion-s3](https://docs.newrelic.com/docs/logs/forward-logs/aws-lambda-sending-logs-s3/)
+- [AMPエージェント](https://docs.newrelic.com/docs/apm/new-relic-apm/getting-started/introduction-apm/)
 
+### トレース監視
