@@ -76,9 +76,9 @@ rclone sync s3:バケット名/パス ./ローカルパス --progress # ロー�
 ## tpslimitは1秒あたりのAPIコールの最大値のため、checkers,transfersがtpslimitを上回ると待機になり、意味がない。
 ## tpslimit > checkers + transfers となるのが理想的
 
---retries 8             # rcloneコマンド自体失敗時のリトライ回数                           デフォルト3回
+--retries 2             # rcloneコマンド自体失敗時のリトライ回数                           デフォルト3回
 --retries-sleep 60s     #  --retriesの待機時間
---low-level-retries 20  # 個別のファイル転送やAPI呼び出し単位での再試行回数                  デフォルト10回
+--low-level-retries 3   # 個別のファイル転送やAPI呼び出し単位での再試行回数                  デフォルト10回
 
 --max-duration 4h       # 4時間で強制停止
 
@@ -96,9 +96,15 @@ rclone copy dropbox:/パス s3:バケット名/パス --dropbox-chunk-size 128M 
 
 ### syncコマンドで転送速度早め
 rclone sync dropbox:/ s3:バケット名/パス \
-  --fast-list --transfers 16 --checkers 32 \
-  --progress --stats 30s --stats-one-line \
+  --progress \
+  --stats 1m \
+  --stats-one-line \
+  --retries 2 \
+  --retries-sleep 60s \
+  --low-level-retries 3 \
+  --checkers 4 \
+  --transfers 8 \
   --dropbox-chunk-size 128M \
-  --s3-upload-concurrency 8 --s3-chunk-size 128M \
-  --retries 8 --low-level-retries 20
+  --s3-upload-concurrency 8 \
+  --s3-chunk-size 128M
 ```
