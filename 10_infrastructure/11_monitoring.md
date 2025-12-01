@@ -37,6 +37,7 @@
 - OpenTelemetry
   - 分散トレーシングにおいてTraceIDやSpanID,ParentSpanIDを保存するというルール
   - Trace＝リクエスト全体、Span=各サービスの処理,ParentSpanID=呼び出し元SpanID
+    - Span: リクエストの一足跡。spanがあつまってリクエスト全体の旅路がわかるので、トレースの一部ともいえる
 - OTLP(OpenTelemetry Protocol)
   - 「テレメトリデータを送受信するための標準プロトコル
 - W3C Trace Context
