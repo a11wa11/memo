@@ -104,6 +104,7 @@
 | optional | 任意 | |
 | exclusive | 独占的な | |
 | exclusion | 除外、排除 | |
+| exceed | 基準を超える | |
 | threshold | 閾値 | |
 | payload | パケットに含まれるヘッダやトレーラなどの不可情報を除いたデータ本体のこと | |
 | compatible | 互換性のある | |
