@@ -16,6 +16,7 @@
       - [URL](#url)
       - [HTTP](#http)
       - [マルチスレッド](#マルチスレッド)
+    - [コード例](#コード例)
 
 ## 公式情報
 
@@ -195,6 +196,7 @@ process.on("uncaughtException", (err) => {}) // 例外処理
 ```node
 // json形式で出力
 JSON.stringify(オブジェクト)
+JSON.stringify(オブジェクト, null, 2) // 整形
 ```
 
 - function(古い記法)を使用する場合
@@ -659,3 +661,20 @@ setTimeout(() => {
 - プロセス間通信を行う方法
   - `.send( <object> )` でメッセージ送信、
   - `.on("message", (<object>) => { })` でメッセージ受信
+
+### コード例
+
+- グローバルIP確認
+
+```node
+var assert = require('http');
+http.get('https://httpbin.org/ip',
+  function (err, response, body) {
+    if (err) {
+      console.error('Error:', err);
+      return;
+    }
+    console.log('Global IP:', response.body);
+  }
+);
+```
