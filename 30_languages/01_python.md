@@ -429,7 +429,7 @@ for handler in logger.handlers:
 
 - vscode
   - venv環境のpythonを適用したい場合
-    1. Ctl + Shift + P で`Python: Select interPereter`をクリック
+    1. Ctl + Shift + P で`Python: Select interPreter`をクリック
     2. `Enter interpreter path...`を選択してvenvのパスを設定
 
 - pdbでメソッドの一覧を取得する
