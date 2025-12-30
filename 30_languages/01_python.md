@@ -160,6 +160,10 @@ for x in my_list: print(x)
 # enumerate(インデックスと値を同時出力)
 for i, fruit in enumerate(fruits):
   print(f"{i}: {fruit}")
+
+# ディレクトリ直下のファイル名一覧出力例 ※ディレクトリ直下のみで再帰的ではない
+for filename in os.listdir(extract_dir):
+    print(filename)
 ```
 
 - リスト内包表記

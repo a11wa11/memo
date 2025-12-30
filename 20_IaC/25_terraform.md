@@ -135,9 +135,16 @@ import {
 #### リソースの移動
 
 ```terraform
+# module内リソースの場合は、moduleの中で定義すればOK
 moved {
   from = aws_codebuild_project.旧リソース名(移動前)
   to   = aws_codebuild_project.新リソース名(移動後)
+}
+
+# moduleの場合も同じ
+moved {
+  from = module.lambda
+  to   = module.main
 }
 ```
 
