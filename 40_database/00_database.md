@@ -117,6 +117,8 @@ insert into words (english, japanese,created_at,updated_at) values
 - drop
 
 ```sql
+-- 指定dデータベース削除
+drop database データベース名;
 -- 指定テーブル削除
 drop table テーブル名;
 -- 依存テーブルも含めて指定テーブルを削除
