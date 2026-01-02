@@ -74,9 +74,27 @@ select version();
 
 --ディスク容量
 SELECT pg_size_pretty(pg_database_size('データベース名'));
+SELECT pg_size_pretty(pg_database_size(current_database())) AS database_size;
 
 --インデックス一覧
 SELECT * FROM pg_indexes;
+
+--データが多いテーブルを知りたい(行数目安)
+SELECT
+  schemaname,
+  relname AS table_name,
+  n_live_tup AS approx_rows
+FROM pg_stat_user_tables
+ORDER BY n_live_tup DESC
+LIMIT 10;
+
+--テーブルサイズ順(インデックス込)
+SELECT
+  schemaname AS schema,
+  relname AS table_name,
+  pg_size_pretty(pg_total_relation_size(relid)) AS total_size
+FROM pg_catalog.pg_statio_user_tables
+ORDER BY pg_total_relation_size(relid) DESC
 ```
 
 ### 便利系
@@ -214,6 +232,7 @@ pg_restoreでバイナリファイル形式のバックファイルからのリ�
 ```sh
 pg_restore -h ホスト名 -C -d データベース名 バックアップファイル名
 psql -h ホスト名 -U ユーザー名 -d データベース名 -f バックアップファイル名
+psql "host=ホスト名 port=5432 dbname=データベース名 user=ユーザー名 sslmode=require" --file=バックアップファイル名
 
 # 特定のテーブルのみを指定する場合
 pg_restore -h ホスト名 -C -d データベース名 -t テーブル名 バックアップファイル名
