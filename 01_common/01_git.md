@@ -68,7 +68,7 @@ git config --global --add safe.directory
 - windows環境設定例
 
 ```sh
-git config --global core.autocrlf true
+git config --global core.autocrlf input
 ```
 
 - 初期化
