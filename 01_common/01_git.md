@@ -65,6 +65,12 @@ git config --local user.email "test_address"
 git config --global --add safe.directory
 ```
 
+- windows環境設定例
+
+```sh
+git config --global core.autocrlf true
+```
+
 - 初期化
 
 ```sh
