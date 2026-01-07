@@ -42,8 +42,28 @@ notepad $PROFILE
 Set-Location "C:\Work" # 好きな開始パス
 ```
 
+### 確認
+
+```powershell
+# powershellのバージョンなど確認
+$PSVersionTable
+```
 
 ## コマンド例
+
+- 基本
+
+```powershell
+# 起動
+pwsh
+
+# 標準出力
+cat ファイル名
+get-Content ファイル名
+
+# パス確認
+where
+```
 
 - 基本(ls)
 
