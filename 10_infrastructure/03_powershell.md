@@ -31,6 +31,18 @@ PS C:\Users\XXXX\Documents
 > 
 ```
 
+- 起動時の開始パス指定
+
+```
+## Microsoft.PowerShell_profile.ps1をメモ帳で編集
+notepad $PROFILE
+
+# ファイル編集
+## 以下の内容を保存
+Set-Location "C:\Work" # 好きな開始パス
+```
+
+
 ## コマンド例
 
 - 基本(ls)
