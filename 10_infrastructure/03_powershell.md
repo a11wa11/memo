@@ -33,11 +33,24 @@ PS C:\Users\XXXX\Documents
 
 ## コマンド例
 
+- 環境変数設定
+
 ```powershell
-# 環境変数設定(一時)
+# 現セッションのみ
 $env:HTTP_PROXY = "http://プロキシホスト:ポート番号"
 $env:HTTPS_PROXY = "http://プロキシホスト:ポート番号"
 ```
+
+- エイリアス設定
+
+```powershell
+# llでもlsを実行するように設定(現セッションのみ)
+Set-Alias ll ls
+
+# 永続化したい場合は$PROFILEに以下記述
+function ll { ls }
+```
+
 
 ### WSL
 
