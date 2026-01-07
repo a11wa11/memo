@@ -1,11 +1,42 @@
 # powershell
 
-## 初期設定(セットアップ)画面でコマンドを使ってPCの電源をOFFにする方法
+## 設定
+
+### 初期設定(セットアップ)画面でコマンドを使ってPCの電源をOFFにする方法
 
 ```powershell
 # /t "timeout"の略で、シャットダウンまでの待機時間を指定
 # /s /sは"shutdown"の略
 shutdown /s /t 0
+```
+
+### プロンプト編集
+
+```
+# powershellで実行
+## 親フォルダを作成(存在していれば何もしない)
+New-Item -ItemType Directory -Path (Split-Path $PROFILE) -Force | Out-Null
+
+## Microsoft.PowerShell_profile.ps1をメモ帳で編集
+notepad $PROFILE
+
+# ファイル編集
+## 以下の内容を保存
+function prompt {
+    "$($executionContext.SessionState.Path.CurrentLocation)`n> "
+}
+
+# powershell表記変更確認
+PS C:\Users\XXXX\Documents
+> 
+```
+
+## コマンド例
+
+```powershell
+# 環境変数設定(一時)
+$env:HTTP_PROXY = "http://プロキシホスト:ポート番号"
+$env:HTTPS_PROXY = "http://プロキシホスト:ポート番号"
 ```
 
 ### WSL
