@@ -33,6 +33,20 @@ PS C:\Users\XXXX\Documents
 
 ## コマンド例
 
+- 基本(ls)
+
+```powershell
+# ディレクトリのみ
+ls -Directory
+
+# 再帰的
+ls -Recurse
+ls -Recurse -Depth 2  # 深さ制限
+
+# 絞り込み
+ls *.txt
+```
+
 - 環境変数設定
 
 ```powershell
