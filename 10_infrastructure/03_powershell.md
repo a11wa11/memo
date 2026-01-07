@@ -45,3 +45,10 @@ cd /mnt/c
 
 - [参考1](https://zenn.dev/ekuinox/articles/520500939e5242a6393c)
 - [参考2](https://qiita.com/kkato233/items/1fc71bde5a6d94f1b982)
+
+## CMD
+
+```CMD
+# コマンドプロンプトでAzureVMメタデータ取得
+curl -H "Metadata:true" "http://169.254.169.254/metadata/instance/compute?api-version=2021-02-01"
+```
