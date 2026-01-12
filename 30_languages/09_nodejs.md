@@ -615,7 +615,7 @@ let request = http.request(url, options, (response) => {
   response.pipe(process.stdout);
 });
 request.on("error", (err) => {
-  console.log.(err.message)
+  console.log(err.message)
 });
 console.log(request);
 request.end(data);
