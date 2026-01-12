@@ -45,7 +45,7 @@ poetry shell
 poetry run python -m unittest ~~~
 
 # pyproject.tomlの検証
-portry check
+poetry check
 
 # pyproject.tomlから一括インストール。poetry.lockがあればそれを参考にする
 poetry install
