@@ -211,12 +211,11 @@ nil
 
 ```python
 # 定義
-def hello:
+def hello():
     print("HELLO")
 
 def introduction(name):
-    print("私は%sです。" % name)
-    print("私は#{name}です。")
+    print(f"私は{name}です。")
 
 def add(x, y):
     return x + y
