@@ -31,6 +31,8 @@
 
 ― AutoHotkeyでmacライクのキーボードに設定
   - `;`でコメント
+  - CapslockキーがマシンによってはVK240というキーに設定されている場合があるので、下記はその場合の設定
+    - 下記設定でCapslockキー+Aなどで全選択できるようになるがCtrlが押下しっぱなしの状態になることがあり、その場合はCtrlキー押下で元(Ctrl非クリック状態)に戻った
 
 ```AutoHotkey
 #Requires AutoHotkey v2.0
