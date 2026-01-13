@@ -26,3 +26,19 @@
   - AWSの物理サーバを丸ごと一台、専用として確保するサービス
 
 ## 構成要素
+
+## セットアップ
+
+― AutoHotkeyでmacライクのキーボードに設定
+  - `;`でコメント
+
+```AutoHotkey
+#Requires AutoHotkey v2.0
+; シフトなしでアンダースコア入力
+vkE2::_
+
+
+; CapsLock(VK240 _ SC03A)を Ctrl にする(押下で Ctrl down、離したら Ctrl up)
+SC03A::Ctrl
+SC03A up::return
+```
