@@ -248,24 +248,30 @@
  // List of extensions which should be recommended for users of this workspace.
  "recommendations": [
    //  common
+   "moshfeu.compare-folders",
+   "hediet.vscode-drawio",
+   "alefragnani.project-manager",
+   //  * 整形関連
+   "oderwat.indent-rainbow",
    "streetsidesoftware.code-spell-checker",
+   "tyriar.sort-lines",
+   "usernamehw.errorlens",
+   "Log File Highlighte",
+   //  * docker
    "ms-azuretools.vscode-docker",
    "ms-vscode-remote.remote-containers",
+   //  * git
    "donjayamanne.githistory",
    "eamodio.gitlens",
-   "tyriar.sort-lines",
-   "patricklee.vsnotes",
-   "yzhang.markdown-all-in-one",
-   "usernamehw.errorlens",
-   "oderwat.indent-rainbow",
-   "moshfeu.compare-folders",
-   "vscode-icons",
-   "hediet.vscode-drawio",
-   "Log File Highlighte",
    //  Infrastructure
    "aws-scripting-guy.cform",
    "redhat.vscode-yaml",
    //  languages
+   //  * markdown
+   "patricklee.vsnotes",
+   "yzhang.markdown-all-in-one",
+   "shd101wyy.markdown-preview-enhanced",
+   //  * python
    "ms-python.python",
    "ms-python.vscode-pylance",
    "tabnine.tabnine-vscode",
