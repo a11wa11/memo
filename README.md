@@ -16,6 +16,9 @@
   - [nginx](https://a11wa11.github.io/memo/10_infrastructure/07_nginx)
   - [security](https://a11wa11.github.io/memo/10_infrastructure/08_security)
   - [mac](https://a11wa11.github.io/memo/10_infrastructure/09_mac)
+  - [packages](https://a11wa11.github.io/memo/10_infrastructure/10_packages)
+  - [monitoring](https://a11wa11.github.io/memo/10_infrastructure/11_monitoring)
+  - [windows](https://a11wa11.github.io/memo/10_infrastructure/20_windows)
 - 20_IaC (Infrastructure as Code)
   - [docker](https://a11wa11.github.io/memo/20_IaC/01_docker)
   - [ansible](https://a11wa11.github.io/memo/20_IaC/02_ansible)
@@ -29,15 +32,18 @@
   - [go](https://a11wa11.github.io/memo/30_languages/04_golang)
   - [php](https://a11wa11.github.io/memo/30_languages/05_php)
   - [html](https://a11wa11.github.io/memo/30_languages/06_html)
-  - [css](https://a11wa11.github.io/memo/30_languages/07_css.md)
+  - [css](https://a11wa11.github.io/memo/30_languages/07_css)
   - [javascript](https://a11wa11.github.io/memo/30_languages/08_javascript)
   - [node.js](https://a11wa11.github.io/memo/30_languages/09_nodejs)
   - [typescript](https://a11wa11.github.io/memo/30_languages/10_typescript)
+  - [markdown](https://a11wa11.github.io/memo/30_languages/90_markdown)
   - libraries
     - [playwright](https://a11wa11.github.io/memo/30_languages/lib/01_playwright)
     - [cypress](https://a11wa11.github.io/memo/30_languages/lib/02_cypress)
     - [nodemon](https://a11wa11.github.io/memo/30_languages/lib/03_nodemon)
     - [webpack](https://a11wa11.github.io/memo/30_languages/lib/04_webpack)
+    - [nextjs](https://a11wa11.github.io/memo/30_languages/lib/07_nextjs)
+    - [fastapi](https://a11wa11.github.io/memo/30_languages/lib/11_fastapi)
     - [deployer](https://a11wa11.github.io/memo/30_languages/lib/51_deployer)
     - [laravel](https://a11wa11.github.io/memo/30_languages/lib/52_laravel)
   - PackageManager
@@ -52,13 +58,18 @@
   - [database](https://a11wa11.github.io/memo/40_database/00_database)
   - [mysql](https://a11wa11.github.io/memo/40_database/01_mysql)
   - [postgresql](https://a11wa11.github.io/memo/40_database/02_postgresql)
+  - [sqlserver](https://a11wa11.github.io/memo/40_database/03_sqlserver)
   - [redis](https://a11wa11.github.io/memo/40_database/11_redis)
 - 50_CICD
   - [githubActions](https://a11wa11.github.io/memo/50_CICD/01_githubActions)
+- 60_AI
+  - [claude](https://a11wa11.github.io/memo/60_AI/01_claude)
 - 90_etc
   - [english](https://a11wa11.github.io/memo/90_etc/01_english)
   - [vscode](https://a11wa11.github.io/memo/90_etc/02_vscode)
   - [cursor](https://a11wa11.github.io/memo/90_etc/03_cursor)
+  - [slack](https://a11wa11.github.io/memo/90_etc/04_slack)
+  - [spreadsheet](https://a11wa11.github.io/memo/90_etc/11_spreadsheet)
 
 ## Support or Contact
 
