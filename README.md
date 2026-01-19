@@ -42,6 +42,7 @@
     - [cypress](https://a11wa11.github.io/memo/30_languages/lib/02_cypress)
     - [nodemon](https://a11wa11.github.io/memo/30_languages/lib/03_nodemon)
     - [webpack](https://a11wa11.github.io/memo/30_languages/lib/04_webpack)
+    - [react](https://a11wa11.github.io/memo/30_languages/lib/06_react)
     - [nextjs](https://a11wa11.github.io/memo/30_languages/lib/07_nextjs)
     - [fastapi](https://a11wa11.github.io/memo/30_languages/lib/11_fastapi)
     - [deployer](https://a11wa11.github.io/memo/30_languages/lib/51_deployer)
