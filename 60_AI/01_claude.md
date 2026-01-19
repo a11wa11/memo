@@ -20,12 +20,17 @@ claude --continue               # 前回途中から再開できる
 claude --mcp-config=.mcp.json   # mcpサーバーと連携する
 ```
 
+#### [スラッシュコマンド](https://code.claude.com/docs/ja/slash-commands)
+
+セッション中にClaudeの動作を制御するコマンド
+
 - `/init` CLAUDE.mdを生成する
 - `/hooks` hooksを生成する
   - AIがツール(ファイルの編集など)を実行する前後や、一連の作業が完了したタイミングで、特定の処理を自動的に発火(実行)させる機能のこと
   - pre-tool-use: AIがツールを使用する直前に処理を実行
   - post-tool-use: AIがツールを使用した直後に処理を実行
 - `/mcp` mcpへ接続する
+- `/compact` 会話の要約をして、会話のコンテキストを圧縮する
 - `/agents` 専用のAIを起動する(サブエージェント機能)
    - コードレビュー専用のエージェントを作って独立したコンテキストで実行される
    - セキュリティチェック専用のエージェントなども作成可能
