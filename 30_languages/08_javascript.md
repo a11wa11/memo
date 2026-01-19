@@ -37,29 +37,22 @@ console.log(abc.length);
 console.log(abc.toUpperCase());
 ```
 
+### ECMAScript
+
+- JavaScriptの標準規格
+- **E**uropean **C**omputer **M**anufacturers **A**ssociation (ECMA)によって制定されている
+- 2015年にECMAScript6(ES6=ES2015)と呼ばれ、多くの機能追加があった。近代JSの転換期となり、その後のバージョンは年単位で命名されている
+
 ### 基本
 
-- 出力
+###### 出力
 
 ```javascript
 console.log("出力したい内容")
 console.trace("出力したい内容") // スタックトレースと一緒に出力
 ```
 
-- 時間計測
-
-```node
-console.time("timerName")     // 計測開始
-console.timeEnd("timerName")  // 計測終了
-console.timeLog("timerName")  // 途中経過
-
-// 例
-console.time("timerName")
-page.waitForTimeout(10000)
-console.timeEnd("timerName")
-```
-
-- 変数
+###### 変数
 
 ```javascript
 let height;        // 変数宣言のみ
@@ -79,6 +72,8 @@ console.log("身長は" + height + "です。")
 // テンプレートリテラル
 console.log(`身長は${height}です。`)
 ```
+
+###### 型
 
 - 型確認
 
@@ -107,7 +102,7 @@ JSON.stringify(ターゲット)
 JSON.parse(ターゲット)
 ```
 
-- 配列
+###### 配列
 
 ```javascript
 let sample = [1,2,3]
@@ -123,9 +118,84 @@ let sample1 = [1,2,3]
 let sample2 = [4,5,6]
 sample1.push(sample2)    // 追加対象も配列として追加 [1,2,3,[4,5,6]]
 sample1.push(...sample2) // 追加対象を配列解除して追加 [1,2,3,4,5,6]
+
+// スプレッド構文
+console.log(...sample)   // 1 2 3 と...をつけることで展開される
 ```
 
-- オブジェクト型
+- map
+
+```javascript
+const array = [1, 2, 3, 4, 5]
+
+// array.map(処理したい関数定義)
+array.map(function(value, index, array ) {
+    console.log(`バリューを3倍: ${value * 3}`)
+    console.log(`キー: ${index}`)
+    console.log(`配列: ${array}`)
+})
+```
+
+- filter
+
+```javascript
+const array = [1, 2, 3, 4, 5]
+
+// array.filter(処理したい関数定義)
+array.filter(function(value, index, array ) {
+    return value % 2 === 1;
+})
+```
+
+###### オブジェクト型
+
+- オブジェクト
+
+```javascript
+const person = {
+  name: "名前",
+  age: 30
+};
+```
+
+- 分割代入
+
+```javascript
+// オブジェクト
+const person = {
+  name: "名前",
+  age: 30
+};
+
+const {name, age} = person
+const message = `名前は${name}で、歳は${age}です`;
+// デフォルト値を設定
+const {name, age = 18} = person
+
+
+// 配列
+const person = ["名前", 30]
+
+const [name, age] = person
+const message = `名前は${name}で、歳は${age}です`;
+```
+
+- オブジェクトの省略記法
+
+```javascript
+// オブジェクト
+const name = "名前";
+const age = 30;
+
+const person = {name, age} //オブジェクトのプロパティ名と変数名が同じ場合、省略可能
+// ↑は↓と同じ意味
+const person = {
+  name: "名前",
+  age: 30
+};
+```
+
+- キーの指定の仕方
 
 ```javascript
 // オブジェクト型の中にオブジェクト型や関数も定義可能
@@ -147,8 +217,9 @@ person[keyName].music = 'piano'
 
 // クラス内の関数は__proto__に格納されている
 // そのため、下記のように丁寧に書き出して呼出も可能だが一般的には省略
-person.__proto__.getHobby()
 ```
+
+###### クラス
 
 - クラス
 
@@ -388,6 +459,14 @@ switch (pref){
 }
 ```
 
+- 三項演算子
+
+```javascript
+// 条件 ? 条件がtrueの場合の値 : 条件がfalseの場合の値
+num = 99;
+const result = num > 80 ? "OK" : "NG";
+```
+
 #### 抽出
 
 - 部分一致
@@ -454,7 +533,7 @@ function double ( num = 5 ) {
 double(4);
 ```
 
-- コールバック関数
+###### コールバック関数
 
 ある関数を呼び出す時に、引数に指定する別の関数のこと。以下例でgreetingがコールバック関数となる
 
@@ -471,17 +550,18 @@ function processUserInput(callback) {
 processUserInput(greeting);
 ```
 
-- アロー関数
-  - 関数リテラル(匿名関数,無名関数ともいう)をシンプルに記述する手法をアロー関数という
-  - アロー関数は引数の丸かっこと処理内容の波かっこの間に`=>`の記述が必須
-  - 以下の条件で省略できる部分がある
-    - 条件なし
-      - `function`の省略
-    - 処理内容が1行
-      - 処理内容の波かっこ`{}`の省略
-      - `return`の省略
-    - 引数が1つ & デフォルト引数なし
-      - 引数の丸かっこ`()`の省略
+###### アロー関数
+
+- 関数リテラル(匿名関数,無名関数ともいう)をシンプルに記述する手法をアロー関数という
+- アロー関数は引数の丸かっこと処理内容の波かっこの間に`=>`の記述が必須
+- 以下の条件で省略できる部分がある
+  - 条件なし
+    - `function`の省略
+  - 処理内容が1行
+    - 処理内容の波かっこ`{}`の省略
+    - `return`の省略
+  - 引数が1つ & デフォルト引数なし
+    - 引数の丸かっこ`()`の省略
 
 ```javascript
 // 変更元となる基本アロー関数。functionを省略、引数の丸かっこ()と処理内容の波かっこ{}の間にアロー=>を配置
@@ -736,10 +816,21 @@ io.observe(target)
 ```javascript
 ```
 
-```javascript
-```
 
 ## よく使う
+
+- 時間計測
+
+```javascript
+console.time("timerName")     // 計測開始
+console.timeEnd("timerName")  // 計測終了
+console.timeLog("timerName")  // 途中経過
+
+// 例
+console.time("timerName")
+page.waitForTimeout(10000)
+console.timeEnd("timerName")
+```
 
 - `YYYYMMDD-hhmm`形式で時刻を取得する
 
