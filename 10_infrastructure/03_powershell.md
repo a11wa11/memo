@@ -4,7 +4,8 @@
 
 ### 初期設定(セットアップ)画面でコマンドを使ってPCの電源をOFFにする方法
 
-```powershell
+```cmd
+# コマンドプロンプトで実行
 # /t "timeout"の略で、シャットダウンまでの待機時間を指定
 # /s /sは"shutdown"の略
 shutdown /s /t 0
@@ -40,6 +41,13 @@ notepad $PROFILE
 # ファイル編集
 ## 以下の内容を保存
 Set-Location "C:\Work" # 好きな開始パス
+```
+
+- vimのパスを設定(インストールと環境変数の設定済であること)
+
+```
+# vimのパスを設定
+function vim { & 'C:\Program Files\Vim\vim91\vim.exe' $args }
 ```
 
 ### 確認
