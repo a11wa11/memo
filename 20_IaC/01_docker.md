@@ -431,3 +431,17 @@ services:
         reservations: # 最小メモリ制限（コンテナが使用する最小メモリ）
           memory: 4G  # コンテナが使用する最小メモリ
 ```
+
+- デバッグ
+
+```yml
+# 小技でコンテナを起動してそのまま停止すると`docker exec -it コンテナ名 bash`でコンテナ接続可能
+entrypoint: ["sleep", "9999"]
+```
+
+### コマンド
+
+```sh
+# コンテナのログをリアルタイムで表示
+docker-compose logs -f コンテナ名
+```
