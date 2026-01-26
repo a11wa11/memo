@@ -43,19 +43,23 @@ tsc --outDir dist
 {
   "include": ["./src/**/*.ts"],
   "exclude": ["node_modules"],
-  "compilerOptions": {
-    "target": "es6",                          // typescriptコードをどのバージョンのjavascriptに変換するかを指定。ES6(ECMAScript 2015)を出力ターゲットとする
+  "compilerOptions": {                        // TypeScriptコンパイラへの指示
+    "target": "es2015",                       // typescriptコードをどのバージョンのjavascriptに変換するかを指定。ES6(ECMAScript 2015)を出力ターゲットとする
     "module": "commonjs",                     // CommonJS形式のモジュール
-    "lib": [
+    "lib": [                                  // 使用可能なJavaScript組み込みAPIの型定義を指定。libを指定しない場合、targetに応じて自動設定
       "es6",
       "es2018",
       "esnext.asynciterable"
     ],
     "rootDir": "src",
     "outDir": "./dist",                        // コンパイル後のファイルを./distディレクトリに出力
-    "typeRoots": ["node_modules/@types"],
+    "typeRoots": ["node_modules/@types"],      // 型定義ファイル（.d.ts）を探すフォルダを指定。デフォルトで順番に../へ遡っていく
+    "types": ["@types/node", "@types/jest"],   // node_modules/@types/配下のモジュールで明示したもの以外使用できなくする(指定がなければnode_modules/@types/のすべて使用可能)
     "moduleResolution": "node",                // typescriptがモジュールをどのように解決(探索)するかを指定。主に"node"と"classic"の2つのオプションがある。"node"はnode.jsのモジュール解決アルゴリズムを模倣し、"classic"はtypescriptの古い解決方法を使用する
-    "baseUrl": ".",
+    "baseUrl": ".",                            // モジュール解決の基準となるディレクトリを指定
+    "paths": {                                 // 長いインポートパス(import { logger } from "@/logger" など)を短い別名(エイリアス)で書けるようにする 
+      "@/*": ["./functions/common/util/src/*"]
+    },
 
     /* Code Quality checks */
     "noUnusedLocals": true,                    // 使用されていないローカル変数がある場合にエラー
@@ -76,9 +80,10 @@ tsc --outDir dist
     "experimentalDecorators": true,            // TypeScriptの実験的なデコレーター機能を有効にする
 
     /* Advanced Options */
-    "skipLibCheck": true,                      // ライブラリの型チェックをスキップ
+    "skipLibCheck": true,                      // ライブラリ(node_modules内)の型チェックをスキップ
     "composite": false,                        // 他のTypeScriptプロジェクトと一緒にビルドされない
     "allowSyntheticDefaultImports": false,     // デフォルトインポートは許可しない
+    "sourceMap": true,                         // .js.map ファイル(ソースマップ)を生成し、デバッグ時に元のTypeScriptコードを表示
   },
 }
 ```
