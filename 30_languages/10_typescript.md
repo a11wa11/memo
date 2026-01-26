@@ -47,8 +47,8 @@ tsc --outDir dist
     "target": "es2015",                       // typescriptコードをどのバージョンのjavascriptに変換するかを指定。ES6(ECMAScript 2015)を出力ターゲットとする
     "module": "commonjs",                     // CommonJS形式のモジュール
     "lib": [                                  // 使用可能なJavaScript組み込みAPIの型定義を指定。libを指定しない場合、targetに応じて自動設定
-      "es6",
-      "es2018",
+      "es2020",
+      "dom",                                  // ブラウザ向け
       "esnext.asynciterable"
     ],
     "rootDir": "src",
