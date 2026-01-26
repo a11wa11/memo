@@ -442,6 +442,9 @@ entrypoint: ["sleep", "9999"]
 ### コマンド
 
 ```sh
+# イメージをビルドしてコンテナを起動
+docker-compose up --build
+
 # コンテナのログをリアルタイムで表示
 docker-compose logs -f コンテナ名
 ```
