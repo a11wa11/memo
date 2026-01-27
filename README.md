@@ -6,6 +6,7 @@
   - [Makefile](https://a11wa11.github.io/memo/01_common/03_Makefile)
   - [yaml](https://a11wa11.github.io/memo/01_common/04_yaml)
   - [json](https://a11wa11.github.io/memo/01_common/05_json)
+  - [api](https://a11wa11.github.io/memo/01_common/09_api)
 - 10_infrastructure
   - [ssh](https://a11wa11.github.io/memo/10_infrastructure/01_ssh)
   - [shell](https://a11wa11.github.io/memo/10_infrastructure/02_shell)
@@ -13,12 +14,11 @@
   - [linux](https://a11wa11.github.io/memo/10_infrastructure/04_linux)
   - [network](https://a11wa11.github.io/memo/10_infrastructure/05_network)
   - [test](https://a11wa11.github.io/memo/10_infrastructure/06_test)
-  - [nginx](https://a11wa11.github.io/memo/10_infrastructure/07_nginx)
   - [security](https://a11wa11.github.io/memo/10_infrastructure/08_security)
-  - [mac](https://a11wa11.github.io/memo/10_infrastructure/09_mac)
-  - [packages](https://a11wa11.github.io/memo/10_infrastructure/10_packages)
   - [monitoring](https://a11wa11.github.io/memo/10_infrastructure/11_monitoring)
-  - [windows](https://a11wa11.github.io/memo/10_infrastructure/20_windows)
+  - packages
+    - [nginx](https://a11wa11.github.io/memo/10_infrastructure/packages/01_nginx)
+    - [rclone](https://a11wa11.github.io/memo/10_infrastructure/packages/04_rclone)
 - 20_IaC (Infrastructure as Code)
   - [docker](https://a11wa11.github.io/memo/20_IaC/01_docker)
   - [ansible](https://a11wa11.github.io/memo/20_IaC/02_ansible)
@@ -52,9 +52,15 @@
     - [asdf](https://a11wa11.github.io/memo/30_languages/PackageManager/asdf/README)
     - [brew](https://a11wa11.github.io/memo/30_languages/PackageManager/brew/README)
     - [go](https://a11wa11.github.io/memo/30_languages/PackageManager/go/README)
-    - [javascript](https://a11wa11.github.io/memo/30_languages/PackageManager/javascript/README)
-    - [php](https://a11wa11.github.io/memo/30_languages/PackageManager/php/README)
-    - [python](https://a11wa11.github.io/memo/30_languages/PackageManager/python/README)
+    - javascript
+      - [npm](https://a11wa11.github.io/memo/30_languages/PackageManager/javascript/01_npm)
+      - [yarn](https://a11wa11.github.io/memo/30_languages/PackageManager/javascript/02_yarn)
+    - php
+      - [composer](https://a11wa11.github.io/memo/30_languages/PackageManager/php/01_composer)
+      - [pecl](https://a11wa11.github.io/memo/30_languages/PackageManager/php/02_pecl)
+    - python
+      - [pip](https://a11wa11.github.io/memo/30_languages/PackageManager/python/01_pip)
+      - [poetry](https://a11wa11.github.io/memo/30_languages/PackageManager/python/02_poetry)
 - 40_database
   - [database](https://a11wa11.github.io/memo/40_database/00_database)
   - [mysql](https://a11wa11.github.io/memo/40_database/01_mysql)
@@ -65,10 +71,10 @@
   - [githubActions](https://a11wa11.github.io/memo/50_CICD/01_githubActions)
 - 60_AI
   - [claude](https://a11wa11.github.io/memo/60_AI/01_claude)
+  - [cursor](https://a11wa11.github.io/memo/60_AI/02_cursor)
 - 90_etc
   - [english](https://a11wa11.github.io/memo/90_etc/01_english)
   - [vscode](https://a11wa11.github.io/memo/90_etc/02_vscode)
-  - [cursor](https://a11wa11.github.io/memo/90_etc/03_cursor)
   - [slack](https://a11wa11.github.io/memo/90_etc/04_slack)
   - [spreadsheet](https://a11wa11.github.io/memo/90_etc/11_spreadsheet)
 
