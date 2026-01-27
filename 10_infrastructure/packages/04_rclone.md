@@ -1,14 +1,11 @@
-# packages
-
-- [packages](#packages)
-  - [rclone](#rclone)
-
-## rclone
+# rclone
 
 クラウドストレージやリモートストレージを、ローカルファイルのように扱えるコマンドラインツール
 
-- [AWS公式rclone記事](https://aws.amazon.com/jp/blogs/storage/migrate-data-from-dropbox-to-amazon-s3-using-rclone/)
-- [rclone公式記事](https://rclone.org/remote_setup/)
+- [AWS 公式 rclone 記事](https://aws.amazon.com/jp/blogs/storage/migrate-data-from-dropbox-to-amazon-s3-using-rclone/)
+- [rclone 公式記事](https://rclone.org/remote_setup/)
+
+## コマンド
 
 ```sh
 # rclone設定を確認
@@ -61,7 +58,7 @@ rclone mount gdrive: ~/mnt/gdrive # GoogleDriveをローカルにマウント
 
 # ミラー
 ## --fast-list 差分チェック
-rclone sync dropbox:/ s3:バケット名/パス --fast-list --progress 
+rclone sync dropbox:/ s3:バケット名/パス --fast-list --progress
 rclone sync s3:バケット名/パス ./ローカルパス --progress # ローカルにもミラー可能
 
 # その他オプション
