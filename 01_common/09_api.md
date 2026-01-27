@@ -1,110 +1,92 @@
-# packages
+# API
 
-- [packages](#packages)
-  - [rclone](#rclone)
+## リクエストヘッダー
 
-## rclone
 
-クラウドストレージやリモートストレージを、ローカルファイルのように扱えるコマンドラインツール
+### Content-Type
 
-- [AWS公式rclone記事](https://aws.amazon.com/jp/blogs/storage/migrate-data-from-dropbox-to-amazon-s3-using-rclone/)
-- [rclone公式記事](https://rclone.org/remote_setup/)
+サーバーがデータを正しく解釈するために必要な項目
 
-```sh
-# rclone設定を確認
-## ~/.config/rclone/rclone.conf に設定ファイル格納
-rclone config show
+```text
+# パスカルケース(Content-Type)が慣例
+Content-Type: application/json; charset=utf-8
+```
 
-# rclone設定パスを表示
-rclone config file
+- GET: リクエスト時は不要
+- POST/PUT: サーバがボディの解釈方法を知るために必須
+  - POSTでbodyなしなら送るデータがないので不要の場合あり
 
-# 対話で設定する
-rclone config
-# n → dropbox → APIキー入力 → ブラウザで許可など
 
-# コマンドのみでリモート設定(対話不要)
-rclone config create リモート設定名 dropbox(タイプ指定) \
-  client_id "APP_KEY" \
-  client_secret "APP_SECRET" \
-  token '{"access_token":"...","refresh_token":"...","expiry":"..."}' \
-  --non-interactive
+| Content-Type | 用途 |
+|--------------|------|
+| `application/json` | JSON（REST API で最も一般的） |
+| `application/x-www-form-urlencoded` | HTMLフォーム送信（キー=値&キー=値） |
+| `multipart/form-data` | ファイルアップロード |
+| `text/html` | HTML |
+| `text/plain` | プレーンテキスト |
+| `text/csv` | CSV |
+| `application/xml` | XML |
+| `application/pdf` | PDF |
+| `image/png`, `image/jpeg` | 画像 |
+| `application/octet-stream` | バイナリ（汎用） |
 
-# コマンドのみで一部設定のみ更新(対話不要)
-rclone config update dropbox-remote client_id=新しい値
+### charset
 
-# どんな機能に対応しているかを確認する
-rclone backend features 接続タイプ名:
+| charset | 説明 |
+|---------|------|
+| `utf-8` | 世界標準（絵文字も対応） |
+| `shift_jis` | 日本の古いシステム |
+| `euc-jp` | 日本のUnix系 |
+| `iso-8859-1` | 西欧言語 |
 
-# dry-run
-rclone ls 接続タイプ名:ディレクトリ名/ファイル名 --dry-run -v
+### X-Request-ID
 
-# リモート接続先確認
-rclone listremotes # 設定済接続先一覧
+- リクエストを一意に識別するためのID
+  - 形式（UUID v4 例`A0E7CA6D-E568-4FED-8562-318E0620F47F`(8-4-4-4-12 の形式)が一般的）
+- `X-`を付けないことが推奨されているが、X-Request-IDは広く使われているため定着している
 
-rclone ls 接続タイプ名:               # 全て確認 ディレクトリは非表示
-rclone ls 接続タイプ名:ディレクトリ名   # ディレクトリなど指定
-rclone lsf 接続タイプ名:              # ディレクトリも表示して確認
-rclone lsf --format sp 接続タイプ名:  # ディレクトリも表示して確認
-rclone lsd 接続タイプ名:              # ディレクトリのみ表示
-rclone lsl 接続タイプ名:              # 詳細表示
-rclone size 接続タイプ名:ディレクトリ名 # ファイル数と合計サイズを表示
-rclone about 接続タイプ名:            # ストレージの使用量確認
 
-# コピー
-rclone copy ./ローカルパス s3:バケット名/パス --progress
+### Authorization
 
-# 移動
-rclone move ./ローカルパス s3:バケット名/パス
+- 認証情報を送るための標準ヘッダー
+  - 「あなたは誰か」「このAPIを使う権限があるか」を証明するために使用
 
-# マウント
-rclone mount gdrive: ~/mnt/gdrive # GoogleDriveをローカルにマウント
 
-# ミラー
-## --fast-list 差分チェック
-rclone sync dropbox:/ s3:バケット名/パス --fast-list --progress 
-rclone sync s3:バケット名/パス ./ローカルパス --progress # ローカルにもミラー可能
+###### 認証スキーム
 
-# その他オプション
---progress              # 進捗を常に表示
---stats 30s             # 標準出力間隔                                                  デフォルト1秒
---stats-one-line        # 進捗表示を1行にまとめてコンパクトに表示する                        デフォルト複数行
+| スキーム種類 | 形式 | 用途 | 一般度 |
+|---------|------|------|--------|
+| **Bearer** | `Bearer <token>` | OAuth 2.0、JWT | 一般的 |
+| **Basic** | `Basic <base64>` | ユーザー名:パスワード | レガシー |
+| **Digest** | `Digest <params>` | チャレンジ/レスポンス認証 | 稀 |
 
---checkers 4            # メタ情報チェックの並列数(チェックフェーズで差分あるか確認)            デフォルト8個
---transfers 4           # 同時転送ファイル数(チェックフェーズで必要となったものから随時転送開始)  デフォルト8個
---tpslimit 5.0          # Transactions Per Second(1秒ごとに何回APIコールするか)           デフォルト0 =　無制限
-# tpslimit,checkers,transfersの関係性
-## tpslimitは1秒あたりのAPIコールの最大値のため、checkers,transfersがtpslimitを上回ると待機になり、意味がない。
-## tpslimit > checkers + transfers となるのが理想的
+###### Basic認証との比較
 
---retries 2             # rcloneコマンド自体失敗時のリトライ回数                           デフォルト3回
---retries-sleep 60s     #  --retriesの待機時間
---low-level-retries 3   # 個別のファイル転送やAPI呼び出し単位での再試行回数                  デフォルト10回
+| 項目 | Basic | Bearer |
+|------|-------|--------|
+| 送る情報 | ユーザー名:パスワード | トークン |
+| エンコード | Base64（簡単に復号可能） | 暗号化署名付き |
+| 有効期限 | なし（パスワード変更まで有効） | あり（通常1時間など） |
+| 漏洩リスク | 高い | 低い（期限切れで無効化） |
+| 現在の推奨 | ❌ 非推奨 | ✅ 推奨 |
 
---max-duration 4h       # 4時間で強制停止
+###### Bearer認証スキーム
 
---max-size 100M         # 100MB未満のファイルのみ対象
---min-size 100M         # 100MB以下のファイルのみ対象
+- トークンベースの認証方式
+- 「Bearer」という名前は、**トークンを持っている者（bearer）に認可を与える**という意味に由来
+- JWT(JSON Web Token)がもっとも一般的
+  - `ヘッダー.ペイロード.署名` -> 例: `eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSJ9.signature`
+    1. ヘッダー: アルゴリズムとトークンタイプ
+    2. ペイロード: ユーザー情報や有効期限などのクレーム
+    3. 署名: 改ざん検知用
 
-## タイプ別オプション
---dropbox-chunk-size 128M  # 大きくするとスループットやメモリ上昇だが転送速度早い デフォルト48M
---s3-chunk-size 128M       # 〃
---s3-upload-concurrency 8  # 1ファイルを何並列で上げるか
 
-## コマンド例
-### コピーコマンドで転送速度早め
-rclone copy dropbox:/パス s3:バケット名/パス --dropbox-chunk-size 128M --transfers 8 --progress
+```text
+# 構造
+Authorization: Bearer <トークン>
 
-### syncコマンドで転送速度早め
-rclone sync dropbox:/ s3:バケット名/パス \
-  --progress \
-  --stats 1m \
-  --stats-one-line \
-  --retries 2 \
-  --retries-sleep 60s \
-  --low-level-retries 3 \
-  --checkers 4 \
-  --transfers 8 \
-  --dropbox-chunk-size 128M \
-  --s3-upload-concurrency 8 \
-  --s3-chunk-size 128M
+# 例
+GET /api/data HTTP/1.1
+Host: api.example.com
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
