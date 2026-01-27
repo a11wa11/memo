@@ -9,7 +9,7 @@
 
 ### コンパイル
 
-`tsc` -> typescriptファイルをjavascriptにコンパイルするためのコンパイラコマンド
+`tsc` -> typescript ファイルを javascript にコンパイルするためのコンパイラコマンド
 
 ```sh
 # 基本コンパイル
@@ -22,22 +22,27 @@ tsc 対象ファイル.ts --watch
 
 # 出力ディレクトリを指定してコンパイル
 tsc --outDir dist
+
+# 型チェックのみ行う
+tsc --noEmit
 ```
 
 - 注意点
-  - `tsc --outDir ディレクトリ名`でコンパイル指定しなければデフォルトでは、元あるtsファイルの場所にそのままコンパイルファイル(js)が作成される
 
-- `.d.ts` -> typescriptの型定義ファイル。javascriptで記述されたコードやライブラリをtypescriptで使用するときに、型の補完と型チェックを提供する
+  - `tsc --outDir ディレクトリ名`でコンパイル指定しなければデフォルトでは、元ある ts ファイルの場所にそのままコンパイルファイル(js)が作成される
+
+- `.d.ts` -> typescript の型定義ファイル。javascript で記述されたコードやライブラリを typescript で使用するときに、型の補完と型チェックを提供する
+
   - 型情報の宣言
     - `.d.ts`ファイルは型情報のみを宣言し、実際のコード（ロジック）は含まない。関数やクラス、変数、モジュールなどがどのような型を持つかを定義
-  - javascriptライブラリの型サポート：
-    - javascriptで書かれたライブラリ（例 jQueryやLodash）をtypescriptで使う場合、型情報がないとtypescriptの型チェックや型補完が機能しない。そこで、`.d.ts`ファイルを使って、そのライブラリに対して型を定義し、typescriptのコードで型安全性を確保できる
+  - javascript ライブラリの型サポート：
+    - javascript で書かれたライブラリ（例 jQuery や Lodash）を typescript で使う場合、型情報がないと typescript の型チェックや型補完が機能しない。そこで、`.d.ts`ファイルを使って、そのライブラリに対して型を定義し、typescript のコードで型安全性を確保できる
   - コンパイル対象外
-    - `.d.ts`ファイルは型定義だけなので、typescriptのコンパイラで .ts ファイルをjavascriptに変換するときに、.d.ts ファイルはコンパイルされません。あくまで開発時の補助として機能する
+    - `.d.ts`ファイルは型定義だけなので、typescript のコンパイラで .ts ファイルを javascript に変換するときに、.d.ts ファイルはコンパイルされません。あくまで開発時の補助として機能する
   - 型チェックの補完
-    - `.d.ts`ファイルがあれば、typescriptのエディタやコンパイラは型チェックを行い、エラーの検出やコード補完をサポートする
+    - `.d.ts`ファイルがあれば、typescript のエディタやコンパイラは型チェックを行い、エラーの検出やコード補完をサポートする
 
-- `tsconfig.json` -> デフォルトではtsconfig.jsonファイルがプロジェクト内にある場合、その設定に従ってtypescriptファイルをコンパイルする
+- `tsconfig.json` -> デフォルトでは tsconfig.json ファイルがプロジェクト内にある場合、その設定に従って typescript ファイルをコンパイルする
 
 ```tsconfig.json
 {
@@ -57,7 +62,7 @@ tsc --outDir dist
     "types": ["@types/node", "@types/jest"],   // node_modules/@types/配下のモジュールで明示したもの以外使用できなくする(指定がなければnode_modules/@types/のすべて使用可能)
     "moduleResolution": "node",                // typescriptがモジュールをどのように解決(探索)するかを指定。主に"node"と"classic"の2つのオプションがある。"node"はnode.jsのモジュール解決アルゴリズムを模倣し、"classic"はtypescriptの古い解決方法を使用する
     "baseUrl": ".",                            // モジュール解決の基準となるディレクトリを指定
-    "paths": {                                 // 長いインポートパス(import { logger } from "@/logger" など)を短い別名(エイリアス)で書けるようにする 
+    "paths": {                                 // 長いインポートパス(import { logger } from "@/logger" など)を短い別名(エイリアス)で書けるようにする
       "@/*": ["./functions/common/util/src/*"]
     },
 
@@ -93,19 +98,21 @@ tsc --outDir dist
 - object
 
 ```typescript
-let person: {name: string, age: number} = {
-    name: "suzuki",
-    age: 20
-}
+let person: { name: string; age: number } = {
+  name: "suzuki",
+  age: 20,
+};
 
-let person: {} = {  // オブジェクト型だがそこまで使わず
-    name: "suzuki",
-    age: 20
-}
-let person: object = {  // 同じくオブジェクト型だが使わず
-    name: "suzuki",
-    age: 20
-}
+let person: {} = {
+  // オブジェクト型だがそこまで使わず
+  name: "suzuki",
+  age: 20,
+};
+let person: object = {
+  // 同じくオブジェクト型だが使わず
+  name: "suzuki",
+  age: 20,
+};
 ```
 
 - 配列
@@ -139,26 +146,26 @@ enum Size {
 
 ```typescript
 // 配列と違い型注釈で[]の中に記載
-let pc: [string, number, boolean] = ["test", 11, true]
+let pc: [string, number, boolean] = ["test", 11, true];
 ```
 
 - any どの型を宣言してもいい。別の型の変数に代入も可能
 
 ```typescript
-let anything: any = ["test", 11, true]
+let anything: any = ["test", 11, true];
 ```
 
-- unknown どの型を宣言してもいいが、さらにunknown型変数を代入するには代入先の方注釈に適合していなければならない
+- unknown どの型を宣言してもいいが、さらに unknown 型変数を代入するには代入先の方注釈に適合していなければならない
 
 ```typescript
-let unknownInput: unknown = true
-let text: string = "text"
-unknownInput = "test" 
-unknownInput = 33
-text = unknownInput // エラーになる
+let unknownInput: unknown = true;
+let text: string = "text";
+unknownInput = "test";
+unknownInput = 33;
+text = unknownInput; // エラーになる
 ```
 
-- union型 → 複数の型を宣言可能
+- union 型 → 複数の型を宣言可能
 
 ```typescript
 let union: number | string = 11
@@ -168,12 +175,12 @@ union = "test"
 let unions: (number | string)[] = [11, "test"]
 ```
 
-- Literal型 指定した値のみしか入らない
+- Literal 型 指定した値のみしか入らない
 
 ```typescript
-const banana: "banana" = "banana"
-const banana = "banana" //constで宣言したらstring型ではなく、Literal型になる
-let fruit: "apple" | "orange" | "banana" = "orange"
+const banana: "banana" = "banana";
+const banana = "banana"; //constで宣言したらstring型ではなく、Literal型になる
+let fruit: "apple" | "orange" | "banana" = "orange";
 ```
 
 - type → 型のエイリアス, interface
@@ -267,15 +274,15 @@ export default const target;          // importされた時に任意の名前で
 - 環境変数の利用
 
 ```typescript
-console.log("process.env.対象変数")
+console.log("process.env.対象変数");
 ```
 
 - インデックスシグネチャ
 
 ```typescript
 interface Designer {
-    name: string;
-    [index: string]: string;
+  name: string;
+  [index: string]: string;
 }
 ```
 
@@ -284,17 +291,17 @@ interface Designer {
 - オーバーロード
 
 ```typescript
-function toUpperCase(x: string): string
-function toUpperCase(x: number): number
+function toUpperCase(x: string): string;
+function toUpperCase(x: number): number;
 ```
 
 - !マークの意味 (Non-null assertion operator)
 
 ```typescript
-return fruit! // fruitという値がundefinedやnullにはならないという意味
+return fruit!; // fruitという値がundefinedやnullにはならないという意味
 ```
 
-- optional Chaining -> ?が付いた対象がundefinedかnullであればundefinedを返す(エラーを出さず、undefinedで留める)。そうでなければそのままのデータを渡す。
+- optional Chaining -> ?が付いた対象が undefined か null であれば undefined を返す(エラーを出さず、undefined で留める)。そうでなければそのままのデータを渡す。
 
 ```typescript
 interface Designer {
@@ -306,14 +313,14 @@ interface Designer {
 console.log(Designer.name?first)
 ```
 
-- Nullish Coalescing -> undefinedかnullの場合のみ代入する
+- Nullish Coalescing -> undefined か null の場合のみ代入する
 
 ```typescript
 # someObject.keyがundefinedかnullの場合のみ代入する
 const testVar = someObject.key ?? 'tmpKey'
 ```
 
-- lookup型
+- lookup 型
 
 ```typescript
 interface Designer {
