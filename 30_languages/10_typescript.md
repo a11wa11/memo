@@ -9,7 +9,9 @@
 
 ### コンパイル
 
-`tsc` -> typescript ファイルを javascript にコンパイルするためのコンパイラコマンド
+#### tsc
+
+`tsc` -> typescript ファイルを javascript にコンパイルするためのデフォルトコンパイラコマンド
 
 ```sh
 # 基本コンパイル
@@ -91,6 +93,25 @@ tsc --noEmit
     "sourceMap": true,                         // .js.map ファイル(ソースマップ)を生成し、デバッグ時に元のTypeScriptコードを表示
   },
 }
+```
+
+#### esbuild
+
+TypeScript用コンパイラ。ただし、型チェックは行わないので、`tsc --noEmit`などと組み合わせてビルドする
+
+```sh
+# 基本コマンド。ファイルと出力先を1つ明示する
+esbuild フォルダ/ファイル名.ts --outfile=dist/ファイル名.js
+
+# 複数指定
+esbuild src/**/*.ts --outdir=dist
+
+# --platform=node: Node.js 環境の挙動に合わせる。デフォルトはbrowser
+# --target=node22: Node.js 22で動くJSとして最適化。デフォルトは最新構文をそのまま残す
+# --bundle: 全依存ファイルを1つのJSにまとめる。デフォルトは依存は取り込まず、単純変換
+esbuild フォルダ/ファイル名.ts --outfile=dist/ファイル名.js --platform=node --target=node22 --bundle
+# --externalで対象のみ外部化してバンドルする対象から外す
+esbuild フォルダ/ファイル名.ts --outfile=dist/ファイル名.js --platform=node --target=node22 --bundle --external:@aws-sdk/*
 ```
 
 ## 構文
