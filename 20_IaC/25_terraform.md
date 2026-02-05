@@ -21,7 +21,7 @@
 
 ## インストール
 
-- tfenvをインストールし、tfenvからterraformの任意のバージョンをインストール
+- tfenv をインストールし、tfenv から terraform の任意のバージョンをインストール
 
 ```sh
 brew install tfenv
@@ -43,17 +43,17 @@ tfenv list-remote
 ## 設定
 
 - `.terraform-version`
-  - プロジェクトルートに.terraform-versionというファイルを置いておくとそのファイルに書かれたバージョンを優先して利用
+  - プロジェクトルートに.terraform-version というファイルを置いておくとそのファイルに書かれたバージョンを優先して利用
 
 ### 変数
 
-外部から変数を付与する方法は主に以下の3種類
+外部から変数を付与する方法は主に以下の 3 種類
 
-| No. | 種類 | 例 | 補足 | 上書例 |
-|-|-|-|-|-|
-| 1 | 環境変数 | `TF_VAR_<NAME>` | `msg`という変数が定義されていると`TF_VAR_msg`で定義可能 | `export TF_VAR_msg="ABC" terraform apply` |
-| 2 | 変数ファイル | sample.tfvars | git管理可能 | tfvarsという拡張子で定義されたファイルであれば`-var-file`の引数で指定しなくても自動でtfvars拡張子ファイルが適用される |
-| 3 | コマンド引数 | -var <NAME>=<VALUE> | テストや一時的な利用で使える | `terraform apply -var msg="EFG"` |
+| No. | 種類         | 例                  | 補足                                                    | 上書例                                                                                                                   |
+| --- | ------------ | ------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| 1   | 環境変数     | `TF_VAR_<NAME>`     | `msg`という変数が定義されていると`TF_VAR_msg`で定義可能 | `export TF_VAR_msg="ABC" terraform apply`                                                                                |
+| 2   | 変数ファイル | sample.tfvars       | git 管理可能                                            | tfvars という拡張子で定義されたファイルであれば`-var-file`の引数で指定しなくても自動で tfvars 拡張子ファイルが適用される |
+| 3   | コマンド引数 | -var <NAME>=<VALUE> | テストや一時的な利用で使える                            | `terraform apply -var msg="EFG"`                                                                                         |
 
 ## 仕様
 
@@ -63,10 +63,10 @@ tfenv list-remote
 
 `tfstate`とは
 
-- `tfstate`ファイルはterraformによって構築されたクラウドの状態情報ファイル
-  - どのようなりソースが作成されたか、そのリソースのIDや設定内容などを保存している
-- backend機能を利用することで、複数のユーザーでterraformを管理する場合、S3バケットにtfstateを保存して１つのtfstateを共有することが可能
-  - backend機能なしではstateファイルを実行環境のローカル環境に作成するので複数ユーザーで状態管理をするのが難しい
+- `tfstate`ファイルは terraform によって構築されたクラウドの状態情報ファイル
+  - どのようなりソースが作成されたか、そのリソースの ID や設定内容などを保存している
+- backend 機能を利用することで、複数のユーザーで terraform を管理する場合、S3 バケットに tfstate を保存して１つの tfstate を共有することが可能
+  - backend 機能なしでは state ファイルを実行環境のローカル環境に作成するので複数ユーザーで状態管理をするのが難しい
 
 ```terraform
 # Backend
@@ -89,9 +89,9 @@ terraform {
 
 ## 構文
 
-- HCL2とは
-  - `H`ashi`C`orp`L`anguage`2` の略称でHashiCorp社の独自言語
-  - jsonと似ているが違いがあり、下記jsonとの違い
+- HCL2 とは
+  - `H`ashi`C`orp`L`anguage`2` の略称で HashiCorp 社の独自言語
+  - json と似ているが違いがあり、下記 json との違い
     - 簡易プログラムが組める
     - コメント(`#`)が記述可能
     - `:`ではなく`=`でキーバリューを指定
@@ -101,27 +101,27 @@ terraform {
 
 ### ブロックタイプ
 
-|種類|説明|補足|具体例|
-|-|-|-|-|
-| locals | `変数`: 外部から変更不可 |  | `${local.<変数名>}`で参照 |
-| variables | `変数`: 外部から変更可能 | コマンド実行時にオプション、ファイル指定で上書き可能 | `${var.<変数名>}`で参照|
-| terraform | terraform本体の設定 | terraformブロックはterraform本体、providerは各サービスのことで対となるような存在 |  |
-| provider | AWSやAzure,GCPなどの対象サービスのこと |  |  |
-| data | terraform管理外のリソース取得 |  |  |
-| resource | terraform管理内のリソース |  |  |
-| output | 外部から参照できるようにする値 |  |  |
-| import | 手動で作成した既存リソースの取り込み？ | 最終手段？ |  |
-| | |  |  |
+| 種類      | 説明                                      | 補足                                                                                 | 具体例                    |
+| --------- | ----------------------------------------- | ------------------------------------------------------------------------------------ | ------------------------- |
+| locals    | `変数`: 外部から変更不可                  |                                                                                      | `${local.<変数名>}`で参照 |
+| variables | `変数`: 外部から変更可能                  | コマンド実行時にオプション、ファイル指定で上書き可能                                 | `${var.<変数名>}`で参照   |
+| terraform | terraform 本体の設定                      | terraform ブロックは terraform 本体、provider は各サービスのことで対となるような存在 |                           |
+| provider  | AWS や Azure,GCP などの対象サービスのこと |                                                                                      |                           |
+| data      | terraform 管理外のリソース取得            |                                                                                      |                           |
+| resource  | terraform 管理内のリソース                |                                                                                      |                           |
+| output    | 外部から参照できるようにする値            |                                                                                      |                           |
+| import    | 手動で作成した既存リソースの取り込み？    | 最終手段？                                                                           |                           |
+|           |                                           |                                                                                      |                           |
 
 - リソース参照
   - `resource "aws_vpc" "vpc" {省略}` というリソースが定義されていたら別のリソースから`aws_voc.vpc.id`とラベルをドット(.)区切りで指定して参照できる
 
 #### リソースのインポート
 
-手動作成したリソースなどをterraform管理下に取り込むことができる。大枠は以下
+手動作成したリソースなどを terraform 管理下に取り込むことができる。大枠は以下
 
 1. 手動作成したリソース名に相当するコードを作成(`アドレス.取り込み先リソース名`)
-   - コードの側だけ作成し、中身は後でインポートで取り込むため空でOK
+   - コードの側だけ作成し、中身は後でインポートで取り込むため空で OK
 2. 指定したリソースをインポート(`terraform import 取り込み先リソース名 ターゲットID`)
 3. インポートしたリソースを`terraform state show アドレス.リ対象リソース名`で表示し、１のコードに落とし込む
 
@@ -150,21 +150,21 @@ moved {
 
 ### メタ引数
 
-| No. | 種類 | 例 | 補足 | 上書例 |
-|-|-|-|-|-|
-| depends_on |  |  |  |  |
-| count |  |  |  |  |
-| for_each |  |  |  |  |
-| lifecycle |  |  |  |  |
-| provider |  |  |  |  |
+| No.        | 種類 | 例  | 補足 | 上書例 |
+| ---------- | ---- | --- | ---- | ------ |
+| depends_on |      |     |      |        |
+| count      |      |     |      |        |
+| for_each   |      |     |      |        |
+| lifecycle  |      |     |      |        |
+| provider   |      |     |      |        |
 
 ### 拡張機能
 
-vscodeではグラフ化に便利な`graphviz`という拡張機能があり依存関係を可視化できる
+vscode ではグラフ化に便利な`graphviz`という拡張機能があり依存関係を可視化できる
 
 ### 参考ドキュメント
 
-HCL2とterraformCLI
+HCL2 と terraformCLI
 
 ![HCL2とterraformCLI](https://github.com/a11wa11/memo/assets/46781572/15191928-4634-42d2-8c66-ba6860554df7)
 
@@ -175,22 +175,22 @@ HCL2とterraformCLI
 
 ### よく使う事例
 
-- [keys関数](https://developer.hashicorp.com/terraform/language/functions/keys) - キーバリュー形式のキーを表示
-- [value関数](https://developer.hashicorp.com/terraform/language/functions/values) - キーバリュー形式のバリューを表示
-- [range関数](https://developer.hashicorp.com/terraform/language/functions/range) - 番号リスト作成
+- [keys 関数](https://developer.hashicorp.com/terraform/language/functions/keys) - キーバリュー形式のキーを表示
+- [value 関数](https://developer.hashicorp.com/terraform/language/functions/values) - キーバリュー形式のバリューを表示
+- [range 関数](https://developer.hashicorp.com/terraform/language/functions/range) - 番号リスト作成
 - リスト関連
-  - [compact関数](https://developer.hashicorp.com/terraform/language/functions/compact) - リストから空・nullを消去する
-  - [concat関数](https://developer.hashicorp.com/terraform/language/functions/concat) - リスト同士を繋げて1つのリストにする
-  - [flatten関数](https://developer.hashicorp.com/terraform/language/functions/flatten) - リスト同士を繋げてネスト状態や空文字を除去した1つのリストにする
-  - [distinct関数](https://developer.hashicorp.com/terraform/language/functions/distinct) - リストから重複した値を消去する
-- [length関数](https://developer.hashicorp.com/terraform/language/functions/length) - length確認
+  - [compact 関数](https://developer.hashicorp.com/terraform/language/functions/compact) - リストから空・null を消去する
+  - [concat 関数](https://developer.hashicorp.com/terraform/language/functions/concat) - リスト同士を繋げて 1 つのリストにする
+  - [flatten 関数](https://developer.hashicorp.com/terraform/language/functions/flatten) - リスト同士を繋げてネスト状態や空文字を除去した 1 つのリストにする
+  - [distinct 関数](https://developer.hashicorp.com/terraform/language/functions/distinct) - リストから重複した値を消去する
+- [length 関数](https://developer.hashicorp.com/terraform/language/functions/length) - length 確認
 
 ```terraform
 terraform console
 >length(["a", "b"])
 ```
 
-- プレフィックスリストからIPリストを作成
+- プレフィックスリストから IP リストを作成
 
 ```terraform
 # dataブロックで事前に定義しておくこと
@@ -206,6 +206,11 @@ terraform console
     ignore_changes = [
       master_password
     ]
+  }
+
+# 削除防止。削除したいときはstate rmなどで管理外にする
+  lifecycle {
+    prevent_destroy = true  # terraform destroyで削除を防止
   }
 ```
 
@@ -248,7 +253,7 @@ terraform state mv アドレス.変更前リソース名 アドレス.変更後�
 
 ```sh
 # tfstateファイルへリソースのインポートがされるため、コード上は変化なし
-terraform import アドレス.リソース名(任意名)　ターゲットID 
+terraform import アドレス.リソース名(任意名)　ターゲットID
 ```
 
 - デプロイ
@@ -299,8 +304,8 @@ typeが出力される...
 
 ## トラブルシューティング
 
-- Terraformの状態ロック
-  - `terraform apply`実行時に以下のようなエラーが表示されることがある。  
+- Terraform の状態ロック
+  - `terraform apply`実行時に以下のようなエラーが表示されることがある。
 
 ```sh
 Terraform acquires a state lock to protect the state from being written
