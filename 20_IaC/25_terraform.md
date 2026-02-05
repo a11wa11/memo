@@ -278,6 +278,17 @@ terraform destory -auto-approve # プロンプトを表示せずに自動的に�
 terraform state rm アドレス.変更前リソース名 # コード上にリソースが残っていれば再構築されてしまうので注意
 ```
 
+- 削除防止
+
+```terrafrom
+# prevent_destroyを記述することでterraformで削除されなくなる。削除したいときにはterraform state rmで管理対象から外してから
+resource "aws_eip" "nat_single" {
+  ・・・省略
+  lifecycle {
+    prevent_destroy = true  # terraform destroyで削除を防止
+  }
+```
+
 - フォーマット
 
 ```sh
