@@ -25,10 +25,10 @@
   - BASE_REF
   - HEAD_REF
 
-|BASE_REF|HEAD_REF|
-|-|-|
-| マージ先のブランチ | 変更元のブランチ |
-| dev,mainなど | feature,fix_XXなど |
+| BASE_REF           | HEAD_REF            |
+| ------------------ | ------------------- |
+| マージ先のブランチ | 変更元のブランチ    |
+| dev,main など      | feature,fix_XX など |
 
 ### バージョニング
 
@@ -36,10 +36,10 @@
 
 - `1.2.3`の場合、以下の構成
 
-| メジャーバージョン | マイナーバージョン | パッチ |
-|-|-|-|
-| 1. | 2. | 3 |
-| 後方互換なし | 後方互換ありの機能追加 | 後方互換ありのバグ修正 |
+| メジャーバージョン | マイナーバージョン     | パッチ                 |
+| ------------------ | ---------------------- | ---------------------- |
+| 1.                 | 2.                     | 3                      |
+| 後方互換なし       | 後方互換ありの機能追加 | 後方互換ありのバグ修正 |
 
 ## 設定
 
@@ -65,7 +65,7 @@ git config --local user.email "test_address"
 git config --global --add safe.directory
 ```
 
-- windows環境設定例
+- windows 環境設定例
 
 ```sh
 git config --global core.autocrlf input
@@ -79,7 +79,7 @@ git add 対象ファイル
 git commit
 ```
 
-- エディタをvimに設定
+- エディタを vim に設定
 
 ```sh
 git config --global core.editor "vim"
@@ -170,6 +170,8 @@ git branch -D ブランチ名
 
 # リモートブランチのIPアドレス変更
 git remote set-url origin git@0.0.0.0:*****.git
+# リモートURLを新しい名前に更新
+git remote set-url origin git@github.com:ユーザー名/新しいリポジトリ名.git
 
 # リモートブランチの最新状態を取得（リモートブランチの削除も同期）
 git fetch -p
@@ -201,7 +203,7 @@ git blame ファイル名
 # コミット作成時にdiffを表示
 git commit -v
 
-# 直近のコミットからの変更内容を（新コミットを追加せず）直近コミットに反映する 
+# 直近のコミットからの変更内容を（新コミットを追加せず）直近コミットに反映する
 git commit --amend
 
 # 直近のコミットメッセージの変更
@@ -294,10 +296,10 @@ git merge ブランチ名 --no-commit
 # コンフリクトが起きる場合はエラーが発生する
 ```
 
-- git log　表記で見るコミットハッシュ
+- git log 　表記で見るコミットハッシュ
   - yyyy => マージされるブランチ
   - zzzz => マージするブランチ
-  - yyyyブランチにいて `git merge zzzz`して出来上がったブランチのコミットハッシュがXXXXとなる
+  - yyyy ブランチにいて `git merge zzzz`して出来上がったブランチのコミットハッシュが XXXX となる
 
 ```sh
 commit XXXX (HEAD -> master, upstream/master)
@@ -310,8 +312,8 @@ Author: sample <sample@users.noreply.github.com>
 ```sh
 # チェリーピック(単体でも複数でも可)
 git cherry-pick コミットID
-git cherry-pick コミットID1 コミットID2 
-git cherry-pick コミットID1..コミットID9  # 1~9をまとめてチェリーピック 
+git cherry-pick コミットID1 コミットID2
+git cherry-pick コミットID1..コミットID9  # 1~9をまとめてチェリーピック
 
 # メッセージを変更してチェリーピック
 git cherry-pick -e コミットID

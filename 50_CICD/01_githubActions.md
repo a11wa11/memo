@@ -14,6 +14,7 @@ name: ワークフロー名
 on:                                # ワークフローのトリガー条件
   workflow_dispatch:               # 手動で実施できる
   push:                            # ブランチに新しいコミットがプッシュされた場合
+  # pull_request::                   # PR作成・更新時に実施
     branches:                      # 対象のブランチを指定
       - dev
     paths:                         # 対象ディレクトリ以下の変更がある場合に限る
@@ -48,17 +49,17 @@ jobs:                           　 # ワークフロー内のジョブを定義
 - 指定のファイルを保存する
 
 ```yml
-      - name: Upload output file
-        if: always()             # 先行のステップが失敗しても常時実行する
-        uses: actions/upload-artifact@v3
-        with:
-          name: output-log-file
-          path: output.log
+- name: Upload output file
+  if: always() # 先行のステップが失敗しても常時実行する
+  uses: actions/upload-artifact@v3
+  with:
+    name: output-log-file
+    path: output.log
 ```
 
 ### デバッグ
 
-- `act`はGitHub ActionsのワークフローをローカルDocker環境で実行・デバッグできるCLIツール
+- `act`は GitHub Actions のワークフローをローカル Docker 環境で実行・デバッグできる CLI ツール
 
 ```sh
 # インストール
