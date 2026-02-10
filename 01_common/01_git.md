@@ -164,18 +164,22 @@ git branch --unset-upstream 対象ブランチ名
 
 # ブランチを削除する
 git branch -d ブランチ名
+git branch -D ブランチ名 # ブランチを強制削除
 
-# ブランチを強制削除
-git branch -D ブランチ名
+# 現在の状態を強制的に指定ブランチ名に反映する
+git branch -f ブランチ名
+# A-B(HEAD)となったときにAを更新してA'としてその後Bを取り込んでA'-B'とする手順↓
+# git checkout A; git add 更新ファイル; git commit --amend(A');git cherrry-pick BのコミットID(B'); git branch -f ブランチ名; git checkout ブランチ名
+
+
+# リモートブランチの最新状態を取得（リモートブランチの削除も同期）
+git fetch -p
+git fetch --prune
 
 # リモートブランチのIPアドレス変更
 git remote set-url origin git@0.0.0.0:*****.git
 # リモートURLを新しい名前に更新
 git remote set-url origin git@github.com:ユーザー名/新しいリポジトリ名.git
-
-# リモートブランチの最新状態を取得（リモートブランチの削除も同期）
-git fetch -p
-git fetch --prune
 ```
 
 ### 差分確認
