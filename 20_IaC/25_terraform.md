@@ -81,7 +81,7 @@ terraform {
     region         = "ap-northeast-1"
     key            = "任意のファイル名.tfstate"
     dynamodb_table = "任意のDynamoDB名" # オプション。状態ロックをDynamodbで管理することが可能
-    bucket         = "任意のバケット名"    # オプション
+    bucket         = "任意のバケット名"   # オプション
     encrypt        = true              # オプション
   }
 }
@@ -208,7 +208,9 @@ terraform console
     ]
   }
 
-# 削除防止。削除したいときはstate rmなどで管理外にする
+# prevent_destroyを記述することでterraformで削除されなくなる。削除したいときにはterraform state rmで管理対象から外してから
+resource "aws_eip" "nat_single" {
+  ・・・省略
   lifecycle {
     prevent_destroy = true  # terraform destroyで削除を防止
   }
@@ -220,6 +222,7 @@ terraform console
 
 ```sh
 terraform init
+terraform init -migrate-state # stateファイルを維持したままバックエンドに移動する
 ```
 
 - 確認
@@ -273,20 +276,10 @@ terraform apply -auto-approve
 terraform apply -destroy
 terraform apply -destroy -target=指定したいリソース名
 terraform destory -auto-approve # プロンプトを表示せずに自動的に承認(確認プロンプトが不要)
+# 削除防止はlifecycleを参照
 
 # terraform管理外から外す
 terraform state rm アドレス.変更前リソース名 # コード上にリソースが残っていれば再構築されてしまうので注意
-```
-
-- 削除防止
-
-```terrafrom
-# prevent_destroyを記述することでterraformで削除されなくなる。削除したいときにはterraform state rmで管理対象から外してから
-resource "aws_eip" "nat_single" {
-  ・・・省略
-  lifecycle {
-    prevent_destroy = true  # terraform destroyで削除を防止
-  }
 ```
 
 - フォーマット
