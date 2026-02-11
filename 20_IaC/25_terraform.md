@@ -347,6 +347,21 @@ variable "env" {
 value = var.env == "prod" ? "t2.large" : "t2.micro"
 ```
 
+- validation
+
+```terraform
+# 変数の入力値を検証する
+validation {
+  # condition -> trueならバリデーション通過、falseならエラー
+  # contains(第一引数, 第二引数) -> 第一引数の中に第二引数が含まれていればtrue
+  condition     = contains(["Zip", "Image"], var.package_type)
+  # エラー時に表示するメッセージ
+  error_message = "package_type must be either 'Zip' or 'Image'"
+}
+```
+
+- リスナールール
+
 ```terraform
 # リスナールールの加重ルーティング例
 resource "aws_lb_listener_rule" "ecs_https_1" {
