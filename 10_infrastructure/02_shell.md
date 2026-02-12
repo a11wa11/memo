@@ -577,11 +577,16 @@ export LESS="-SRXF"
 
 ### curl
 
+- `-X` HTTPリクエストメソッドを指定
+- `-H` 'Content-type: application/json' HTTPヘッダーを指定
+- `-d(--data)` '{"text":"Hello, World!"}' リクエストのボディ部分のデータ項目を指定
+- `--cert` クライアント証明書ファイルを指定
+- `--key` 秘密鍵を指定
 - `-o` 保管ディククトリ/保管ファイル名の指定
 - `-O` ダウンロードファイルを変更せずにそのままの名前で保存
-- `-L,--location` サーバーがリダイレクトを返した際に追跡してファイルをダウンロード
-- `-k` サーバー証明書の検証を無効にする
-- `-u,--user` 認証情報を指定する `-u username:password`と指定すると指定されたユーザー名とパスワードで認証される
+- `-L(--location)` サーバーがリダイレクトを返した際に追跡してファイルをダウンロード
+- `-k(--insecure)` サーバー証明書の検証を無効にする
+- `-u(--user)` 認証情報を指定する `-u username:password`と指定すると指定されたユーザー名とパスワードで認証される
 
 ```sh
 # ダウンロード
@@ -594,9 +599,8 @@ curl -Iv 対象URI
 curl --user-agent 任意のUser-Agent名 -Iv 対象URI
 # ステータスコードのみ表示
 curl -I -s -o /dev/null -w "%{http_code}\n"
-# -X HTTPリクエストメソッドを指定
-# -H 'Content-type: application/json' HTTPヘッダーを指定
-# --data '{"text":"Hello, World!"}' リクエストのボディ部分を指定
+
+# APIコール例
 curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"}' https://hooks.slack.com/services/XXXXXXXXXXX/YYYYYYYYYYY/ZZZZZZZZZZZZZZZZZZZZZZZZ
 ```
 
