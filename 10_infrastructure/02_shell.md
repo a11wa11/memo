@@ -601,7 +601,10 @@ curl --user-agent 任意のUser-Agent名 -Iv 対象URI
 curl -I -s -o /dev/null -w "%{http_code}\n"
 
 # APIコール例
+## application/jsonの場合
 curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"}' https://hooks.slack.com/services/XXXXXXXXXXX/YYYYYYYYYYY/ZZZZZZZZZZZZZZZZZZZZZZZZ
+## application/x-www-form-urlencodedの場合 (key=value&key2=value2)。-Hオプションで指定しなければcurlではデフォルトでx-www-form-urlencodedとなっている
+curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -data "text=Hello&&code=abc123" https://api.example.com/token 
 ```
 
 ### cron
