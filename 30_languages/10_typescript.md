@@ -109,9 +109,14 @@ esbuild src/**/*.ts --outdir=dist
 # --platform=node: Node.js 環境の挙動に合わせる。デフォルトはbrowser
 # --target=node22: Node.js 22で動くJSとして最適化。デフォルトは最新構文をそのまま残す
 # --bundle: 全依存ファイルを1つのJSにまとめる。デフォルトは依存は取り込まず、単純変換
+# --outfile: 単体ファイル指定
+# --outdir: ディレクトリ指定
 esbuild フォルダ/ファイル名.ts --outfile=dist/ファイル名.js --platform=node --target=node22 --bundle
+esbuild フォルダ/ファイル名.ts --outdir=dist --platform=node --target=node22 --bundle
 # --externalで対象のみ外部化してバンドルする対象から外す
 esbuild フォルダ/ファイル名.ts --outfile=dist/ファイル名.js --platform=node --target=node22 --bundle --external:@aws-sdk/*
+# --watch: 監視モードで常時反映
+esbuild --watch フォルダ/ファイル名.ts --outdir=dist --platform=node --target=node22 --bundle
 ```
 
 ## 構文
