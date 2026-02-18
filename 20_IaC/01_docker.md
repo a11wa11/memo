@@ -447,4 +447,7 @@ docker-compose up --build
 
 # コンテナのログをリアルタイムで表示
 docker-compose logs -f コンテナ名
+
+# composeの構成の中のappを起動(エントリーポイントも変更)してbashで接続
+docker-compose run --entrypoint /bin/bash app
 ```
