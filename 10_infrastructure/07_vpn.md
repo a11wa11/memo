@@ -21,6 +21,9 @@ Virtual Private Network。インターネット上に仮想的な専用回線を
 | SAN | Subject Alternative Name。証明書作成時にのみ定義する |
 | 相互認証 | 高セキュリティ。クライアント側とサーバー側の両方が相手の身元を証明書で確認する認証方式 |
 | 一方向認証 | クライアント側のみがサーバーを検証する方式 |
+| TUN/TAP | VPN用の仮想ネットワークインターフェース。`tun0` など。TUNはL3(IP)、TAPはL2(Ethernet)を扱う |
+| MTU | Maximum Transmission Unit。一度に送信できる最大パケットサイズ。標準は1500バイト |
+| MSS / mssfix | TCPの最大セグメントサイズ。VPNの暗号化による肥大化を防ぐため、`mssfix` でサイズを制限し通信を安定させる |
 |  |  |
 
 ## 関連パッケージ
@@ -65,5 +68,77 @@ ls -l pki/private/tmp-client1.test.key # クライアント秘密鍵
 | ca.crt | CA(認証局)証明書(発行元の証明) |
 | *.ovpn | OpenVPN設定ファイル |
 |  |  |
-|  |  |
-|  |  |
+
+#### コマンド
+
+- 設定ファイルを指定して直接起動。デバッグ時や一時的な接続に利用
+
+```sh
+# サーバーまたはクライアントとして起動
+openvpn --config /etc/openvpn/server/server.conf
+openvpn --config /etc/openvpn/client/client.ovpn
+```
+
+- systemctlによる管理
+
+
+```sh
+# サービスの起動 (server.conf の場合)
+sudo systemctl start openvpn-server@server
+
+# 自動起動の設定
+sudo systemctl enable openvpn-server@server
+
+# ステータス確認
+sudo systemctl status openvpn-server@server
+
+# ログのリアルタイム確認
+sudo journalctl -u openvpn-server@server -f
+```
+
+> `@server` の部分は`/etc/openvpn/server/`配下にある設定ファイル名（拡張子抜き）に対応します。
+クライアントとして管理する場合は`openvpn-client@client`のようになる
+
+- その他・有用なコマンド
+
+| コマンド | 説明 |
+|-|-|
+| `openvpn --version` | バージョンとサポートされている暗号化アルゴリズム等を確認 |
+| `openvpn --genkey --secret ta.key` | TLS-Auth用の共有鍵（静的鍵）を生成 |
+| `openvpn --show-ciphers` | 利用可能な暗号化方式一覧を表示 |
+| `openvpn --show-digests` | 利用可能なメッセージ認証（HMAC）一覧を表示 |
+
+##### トラブルシューティング
+
+- **ルート情報の確認**: `ip route` でVPN経由のルートが正しく追加されているか確認
+- **インターフェース確認**: `ip addr` または `ifconfig` で `tun0` などの仮想デバイスが作成されているか確認
+- **MTUサイズの調整**: 通信が不安定な場合、設定ファイルに `mssfix 1430` などを追記して調整
+
+#### ovpnファイル
+
+```text
+<ca>
+-----BEGIN CERTIFICATE-----
+(ca.crtの中身)
+-----END CERTIFICATE-----
+</ca>
+
+<cert>
+-----BEGIN CERTIFICATE-----
+(client.crtの中身)
+-----END CERTIFICATE-----
+</cert>
+
+<key>
+-----BEGIN PRIVATE KEY-----
+(client.keyの中身)
+-----END PRIVATE KEY-----
+</key>
+
+<tls-auth>
+-----BEGIN OpenVPN Static key V1-----
+(ta.keyの中身)
+-----END OpenVPN Static key V1-----
+</tls-auth>
+key-direction 1
+```
