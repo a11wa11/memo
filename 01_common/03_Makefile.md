@@ -82,3 +82,69 @@ make ターゲット        # 指定したターゲット内容を実行する
 make                 # ターゲットを指定しなければ一番最初に記載のあるターゲットが自動で実行される
 make -n              # ターゲットを内容を実行せずに出力（デバッグ）
 ```
+
+### 実行例
+
+```Makefile
+# 変数定義
+ENV := dev
+NOW := $(shell date '+%Y%m%d-%H%M') # 現時刻を変数代入
+## AWS情報
+AWS_REGION := ap-northeast-1
+ECR_REPOSITORY := $(ENV)-SAMPLE
+LAMBDA_FUNCTION_NAME := $(ENV)_SAMPLE
+IMAGE_NAME := $(ENV)-SAMPLE
+IMAGE_TAG := latest
+AWS_ACCOUNT_ID := $(shell aws sts get-caller-identity --query Account --output text 2>/dev/null)
+ECR_REGISTRY := $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
+ECR_IMAGE_URI := $(ECR_REGISTRY)/$(ECR_REPOSITORY):$(IMAGE_TAG)
+ECR_IMAGE_URI_DATE := $(ECR_REGISTRY)/$(ECR_REPOSITORY):$(NOW)
+
+help: ## このヘルプメッセージを表示
+	@echo "利用可能なmakeコマンド:"
+	@echo "  make login  - 1. ECRにログイン"
+	@echo "  make build  - 2. Dockerイメージをビルド"
+	@echo "  make tag    - 3. Dockerイメージにタグを付ける"
+	@echo "  make push   - 4. DockerイメージをECRにプッシュ"
+	@echo "  make update - 5. Lambda関数を更新"
+	@echo "  make deploy - 上記1~5をすべてを一連で実行"
+	@echo "  make clean  - ローカルのDockerイメージを削除"
+	@echo ""
+	@echo "変数:"
+	@echo "  AWS_ACCOUNT_ID=$(AWS_ACCOUNT_ID)"
+	@echo "  ECR_REGISTRY=$(ECR_REGISTRY)"
+	@echo "  ECR_IMAGE_URI=$(ECR_IMAGE_URI)"
+	@echo "  NOW=$(NOW)"
+
+login: ## ECRにログイン
+	@echo "ECRにログイン..."
+	aws ecr get-login-password --region $(AWS_REGION) | docker login --username AWS --password-stdin $(ECR_REGISTRY)
+
+build: ## Dockerイメージをビルド
+	@echo "Dockerイメージをビルド..."
+	docker build -t $(IMAGE_NAME):$(IMAGE_TAG) .
+
+tag: ## Dockerイメージにタグを付ける
+	@echo "Dockerイメージにタグを付与..."
+	docker tag $(IMAGE_NAME):$(IMAGE_TAG) $(ECR_IMAGE_URI)
+	docker tag $(IMAGE_NAME):$(IMAGE_TAG) $(ECR_IMAGE_URI_DATE)
+
+push: tag ## DockerイメージをECRにプッシュ
+	@echo "DockerイメージをECRにプッシュ..."
+	docker push $(ECR_IMAGE_URI)
+	docker push $(ECR_IMAGE_URI_DATE)
+
+update: ## Lambda関数を更新
+	@echo "Lambda関数を更新..."
+	aws lambda update-function-code --function-name $(LAMBDA_FUNCTION_NAME) --image-uri $(ECR_IMAGE_URI) --output text
+
+clean: ## ローカルのDockerイメージを削除
+	@echo "ローカルのDockerイメージを削除..."
+	-@docker rmi $(IMAGE_NAME):$(IMAGE_TAG) 2>/dev/null || true
+	-@docker images $(ECR_REGISTRY)/$(ECR_REPOSITORY) -q | xargs docker rmi
+
+deploy: login build push update ## 一連のデプロイ手順を実行（ログイン→ビルド→プッシュ→Lambda更新）
+	@echo "デプロイが完了しました！"
+
+.PHONY: help login build tag push update deploy clean
+```
