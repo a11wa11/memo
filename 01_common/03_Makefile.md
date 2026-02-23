@@ -140,8 +140,9 @@ update: ## Lambda関数を更新
 
 clean: ## ローカルのDockerイメージを削除
 	@echo "ローカルのDockerイメージを削除..."
-	-@docker rmi $(IMAGE_NAME):$(IMAGE_TAG) 2>/dev/null || true
-	-@docker images $(ECR_REGISTRY)/$(ECR_REPOSITORY) -q | xargs docker rmi
+	-docker rmi $(ECR_IMAGE_URI) 2>/dev/null || true
+	-docker rmi $(IMAGE_NAME):$(IMAGE_TAG) 2>/dev/null || true
+	-docker images $(ECR_REGISTRY)/$(ECR_REPOSITORY) -q | xargs docker rmi
 
 deploy: login build push update ## 一連のデプロイ手順を実行（ログイン→ビルド→プッシュ→Lambda更新）
 	@echo "デプロイが完了しました！"
