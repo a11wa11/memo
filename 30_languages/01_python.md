@@ -127,6 +127,9 @@ print('合計 %s 個です' % len(list))
 
 # format形式
 print('{} is {} years old'.format(s, i))
+
+# f-string
+print(f"var: {var}")
 ```
 
 - 辞書
