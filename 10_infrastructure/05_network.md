@@ -340,6 +340,8 @@ nslookupは非推奨、digが推奨。hostコマンドとdigコマンドはIPア
 ```sh
 nslookup
 >google.com
+# ネームサーバーを指定
+nslookup amazonaws.com 99.99.0.2(ネームサーバー)
 ```
 
 - host
@@ -354,6 +356,8 @@ host google.com
 dig google.com
 # クエリするレコードタイプをNSで指定。デフォルトはA
 dig NS google.com
+# ネームサーバーを指定してdig
+dig amazonaws.com @99.99.0.2(ネームサーバー)
 ```
 
 - nc
