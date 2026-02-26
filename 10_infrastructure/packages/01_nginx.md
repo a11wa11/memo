@@ -158,6 +158,7 @@ location  /name/ {
   proxy_pass /http://example.com/$request_uri;
 }
 ```
+
 ### stream
 
 TCPやUDPプロトコルを使用したリクエストを他のサーバーにプロキシする。これにより、HTTP以外のプロトコルを使用するアプリケーションもnginx経由でアクセス可能
