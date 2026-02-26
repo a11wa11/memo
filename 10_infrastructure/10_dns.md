@@ -45,4 +45,16 @@ resolvectl query ドメイン名
 
 # DNS統計情報を表示
 resolvectl statistics
+
+# 統計情報をリセット
+resolvectl reset-statistics
+
+# tun0(1番目のトンベル)にDNSサーバーを設定。再起動すると元に戻る
+resolvectl dns tun0 99.99.0.2(対象のDNSサーバー)
+
+# tun0をデフォルトルートに設定(デフォルトルートが複数あればすべてのデフォルトルートに問い合わせて早い方を採用する)
+resolvectl default-route tun0 true
+
+# キャッシュをクリア
+resolvectl flush-caches
 ```
