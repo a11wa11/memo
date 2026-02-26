@@ -147,6 +147,17 @@ location  /name/ {
 }
 ```
 
+### request_uri
+
+- nginxの組み込み変数で、自分で定義する必要はない
+- クライアントから送られた**元のリクエストURI(パス + クエリパラメータ)**をそのまま保持する
+- curl http://localhost:8080/sample?foo=bar → $request_uri = "/sample?foo=bar"
+
+```nginx
+location  /name/ {
+  proxy_pass /http://example.com/$request_uri;
+}
+```
 ### stream
 
 TCPやUDPプロトコルを使用したリクエストを他のサーバーにプロキシする。これにより、HTTP以外のプロトコルを使用するアプリケーションもnginx経由でアクセス可能
