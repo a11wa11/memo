@@ -62,11 +62,7 @@
       - [pip](https://a11wa11.github.io/memo/30_languages/PackageManager/python/01_pip)
       - [poetry](https://a11wa11.github.io/memo/30_languages/PackageManager/python/02_poetry)
 - 40_database
-  - [database](https://a11wa11.github.io/memo/40_database/00_database)
-  - [mysql](https://a11wa11.github.io/memo/40_database/01_mysql)
-  - [postgresql](https://a11wa11.github.io/memo/40_database/02_postgresql)
-  - [sqlserver](https://a11wa11.github.io/memo/40_database/03_sqlserver)
-  - [redis](https://a11wa11.github.io/memo/40_database/11_redis)
+  - [database](https://a11wa11.github.io/memo/40_database/README)
 - 50_CICD
   - [githubActions](https://a11wa11.github.io/memo/50_CICD/01_githubActions)
 - 60_AI
