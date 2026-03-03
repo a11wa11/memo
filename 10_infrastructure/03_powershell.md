@@ -50,6 +50,16 @@ Set-Location "C:\Work" # 好きな開始パス
 function vim { & 'C:\Program Files\Vim\vim91\vim.exe' $args }
 ```
 
+- コード補完設定を変更
+
+```
+# コード補完をリスト表示に変更
+Set-PSReadLineOption -PredictionViewStyle ListView
+
+# 履歴ベース表示
+Set-PSReadLineOption -PredictionSource History
+```
+
 ### 確認
 
 ```powershell
