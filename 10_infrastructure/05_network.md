@@ -140,7 +140,7 @@ DELETE /users/123       → ユーザー削除
 - [ホストネーム](#ホストネーム)
 - [タイムゾーン](#タイムゾーン)
 - [ロケール](#ロケール)
-- [](#)
+- [IPアドレス](#ipアドレス)
 - [ポート](#ポート)
 - [ネットワークマネージャー](#ネットワークマネージャー)
 - [名前解決](#名前解決)
@@ -278,6 +278,48 @@ GATEWAY=192.168.0.1         # デフォルトゲートウェイ
 NOZEROCONF=yes
 ```
 
+| 用語 | 意味 |
+|-|-|
+| パケット | データを分割したもの |
+| インターフェース | コンピュータがネットワークに接続するための「出入口」  |
+| ゲートウェイ | 別のネットワークへパケットを転送してくれる「中継地点」  |
+| ルーティングテーブル | パケットの宛先IPアドレスに応じて、どの経路(ゲートウェイ/インターフェース)に転送するかを決める対応表 |
+|  |  |
+
+
+```sh
+# パケットが宛先に到達するためにどの経路(ゲートウェイ、インターフェース)を使うかを確認
+ip route show
+ip route        # show は省略可能
+ip r            # route も r に省略可能
+ip r s          # show も s に省略可能
+
+# 特定の宛先ネットワークのルートのみ表示
+ip route show 10.0.0.0/16
+
+# 特定IPへの到達経路を確認
+ip route get 20.0.0.2
+```
+
+- ip routeの見方
+
+- via あり/なし
+  -  viaは「経由」という意味で、via有は「まず中継地点に渡してそこから転送してもらう」、ない場合は「自分から直接送れる」という違い
+
+| 出力 | 意味 |
+|-|-|
+| `via 10.0.X.X dev eth0` | 10.0.X.X(中継地点)を経由して eth0 から送る |
+| dev tun0(via なし)	 | 中継地点なしでtun0から直接送る |
+| proto kernel | カーネルが自動生成したルート |
+| proto static | 手動(または設定ファイルで)追加されたルート |
+| scope link | 直接接続されたネットワーク |
+| src 10.0.X.X | このルートを使う際の送信元IPアドレス |
+
+```sh
+default via 10.0.X.X dev eth0        # どこ宛か分からないものは10.0.X.X を経由して、eth0という出口から送る
+172.16.x.x/x via 10.0.X.X dev tun0  # 172.16.x.x 〜 172.31.x.x 宛のものは、10.0.X.Xを経由して、tun0(VPNトンネル)から送る
+```
+
 #### iptables
 
 [参考](https://knowledge.sakura.ad.jp/4048/)
@@ -299,20 +341,6 @@ iptables -nL INPUT --line-numbers
 iptables -A INPUT -p tcp -d 対象サーバIP --dport 3000(ポート番号) -j DROP
 iptables -A INPUT -p tcp -s 10.0.0.0(IPアドレス) --sport 3000(ポート番号) --tcp-flags SYN,FIN,RST,ACK FIN,ACK -j DROP
 iptables -A INPUT -p tcp -s 10.0.0.0(IPアドレス) --sport 3000(ポート番号) --tcp-flags PSH,ACK PSH,ACK -j DROP
-```
-
-```sh
-# パケットが宛先に到達するためにどの経路(ゲートウェイ、インターフェース)を使うかを確認
-ip route show
-ip route        # show は省略可能
-ip r            # route も r に省略可能
-ip r s          # show も s に省略可能
-
-# 特定の宛先ネットワークのルートのみ表示
-ip route show 10.0.0.0/16
-
-# 特定IPへの到達経路を確認
-ip route get 20.0.0.2
 ```
 
 #### ping
