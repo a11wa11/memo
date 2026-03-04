@@ -140,7 +140,7 @@ DELETE /users/123       → ユーザー削除
 - [ホストネーム](#ホストネーム)
 - [タイムゾーン](#タイムゾーン)
 - [ロケール](#ロケール)
-- [IPアドレス](#ipアドレス)
+- [](#)
 - [ポート](#ポート)
 - [ネットワークマネージャー](#ネットワークマネージャー)
 - [名前解決](#名前解決)
@@ -299,6 +299,20 @@ iptables -nL INPUT --line-numbers
 iptables -A INPUT -p tcp -d 対象サーバIP --dport 3000(ポート番号) -j DROP
 iptables -A INPUT -p tcp -s 10.0.0.0(IPアドレス) --sport 3000(ポート番号) --tcp-flags SYN,FIN,RST,ACK FIN,ACK -j DROP
 iptables -A INPUT -p tcp -s 10.0.0.0(IPアドレス) --sport 3000(ポート番号) --tcp-flags PSH,ACK PSH,ACK -j DROP
+```
+
+```sh
+# パケットが宛先に到達するためにどの経路(ゲートウェイ、インターフェース)を使うかを確認
+ip route show
+ip route        # show は省略可能
+ip r            # route も r に省略可能
+ip r s          # show も s に省略可能
+
+# 特定の宛先ネットワークのルートのみ表示
+ip route show 10.0.0.0/16
+
+# 特定IPへの到達経路を確認
+ip route get 20.0.0.2
 ```
 
 #### ping
