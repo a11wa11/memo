@@ -19,8 +19,8 @@ Virtual Private Network。インターネット上に仮想的な専用回線を
 | PKI | Public Key Infrastructure(公開鍵基盤)。デジタル証明書を発行・管理・検証するための仕組み全体を指す |
 | CN | Common Name。証明書作成時にのみ定義する |
 | SAN | Subject Alternative Name。証明書作成時にのみ定義する |
-| 相互認証 | 高セキュリティ。クライアント側とサーバー側の両方が相手の身元を証明書で確認する認証方式 |
-| 一方向認証 | クライアント側のみがサーバーを検証する方式 |
+| 相互認証(mTLS) | 高セキュリティ。クライアント側とサーバー側の両方が相手の身元を証明書で確認する認証方式  Mutual-TLS |
+| 一方向認(TLS) | クライアント側のみがサーバーを検証する方式 |
 | TUN/TAP | VPN用の仮想ネットワークインターフェース。`tun0` など。TUNはL3(IP)、TAPはL2(Ethernet)を扱う |
 | MTU | Maximum Transmission Unit。一度に送信できる最大パケットサイズ。標準は1500バイト |
 | MSS / mssfix | TCPの最大セグメントサイズ。VPNの暗号化による肥大化を防ぐため、`mssfix` でサイズを制限し通信を安定させる |
@@ -141,4 +141,20 @@ sudo journalctl -u openvpn-server@server -f
 -----END OpenVPN Static key V1-----
 </tls-auth>
 key-direction 1
+```
+
+### 関連技術
+
+- Mutual-TLS Client Authentication(mTLS)
+  - 相互認証(双方向認証)
+  - クライアントが誰であるかもTLSレベルで証明
+
+```text
+# 通常のTLS(一方向認証)
+クライアント → サーバー証明書を検証 → 通信開始
+
+# Mutual-TLS(双方向認証)
+クライアント → サーバー証明書を検証
+サーバー     → クライアント証明書を検証 → 両方OKなら通信開始
+              ↑ これが「Mutual (相互)」
 ```
