@@ -1,0 +1,73 @@
+# vite
+
+## 概要
+
+- 開発サーバー: ファイル変更を即座にブラウザに反映(HMR)
+- バンドル: ビルド時にTypeScript/JSX → JS に変換・最適化
+- 高速起動: webpack等の旧来ツールより開発サーバーの起動が非常に速い
+
+## インストール
+
+```sh
+# プロジェクト作成
+npm create vite@latest . -- --template react-ts # テンプレートに「React + TypeScript」を指定
+```
+
+## コマンド
+
+```sh
+# 基本コマンド 開発サーバー起動
+vite
+
+# ビルド
+vite build
+
+# ビルドの進行状況をリアルタイムで確認できる
+npx webpack --progress
+
+# ビルド結果をローカルで確認
+vite preview
+
+# 本番モード　最適化が自動的に有効化され、軽量かつ高速なバンドルファイルが生成される
+npx webpack --mode production
+```
+
+## 設定ファイル
+
+- vite.config.jsで設定管理
+
+```vite.config.js
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],             // Reactプラグイン有効化
+})
+
+```
+
+## 開発環境
+
+- webpack専用のローカルサーバーが構築可能な`webpack-dev-server`がある
+
+```sh
+# インストール
+npm install webpack-dev-server
+
+# 起動
+npx webpack server
+```
+
+- `webpack-dev-server`の設定
+
+```webpack.config.js
+module.export = {
+...
+  // ローカルサーバーの設定
+  devServer: {
+    static: "dist",
+    open: true,
+  },
+};
+```
