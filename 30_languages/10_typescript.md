@@ -27,6 +27,9 @@ tsc --outDir dist
 
 # 型チェックのみ行う
 tsc --noEmit
+
+# プロジェクト参照を使った型チェック・コンパイル
+tsc --build
 ```
 
 - 注意点
