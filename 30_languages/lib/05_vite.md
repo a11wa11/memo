@@ -44,7 +44,18 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],             // Reactプラグイン有効化
 })
+```
 
+- tsconfig.json: 自身はファイルを処理せず、2つの設定を束ねるルートファイルとして機能がよくあるパターン
+
+```tsconfig.json
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },  // 実行環境=ブラウザのDOM型
+    { "path": "./tsconfig.node.json" }  // 実行環境=Node.js
+  ]
+}
 ```
 
 ## 開発環境
