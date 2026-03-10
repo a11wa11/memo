@@ -52,8 +52,8 @@ export default defineConfig({
 {
   "files": [],
   "references": [
-    { "path": "./tsconfig.app.json" },  // 実行環境=ブラウザのDOM型
-    { "path": "./tsconfig.node.json" }  // 実行環境=Node.js
+    { "path": "./tsconfig.app.json" },  // 実行環境=ブラウザのDOM型(src/向け)の設定
+    { "path": "./tsconfig.node.json" }  // 実行環境=Node.jsぬけの設定
   ]
 }
 ```
