@@ -46,6 +46,14 @@ export default defineConfig({
 })
 ```
 
+以下、デフォルト値として規定されている
+
+| 設定キー	 | デフォルト値 | 意味 |
+|-|-|-|
+|  publicDir | puclic | 静的ファイルのフォルダ名 |
+| build.outDir | dist | ビルド出力先 |
+|  |  |  |
+
 - tsconfig.json: 自身はファイルを処理せず、2つの設定を束ねるルートファイルとして機能がよくあるパターン
 
 ```tsconfig.json
@@ -59,6 +67,9 @@ export default defineConfig({
 ```
 
 ## 開発環境
+
+- ファイル置き場: `src`がソースコード本体置き場のデフォルト値。※npm create vite の公式テンプレートがこの構成で生成するため、事実上の標準
+
 
 - webpack専用のローカルサーバーが構築可能な`webpack-dev-server`がある
 
