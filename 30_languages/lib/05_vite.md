@@ -17,19 +17,14 @@ npm create vite@latest . -- --template react-ts # テンプレートに「React 
 
 ```sh
 # 基本コマンド 開発サーバー起動
-vite
+vite # vite devと同じ
+vite dev
 
-# ビルド
+# ビルド(本番モード)
 vite build
-
-# ビルドの進行状況をリアルタイムで確認できる
-npx webpack --progress
 
 # ビルド結果をローカルで確認
 vite preview
-
-# 本番モード　最適化が自動的に有効化され、軽量かつ高速なバンドルファイルが生成される
-npx webpack --mode production
 ```
 
 ## 設定ファイル
@@ -70,16 +65,12 @@ export default defineConfig({
 
 - ファイル置き場: `src`がソースコード本体置き場のデフォルト値。※npm create vite の公式テンプレートがこの構成で生成するため、事実上の標準
 
-
-- webpack専用のローカルサーバーが構築可能な`webpack-dev-server`がある
-
 ```sh
-# インストール
-npm install webpack-dev-server
-
-# 起動
-npx webpack server
+# 開発サーバー起動
+vite     # vite devと同じ
+vite dev
 ```
+
 
 - `webpack-dev-server`の設定
 
