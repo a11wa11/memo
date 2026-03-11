@@ -356,3 +356,24 @@
 | `env`         | 環境変数を設定するオブジェクト（例: `{ "KEY": "VALUE" }`）                              |
 | `console`     | 出力を表示するコンソールの種類（例: `integratedTerminal`、`externalTerminal`）           |
 | `stopOnEntry` | プログラム開始時に自動的に停止するかどうか（`true` または `false`）                     |
+
+- typescript例
+
+```launch.json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "typescript: 現在のファイルを実行",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["tsx"],
+      "args": ["${file}"],
+      "cwd": "${workspaceFolder}",
+      "envFile": "${workspaceFolder}/.env",
+      "console": "integratedTerminal"
+    }
+  ]
+}
+```
