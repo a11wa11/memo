@@ -17,6 +17,7 @@
     - [docker buildx](#docker-buildx)
   - [Docker for Mac](#docker-for-mac)
   - [docker-compose](#docker-compose)
+    - [コマンド](#コマンド-1)
 
 ## インストール
 
@@ -204,6 +205,9 @@ docker run --name 名付けたいコンテナ名 -it イメージ名 bash
 
 # ポートマッピング
 docker run -p 80(ローカルホストポート):80(コンテナポート) --name 名付けたいコンテナ名 -it イメージ名 bash
+
+# .envファイルを反映して起動
+docker run -it --rm --env-file .env イメージ名 bash
 ```
 
 - コンテナの状態確認
