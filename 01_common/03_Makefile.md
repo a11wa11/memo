@@ -1,8 +1,9 @@
 # Makefile
 
 - [Makefile](#makefile)
-  - [構文](#構文)
-  - [実行コマンド](#実行コマンド)
+	- [構文](#構文)
+	- [実行コマンド](#実行コマンド)
+		- [実行例](#実行例)
 
 ## 構文
 
@@ -99,6 +100,8 @@ AWS_ACCOUNT_ID := $(shell aws sts get-caller-identity --query Account --output t
 ECR_REGISTRY := $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_REGION).amazonaws.com
 ECR_IMAGE_URI := $(ECR_REGISTRY)/$(ECR_REPOSITORY):$(IMAGE_TAG)
 ECR_IMAGE_URI_DATE := $(ECR_REGISTRY)/$(ECR_REPOSITORY):$(NOW)
+CLUSTER_NAME := $(ENV)-ecs
+CONTAINER_NAME := ecs
 
 help: ## このヘルプメッセージを表示
 	@echo "利用可能なmakeコマンド:"
@@ -144,8 +147,16 @@ clean: ## ローカルのDockerイメージを削除
 	-docker rmi $(IMAGE_NAME):$(IMAGE_TAG) 2>/dev/null || true
 	-docker images $(ECR_REGISTRY)/$(ECR_REPOSITORY) -q | xargs docker rmi
 
+whole: login build push ## 一連のECR更新手順を実行（ログイン→ビルド→プッシュ）
+	@echo "buildからpushまで完了しました!"
+
 deploy: login build push update ## 一連のデプロイ手順を実行（ログイン→ビルド→プッシュ→Lambda更新）
 	@echo "デプロイが完了しました！"
+
+exec: ## ECSタスクに接続 (例: make exec CLUSTER_NAME=my-cluster CONTAINER_NAME=my-container)
+	@echo "ECSへ接続します..."
+	@TASK_ARN=$$(aws ecs list-tasks --region $(AWS_REGION) --cluster $(CLUSTER_NAME) --query "taskArns[0]" --output text) && \
+	aws ecs execute-command --region $(AWS_REGION) --cluster $(CLUSTER_NAME) --task $$TASK_ARN --container $(CONTAINER_NAME) --interactive --command "/bin/bash"
 
 .PHONY: help login build tag push update deploy clean
 ```
