@@ -22,8 +22,9 @@ vite dev
 
 # ビルド(本番モード)
 vite build
+vite build --mode development # 開発モード
 
-# ビルド結果をローカルで確認
+# dist/の内容を本番と同じ挙動でローカルサーバー公開で確認
 vite preview
 ```
 
