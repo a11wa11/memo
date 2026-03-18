@@ -26,6 +26,12 @@ vite build --mode development # 開発モード
 
 # dist/の内容を本番と同じ挙動でローカルサーバー公開で確認
 vite preview
+
+# 起動時にブラウザを自動で開く
+vite dev --open
+
+# vite内部ログの詳細表示
+DEBUG=vite:* npx vite dev
 ```
 
 ## 設定ファイル
@@ -70,18 +76,4 @@ export default defineConfig({
 # 開発サーバー起動
 vite     # vite devと同じ
 vite dev
-```
-
-
-- `webpack-dev-server`の設定
-
-```webpack.config.js
-module.export = {
-...
-  // ローカルサーバーの設定
-  devServer: {
-    static: "dist",
-    open: true,
-  },
-};
 ```
