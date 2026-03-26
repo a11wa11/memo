@@ -77,3 +77,44 @@ export default defineConfig({
 vite     # vite devと同じ
 vite dev
 ```
+
+## vitest
+
+- viteのテストランナー。viteと同時にインストールされるわけではない
+
+### vitest設定ファイル
+
+- vitestの実行設定を定義するファイル
+   - vite側の設定を流用しつつ、テスト実行時だけ必要な条件を上書きする
+
+```vitest.config.ts
+import viteConfig from './vite.config'
+import { fileURLToPath } from 'node:url'
+import { mergeConfig, defineConfig, configDefaults } from 'vitest/config'
+
+export default mergeConfig(
+  viteConfig,
+  defineConfig({
+    test: {
+      environment: 'jsdom',                                // ブラウザ風のDOM APIを使うテストをNode上で実行。他に node, happy-domなどあり
+      exclude: [...configDefaults.exclude, 'e2e/**'],      // 既定の除外対象に加えてe2eディレクトリを除外
+      root: fileURLToPath(new URL('./', import.meta.url)), // rootをこの設定ファイル基準のプロジェクトルートに設定
+    },
+  }),
+)
+```
+
+### vitestコマンド
+
+```sh
+# 監視モードで実行(変更時に再実行)
+npx vitest
+# 全テストを1回実行
+npx vitest run
+# 絞り込みで実行
+npx vitest run -t "対象名"
+# カバレッジ付きで実行
+npx vitest run --coverage
+# UIモードで実行
+npx vitest --ui
+```
