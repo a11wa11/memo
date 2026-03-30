@@ -84,7 +84,7 @@ vite dev
 
 ### vitest設定ファイル
 
-- vitestの実行設定を定義するファイル
+- vitestの実行設定を定義するファイル(vitest.config.ts)
    - vite側の設定を流用しつつ、テスト実行時だけ必要な条件を上書きする
 
 ```vitest.config.ts
@@ -118,3 +118,42 @@ npx vitest run --coverage
 # UIモードで実行
 npx vitest --ui
 ```
+
+
+### テスト
+
+- MSW
+  - 通常のAPIモックはfetch関数自体を差し替える(例: vi.mock('fetch'))がMSWは違うアプローチで、ネットワーク層でリクエストをインターセプトする
+  - 実際のfetchはそのまま動き、リクエストがネットワークに出る手前でMSWが横取りして偽のレスポンスを返す
+  - メリット
+    - テスト対象のコードを一切変更しない
+    - fetch, axios など実装に依存しない
+    - リクエストのURL・body・headerも検証できる
+
+3つのライフサイクルフックの役割
+
+| フック	 | タイミング | 内容 |
+|-|-|-|
+| beforeAll | 全テスト実行前に1回 | `server.listen()`でネットワークのインターセプトを開始 |
+| afterEach | 各テストの後 | `server.resetHandlers()`でデフォルトハンドラーに戻す |
+| afterAll | 全テスト完了後に1回 | `server.close()`でインターセプトを停止 |
+|  |  |  |
+
+- setupTest.ts
+
+```typescript
+import '@testing-library/jest-dom/vitest'
+import { beforeAll, afterEach, afterAll } from 'vitest'
+import { server } from './__tests__/mocks/server'
+
+// 全テストファイルの実行前に1回だけMSWサーバーを起動
+beforeAll(() => server.listen())
+
+// 各テストの後にハンドラーをリセット(テスト内で server.use() した上書きを元に戻す)
+afterEach(() => server.resetHandlers())
+
+// 全テスト完了後にサーバーを停止
+afterAll(() => server.close())
+```
+
+
