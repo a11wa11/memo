@@ -196,6 +196,7 @@ npx eslint 対象ファイル --fix
 ```
 
 - [eslintrc(設定ファイル)](https://maku.blog/p/j6iu7it/)
+  - ESLint v9以降ではyml形式非推奨
 
 ```yaml
 # 実行時のカレントディレクトリを起点にして、上位のディレクトリの設定ファイル (.eslintrc.*) を探していく。
@@ -228,6 +229,35 @@ rules: # 各ルールの設定
   indent: ["error", 2]
   semi: ["error", "always"]
   no-console: warn
+  complexity: ["warn", { max: 10 }] // 関数の複雑度が(if,switch,for,whileなどをどの程度関数内で使っているか)10以上で警告
+```
+
+```eslint.config.js
+import js from "@eslint/js";
+import tseslint from "typescript-eslint";
+
+export default [
+  {
+    ignores: [
+      "src/**/__tests__/**",
+    ],
+  },
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
+  {
+    files: ["src/**/*.ts"],
+    languageOptions: {
+      sourceType: "module",
+      parser: tseslint.parser,
+    },
+    plugins: {
+      "@typescript-eslint": tseslint.plugin,
+    },
+    rules: {
+      complexity: ["warn", { max: 10 }],
+    },
+  },
+];
 ```
 
 - eslintとprettierの使い分け
