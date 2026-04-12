@@ -251,21 +251,25 @@
    "moshfeu.compare-folders",
    "hediet.vscode-drawio",
    "alefragnani.project-manager",
+   "christian-kohler.path-intellisense",
    //  * 整形関連
    "oderwat.indent-rainbow",
    "streetsidesoftware.code-spell-checker",
    "tyriar.sort-lines",
    "usernamehw.errorlens",
-   "Log File Highlighte",
+   "Log File Highlighter",
    //  * docker
    "ms-azuretools.vscode-docker",
    "ms-vscode-remote.remote-containers",
+   "ms-azuretools.vscode-containers",
    //  * git
    "donjayamanne.githistory",
-   "eamodio.gitlens",
-   //  Infrastructure
-   "aws-scripting-guy.cform",
+   //  AWS
    "redhat.vscode-yaml",
+   "aws-scripting-guy.cform", // CloudFormation
+   "hashicorp.terraform", // terraform
+   "tintinweb.graphviz-interactive-preview", // Graphviz
+   "hediet.vscode-drawio", // drawio
    //  languages
    //  * markdown
    "patricklee.vsnotes",
@@ -274,7 +278,6 @@
    //  * python
    "ms-python.python",
    "ms-python.vscode-pylance",
-   "tabnine.tabnine-vscode",
  ],
  // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
  "unwantedRecommendations": [
