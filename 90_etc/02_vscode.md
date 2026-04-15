@@ -237,13 +237,17 @@
 ### よく使う機能
 
 - ファイル検索
-  - `cmd + P`で任意のファイル名(READMEなど)を入力
+  - `cmd + P`で任意のファイル名(README など)を入力
 
 ## 使用する拡張機能一覧
-  
+
 - extensions.json
 
-```json
+  - .`vscode/extensions.json`に保存するとプロファイルにインストール推奨してくれる
+
+- 一例
+
+```extensions.json
 {
  // List of extensions which should be recommended for users of this workspace.
  "recommendations": [
@@ -285,6 +289,20 @@
 }
 ```
 
+- 例 terraform
+
+```extensions.json
+{
+  "recommendations": [
+    // terraform
+    "hashicorp.terraform",
+    // json & yaml
+    "zainchen.json",
+    "redhat.vscode-yaml"
+  ]
+}
+```
+
 ### playwright
 
 - デバッグ設定例
@@ -319,10 +337,10 @@
 
 ### シェルスクリプト
 
-- [Bash Debug](https://github.com/rogalmic/vscode-bash-debug)でシェルスクリプトのデバッグがvscodeで可能になる
-- macではzshの場合がbashは4or5のバージョンでばければ非対応
-- bashが古い場合、`brew install bash`でインストール
-  - システムとは別にbrewなどでインストールした場合は下記のように`pathBash`でbashのパスを指定する
+- [Bash Debug](https://github.com/rogalmic/vscode-bash-debug)でシェルスクリプトのデバッグが vscode で可能になる
+- mac では zsh の場合が bash は 4or5 のバージョンでばければ非対応
+- bash が古い場合、`brew install bash`でインストール
+  - システムとは別に brew などでインストールした場合は下記のように`pathBash`で bash のパスを指定する
 
 ```json
   "version": "0.2.0",
@@ -346,21 +364,21 @@
 ## debug
 
 - 共通の設定項目
-  - go、python、node.jsなど多数の言語に共通する設定
+  - go、python、node.js など多数の言語に共通する設定
 
-| 項目          | 説明                                                                                   |
-|---------------|----------------------------------------------------------------------------------------|
-| `name`        | デバッグ構成の名前（メニューで識別するために使用）                                       |
-| `type`        | デバッグ対象の言語やツール（例: `go`, `python`, `node`）                                |
-| `request`     | デバッグの種類：`launch`（新しいプロセスを起動）または`attach`（既存プロセスに接続）     |
-| `program`     | 実行するスクリプトまたはバイナリのパス                                                  |
-| `args`        | 実行時の引数                                                                           |
-| `cwd`         | 実行時のカレントディレクトリ                                                           |
-| `env`         | 環境変数を設定するオブジェクト（例: `{ "KEY": "VALUE" }`）                              |
-| `console`     | 出力を表示するコンソールの種類（例: `integratedTerminal`、`externalTerminal`）           |
-| `stopOnEntry` | プログラム開始時に自動的に停止するかどうか（`true` または `false`）                     |
+| 項目          | 説明                                                                                 |
+| ------------- | ------------------------------------------------------------------------------------ |
+| `name`        | デバッグ構成の名前（メニューで識別するために使用）                                   |
+| `type`        | デバッグ対象の言語やツール（例: `go`, `python`, `node`）                             |
+| `request`     | デバッグの種類：`launch`（新しいプロセスを起動）または`attach`（既存プロセスに接続） |
+| `program`     | 実行するスクリプトまたはバイナリのパス                                               |
+| `args`        | 実行時の引数                                                                         |
+| `cwd`         | 実行時のカレントディレクトリ                                                         |
+| `env`         | 環境変数を設定するオブジェクト（例: `{ "KEY": "VALUE" }`）                           |
+| `console`     | 出力を表示するコンソールの種類（例: `integratedTerminal`、`externalTerminal`）       |
+| `stopOnEntry` | プログラム開始時に自動的に停止するかどうか（`true` または `false`）                  |
 
-- typescript例
+- typescript 例
 
 ```launch.json
 {
