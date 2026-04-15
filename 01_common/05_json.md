@@ -3,9 +3,9 @@
 ## 概要
 
 - **J**ava**S**cript**O**bject**N**otation
-- XMLと同様のデータ構造を表現する記法
-  - jsonが主流になる前はXMLが主流だった
-  - XMLと比べてjsonは以下の利点がある
+- XML と同様のデータ構造を表現する記法
+  - json が主流になる前は XML が主流だった
+  - XML と比べて json は以下の利点がある
     - 同じデータでも直感的に理解できる
     - タグがないのでデータ容量が少なくなる
 - ※ 'シングルクォート'ではなく"ダブルクオート"で囲まれていること
@@ -14,8 +14,8 @@
 
 ### vscode
 
-1. 右下のステータスバーのファイルタイプをJSONファイルに変更
-1. VSCodeでJSONファイルを開いた状態で、`Shift + Alt + F` (Windows) または `Shift + Option + F` (Mac) のショートカットキー、または右クリックを使って「ドキュメントのフォーマット」を実行
+1. 右下のステータスバーのファイルタイプを JSON ファイルに変更
+1. VSCode で JSON ファイルを開いた状態で、`Shift + Alt + F` (Windows) または `Shift + Option + F` (Mac) のショートカットキー、または右クリックを使って「ドキュメントのフォーマット」を実行
 
 ### jq
 
@@ -43,7 +43,7 @@ cat ***.json | jq '.キー名 | select(.name == "指定したい値")' # rubyだ
 jq --arg image_name "任意のイメージ名" 'select(.name == "nginx") | .image=$image_name' 対象ファイル名
 ```
 
-## jsonからymlへ変換するツール
+## json から yml へ変換するツール
 
 ### yq
 
@@ -77,3 +77,9 @@ npm install -g json2yaml
 ```sh
 npx json2yaml -d レベル番号 ファイル名.json > ファイル名.yml
 ```
+
+## JSONC
+
+コメントが許容される json
+
+- vscode の extensions.json や tsconfig.json は JSONC として扱われる
