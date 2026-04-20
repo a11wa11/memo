@@ -393,7 +393,9 @@
       "args": ["${file}"],
       "cwd": "${workspaceFolder}",
       "envFile": "${workspaceFolder}/.env",
-      "console": "integratedTerminal"
+      "skipFiles": ["<node_internals>/**"], //  Node.js内部コード（<node_internals>）をステップ実行対象から除外
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen" // デバッグコンソールを自動表示しない設定
     }
   ]
 }
