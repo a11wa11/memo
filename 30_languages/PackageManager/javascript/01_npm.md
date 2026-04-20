@@ -300,6 +300,19 @@ prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json,css,scss}'
     - 宣言されているが、使っていない変数がある
     - 未定義の変数やモジュールを使用している
 
+- prettier設定例
+
+```.prettierrc
+{
+  "semi": true,           // 行末にセミコロンを付ける
+  "trailingComma": "all", // 末尾のカンマ（,）を付ける
+  "singleQuote": false,   // クォートの形式 false=ダブルクォーテーション
+  "printWidth": 120,      // 1行の最大文字数(120文字)
+  "tabWidth": 2,          // インデント(字下げ)の幅
+  "endOfLine": "lf"       // 改行コード(行末の改行方式) LF(Linux/Mac/モダンシステム推奨)
+}
+```
+
 ### husky
 
 gitのcommitやpushといったアクションのタイミングで、コマンドを実行する仕組みを提供するライブラリ
