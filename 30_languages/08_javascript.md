@@ -124,6 +124,7 @@ console.log(...sample)   // 1 2 3 と...をつけることで展開される
 ```
 
 - map
+  - 配列の各要素を変換して、新しい配列を返す関数
 
 ```javascript
 const array = [1, 2, 3, 4, 5]
@@ -134,6 +135,11 @@ array.map(function(value, index, array ) {
     console.log(`キー: ${index}`)
     console.log(`配列: ${array}`)
 })
+
+// デフォルトで渡される3つの引数
+// 1 value: 現在の要素 必須
+// 2 index: 要素のインデックス（0, 1, 2...） 省略可能
+// 3 array: map が呼ばれた元の配列全体       省略可能
 ```
 
 - filter
