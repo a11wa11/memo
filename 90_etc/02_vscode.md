@@ -14,6 +14,7 @@
 - 特によく使う
   - `cmd + P` → コマンドパレット
   - `ctl + -` → 戻る
+  - `ctl + _(アンダースコア)` → 進む
   - `cmd + K + T` → カラーテーマ設定
 
 <table>
@@ -398,5 +399,23 @@
       "internalConsoleOptions": "neverOpen" // デバッグコンソールを自動表示しない設定
     }
   ]
+}
+```
+
+- python例
+
+```launch.json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Debugger: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "justMyCode": true,
+            "console": "integratedTerminal"
+        }
+    ]
 }
 ```
