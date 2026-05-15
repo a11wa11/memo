@@ -173,6 +173,7 @@
 | synthetics | 人工的に作られたテスト | 人工的に作ったユーザー行動で監視する仕組み |
 | deallocate | 割り当てを解除する | |
 | implicit | 暗黙 | |
+| quarantine | 隔離、検疫 | |
 | prerequisites | 前提条件 | |
 | truncate | 切り捨てる | |
 | ingestion | 摂取 | |
