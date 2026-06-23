@@ -70,6 +70,17 @@ gobuster dir -u 0.0.0.x -w ワードリストパス
 
 - ユーザーからの入力をそのままSQL文に埋め込むことで、データベースに対して不正な操作を行う攻撃
 
+## HSTS
+
+- **H**TTP **S**trict **T**ransport **S**ecurity は、ブラウザに対して「このサイトへは必ずHTTPSで接続せよ」と指示するレスポンスヘッダー
+- HSTSが未設定の場合、以下の攻撃リスクがある
+   - SSLストリッピング攻撃
+     - 攻撃者がHTTPS通信をHTTPに「格下げ」し、平文で盗聴・改ざんする
+   - ダウングレード攻撃
+     - ユーザーが `http://` でアクセスした際、HTTPSへのリダイレクト前の一瞬を悪用される
+   - Cookie盗聴
+     - Secureフラグ付きCookieでも、最初のHTTPリクエストで漏洩するリスクがある
+
 ## 証明書
 
 - [TLS](https://kinsta.com/jp/knowledgebase/tls-vs-ssl/)とは?
