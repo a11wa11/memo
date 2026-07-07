@@ -52,6 +52,12 @@ gobuster dir -u 0.0.0.x -w ワードリストパス
   - HttpOnly 属性の付与
     - クッキーへのアクセスをJavaScriptから禁止することでセッションハイジャックを防止する
 
+## CORS
+
+- Cross−Origin Resource Sharing(クロスオリジン・リソース・シェアリング)
+- ブラウザには同一オリジンポリシーがあり、例えば、Webアプリが`https://app.example.com`で動いていて、S3が`https://my-bucket.s3.ap-northeast-1.amazonaws.com`だと、オリジンが違うのでそのままでは制限される
+- この制限を「この条件なら許可する」と明示するのが`CORS`
+
 ## CSRF
 
 - Cross-Site Request Forgeries(クロスサイト・リクエスト・フォージェリ)
