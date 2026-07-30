@@ -348,6 +348,9 @@ git resotre -s(source) コミットID
 # リモートブランチのタグの一覧
 git ls-remote --tags
 
+# ローカルのタグをリモートリポジトリに反映
+git push origin --tags
+
 # リモートリポジトリのタグをローカルに強制的に持ってくる
 git fetch --tags -f
 
