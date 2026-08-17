@@ -87,6 +87,20 @@ gobuster dir -u 0.0.0.x -w ワードリストパス
    - Cookie盗聴
      - Secureフラグ付きCookieでも、最初のHTTPリクエストで漏洩するリスクがある
 
+## ドメインフロンティング
+
+Domain FrontingとはTLSハンドシェイク時のSNI(Server Name Indication)と、HTTPヘッダーのHostを意図的に異なるドメインに設定することで、本来アクセスできないエンドポイントに不正にリクエストを通す手法
+
+
+```text
+CloudFront → Regional API Gateway
+  SNI: api.example.com
+  Host: api.example.com   ← 一致しているので OK
+
+TLSのSNI:   api-allowed.example.com   ← 許可されたドメイン
+HTTP Host:  api-secret.example.com    ← 本来アクセスさせたくないドメイン
+```
+
 ## 証明書
 
 - [TLS](https://kinsta.com/jp/knowledgebase/tls-vs-ssl/)とは?
