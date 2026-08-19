@@ -180,6 +180,7 @@
 | prerequisites | 前提条件 | |
 | truncate | 切り捨てる | |
 | ingestion | 摂取 | |
+| rewind | 巻き戻し | |
 | rc | バージョン候補(release candidate) | |
 | clobber | 打ち消す、打ちのめす | |
 | solve |  | 「客観的に正解のある問題」を解決する|
