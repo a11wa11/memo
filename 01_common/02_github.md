@@ -124,3 +124,11 @@ Password: YOUR_PERSONAL_ACCESS_TOKEN
 
 <!-- 補足事項があれば記述 -->
 ```
+
+## [CODEOWNERS](https://docs.github.com/ja/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)
+
+CODEOWNERSはGitHubの標準機能で使われるファイルでPRが作られたとき、変更されたファイルパスに応じて自動でレビュー依頼を飛ばす
+指定された承認者のうち誰かがapproveしないとマージできない（rulesetと組み合わせて強制）
+
+配置場所はCODEOWNERSというファイル名で`.github/`, ルートディレクトリ, `docs/`に置くとGitHubが自動認識する  
+ファイルが複数の場所に存在する場合、GitHubはその順序でそれらを検索し、最初に見つけたファイルを使用する
