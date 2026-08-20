@@ -105,6 +105,9 @@ git push -u origin main
 
 ```sh
 git push -f origin ローカルブランチ:リモートブランチ
+
+# リモートが自分が最後にfetchした状態から変わっていなければ上書き ※他人がpushしていたら拒否される(安全)
+git push --force-with-lease
 ```
 
 - 特定の鍵を指定してリモートリポジトリに接続
