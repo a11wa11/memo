@@ -144,6 +144,7 @@
 | assign | 割り当てる | |
 | diagnose | 診断する | 原因を突き止める |
 | sanitize | (不快なものや汚れを)取り除く、和らげる | 消毒する、清潔にする |
+| sanity | 正気・健全さ | sanity check で「健全性チェック」 |
 | ingress | 進入 | |
 | egress | 出口 | |
 | extraneous | 無関係な | |
