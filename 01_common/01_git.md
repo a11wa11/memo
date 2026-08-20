@@ -387,6 +387,27 @@ git submodule update --init --recursive
 git submodule status
 ```
 
+## worktree
+
+branchは1つのフォルダの中身をブランチごとに入れ替える方式に対し、worktreeは、同じリポジトリから追加のフォルダを生やして、各フォルダに別のブランチをチェックアウトする方式
+ブランチを実体化した作業フォルダと言える
+ 「複数のブランチを同時に開いておく」 が主目的
+
+```sh
+# worktreeの一覧（どこにどのブランチがあるか）
+git worktree list
+
+# 既存ブランチを別フォルダに開く
+git worktree add ../作りたいフォルダ名(.tmp/などパスはどこでもOK) ブランチ名
+<ブランチ名>を <作りたいフォルダ名>フォルダに展開します。
+
+# worktreeの中身を見に行く（普通のcd） worktreeはフォルダなのでそこへ移動する。通常のgitコマンドはその中で使用可能
+cd .tmp/worktrees/feature123
+
+# 不要になったworktreeを削除（フォルダごと消える）
+git worktree remove .tmp/worktrees/feature123
+```
+
 ## トラブルシューティング
 
 - 文字化け時
