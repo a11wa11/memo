@@ -91,7 +91,7 @@
 | availability |  可用性  |  システムが継続して稼働できる度合いや能力 |
 | arn | Amazon リソースネーム (ARN) | |
 | amend | 修正する | |
-| aggregate | 集計する | |
+| aggregate | 集計する、集約する | |
 | benchmark | 性能評価 | |
 | bundle | たばねる | |
 | concurrency | 同時実行数 | 同時に何個のリクエストを処理できるか |

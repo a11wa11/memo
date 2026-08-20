@@ -2,9 +2,15 @@
 
 - [github](#github)
   - [使い方](#使い方)
+    - [アクセストークン発行](#アクセストークン発行)
+    - [ブランチ設定](#ブランチ設定)
+          - [デフォルトブランチ](#デフォルトブランチ)
+          - [ブランチルール設定](#ブランチルール設定)
   - [GitHub Copilot](#github-copilot)
     - [チャット](#チャット)
       - [注意点](#注意点)
+  - [PullRequest-Template](#pullrequest-template)
+  - [CODEOWNERS](#codeowners)
 
 ## 使い方
 

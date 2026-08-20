@@ -2,6 +2,11 @@
 
 - [Claude](#claude)
   - [claude code](#claude-code)
+    - [CLAUDE.md](#claudemd)
+    - [コマンド](#コマンド)
+      - [スラッシュコマンド](#スラッシュコマンド)
+      - [その他コマンド](#その他コマンド)
+  - [MCPサーバー](#mcpサーバー)
 
 ## claude code
 
