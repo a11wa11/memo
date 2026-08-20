@@ -39,6 +39,11 @@ claude --mcp-config=.mcp.json   # mcpサーバーと連携する
    - セキュリティチェック専用のエージェントなども作成可能
 - `commands` 自作コマンドを定義する
   - .claude/commands/ディレクトリにmdファイルを配置して定義可能
+- `/terminal-setup` Shift+Enterで改行可能にする
+
+#### その他コマンド
+
+- `Ctl + J` 改行 `\`でも可能。`/terminal-setup`実行時にはShift+Enterで可能
 
 ## MCPサーバー
 
