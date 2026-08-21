@@ -57,6 +57,22 @@ jobs:                           　 # ワークフロー内のジョブを定義
     path: output.log
 ```
 
+```yml
+
+concurrency:
+  group: terraform-dev      # 自分で決めるラベルで、GitHubは「同じ文字列になったrun同士は同時に走らるかどうか」という比較に使う
+  cancel-in-progress: true  # 新しいrunが来たら古いrunをキャンセル
+  cancel-in-progress: false # 実行中のものはキャンセルせず、後続を待たせる
+
+# 以下パターンは別ファイルでも同じ列に並んで起動する
+# cd-infra-dev.yml
+concurrency:
+  group: terraform-apply-dev   # ← このファイルと
+# 別ファイル
+concurrency:
+  group: terraform-apply-dev   # ← こちらが同じ列に並ぶ
+```
+
 ### 手動起動
 
 `Run workflow`ボタンが出ない場合、workflow_dispatchの定義がデフォルトブランチにマージされていないと表示されない
