@@ -38,8 +38,9 @@ brew doctor
 brew deps 対象名
 brew deps --tree パッケージ名 # 依存関係先をツリー形式で表示
 brew deps --installed --tree # インストール済の依存関係をツリー状で表示
-# 他のパッケージから依存されていないパッケージを削除
-brew autoremove # --dry-runオプションで消去されるパッケージの確認可能
+# 依存としてのみ入っていて、不要になったものを削除(他のパッケージから依存されていないパッケージ) ※安全
+brew autoremove
+brew autoremove  --dry-run # オプションで消去されるパッケージの確認可能
 # 依存関係を確認（どの対象から依存されているか)
 brew uses 対象名
 # 依存関係がない対象を表示
