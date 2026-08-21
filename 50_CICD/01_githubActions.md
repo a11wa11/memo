@@ -57,6 +57,10 @@ jobs:                           　 # ワークフロー内のジョブを定義
     path: output.log
 ```
 
+### 手動起動
+
+`Run workflow`ボタンが出ない場合、workflow_dispatchの定義がデフォルトブランチにマージされていないと表示されない
+
 ### デバッグ
 
 - `act`は GitHub Actions のワークフローをローカル Docker 環境で実行・デバッグできる CLI ツール
