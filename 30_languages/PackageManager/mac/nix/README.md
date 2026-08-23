@@ -32,7 +32,7 @@ curl -sSfL https://artifacts.nixos.org/nix-installer | sh -s -- install --enable
 | home.nix | Home Managerに「自分のユーザー環境をこうしてほしい」と宣言する設定ファイル |  |  |
 | darwin.nix | Mac側の設定を保存する|  |  |
 | Home Manager | Nixを使って「自分のユーザー環境」を宣言的に管理するツール |  |  |
-|  |  |  |  |
+| GC | Garbage Collection |  |  |
 |  |  |  |  |
 
 ## コマンド
@@ -62,7 +62,7 @@ nix profile upgrade パッケージ名
 nix profile upgrade --all # 全パッケージをアップグレード
 # flakeで使う名前のショートカット一覧を表示する
 nix registry list
-
+# 「もう使われていないデータ」を/nix/storeから安全に掃除する
 nix store gc
 # profileの世代一覧と各段階での変更内容を表示
 nix profile history
@@ -70,7 +70,8 @@ nix profile history
 nix profile rollback
 nix profile rollback --to 5 # 特定の世代へ移動
 # 古い世代を消す
-nix profile wipe-history --older-than 30d
+nix profile wipe-history # 現行世代だけ残す
+nix profile wipe-history --older-than 30d # 30日より古い非現行世代を削除。--dry-runで確認可能
 
 # プロジェクト用の開発環境に入る。flake.nixのdevShellに書いた環境などが使えるようになる
 nix develop
