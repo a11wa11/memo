@@ -397,16 +397,23 @@ branchは1つのフォルダの中身をブランチごとに入れ替える方�
 ```sh
 # worktreeの一覧（どこにどのブランチがあるか）
 git worktree list
+git worktree list --porcelain # lock中かどうかも可読
 
 # 既存ブランチを別フォルダに開く
 git worktree add ../作りたいフォルダ名(.tmp/などパスはどこでもOK) ブランチ名
-<ブランチ名>を <作りたいフォルダ名>フォルダに展開します。
 
 # worktreeの中身を見に行く（普通のcd） worktreeはフォルダなのでそこへ移動する。通常のgitコマンドはその中で使用可能
 cd .tmp/worktrees/feature123
 
+# ロックする
+git worktree lock .tmp/worktrees/feature123
+# ロックを解除する
+git worktree unlock .tmp/worktrees/feature123
 # 不要になったworktreeを削除（フォルダごと消える）
 git worktree remove .tmp/worktrees/feature123
+# 不要になったworktreeの管理情報を削除する
+git worktree prune
+git worktree prune -v # 削除した内容を表示する
 ```
 
 ## トラブルシューティング
