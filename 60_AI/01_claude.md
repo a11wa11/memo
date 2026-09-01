@@ -69,3 +69,7 @@ slackやgithubなどAIと通して指示ができるサーバーのこと
   - mcpサーバーとして起動したい内容は各サービスで紹介されていることが多い
   - MCPify: MCPサービスを自作するサービス。なければ自作を検討
 - `https://mcp.so/`で流行のMCPサーバーを検索可能
+
+## 参考サイト
+
+[AWSでのClaudeCode入門](https://catalog.workshops.aws/claudecode101/ja-JP)
