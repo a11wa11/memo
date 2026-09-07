@@ -182,7 +182,8 @@
 | rsync | remote syncの略 | ファイルおよびディレクトリを効率的にコピーおよび同期するためのツール |
 | synthetics | 人工的に作られたテスト | 人工的に作ったユーザー行動で監視する仕組み |
 | deallocate | 割り当てを解除する | |
-| implicit | 暗黙 | |
+| implicit | 暗黙 |  |
+| orphans | 孤児、切り離された孤立物 | ゾンビプロセス |
 | quarantine | 隔離、検疫 | |
 | prerequisites | 前提条件 | |
 | truncate | 切り捨てる | |
