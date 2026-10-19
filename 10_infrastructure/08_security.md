@@ -101,6 +101,15 @@ TLSのSNI:   api-allowed.example.com   ← 許可されたドメイン
 HTTP Host:  api-secret.example.com    ← 本来アクセスさせたくないドメイン
 ```
 
+## サプライヤーチェーン攻撃
+
+Supply Chain Attack — 直接のターゲットではなく、その「依存先」を侵害して、経由で攻撃する手法
+
+実例
+- Faker.js / Colors.js（2022） — メイン開発者が意図的にコード改ざん
+- SolarWinds（2020） — 更新プログラム自体が侵害されて配布
+- ua-parser-js（2021） — npm アカウント乗っ取られてマルウェア埋め込み
+
 ## 証明書
 
 - [TLS](https://kinsta.com/jp/knowledgebase/tls-vs-ssl/)とは?
