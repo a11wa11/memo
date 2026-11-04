@@ -131,6 +131,22 @@ Password: YOUR_PERSONAL_ACCESS_TOKEN
 <!-- 補足事項があれば記述 -->
 ```
 
+### PRでの文字拡大
+
+- h1,h2以外の見出し以外の方法で文字拡大する場合の記述方法
+
+$\Large{\textsf{要対応}}$ 
+
+```
+$\Large{\textsf{This works}}$
+```
+
+$\Large{\color{red}\textsf{要対応(カラー指定)}}$
+
+```
+$\Large{\color{red}\textsf{要対応(カラー指定)}}$
+```
+
 ## [CODEOWNERS](https://docs.github.com/ja/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)
 
 CODEOWNERSはGitHubの標準機能で使われるファイルでPRが作られたとき、変更されたファイルパスに応じて自動でレビュー依頼を飛ばす
