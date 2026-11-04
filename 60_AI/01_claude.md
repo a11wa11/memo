@@ -57,6 +57,7 @@ claude --mcp-config=.mcp.json   # mcpサーバーと連携する
 - `commands` 自作コマンドを定義する
   - .claude/commands/ディレクトリにmdファイルを配置して定義可能
 - `/terminal-setup` Shift+Enterで改行可能にする
+- `/output-style` 出力内容の応答スタイルを切り替える。 `/output-style Explanatory`で説明的応答になる。他、ConciseやProactiveなど選択肢あり
 
 #### その他コマンド
 
