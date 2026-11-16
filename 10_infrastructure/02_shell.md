@@ -578,10 +578,12 @@ export LESS="-SRXF"
 ### curl
 
 - `-X` HTTPリクエストメソッドを指定
-- `-H` 'Content-type: application/json' HTTPヘッダーを指定
+- `-H` 'Content-type: application/json' 任意のHTTPヘッダーを指定 'User-Agent: XXXXX'なども可能 
 - `-d(--data)` '{"text":"Hello, World!"}' リクエストのボディ部分のデータ項目を指定
 - `--cert` クライアント証明書ファイルを指定
 - `--key` 秘密鍵を指定
+- `-i` レスポンスヘッダーをボディと一緒に出力する
+- `-I` レスポンスヘッダーのみ出力する
 - `-o` 保管ディククトリ/保管ファイル名の指定
 - `-O` ダウンロードファイルを変更せずにそのままの名前で保存
 - `-L(--location)` サーバーがリダイレクトを返した際に追跡してファイルをダウンロード
