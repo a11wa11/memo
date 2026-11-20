@@ -71,6 +71,9 @@ npm info パッケージ名 version
 npm outdated
 npm outdated --long # 追加項目表示
 
+# パッケージの依存元・導入経路を確認
+npm explain パッケージ名
+
 # 依存しているパッケージの重複を整理
 npm dedupe
 
@@ -78,14 +81,20 @@ npm dedupe
 npm cache clean 
 npm cache clean --force
 
-# 脆弱性監査
-npm audit
-
 # package.jsonに記載されていないパッケージをnode_modulesから削除する
 npm prune
 
-# npmのアップデート
-npm update -g npm
+# 脆弱性監査
+npm audit
+npm audit --audit-level=high # highまたはcriticalが1件以上あれば失敗。表示内容はnpm auditと同じ
+
+npm audit fix            # 検出された脆弱性を、現在のpackage.jsonバージョン指定の範囲内で修正できるよう依存を更新する
+npm audit fix --dry-run  # 脆弱性を修正する更新をシミュレーションする
+
+# パッケージのアップデート ※npm auditは脆弱性修正に必要な範囲だけだがnpm updateは全般的な更新
+npm update             # package.jsonに記述の範囲でのみ更新(メジャーバージョン維持、マイナーバージョン維持など)
+npm update パッケージ名 # 指定パッケージのみアップデート
+npm update -g npm      # npm自体のアップデート
 ```
 
 ### package.json
@@ -104,7 +113,7 @@ npm update -g npm
 ```
 
 - @マークの意味 -> [名前空間としてのアットマーク](https://mass-min.com/archives/1018)
-  - npmモジュールは、名前が被るのを許可していない。しかしそれだと`assert`や`cli`のような誰しつける名前は早い者勝ちで名付けられないことになる。
+  - npmモジュールは、名前が被るのを許可していない。しかしそれだと`assert`や`cli`のような誰しもつける名前は早い者勝ちで名付けられないことになる。
   - そこでnpmでは、「@」と「/」の間にユーザーネーム(or 組織名)を入れて名前空間とし、その後ろにモジュール名をつける「scoped packages」形式を許可しており、以下のような指定方法になる。
 
 ```json
