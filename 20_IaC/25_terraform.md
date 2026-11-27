@@ -234,6 +234,8 @@ terraform plan
 terraform plan -target=指定したいリソース名
 # 結果を指定ファイル名へ出力する
 terraform plan -out=ファイル名
+# 指定リソースを強制再構築して差分表示(指定リソース以外の差分もあれば表示する)
+terraform plan -replace="指定したいリソース名"
 # デバッグログを有効にして詳細な情報を表示
 TF_LOG=DEBUG terraform plan
 # クラウド上の現状を反映させる
@@ -268,6 +270,8 @@ terraform apply
 terraform apply -target=指定したいリソース名
 # プロンプトを表示せずに自動的に承認(確認プロンプトが不要)
 terraform apply -auto-approve
+# 指定リソースを再構築してデプロイ
+terraform apply -replace="指定したいリソース名"
 ```
 
 - 削除
